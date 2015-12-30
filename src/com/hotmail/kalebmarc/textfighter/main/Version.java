@@ -3,7 +3,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 class Version {
 	private Version(){}
 	
-	private static final String VERSION = "4.5";
+	private static final String VERSION = "4.6DEV";
 	
 	private static final String STAGE = "Alpha";
 	
@@ -20,30 +20,35 @@ class Version {
 			+ "(Not compatible with previous saves)\n\n"
 			
 			+ "New Stuff:\n"
-			+ "- Renamed Villain to Barbarian\n"
-			+ "- Renamed Snake to Giant Ant\n"
-			+ "- Added Evil Unicorn (Extra coins & XP)\n"
-			+ "- Added Ogre (Hard)\n"
-			+ "- Added total coins spent stat\n"
-			+ "- Added Coins spent on weapons/ammo stat\n"
-			+ "- Added coins spent on health stat\n"
-			+ "- Added coins spent on bank interest stat\n"
-			+ "- Added bullets fired stat\n"
-			+ "- Added bullets that hit stat\n"
-			+ "- Added K:D ratio stat\n"
-			+ "- Added times cheated stat\n"
-			+ "- Added times quit stat\n"
-			+ "- Added Items Crafted stat\n"
-			+ "- Added Dice Games played stat\n"
-			+ "- Added Slot Games played stat\n"
-			+ "- Added XP bought stat\n"
-			+ "- Added Godmode cheat\n"
-			+ "- Added option to turn off pop-up windows\n"
-			+ "- Added better way to deal with output\n"
-			+ "- Added option to start with \"nogui\"\n\n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n"
+			+ "- \n\n"
 			
 			+ "Bug Fixes:\n"
-			+ "- Fixed getting XP when cheats are enabled";
+            + "- \n"
+            + "- \n"
+            + "- \n"
+            + "- \n"
+            + "- \n"
+            + "- ";
 	
 	public static String get(){
 		return VERSION;
