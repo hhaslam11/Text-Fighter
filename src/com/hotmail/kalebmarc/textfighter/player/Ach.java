@@ -54,7 +54,7 @@ public class Ach {
 
 
     //Arrays for achievements
-    public static final ArrayList<String> arrayName    = new ArrayList<>();
+    private static final ArrayList<String> arrayName   = new ArrayList<>();
     public static final ArrayList<Boolean> arrayKilled = new ArrayList<>();
     private static final ArrayList<Enemy> arrayEnemy   = new ArrayList<>();
 

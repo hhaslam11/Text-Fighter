@@ -9,13 +9,13 @@ public class Stats {
 	private Stats(){}
 
     //Battle Stats
-    public static int highScore;
-    public static int kills;
-    public static int totalDamageDealt;
-    public static int totalKills;
-    public static int bulletsFired;
-    public static int bulletsThatHit;
-    public static String killDeathRatio;
+    public  static int highScore;
+    public  static int kills;
+    public  static int totalDamageDealt;
+    public  static int totalKills;
+    public  static int bulletsFired;
+    public  static int bulletsThatHit;
+    private static String killDeathRatio;
 
 	//Coins
     public static int totalCoinsSpent;

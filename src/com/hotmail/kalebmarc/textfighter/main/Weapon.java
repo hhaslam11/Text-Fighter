@@ -344,7 +344,7 @@ public class Weapon{
         Ui.println("You have bought 10 ammo.");
         Action.pause();
     }
-    public static void noAmmo(){
+    private static void noAmmo(){
         Ui.popup("You've run out of ammo!", "Warning", JOptionPane.WARNING_MESSAGE);
         Weapon.current = Weapon.starting;
     }

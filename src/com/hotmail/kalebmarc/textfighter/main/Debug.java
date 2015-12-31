@@ -7,7 +7,7 @@ import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Settings;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 
-public class Debug {
+class Debug {
 
     private static boolean enabled = false;
     Debug(){}
