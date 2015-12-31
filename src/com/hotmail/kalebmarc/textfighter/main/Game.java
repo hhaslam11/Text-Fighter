@@ -219,13 +219,12 @@ public class Game {
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("1) Equip weapon");
 			Ui.println("2) View Item Chest");
-			Ui.println("3) Craft");
-			Ui.println("4) Achievements");
-			Ui.println("5) Stats");
-			Ui.println("6) About");
-			Ui.println("7) Settings");
-			Ui.println("8) Help");
-			Ui.println("9) Back");
+			Ui.println("3) Achievements");
+			Ui.println("4) Stats");
+			Ui.println("5) About");
+			Ui.println("6) Settings");
+			Ui.println("7) Help");
+			Ui.println("8) Back");
 			Ui.println("------------------------------------------------------------------");
 			
 			menuChoice = Action.getValidInt();
@@ -238,24 +237,21 @@ public class Game {
 				Chest.view();
 				break;
 			case 3:
-				Craft.menu();
-				break;
-			case 4:
 				Ach.view();
 				break;
-			case 5:
+			case 4:
 				Stats.view();
 				break;
-			case 6:
+			case 5:
 				About.view(true);
 				Ach.viewedAbout = true;
 				break;
-			case 7:
+			case 6:
 				menu();
 				break;
-			case 8:
+			case 7:
 				Help.view();
-			case 9:
+			case 8:
 				return;
 			default:
 				break;

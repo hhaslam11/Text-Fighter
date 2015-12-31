@@ -18,10 +18,9 @@ public class Chest {
 		Ui.println("Coins: " + Coins.get());
 		Ui.println("POWERS: " + Power.get());
 		for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-            Ui.println(Weapon.arrayWeapon.get(i).getName() + ": " + Weapon.arrayWeapon.get(i).owns());
+            Ui.print(Weapon.arrayWeapon.get(i).getName() + ": " + Weapon.arrayWeapon.get(i).owns());
+			Ui.println(" (Ammo: " + Weapon.arrayWeapon.get(i).getAmmo() + ")");
         }
-		Ui.println("Ammo: " + Weapon.getAmmo());
-		Ui.println("Shotgun ammo: " + Weapon.getSgAmmo());
 		Ui.println();
 		Ui.println("------------------------------");
 		Action.pause();

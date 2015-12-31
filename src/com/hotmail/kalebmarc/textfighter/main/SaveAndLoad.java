@@ -98,11 +98,12 @@ class SaveAndLoad {
 			Stats.highScore = Integer.parseInt(input.nextLine());
 			Stats.totalKills = Integer.parseInt(input.nextLine());
 			Weapon.set(Integer.parseInt(input.nextLine()));
-			Weapon.setAmmo(Integer.parseInt(input.nextLine()), false);
-			Weapon.setSgAmmo(Integer.parseInt(input.nextLine()), false);
 			for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
 				Weapon.arrayWeapon.get(i).owns = Boolean.parseBoolean(input.nextLine());
 			}
+            for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+                Weapon.arrayWeapon.get(i).setAmmo(Integer.parseInt(input.nextLine()), false);
+            }
 			Power.set(Integer.parseInt(input.nextLine()), false);
 			Power.used = Integer.parseInt(input.nextLine());
 			Stats.totalDamageDealt = Integer.parseInt(input.nextLine());
@@ -208,11 +209,12 @@ class SaveAndLoad {
         output.println(Stats.highScore);
         output.println(Stats.totalKills);
         output.println(Weapon.getIndex(Weapon.get()));
-        output.println(Weapon.getAmmo());
-        output.println(Weapon.getSgAmmo());
         for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
             //Weapons owned
             output.println(Weapon.arrayWeapon.get(i).owns());
+        }
+        for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+            output.println(Weapon.arrayWeapon.get(i).getAmmo());
         }
         output.println(Power.get());
         output.println(Power.used);

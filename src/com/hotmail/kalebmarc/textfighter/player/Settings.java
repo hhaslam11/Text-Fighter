@@ -1,6 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
-import com.hotmail.kalebmarc.textfighter.item.Craft;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
@@ -162,24 +161,21 @@ public class Settings {
 			Game.ogre        = new Enemy("Ogre",         90, 20, 50, 10, 30, 50, firstInit, changeDif);
 
             //Weapons
-            //Gun:   (name, ammoUsed, buyable, price, level, chanceOfMissing, firstInit)
+            //Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, firstInit, changeDif)
             //Melee: (name, startingWeapon, buyable, price, level, damageMin, damageMax, firstInit)
-            Game.nothing        = new Weapon("Nothing",      true, false,  0,   0,  5,  10,  firstInit, changeDif);
-            Game.baseballBat    = new Weapon("Baseball Bat", false, true,  120, 1,  10, 15,  firstInit, changeDif);
-            Game.knife          = new Weapon("Knife",        false, true,  125, 2,  10, 20,  firstInit, changeDif);
-            Game.pipe           = new Weapon("Pipe",         false, false, 0,   0,  5,  20,  firstInit, changeDif);
-            Game.pistol         = new Weapon("Pistol",           1,  true,  250, 4,  15,      firstInit, changeDif);
-            Game.smg            = new Weapon("Smg",              10, true,  700, 10, 75,      firstInit, changeDif);
-            Game.shotgun        = new Weapon("Shotgun",          1,  true,  375, 9,  60,      firstInit, changeDif);
-            Game.rifle          = new Weapon("Rifle",            1,  true,  275, 5,  10,      firstInit, changeDif);
-            Game.rifleWithKnife = new Weapon("Rifle With Knife", 2,  false, 0,   5,  0,       firstInit, changeDif);
-            Game.sniper         = new Weapon("Sniper",           1,  true,  700, 7,  0,       firstInit, changeDif);
+            Game.nothing        = new Weapon("Nothing",      true, false,  0,   0,  5,  10,     firstInit, changeDif);
+            Game.baseballBat    = new Weapon("Baseball Bat", false, true,  120, 1,  10, 15,     firstInit, changeDif);
+            Game.knife          = new Weapon("Knife",        false, true,  125, 2,  10, 20,     firstInit, changeDif);
+            Game.pipe           = new Weapon("Pipe",         false, false, 0,   0,  5,  20,     firstInit, changeDif);
+            Game.pistol         = new Weapon("Pistol",           1,  18, true,  250, 1, 4,  15, firstInit, changeDif);
+            Game.smg            = new Weapon("Smg",              10, 75, true,  700, 1, 10, 75, firstInit, changeDif);
+            Game.shotgun        = new Weapon("Shotgun",          1,  12, true,  375, 2, 9,  60, firstInit, changeDif);
+            Game.rifle          = new Weapon("Rifle",            1,  18, true,  275, 1, 5,  10, firstInit, changeDif);
+            Game.rifleWithKnife = new Weapon("Rifle With Knife", 2,  18, false, 0,   1, 5,  0,  firstInit, changeDif);
+            Game.sniper         = new Weapon("Sniper",           1,  10, true,  700, 2, 7,  0,  firstInit, changeDif);
 
 			//Price
             Power.price           = 25;
-            Weapon.AMMO_10_PRICE  = 15;
-            Weapon.AMMO_50_PRICE  = 80;
-            Weapon.AMMO_100_PRICE = 130;
 			Weapon.BULLET_DAMAGE  = 10;
             FirstAid.price        = 5;
             InstaHealth.price     = 30;
@@ -190,8 +186,6 @@ public class Settings {
             FirstAid.level        = 1;
             InstaHealth.level     = 2;
             Power.level           = 3;
-            Weapon.AMMO_LEVEL     = 4;
-			Craft.LEVEL           = 5;
 
         }else{//Sets variables for HARD mode
 
@@ -208,24 +202,21 @@ public class Settings {
             Game.ogre        = new Enemy("Ogre",         100, 20, 50, 10, 30, 50, firstInit, changeDif);
 
 			//Weapons
-			//Gun:   (name, ammoUsed, buyable, price, level, chanceOfMissing, firstInit, changeDif)
+			//Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, firstInit, changeDif)
             //Melee: (name, startingWeapon, buyable, price, level, damageMin, damageMax, firstInit, changeDif)
-            Game.nothing        = new Weapon("Nothing",       true, false,  0,   0,  5,  10,  firstInit, changeDif);
-            Game.baseballBat    = new Weapon("Baseball Bat", false,  true,  170, 1,  10, 15,  firstInit, changeDif);
-            Game.knife          = new Weapon("Knife",        false,  true,  175, 2,  10, 20,  firstInit, changeDif);
-            Game.pipe           = new Weapon("Pipe",         false, false,  0,   0,  5,  20,  firstInit, changeDif);
-            Game.pistol         = new Weapon("Pistol",           1,  true,  275, 4,  15,      firstInit, changeDif);
-            Game.smg            = new Weapon("Smg",              10, true,  800, 10, 75,      firstInit, changeDif);
-            Game.shotgun        = new Weapon("Shotgun",          1,  true,  415, 9,  60,      firstInit, changeDif);
-            Game.rifle          = new Weapon("Rifle",            1,  true,  300, 5,  10,      firstInit, changeDif);
-            Game.rifleWithKnife = new Weapon("Rifle With Knife", 2,  false, 0,   5,  0,       firstInit, changeDif);
-            Game.sniper         = new Weapon("Sniper",           1,  true,  750, 7,  0,       firstInit, changeDif);
+            Game.nothing        = new Weapon("Nothing",       true, false,  0,   0,  5,  10,      firstInit, changeDif);
+            Game.baseballBat    = new Weapon("Baseball Bat", false,  true,  170, 1,  10, 15,      firstInit, changeDif);
+            Game.knife          = new Weapon("Knife",        false,  true,  175, 2,  10, 20,      firstInit, changeDif);
+            Game.pipe           = new Weapon("Pipe",         false, false,  0,   0,  5,  20,      firstInit, changeDif);
+            Game.pistol         = new Weapon("Pistol",           1,  18, true,  275, 1, 4,  15,   firstInit, changeDif);
+            Game.smg            = new Weapon("Smg",              10, 75, true,  800, 1, 10, 75,   firstInit, changeDif);
+            Game.shotgun        = new Weapon("Shotgun",          1,  12, true,  415, 2, 9,  60,   firstInit, changeDif);
+            Game.rifle          = new Weapon("Rifle",            1,  18, true,  300, 1, 5,  10,   firstInit, changeDif);
+            Game.rifleWithKnife = new Weapon("Rifle With Knife", 2,  18, false, 0,   1, 5,  0,    firstInit, changeDif);
+            Game.sniper         = new Weapon("Sniper",           1,  10, true,  750, 2, 7,  0,    firstInit, changeDif);
 
             //PRICE
             Power.price            = 75;
-            Weapon.AMMO_10_PRICE   = 25;
-            Weapon.AMMO_50_PRICE   = 100;
-            Weapon.AMMO_100_PRICE  = 175;
 			Weapon.BULLET_DAMAGE   = 5;
             FirstAid.price         = 15;
             InstaHealth.price      = 45;
@@ -236,8 +227,6 @@ public class Settings {
             FirstAid.level        = 1;
             InstaHealth.level     = 2;
             Power.level           = 3;
-            Weapon.AMMO_LEVEL     = 4;
-            Craft.LEVEL           = 5;
 
         }
         if (firstInit) newGameSetup();

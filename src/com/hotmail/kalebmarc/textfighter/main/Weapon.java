@@ -16,7 +16,6 @@ public class Weapon{
     public int        level;
     private int       damageMin;
     private int       damageMax;
-    private int       ammoUsed;
     private double    chanceOfMissing;
     private String    name;
     private boolean   buyable;
@@ -30,22 +29,25 @@ public class Weapon{
 
     //Ammo
     private int ammo;
-    private int ammo_price;//Per 1
+    private int ammoUsed;
+    private int ammoPrice;//Per 1
     private int ammoIncludedWithPurchase;
 
     //Weapon List
     public static final ArrayList<Weapon> arrayWeapon = new ArrayList<>();
 
-    public Weapon(String name, int ammoUsed, boolean buyable, int price, int level,//For Gun
-                  double chanceOfMissing, boolean firstInit, boolean changeDif){
+    public Weapon(String name, int ammoUsed, int ammoIncludedWithPurchase, boolean buyable, int price, //For guns
+                  int ammoPrice, int level, double chanceOfMissing, boolean firstInit, boolean changeDif){
 
-       this.name               = name;
-       this.ammoUsed           = ammoUsed;
-       this.buyable            = buyable;
-       this.price              = price;
-       this.level              = level;
-       this.chanceOfMissing    = chanceOfMissing;
-       this.melee              = false;
+        this.name                     = name;
+        this.ammoUsed                 = ammoUsed;
+        this.ammoIncludedWithPurchase = ammoIncludedWithPurchase;
+        this.buyable                  = buyable;
+        this.price                    = price;
+        this.ammoPrice                = ammoPrice;
+        this.level                    = level;
+        this.chanceOfMissing          = chanceOfMissing;
+        this.melee                    = false;
 
        if(!changeDif){
            arrayWeapon.add(this);
@@ -90,13 +92,7 @@ public class Weapon{
     public boolean owns(){
         return owns;
     }
-    public static int getAmmo(){
-        return ammo;
-    }
-    public static int getSgAmmo(){
-        return sgAmmo;
-    }
-    public static int getIndex(Weapon i){
+    static int getIndex(Weapon i){
         return arrayWeapon.indexOf(i);
     }
     public static void set(Weapon x){
@@ -105,19 +101,16 @@ public class Weapon{
     public static void set(int i){
         current = arrayWeapon.get(i);
     }
-    public static void setAmmo(int amount, boolean add){
+    public void setAmmo(int amount, boolean add){
+        if(this.melee) return;
         if(add){
-            ammo += amount;
+            this.ammo += amount;
         }else{
-            ammo = amount;
+            this.ammo = amount;
         }
     }
-    public static void setSgAmmo(int amount, boolean add){
-        if(add){
-            sgAmmo += amount;
-        }else{
-            sgAmmo = amount;
-        }
+    public int getAmmo(){
+        return this.ammo;
     }
     public static void choose(){
         while(true) {
@@ -125,7 +118,7 @@ public class Weapon{
             Ui.println("----------------------------");
             Ui.println("Equip new weapon");
             Ui.println();
-            Ui.println("Ammo: " + getAmmo());
+            Ui.println("Ammo: " + current.getAmmo());
             Ui.println("Equipped weapon: " + current.getName());
             Ui.println("----------------------------");
             for(int i = 0; i < arrayWeapon.size(); i++){
@@ -166,45 +159,27 @@ public class Weapon{
 			 */
             damageDealt = Random.RInt(this.damageMin, this.damageMax);
         }else{
+
 			/*
 			 * Gun Attack
 			 */
-            if(current.getName().equals("Shotgun")){
-                //Use shotgun ammo if shotgun equipped
-                //This will be changed in Alpha 4.6 so there's only one path
-                if (getSgAmmo() >= 1){
 
-                    for (int i = 1; i <= 7; i++){
-                        if (Random.RInt(100) > this.chanceOfMissing){
-                            damageDealt += 10;
-                            Stats.bulletsThatHit++;
-                        }
+            if (getAmmo() >= this.ammoUsed) {
+
+                for (int i = 1; i <= this.ammoUsed; i++) {
+                    if (Random.RInt(100) > this.chanceOfMissing) {
+                        damageDealt += BULLET_DAMAGE;
+                        Stats.bulletsThatHit++;
                     }
-                    //Results
-                    setSgAmmo(-1, true);
-                    Stats.bulletsFired++;
 
-                }else{
-                    noAmmo();
-                    damageDealt = 0;
-                }
-            }else{
-                if (getAmmo() >= this.ammoUsed) {
-
-                    for (int i = 1; i <= this.ammoUsed; i++) {
-                        if (Random.RInt(100) > this.chanceOfMissing){
-                            damageDealt += BULLET_DAMAGE;
-                            Stats.bulletsThatHit++;
-                        }
-                    }
                     //Results
                     setAmmo(-ammoUsed, true);
                     Stats.bulletsFired += ammoUsed;
+                }
 
-                }else{
+            } else {
                     noAmmo();
                     damageDealt = 0;
-                }
             }
         }
 
@@ -297,15 +272,10 @@ public class Weapon{
         Action.pause();
 
         //Give ammo
-        if(this.name.equals("Shotgun")){
-            //TODO Remove when each gun has own ammo type (Planned for alpha 4.6)
-            sgAmmo += SGAMMO_WITH_PURCHASE;
-        }else{
-            ammo += AMMO_WITH_PURCHASE;
-        }
+        ammo += this.ammoIncludedWithPurchase;
 
     }
-    public void buyAmmo10(){
+    public void buyAmmo(){
 
         Action.cls();
 
@@ -316,36 +286,32 @@ public class Weapon{
             return;
         }
 
-
-        /*
-         * TODO
-         * Need a pricing method that works. 1 for one is too expensive, but making 1 ammo less than 1 coin can complicate things,
-         * as coins are integers. Maybe go a bit crazy and change the whole coins system to have cents (Ex. 120.15 coins), or just
-         * write a block that doesn't let the user buy x amount of ammo if it doesn't work out to be an integer. (But make sure it's
-         * not an annoying trial/error system!!)
-         */
         //Get amount of ammo user wants
         Ui.println("How much ammo would you like to buy?");
-        Ui.println("1 ammo cost " + this.ammo_price + " coins.");
+        Ui.println("1 ammo cost " + this.ammoPrice + " coins.");
         Ui.println("You have " + Coins.get() + " coins.");
         int ammoToBuy = Action.getValidInt();
+        int cost = ammoToBuy * ammoPrice;
 
         //Make sure player has enough coins
-        if(Coins.get() < ()){
-            Ui.println("You don't have enough coins. You need " + (AMMO_10_PRICE - Coins.get()) + " more coins.");
+        if(Coins.get() < (cost)){
+            Ui.println("You don't have enough coins. You need " + (cost - Coins.get()) + " more coins.");
             Action.pause();
             return;
         }
 
-        ammo += 10;
-        Coins.set(-AMMO_10_PRICE, true);
-        Stats.coinsSpentOnWeapons += AMMO_10_PRICE;
+        this.ammo += ammoToBuy;
+        Coins.set(-cost, true);
+        Stats.coinsSpentOnWeapons += cost;
 
-        Ui.println("You have bought 10 ammo.");
+        Ui.println("You have bought " + ammoToBuy + " ammo.");
         Action.pause();
     }
     private static void noAmmo(){
         Ui.popup("You've run out of ammo!", "Warning", JOptionPane.WARNING_MESSAGE);
         Weapon.current = Weapon.starting;
+    }
+    public int getAmmoPrice(){
+        return this.ammoPrice;
     }
 }

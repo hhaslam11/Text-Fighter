@@ -35,14 +35,8 @@ public class Action {
 	}
 
 	public static void displayAmmo() {
-
-        //TODO Edit this when implementing individual ammo
         if (!(Weapon.get().melee)) {
-            if (Weapon.get().getName().equals("Shotgun")) {
-                Ui.println("     Shotgun Ammo: " + Weapon.getSgAmmo());
-            } else {
-                Ui.println("     Ammo: " + Weapon.getAmmo());
-            }
+            Ui.println("     Ammo: " + Weapon.get().getAmmo());
         }
     }
 

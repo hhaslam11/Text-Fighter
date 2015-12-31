@@ -25,4 +25,7 @@ class About {
 	public static void setViewed(boolean v){
         viewed = v;
     }
+	public static boolean isEven(int check){//TODO Remove when implementing JTools
+		return ((check % 2) == 0);
+	}
 }
