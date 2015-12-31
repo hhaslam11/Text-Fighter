@@ -34,16 +34,18 @@ public class Action {
 		}
 	}
 
-	public static void displayAmmo(){
-		if(Weapon.get().melee){
-			//No gun equipped, so no need to do anything
-			//TODO Get rid of empty block
-		}else if(Weapon.get().getName().equals("Shotgun")){
-			Ui.println("     Shotgun Ammo: " + Weapon.getSgAmmo());
-		}else{
-			Ui.println("     Ammo: " + Weapon.getAmmo());
-		}
-	}
+	public static void displayAmmo() {
+
+        //TODO Edit this when implementing individual ammo
+        if (!(Weapon.get().melee)) {
+            if (Weapon.get().getName().equals("Shotgun")) {
+                Ui.println("     Shotgun Ammo: " + Weapon.getSgAmmo());
+            } else {
+                Ui.println("     Ammo: " + Weapon.getAmmo());
+            }
+        }
+    }
+
 	/*
 	 * Clears the console 
 	 */

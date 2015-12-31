@@ -91,7 +91,7 @@ class Shop{
             Ui.println("-------------------------------------------------------------------");
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                 if(!Weapon.arrayWeapon.get(i).isBuyable()){
-                    Ui.println((i + 1) + ") [NOT AVAILABLE FOR PURCHASE]");//TODO Make it so it just skips
+                    Ui.println((i + 1) + ") [NOT AVAILABLE FOR PURCHASE]");//TODO Make it so it just skips (A4.9)
                 }else{
                     Ui.println((i + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).price);

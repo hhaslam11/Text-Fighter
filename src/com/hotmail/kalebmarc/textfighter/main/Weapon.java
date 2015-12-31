@@ -10,15 +10,7 @@ import java.util.ArrayList;
 
 public class Weapon{
 
-    //Constants
-    private final static int AMMO_WITH_PURCHASE   = 30;
-    private final static int SGAMMO_WITH_PURCHASE = 25;//TODO Remove in Alpha 4.6 (Or whenever each gun has own ammo)
-
     //Properties
-    public static int AMMO_10_PRICE;
-    public static int AMMO_50_PRICE;
-    public static int AMMO_100_PRICE;
-    public static int AMMO_LEVEL;
     public static int BULLET_DAMAGE;
     public int        price;
     public int        level;
@@ -31,13 +23,15 @@ public class Weapon{
     private boolean   viewedAbout;
     public boolean    melee;
 
-
     //Variables
     public static Weapon  starting;
     private static Weapon current = null;
-    private static int    ammo;
-    private static int    sgAmmo;
     public boolean        owns;
+
+    //Ammo
+    private int ammo;
+    private int ammo_price;//Per 1
+    private int ammoIncludedWithPurchase;
 
     //Weapon List
     public static final ArrayList<Weapon> arrayWeapon = new ArrayList<>();
@@ -311,23 +305,33 @@ public class Weapon{
         }
 
     }
-    public static void buyAmmo10(){
-        /*
-         * Using 3 different methods to do the same thing with slightly different values will be changed when you
-         * can buy a custom amount of ammo (A4.6)
-         */
+    public void buyAmmo10(){
 
         Action.cls();
 
         //Make sure player is a high enough level
-        if(Xp.getLevel() < AMMO_LEVEL){
-            Ui.println("You are not a high enough level. You need to be at least level " + AMMO_LEVEL + ".");
+        if(Xp.getLevel() < this.level){
+            Ui.println("You are not a high enough level. You need to be at least level " + this.level + ".");
             Action.pause();
             return;
         }
 
+
+        /*
+         * TODO
+         * Need a pricing method that works. 1 for one is too expensive, but making 1 ammo less than 1 coin can complicate things,
+         * as coins are integers. Maybe go a bit crazy and change the whole coins system to have cents (Ex. 120.15 coins), or just
+         * write a block that doesn't let the user buy x amount of ammo if it doesn't work out to be an integer. (But make sure it's
+         * not an annoying trial/error system!!)
+         */
+        //Get amount of ammo user wants
+        Ui.println("How much ammo would you like to buy?");
+        Ui.println("1 ammo cost " + this.ammo_price + " coins.");
+        Ui.println("You have " + Coins.get() + " coins.");
+        int ammoToBuy = Action.getValidInt();
+
         //Make sure player has enough coins
-        if(Coins.get() < AMMO_10_PRICE){
+        if(Coins.get() < ()){
             Ui.println("You don't have enough coins. You need " + (AMMO_10_PRICE - Coins.get()) + " more coins.");
             Action.pause();
             return;
@@ -339,66 +343,6 @@ public class Weapon{
 
         Ui.println("You have bought 10 ammo.");
         Action.pause();
-    }
-    public static void buyAmmo50(){
-        /*
-         * Using 3 different methods to do the same thing with slightly different values will be changed when you
-         * can buy a custom amount of ammo (A4.6)
-         */
-
-        Action.cls();
-
-        //Make sure player is a high enough level
-        if(Xp.getLevel() < AMMO_LEVEL){
-            Ui.println("You are not a high enough level. You need to be at least level " + AMMO_LEVEL + ".");
-            Action.pause();
-            return;
-        }
-
-        //Make sure player has enough coins
-        if(Coins.get() < AMMO_50_PRICE){
-            Ui.println("You don't have enough coins. You need " + (AMMO_50_PRICE - Coins.get()) + " more coins.");
-            Action.pause();
-            return;
-        }
-
-        ammo += 50;
-        Coins.set(-AMMO_50_PRICE, true);
-        Stats.coinsSpentOnWeapons += AMMO_50_PRICE;
-
-        Ui.println("You have bought 50 ammo.");
-        Action.pause();
-    }
-    public static void buyAmmo100(){
-
-        /*
-         * Using 3 different methods to do the same thing with slightly different values will be changed when you
-         * can buy a custom amount of ammo (A4.6)
-         */
-
-        Action.cls();
-
-        //Make sure player is a high enough level
-        if(Xp.getLevel() < AMMO_LEVEL){
-            Ui.println("You are not a high enough level. You need to be at least level " + AMMO_LEVEL + ".");
-            Action.pause();
-            return;
-        }
-
-        //Make sure player has enough coins
-        if(Coins.get() < AMMO_100_PRICE){
-            Ui.println("You don't have enough coins. You need " + (AMMO_100_PRICE - Coins.get()) + " more coins.");
-            Action.pause();
-            return;
-        }
-
-        ammo += 100;
-        Coins.set(-AMMO_100_PRICE, true);
-        Stats.coinsSpentOnWeapons += AMMO_100_PRICE;
-
-        Ui.println("You have bought 100 ammo.");
-        Action.pause();
-
     }
     public static void noAmmo(){
         Ui.popup("You've run out of ammo!", "Warning", JOptionPane.WARNING_MESSAGE);

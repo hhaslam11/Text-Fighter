@@ -46,9 +46,9 @@ public class Ui {
      *
      * @param msgType Ex. JOptionPane.ERROR_MESSAGE
      */
-    public static void popup(String title, String body, int msgType){//TODO make sure title and body actually are title and body.
+    public static void popup(String body, String title, int msgType){
         if (guiEnabled) {
-            JOptionPane.showMessageDialog(null, title, body, msgType);
+            JOptionPane.showMessageDialog(null, body, title, msgType);
         } else {
             Action.cls();
             println(body);
