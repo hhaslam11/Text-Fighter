@@ -171,7 +171,6 @@ public class Settings {
             Game.smg            = new Weapon("Smg",              10, 75, true,  700, 1, 10, 75, firstInit, changeDif);
             Game.shotgun        = new Weapon("Shotgun",          1,  12, true,  375, 2, 9,  60, firstInit, changeDif);
             Game.rifle          = new Weapon("Rifle",            1,  18, true,  275, 1, 5,  10, firstInit, changeDif);
-            Game.rifleWithKnife = new Weapon("Rifle With Knife", 2,  18, false, 0,   1, 5,  0,  firstInit, changeDif);
             Game.sniper         = new Weapon("Sniper",           1,  10, true,  700, 2, 7,  0,  firstInit, changeDif);
 
 			//Price
@@ -212,7 +211,6 @@ public class Settings {
             Game.smg            = new Weapon("Smg",              10, 75, true,  800, 1, 10, 75,   firstInit, changeDif);
             Game.shotgun        = new Weapon("Shotgun",          1,  12, true,  415, 2, 9,  60,   firstInit, changeDif);
             Game.rifle          = new Weapon("Rifle",            1,  18, true,  300, 1, 5,  10,   firstInit, changeDif);
-            Game.rifleWithKnife = new Weapon("Rifle With Knife", 2,  18, false, 0,   1, 5,  0,    firstInit, changeDif);
             Game.sniper         = new Weapon("Sniper",           1,  10, true,  750, 2, 7,  0,    firstInit, changeDif);
 
             //PRICE

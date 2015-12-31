@@ -34,7 +34,6 @@ public class Game {
     public static Weapon smg;
     public static Weapon shotgun;
     public static Weapon rifle;//Do not remove
-    public static Weapon rifleWithKnife;//Do not remove
     public static Weapon sniper;
 
     private static Scanner scan = new Scanner(System.in);
