@@ -28,12 +28,12 @@ public class Game {
 	//Weapons
     public static Weapon nothing;
     public static Weapon baseballBat;
-    public static Weapon knife;//Do not remove
+    public static Weapon knife;
     public static Weapon pipe;
     public static Weapon pistol;
     public static Weapon smg;
     public static Weapon shotgun;
-    public static Weapon rifle;//Do not remove
+    public static Weapon rifle;
     public static Weapon sniper;
 
     private static Scanner scan = new Scanner(System.in);

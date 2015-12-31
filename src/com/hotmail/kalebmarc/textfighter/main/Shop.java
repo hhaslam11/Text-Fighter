@@ -132,10 +132,8 @@ class Shop{
                     Ui.println();
                     //if (menuItem == (Weapon.arrayWeapon.size() + 2)) return; TODO I don't remember why this line was here. Doesn't seem like it would do anything?
                     Ui.println(menuItem + " is not an option.");
-
                 }
             }
-
         }
     }
     private static void xp(){
@@ -234,10 +232,8 @@ class Shop{
                 int menuItem = Action.getValidInt();
 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
-
                     Weapon.arrayWeapon.get(menuItem - 1).buyAmmo();
                     break;
-
                 } catch (Exception e) {
 
                     if (menuItem == (Weapon.arrayWeapon.size() + 1)) {
@@ -251,5 +247,4 @@ class Shop{
             }
         }
     }
-
 }

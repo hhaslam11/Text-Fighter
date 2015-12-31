@@ -8,7 +8,6 @@ class About {
 	private static boolean viewed = false;
 
 	public static void view(boolean achValid){
-						
 		//Displays basic information
 		Ui.popup("Text-Fighter " + Version.getFull() + "\n\n" + Version.getDesc(), "About", JOptionPane.INFORMATION_MESSAGE);
 		

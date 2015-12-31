@@ -19,14 +19,12 @@ public class FirstAid {
 		return firstAid;
 	}
 	public static void set(int amount, boolean add){
-		
 		if(!add){
 			firstAid = amount;
 		}else{
 			firstAid += amount;
 			if (firstAid < 0) firstAid = 0;
 		}
-		
 	}
 	public static void use(){
 		

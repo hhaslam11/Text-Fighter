@@ -81,7 +81,6 @@ public class Stats {
 		Ui.println();
 		Ui.println("-------------------------------------------------");
 		Action.pause();
-
 	}
     private static void updateKillDeathRatio(){
         killDeathRatio = totalKills + ":" + Health.timesDied;

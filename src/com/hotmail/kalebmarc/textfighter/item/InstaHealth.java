@@ -20,20 +20,17 @@ public class InstaHealth {
     }
 
     public static void set(int amount, boolean add) {
-
         if (!add) {
             instaHealth = amount;
         } else {
             instaHealth += amount;
             if (instaHealth < 0) instaHealth = 0;
         }
-
     }
 
     public static void use() {
 
         Action.cls();
-
         if (get() <= 0) {
 
             Ui.println("----------------------------------------------------");

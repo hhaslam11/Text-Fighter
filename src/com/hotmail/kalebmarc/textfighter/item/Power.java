@@ -18,29 +18,24 @@ public class Power {
        return powers;
     }
     public static void set(int amount, boolean add){
-
         if(!add){
             powers = amount;
         }else{
             powers += amount;
             if (powers < 0) powers = 0;
         }
-
     }
     public static void use(){
 
         Action.cls();
 
         if(powers <= 0){
-
             Ui.println("----------------------------------------------------");
             Ui.println("You have no POWER's left!");
             Ui.println("Go to the shop to buy some more.");
             Ui.println("----------------------------------------------------");
             Action.pause();
-
         }else{
-
             powers--;
             used++;
             Xp.set(20, true);
@@ -53,7 +48,6 @@ public class Power {
             Ui.println("POWER's: " + powers);
             Ui.println("----------------------------------------------------");
             Action.pause();
-
         }
     }
     public static void buy(){

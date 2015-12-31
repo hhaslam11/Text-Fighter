@@ -51,7 +51,6 @@ class Help{
 			case 9:
 				return;
 			}
-			
 		}
 	}
 	
@@ -77,7 +76,6 @@ class Help{
                 Ui.println(menuItem + " is not an option.");
                 Action.pause();
             }
-
 		}
 	}
 	private static void info_player(){
@@ -113,7 +111,6 @@ class Help{
                 Ui.println(menuItem + " is not an option.");
                 Action.pause();
             }
-
         }
     }
 	private static void info_health(){

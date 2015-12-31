@@ -9,20 +9,16 @@ public class Action {
 	private Action(){}
 
 	public static int getValidInt(){
-						
 		while(!in.hasNextInt()) {
 			in.nextLine();
 		}
-
 		return in.nextInt();
-		
 	}
 	
 	/*
 	 * Stops the program until the user presses enter, then continues
 	 */
 	public static void pause(){
-		
 		try{
 
 		    Scanner pauseScan = new Scanner(System.in);

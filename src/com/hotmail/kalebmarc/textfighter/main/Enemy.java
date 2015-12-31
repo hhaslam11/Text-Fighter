@@ -38,7 +38,6 @@ public class Enemy{
 		this.damageMax   = damageMax;
 		this.xp          = xp;
 
-
         /*
          * Finding a way to only have one boolean here (either firstInit, changeDif, or something else) would be nicer.
          * If the arrays are in the firstInit block, then it would cause problems when loading from a save file; but
@@ -58,27 +57,21 @@ public class Enemy{
             Ach.setUpEnemyAch(name, this);
         }
         if (firstInit) {//Only call if its the first time initializing the enemy. (Not if changing difficulties)
-
 			this.health = healthMax;
-
         }
 	}
 	
 	public boolean takeDamage(int damage){
-		
 		this.health -= damage;
 		if (this.health <= 0){
 			die();
 			return true;
 		}
 		return false;
-		
 	}
 	public void dealDamage(){
-		
 		int damage = Random.RInt(this.damageMin, this.damageMax);
 		com.hotmail.kalebmarc.textfighter.player.Health.takeDamage(damage);
-		
 	}
 	private void die(){
 		
@@ -100,7 +93,6 @@ public class Enemy{
 		Ach.getEnemyAch(Enemy.get());
 
 		encounterNew();
-				
 	}
 	public static void set(int i){
 		current = arrayEnemy.get(i);

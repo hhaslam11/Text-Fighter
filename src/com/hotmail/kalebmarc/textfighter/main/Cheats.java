@@ -5,7 +5,6 @@ import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
 import com.hotmail.kalebmarc.textfighter.player.*;
 
-import javax.swing.*;
 import java.util.Scanner;
 
 public class Cheats {

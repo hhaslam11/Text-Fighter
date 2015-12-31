@@ -118,7 +118,6 @@ public class Health {
 		}
 	}
 	public static void upgrade(){
-		
 		while(true) {
 
             //Make sure player didn't already upgrade fully

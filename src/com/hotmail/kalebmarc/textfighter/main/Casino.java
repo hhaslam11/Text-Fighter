@@ -11,9 +11,7 @@ public class Casino {
 	public static void menu(){
 		
 		while (true){
-
 			Action.cls();
-
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                      WELCOME TO THE CASINO                       ");
 			Ui.println();
@@ -39,14 +37,10 @@ public class Casino {
 				break;
 			}//Switch
 		}//main loop
-		
 	}
 	private static void dice(){
-		
 		while (true){
-
 			Action.cls();
-
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                            Dice Game                             ");
 			Ui.println(                                                                    );
@@ -80,7 +74,6 @@ public class Casino {
 		
 	}
 	private static void slots(){
-		
 		while (true){
 
 			Action.cls();
@@ -94,7 +87,7 @@ public class Casino {
 			Ui.println(                                                                    );
 			Ui.println("You will pick an amount of coins to bet. Then, 4 slots will spin, ");
 			Ui.println("each containing 5 possibilities. You'll win coins depending on how");
-			Ui.println("much of the same com.hotmail.kalebmarc.item you spin.                                   ");
+			Ui.println("much of the same item you spin.                                   ");
 			Ui.println(                                                                    );
 			Ui.println("0 the same : Lose amount you bet                                  ");
 			Ui.println("2 the same : Lose amount you bet                                  ");
@@ -117,7 +110,6 @@ public class Casino {
 				break;
 			}//Switch
 		}//While
-		
 	}
 	private static void dicePlay(){
 		int bet;
@@ -208,7 +200,6 @@ public class Casino {
 		gamesPlayed++;
 		Stats.diceGamesPlayed++;
 		Action.pause();
-		
 	}
 	private static void slotsPlay(){
 		

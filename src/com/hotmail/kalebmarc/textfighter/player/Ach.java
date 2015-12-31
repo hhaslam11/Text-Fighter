@@ -259,7 +259,6 @@ public class Ach {
 				level10Fighter &&
 				honestPlayer &&
 				learning
-
 				){
 
 			//Check Enemy Achs
@@ -391,6 +390,5 @@ public class Ach {
 
 		learning = true;
 		get("Learning");
-
 	}
 }

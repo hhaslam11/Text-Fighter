@@ -4,7 +4,6 @@ class Menu {
 	
 	private Menu(){}
 	public static void load(){
-
 		while(true){
 			
 			Action.cls();
@@ -39,7 +38,6 @@ class Menu {
 			default: 
 				break;
 			}
-			
 		}//Loop
 	}//Method
 }//Class

@@ -18,7 +18,6 @@ public class Coins {
 		return bank;
 	}
 	public static void set(int amount, boolean add){
-		
 		if(!add){
 			coins = amount;
 		}else{
@@ -26,17 +25,14 @@ public class Coins {
 			if (amount < 0) Stats.totalCoinsSpent += -amount;
 			if (coins < 0) coins = 0;
 		}
-		
 	}
 	public static void setBank(int amount, boolean add){
-		
 		if(!add){
 			bank = amount;
 		}else{
 			bank += amount;
 			if (bank < 0) bank = 0;
 		}
-		
 	}
     public static void setInterest(double price){
         interest = price;
@@ -52,8 +48,7 @@ public class Coins {
 			Action.pause();
 			return;
 		}
-		
-		
+
 		while(true){
 			
 			Action.cls();
@@ -77,7 +72,6 @@ public class Coins {
 			
 			switch(Action.getValidInt()){
 			case 1:
-				
 				//-----------------------------------------------------------------------------------
 				Ui.println("How much money would you like to deposit? (You will have to pay " + (interest * 100) + "% of this)");
 				Ui.println("You currently have " + get() + " coins.");
@@ -93,10 +87,8 @@ public class Coins {
 				//Deposit
 				deposit(amount, interest);
 				//-----------------------------------------------------------------------------------
-
 				break;				
 			case 2:
-				
 				//-----------------------------------------------------------------------------------
 				Action.cls();
 				
@@ -114,7 +106,6 @@ public class Coins {
 				//Withdraw
 				withdraw(amount);				
 				//-----------------------------------------------------------------------------------
-				
 				break;
 			case 3:
 				return;
@@ -122,7 +113,6 @@ public class Coins {
 		}			
 	}
 	private static void withdraw(int amount){
-		
 		//Calculation
 		set(amount, true);
 		setBank(-amount, true);
@@ -132,7 +122,6 @@ public class Coins {
 		Ui.println("Amount withdrawn: " + amount);
 		Ui.println("Current Balance: " + getBank());
 		Action.pause();
-		
 	}
 	private static void deposit(int amount, double interest){
 		
@@ -157,6 +146,5 @@ public class Coins {
 		Ui.println("Interest Paid: " + Math.round(interest) + " coins");
 		Ui.println("Current Balance: " + getBank() + " coins");
 		Action.pause();
-		
 	}	
 }
