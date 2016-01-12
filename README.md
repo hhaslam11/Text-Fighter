@@ -25,21 +25,8 @@ Pretty much all the information you need about the game mechanics is available i
 
 Upcoming
 --------------
-I'm planning to continue developing Text Fighter for a while, as it's proven to be a good resource to help teach me Java. I don't have an end-goal for the project, but I do have a lot of things I want to eventually add. Some of these things include:
+I'm planning to continue developing Text Fighter for a while, as it's proven to be a good resource to help teach me Java. I don't have an end-goal for the project, but I do have a lot of things I want to eventually add. Everything I plan for Text Fighter is posted in [issues.](https://github.com/hhaslam11/Text-Fighter/issues)
 
-- Player Stats (Accuracy, stamina, etc)?
-- Food (Heals player)
-- Way more weapons (Make Weapon file)
-- Way more enemy types (Make Enemy file)
-- Different enemies appear at different levels (Harder enemies with progress)
-- Artifacts (Rare drops, sold or collected)
-- NPC's
-- Quests
-- Temporary medications (Basically potions/powerups)
-- Enemies no longer get health when player dies, but can use first aid kits to heal themselves
-- More Casino games
-- More cheats
-- Body armor
 
 In the beta stage, I want to add a better UI while still keeping the game mostly text-based. For example, having buttons to click on instead of typing numbers in, but still having the output be in text form.
 
