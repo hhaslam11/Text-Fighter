@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.*;
 
@@ -44,7 +45,7 @@ public class Ach {
 	//Aww, You Care About Me
 	public static boolean viewedAbout          = false;
 	//Learning
-	public static boolean viewedPlayer         = false;
+	public static boolean viewedArmour         = false;
 	public static boolean viewedHealth         = false;
 	public static boolean viewedXP             = false;
 	public static boolean viewedCrafting       = false;
@@ -381,7 +382,11 @@ public class Ach {
             if (!Enemy.arrayEnemy.get(i).viewedAbout()) return;
         }
 
-        if(!viewedPlayer)   return;
+		for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
+			if (!Armour.getArmours().get(i).getViewed()) return;
+		}
+
+        if(!viewedArmour)   return;
         if(!viewedXP)       return;
         if(!viewedCrafting) return;
         if(!viewedCheats)   return;

@@ -204,15 +204,15 @@ public class Weapon{
 
         //Start of weapon Info
         Action.cls();
-        for(int i = 0; i < BORDER_LENGTH; i++) Ui.println("-");//Make line
+        for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.println();
-        for(int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++) Ui.println(" ");//Set correct spacing to get name in middle of box
+        for(int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++) Ui.print(" ");//Set correct spacing to get name in middle of box
         Ui.println(this.getName());
         Ui.println("Price: " + this.price + " coins");
         Ui.println("Chance of missing: " + this.chanceOfMissing + "%");
         Ui.println("Ammo Used: " + this.ammoUsed);
         Ui.println("Damage: " + this.getDamage());
-        for(int i = 0; i < 39; i++) Ui.println("-");//Make line
+        for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Action.pause();
         Action.cls();
         //End of weapon Info

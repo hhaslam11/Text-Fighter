@@ -3,7 +3,6 @@ package com.hotmail.kalebmarc.textfighter.main;
 import java.util.Scanner;
 
 public class Action {
-	
 	private static Scanner in = new Scanner(System.in);
 	
 	private Action(){}

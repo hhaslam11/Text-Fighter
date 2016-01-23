@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.player.Ach;
 
 class Help{
@@ -14,7 +15,7 @@ class Help{
 			Ui.println("know about Text-Fighter.");
 			Ui.println("------------------------------------------------------------");
 			Ui.println("1) Enemy");
-			Ui.println("2) Player");
+			Ui.println("2) Armour");
 			Ui.println("3) Weapon");
 			Ui.println("4) Health");
 			Ui.println("5) XP");
@@ -28,7 +29,7 @@ class Help{
 				info_enemy();
 				break;
 			case 2:
-				info_player();
+				info_armour();
 				break;
 			case 3:
 				info_weapons();
@@ -78,16 +79,31 @@ class Help{
             }
 		}
 	}
-	private static void info_player(){
-		//Start of player info
-		Action.cls();
-		Ui.println("-----------------------------------------------");//TODO Either add something here, or get rid of it.
-		Ui.println("There is currently no information");
-		Ui.println("to show in this section..");
-		Ui.println("-----------------------------------------------");
-		Action.pause();
-		//End of player info
-		Ach.viewedPlayer = true;
+	private static void info_armour(){
+		//Start of armour info
+		while(true) {
+			Action.cls();
+			Ui.println("--------------------------------------------------");
+			Ui.println("                    ARMOUR INFO                   ");
+			Ui.println("Which armour type would you like to know about?");
+			Ui.println();
+			for (int i = 0; i < Armour.getArmours().size(); i++) {
+				Ui.println((i + 1) + ") " + Armour.getArmours().get(i).getName());
+			}
+			Ui.println((Armour.getArmours().size() + 1) + ") Back");
+			Ui.println("--------------------------------------------------");
+
+			int menuItem = Action.getValidInt();
+
+			try{
+				Armour.getArmours().get(menuItem - 1).viewAbout();
+			}catch(Exception e){
+				if(menuItem == (Armour.getArmours().size() + 1)) return;
+				Ui.println(menuItem + " is not an option.");
+				Action.pause();
+			}
+		}
+		//End of armour info
 	}
 	private static void info_weapons(){
         while(true) {

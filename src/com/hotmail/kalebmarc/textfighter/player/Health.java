@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
@@ -72,6 +73,9 @@ public class Health {
 		if(Settings.getGodMode()){
 			damage = 0;
 		}
+
+		double resist = Armour.getEquipped().getDamResist() / 100.0;
+		damage = (int)(damage - (damage * resist));
 
         Action.cls();
         health -= damage;

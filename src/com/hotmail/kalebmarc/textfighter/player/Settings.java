@@ -234,6 +234,8 @@ public class Settings {
         Coins.set(50, false);
         FirstAid.set(3, false);
         Xp.setAll(0, 500, 1);
+        Game.none.setOwns(true);
+        Game.none.equip();
 
     }
 

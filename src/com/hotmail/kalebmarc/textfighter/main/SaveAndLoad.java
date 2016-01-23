@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
@@ -109,6 +110,10 @@ class SaveAndLoad {
 			Stats.totalDamageDealt = Integer.parseInt(input.nextLine());
             Stats.bulletsFired = Integer.parseInt(input.nextLine());
             Stats.bulletsThatHit = Integer.parseInt(input.nextLine());
+            for(int i = 0; i < Armour.getArmours().size(); i++){
+                Armour.getArmours().get(i).setOwns(Boolean.parseBoolean(input.nextLine()));
+            }
+            //TODO Make sure equipped weapon is saved/loaded
 
             //Enemy
             Enemy.set(Integer.parseInt(input.nextLine()));
@@ -221,6 +226,9 @@ class SaveAndLoad {
         output.println(Stats.totalDamageDealt);
         output.println(Stats.bulletsFired);
         output.println(Stats.bulletsThatHit);
+        for(int i = 0; i < Armour.getArmours().size(); i++){
+            output.println(Armour.getArmours().get(i).isOwns());
+        }
 
         //Enemy
         output.println(Enemy.getIndex(Enemy.get()));

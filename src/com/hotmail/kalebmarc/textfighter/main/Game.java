@@ -9,6 +9,7 @@ import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
 import static com.hotmail.kalebmarc.textfighter.player.Health.upgrade;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 
 public class Game {
 	private Game(){}
@@ -35,6 +36,11 @@ public class Game {
     public static Weapon shotgun;
     public static Weapon rifle;
     public static Weapon sniper;
+
+	//Amours
+	public static Armour none     = new Armour("None",     0,   0,  1);//DO NOT REMOVE
+	public static Armour basic    = new Armour("Basic",    400, 15, 5);
+	public static Armour advanced = new Armour("Advanced", 750, 30, 7);
 
     private static Scanner scan = new Scanner(System.in);
 
@@ -69,7 +75,7 @@ public class Game {
 			if(Stats.kills > Stats.highScore) Stats.highScore = Stats.kills;
 			Ach.check();
 			Action.cls();
-			
+
 			/*
 			 * MAIN GAME MENU
 			 * Able to fight and go to other places from here
@@ -90,6 +96,7 @@ public class Game {
 			Ui.println("     Health: " + getStr());
 			Ui.println("     Coins: " + Coins.get());
 			Ui.println("     First-Aid kits: " + FirstAid.get());
+			Ui.println("     Equipped armour: " + Armour.getEquipped().toString());
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			//Displays ammo only if a weapon is equipped
 			Action.displayAmmo();
@@ -201,7 +208,7 @@ public class Game {
 	private static void home(){
 		
 		int menuChoice;
-		
+
 		//HOME MENU
 		while (true){
 			Action.cls();
