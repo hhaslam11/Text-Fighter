@@ -3,7 +3,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 class Version {
 	private Version(){}
 	
-	private static final String VERSION = "4.6";
+	private static final String VERSION = "4.7DEV";
 	
 	private static final String STAGE = "Alpha";
 	
@@ -20,15 +20,15 @@ class Version {
 			+ "(Not compatible with previous saves)\n\n"
 			
 			+ "New Stuff:\n"
-			+ "- Body armour\n"
-			+ "- Each gun has own ammo\n"
-			+ "- Able to buy custom ammo amount\n"
-			+ "- Remove Rifle And Knife\n"
-			+ "- Remove Crafting\n\n"
+			+ "-\n"
+			+ "-\n"
+			+ "-\n"
+			+ "-\n"
+			+ "-\n\n"
 
 			+ "Bug Fixes:\n"
-			+ "- Fixed unexpected typo in Slot game\n"
-			+ "- Cleaned-up code";
+			+ "-\n"
+			+ " ";
 	
 	public static String get(){
 		return VERSION;
