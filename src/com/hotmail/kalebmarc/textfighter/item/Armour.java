@@ -97,6 +97,10 @@ public class Armour {
             Ui.println("You have to be at least level " + this.getLevel() + " to buy this!");
             Action.pause();
             return false;
+        }else if (this.isOwns()) {
+            Ui.println("You already own this.");
+            Action.pause();
+            return false;
         }else if(this.getPrice() <= Coins.get()){
             Coins.set(-this.price, true);
             setOwns(true);
@@ -109,6 +113,12 @@ public class Armour {
             Action.pause();
             return false;
         }
+    }
+    public static int get(){
+        return armours.indexOf(getEquipped());
+    }
+    public static void set(int i){
+        armours.get(i).equipped = true;
     }
     public void viewAbout(){
 
@@ -134,5 +144,38 @@ public class Armour {
     }
     public boolean getViewed(){
         return this.viewed;
+    }
+    public static void choose(){
+        while(true) {
+            Action.cls();
+            Ui.println("----------------------------");
+            Ui.println("Equip new armour");
+            Ui.println();
+            Ui.println("Equipped: " + getEquipped().toString());
+            Ui.println("----------------------------");
+            for(int i = 0; i < getArmours().size(); i++){
+                if(!getArmours().get(i).isOwns()){
+                    Ui.println((i + 1) + ") " + getArmours().get(i).getName().toUpperCase() + " IS NOT AVAILABLE");
+                }else{
+                    Ui.println((i + 1) + ") " + getArmours().get(i).getName());
+                }
+            }
+
+            //Get valid weapon index
+            int choice;
+            do{
+                choice  = Action.getValidInt() - 1;
+            }while(choice < 0 || choice > getArmours().size());
+
+            //Equip if player has the selected weapon
+            if(getArmours().get(choice).isOwns()){
+                getArmours().get(choice).equip();
+                return;
+            }else{
+                Action.cls();
+                Ui.println("You don't have this armour.");
+                Action.pause();
+            }
+        }
     }
 }

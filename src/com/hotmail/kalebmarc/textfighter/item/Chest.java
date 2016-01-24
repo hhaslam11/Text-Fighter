@@ -21,6 +21,9 @@ public class Chest {
             Ui.print(Weapon.arrayWeapon.get(i).getName() + ": " + Weapon.arrayWeapon.get(i).owns());
 			Ui.println(" (Ammo: " + Weapon.arrayWeapon.get(i).getAmmo() + ")");
         }
+		for(int i = 1; i < Armour.getArmours().size(); i++){
+			Ui.println(Armour.getArmours().get(i).toString() + ": " + Armour.getArmours().get(i).isOwns());
+		}
 		Ui.println();
 		Ui.println("------------------------------");
 		Action.pause();

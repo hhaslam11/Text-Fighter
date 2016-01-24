@@ -113,7 +113,7 @@ class SaveAndLoad {
             for(int i = 0; i < Armour.getArmours().size(); i++){
                 Armour.getArmours().get(i).setOwns(Boolean.parseBoolean(input.nextLine()));
             }
-            //TODO Make sure equipped weapon is saved/loaded
+            Armour.set(Integer.parseInt(input.nextLine()));
 
             //Enemy
             Enemy.set(Integer.parseInt(input.nextLine()));
@@ -229,6 +229,7 @@ class SaveAndLoad {
         for(int i = 0; i < Armour.getArmours().size(); i++){
             output.println(Armour.getArmours().get(i).isOwns());
         }
+        output.println(Armour.get());
 
         //Enemy
         output.println(Enemy.getIndex(Enemy.get()));

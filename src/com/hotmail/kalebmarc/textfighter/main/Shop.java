@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
@@ -22,23 +23,27 @@ class Shop{
 			Ui.println("-------------------------------------------------------------------");
 			Ui.println("1) Health");
 			Ui.println("2) Weapons/Ammo");
-			Ui.println("3) XP");
-			Ui.println("4) Back");
+            Ui.println("3) Body Armour");
+			Ui.println("4) XP");
+			Ui.println("5) Back");
 			Ui.println("-------------------------------------------------------------------");
 			switch(Action.getValidInt()){
-			case 1:
-				health();
-				break;
-			case 2:
-				weapons();
-				break;
-			case 3:
-				xp();
-				break;
-			case 4:
-				return;
-			default:
-				break;
+			    case 1:
+				    health();
+				    break;
+			    case 2:
+    				weapons();
+	    			break;
+                case 3:
+                    armour();
+                    break;
+		    	case 4:
+			    	xp();
+				    break;
+			    case 5:
+				    return;
+			    default:
+				    break;
 			}
         }
     }
@@ -243,6 +248,47 @@ class Shop{
                     Ui.println(menuItem + " is not an option.");
                     Action.pause();
                     Action.cls();
+                }
+            }
+        }
+    }
+    private static void armour(){
+        while(true) {
+            Action.cls();
+            Ui.println("-------------------------------------------------------------------");
+            Ui.println("                            Body Armour                            ");
+            Ui.println();
+            Ui.println("Coins: " + Coins.get());
+            Ui.println("Level: " + Xp.getLevel());
+            Ui.println();
+            Ui.println("-------------------------------------------------------------------");
+            for(int i = 1; i < Armour.getArmours().size(); i++){
+                if(Armour.getArmours().get(i).getPrice() == 0){
+                    Ui.println((i + 1) + ") [NOT AVAILABLE FOR PURCHASE]");//TODO Make it so it just skips (A4.9)
+                }else{
+                    Ui.println((i + 1) + ") " + Armour.getArmours().get(i).getName());
+                    Ui.println("   Price: " + Armour.getArmours().get(i).getPrice());
+                    Ui.println("   Level: " + Armour.getArmours().get(i).getLevel());
+                }
+                Ui.println();
+            }
+            Ui.println((Armour.getArmours().size() + 1) + ") Back");
+
+            while(true) {//Make it easy to break, without going back to main store menu
+
+                int menuItem = Action.getValidInt();
+
+                try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
+
+                    Armour.getArmours().get(menuItem - 1).buy();
+                    break;
+
+                } catch (Exception e) {
+                    if (menuItem == (Armour.getArmours().size() + 1)) {
+                        return;
+                    }
+                    Ui.println();
+                    Ui.println(menuItem + " is not an option.");
                 }
             }
         }

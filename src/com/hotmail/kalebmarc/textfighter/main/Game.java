@@ -224,43 +224,47 @@ public class Game {
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("1) Equip weapon");
-			Ui.println("2) View Item Chest");
-			Ui.println("3) Achievements");
-			Ui.println("4) Stats");
-			Ui.println("5) About");
-			Ui.println("6) Settings");
-			Ui.println("7) Help");
-			Ui.println("8) Back");
+			Ui.println("2) Equip Armour");
+			Ui.println("3) View Item Chest");
+			Ui.println("4) Achievements");
+			Ui.println("5) Stats");
+			Ui.println("6) About");
+			Ui.println("7) Settings");
+			Ui.println("8) Help");
+			Ui.println("9) Back");
 			Ui.println("------------------------------------------------------------------");
 			
 			menuChoice = Action.getValidInt();
 
 			switch(menuChoice){
-			case 1:
-				Weapon.choose();
-				break;
-			case 2:
-				Chest.view();
-				break;
-			case 3:
-				Ach.view();
-				break;
-			case 4:
-				Stats.view();
-				break;
-			case 5:
-				About.view(true);
-				Ach.viewedAbout = true;
-				break;
-			case 6:
-				menu();
-				break;
-			case 7:
-				Help.view();
-			case 8:
-				return;
-			default:
-				break;
+				case 1:
+					Weapon.choose();
+					break;
+				case 2:
+					Armour.choose();
+					break;
+				case 3:
+					Chest.view();
+					break;
+				case 4:
+					Ach.view();
+					break;
+				case 5:
+					Stats.view();
+					break;
+				case 6:
+					About.view(true);
+					Ach.viewedAbout = true;
+					break;
+				case 7:
+					menu();
+					break;
+				case 8:
+					Help.view();
+				case 9:
+					return;
+				default:
+					break;
 			}//Switch
 		}//While loop
 	}//Method
