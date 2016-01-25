@@ -193,7 +193,7 @@ class Help{
 		Ui.println("------------------------------------------------------------------------");
 		Ui.println("                            CHEATS                          ");
 		Ui.println("To use a cheat code, make sure to be in the main game menu, ");
-		Ui.println("then enter '1337'. A star (*) should appear to indicate that");
+		Ui.println("then enter '0'. A star (*) should appear to indicate that   ");
 		Ui.println("you can type in a cheat code.                               ");
 		Ui.println("WARNING: Using cheats will disable all achievements and the ");
 		Ui.println("XP system.                                                  ");

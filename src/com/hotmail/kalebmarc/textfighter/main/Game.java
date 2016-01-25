@@ -143,7 +143,7 @@ public class Game {
 	    			break;
     			case 7:
     				return;
-    			case 1337:
+    			case 0:
     				Cheats.cheatGateway();
     				break;
                 case 99:
