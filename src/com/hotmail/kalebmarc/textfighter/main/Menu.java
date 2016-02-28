@@ -1,5 +1,7 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.player.Settings;
+
 class Menu {
 	
 	private Menu(){}
@@ -25,6 +27,7 @@ class Menu {
 			switch(Action.getValidInt()){
 			case 1:
 				Action.cls();
+				Ui.guiEnabled = false;
 				Game.start();
 
 				//Saves the game before exiting

@@ -264,15 +264,15 @@ class Shop{
             Ui.println("-------------------------------------------------------------------");
             for(int i = 1; i < Armour.getArmours().size(); i++){
                 if(Armour.getArmours().get(i).getPrice() == 0){
-                    Ui.println((i + 1) + ") [NOT AVAILABLE FOR PURCHASE]");//TODO Make it so it just skips (A4.9)
+                    Ui.println((i) + ") [NOT AVAILABLE FOR PURCHASE]");//TODO Make it so it just skips (A4.9)
                 }else{
-                    Ui.println((i + 1) + ") " + Armour.getArmours().get(i).getName());
+                    Ui.println((i) + ") " + Armour.getArmours().get(i).getName());
                     Ui.println("   Price: " + Armour.getArmours().get(i).getPrice());
                     Ui.println("   Level: " + Armour.getArmours().get(i).getLevel());
                 }
                 Ui.println();
             }
-            Ui.println((Armour.getArmours().size() + 1) + ") Back");
+            Ui.println((Armour.getArmours().size()) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
@@ -280,11 +280,11 @@ class Shop{
 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
 
-                    Armour.getArmours().get(menuItem - 1).buy();
+                    Armour.getArmours().get(menuItem).buy();
                     break;
 
                 } catch (Exception e) {
-                    if (menuItem == (Armour.getArmours().size() + 1)) {
+                    if (menuItem == (Armour.getArmours().size())) {
                         return;
                     }
                     Ui.println();
