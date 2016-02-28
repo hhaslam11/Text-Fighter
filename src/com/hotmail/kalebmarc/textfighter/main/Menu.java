@@ -1,7 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import com.hotmail.kalebmarc.textfighter.player.Settings;
-
 class Menu {
 	
 	private Menu(){}

@@ -17,8 +17,8 @@ class Shop{
 			Ui.println("-------------------------------------------------------------------");
 			Ui.println("                        Welcome to the shop!                       ");
 			Ui.println();
-			Ui.println("Coins: " + com.hotmail.kalebmarc.textfighter.player.Coins.get());
-			Ui.println("First-Aid kits: " + com.hotmail.kalebmarc.textfighter.item.FirstAid.get());
+			Ui.println("Coins: " + Coins.get());
+			Ui.println("First-Aid kits: " + FirstAid.get());
 			Ui.println();
 			Ui.println("-------------------------------------------------------------------");
 			Ui.println("1) Health");

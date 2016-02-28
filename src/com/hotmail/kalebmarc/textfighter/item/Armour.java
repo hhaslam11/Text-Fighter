@@ -75,6 +75,14 @@ public class Armour {
         Ui.println("You have equipped " + this.toString());
         Action.pause();
     }
+    public void equipSilent(){
+        if(!(this.owns)){
+            return;
+        }
+        this.equipped = true;//To make sure something is already equipped
+        getEquipped().unequip();
+        this.equipped = true;
+    }
     public void unequip(){
         this.equipped = false;
     }
