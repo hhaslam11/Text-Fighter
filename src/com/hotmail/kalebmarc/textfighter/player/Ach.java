@@ -48,7 +48,6 @@ public class Ach {
 	public static boolean viewedArmour         = false;
 	public static boolean viewedHealth         = false;
 	public static boolean viewedXP             = false;
-	public static boolean viewedCrafting       = false;
 	public static boolean viewedCheats         = false;
 	public static boolean viewedAchs           = false;
 
@@ -388,7 +387,6 @@ public class Ach {
 
         if(!viewedArmour)   return;
         if(!viewedXP)       return;
-        if(!viewedCrafting) return;
         if(!viewedCheats)   return;
         if(!viewedAchs)     return;
         if(!viewedHealth)   return;
