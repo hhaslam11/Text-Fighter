@@ -121,11 +121,11 @@ public class Weapon{
             Ui.println("Ammo: " + current.getAmmo());
             Ui.println("Equipped weapon: " + current.getName());
             Ui.println("----------------------------");
-            int j = 0;
             for(int i = 0; i < arrayWeapon.size(); i++){
-               if(arrayWeapon.get(i).owns()){
-                   Ui.println((j + 1) + ") " + arrayWeapon.get(i).getName());
-                   j++;
+               if(!arrayWeapon.get(i).owns()){
+                   Ui.println((i + 1) + ") " + arrayWeapon.get(i).getName().toUpperCase() + " IS NOT AVAILABLE");
+               }else{
+                   Ui.println((i + 1) + ") " + arrayWeapon.get(i).getName());
                }
             }
 
