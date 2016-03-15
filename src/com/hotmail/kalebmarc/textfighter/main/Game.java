@@ -9,7 +9,6 @@ import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
 import static com.hotmail.kalebmarc.textfighter.player.Health.upgrade;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
-import com.hotmail.kalebmarc.textfighter.item.Armour;
 
 public class Game {
 	private Game(){}
@@ -189,7 +188,7 @@ public class Game {
 				home();
 				break;
 			case 3:
-                Coins.bank();
+                Bank.menu();
 				break;
 			case 4:
 				Shop.menu();

@@ -178,7 +178,7 @@ public class Settings {
 			Weapon.BULLET_DAMAGE  = 10;
             FirstAid.price        = 5;
             InstaHealth.price     = 30;
-            Coins.setInterest     (0.05);
+            Bank.setInterest      (0.05);
             Health.setUpgradePrice(100);
 
 			//Levels needed
@@ -218,7 +218,7 @@ public class Settings {
 			Weapon.BULLET_DAMAGE   = 5;
             FirstAid.price         = 15;
             InstaHealth.price      = 45;
-            Coins.setInterest      (0.10);
+            Bank.setInterest       (0.10);
             Health.setUpgradePrice (100);
 
             //Levels needed

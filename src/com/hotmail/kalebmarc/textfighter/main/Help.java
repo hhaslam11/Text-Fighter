@@ -19,10 +19,9 @@ class Help{
 			Ui.println("3) Weapon");
 			Ui.println("4) Health");
 			Ui.println("5) XP");
-			Ui.println("6) Crafting");
-			Ui.println("7) Cheats");
-			Ui.println("8) Achievements");
-			Ui.println("9) Back");
+			Ui.println("6) Cheats");
+			Ui.println("7) Achievements");
+			Ui.println("8) Back");
 			Ui.println("------------------------------------------------------------");
 			switch(Action.getValidInt()){
 			case 1:
@@ -41,15 +40,12 @@ class Help{
 				info_xp();
 				break;
 			case 6:
-				info_crafting();
-				break;
-			case 7:
 				info_cheats();
 				break;
-			case 8:
+			case 7:
 				info_achs();
 				break;
-			case 9:
+			case 8:
 				return;
 			}
 		}
@@ -168,25 +164,6 @@ class Help{
 		Ui.println("------------------------------------------------------------");
 		Action.pause();
 		Ach.viewedXP = true;
-	}
-	private static void info_crafting(){
-		Action.cls();
-		Ui.println("------------------------------------------------------------");
-		Ui.println("                           CRAFTING                         ");
-		Ui.println("Crafting is unlocked at level 5. Currently, there's only two ");
-		Ui.println("things that can be crafted. Shotgun ammo, and a 'Rifle And  ");
-		Ui.println("Knife'. *The Crafting menu can be accessed from the Home    ");
-		Ui.println("Menu                                                        ");
-		Ui.println("                                                            ");
-		Ui.println("Shotgun ammo:                                               ");
-		Ui.println("   - Requires 7 normal ammo per 1 shotgun ammo              ");
-		Ui.println("                                                            ");
-		Ui.println("Rifle And Knife:                                            ");
-		Ui.println("   - Title says it all- You need a rifle and a knife to     ");
-		Ui.println("     craft this.                                            ");
-		Ui.println("------------------------------------------------------------");
-		Action.pause();
-		Ach.viewedCrafting = true;
 	}
 	private static void info_cheats(){
 		Action.cls();

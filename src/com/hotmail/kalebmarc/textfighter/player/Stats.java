@@ -53,7 +53,7 @@ public class Stats {
 		Ui.println();
 		Ui.println("Coins:");
 		Ui.println("   Coins - " + Coins.get());
-		Ui.println("   Coins in bank - " + Coins.getBank());
+		Ui.println("   Coins in bank - " + Bank.get());
 		Ui.println("   Total Coins Won in Casino - " + Casino.totalCoinsWon);
 		Ui.println("   Total Games Played in Casino - " + Casino.gamesPlayed);
         Ui.println("   Total coins spent - " + totalCoinsSpent);

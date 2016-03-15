@@ -71,7 +71,7 @@ class SaveAndLoad {
 
 			//Coins
 			Coins.set(Integer.parseInt(input.nextLine()), false);
-			Coins.setBank(Integer.parseInt(input.nextLine()), false);
+			Bank.set(Integer.parseInt(input.nextLine()), false);
 			Casino.totalCoinsWon = Integer.parseInt(input.nextLine());
 			Casino.gamesPlayed = Integer.parseInt(input.nextLine());
             Ach.boughtItem = Boolean.parseBoolean(input.nextLine());
@@ -186,7 +186,7 @@ class SaveAndLoad {
 
         //Coins
         output.println(Coins.get());
-        output.println(Coins.getBank());
+        output.println(Bank.get());
         output.println(Casino.totalCoinsWon);
         output.println(Casino.gamesPlayed);
         output.println(Ach.boughtItem);
