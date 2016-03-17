@@ -121,18 +121,20 @@ public class Weapon{
             Ui.println("Ammo: " + current.getAmmo());
             Ui.println("Equipped weapon: " + current.getName());
             Ui.println("----------------------------");
-            int j = 0;
+            int j = 0; 
+            int[] offset = new int[arrayWeapon.size()];
             for(int i = 0; i < arrayWeapon.size(); i++){
                if(arrayWeapon.get(i).owns()){
                    Ui.println((j + 1) + ") " + arrayWeapon.get(i).getName());
+                   offset[j] = i - j;
                    j++;
                }
             }
 
             //Get valid weapon index
-            int choice;
+            int choice = 0;
             do{
-                choice  = Action.getValidInt() - 1;
+                choice  = Action.getValidInt() - 1 + offset[choice];
             }while(choice < 0 || choice > arrayWeapon.size());
 
             //Equip if player has the selected weapon

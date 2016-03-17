@@ -161,11 +161,13 @@ public class Armour {
             Ui.println();
             Ui.println("Equipped: " + getEquipped().toString());
             Ui.println("----------------------------");
+            int j = 0;
+            int[] offset = new int[getArmours().size()];
             for(int i = 0; i < getArmours().size(); i++){
-                if(!getArmours().get(i).isOwns()){
-                    Ui.println((i + 1) + ") " + getArmours().get(i).getName().toUpperCase() + " IS NOT AVAILABLE");
-                }else{
-                    Ui.println((i + 1) + ") " + getArmours().get(i).getName());
+                if(getArmours().get(i).isOwns()){
+                    Ui.println((j + 1) + ") " + getArmours().get(i).getName());
+                    offset[j] = i - j;
+                    j++;
                 }
             }
 
@@ -174,7 +176,8 @@ public class Armour {
             do{
                 choice  = Action.getValidInt() - 1;
             }while(choice < 0 || choice > getArmours().size());
-
+            
+            choice = choice + offset[choice]; // reverts to Armours indexing
             //Equip if player has the selected weapon
             if(getArmours().get(choice).isOwns()){
                 getArmours().get(choice).equip();
