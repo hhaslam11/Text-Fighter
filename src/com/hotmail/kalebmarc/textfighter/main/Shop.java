@@ -7,7 +7,6 @@ import com.hotmail.kalebmarc.textfighter.item.Power;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
-import java.util.ArrayList;
 
 class Shop{
     private Shop(){}

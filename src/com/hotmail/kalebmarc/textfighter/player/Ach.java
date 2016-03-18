@@ -54,13 +54,11 @@ public class Ach {
 
 
     //Arrays for achievements
-    private static final ArrayList<String> arrayName   = new ArrayList<>();
     public static final ArrayList<Boolean> arrayKilled = new ArrayList<>();
     private static final ArrayList<Enemy> arrayEnemy   = new ArrayList<>();
 
 	public static void setUpEnemyAch(String name, Enemy type){
 
-        arrayName.add(name);
         arrayKilled.add(false);
         arrayEnemy.add(type);
 

@@ -216,7 +216,7 @@ class Help{
 		Ui.println("   Text-Fighter Master    | Get all other achievements");
 		Ui.println("   Yay, POWER!            | Use 5 POWERS");
 		Ui.println("   Slayer                 | Deal a total of 1000 damage");
-		Ui.println("   Nobodys Perfect        | Die");
+		Ui.println("   Nobody's Perfect       | Die");
 		Ui.println("   Making Money           | Win 1000 coins altogether in the Casino");
 		Ui.println("   Gambling Addiction     | Complete 75 rounds in the Casino");
 		Ui.println("   Level 2 Fighter        | Reach level 2");

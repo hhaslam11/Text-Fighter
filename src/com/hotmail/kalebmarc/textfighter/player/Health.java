@@ -155,13 +155,13 @@ public class Health {
 
 			if (Action.getValidInt() == 1) {
 			/*
-			 * - Figure out what health-level com.hotmail.kalebmarc.player is trying to upgrade to
-			 * - Make sure com.hotmail.kalebmarc.player has enough money, and a high enough level
+			 * - Figure out what health-level player is trying to upgrade to
+			 * - Make sure player has enough money, and a high enough level
 			 * - Upgrade health
 			 * - Finish
 			 */
 
-				//Level that com.hotmail.kalebmarc.player is trying to upgrade to,
+				//Level that player is trying to upgrade to,
 				//and level needed to upgrade.
 				int level = getLevel() + 1;
 
