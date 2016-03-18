@@ -163,15 +163,15 @@ public class Settings {
             //Weapons
             //Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, firstInit, changeDif)
             //Melee: (name, startingWeapon, buyable, price, level, damageMin, damageMax, firstInit)
-            Game.nothing        = new Weapon("Nothing",      true, false,  0,   0,  5,  10,     firstInit, changeDif);
-            Game.baseballBat    = new Weapon("Baseball Bat", false, true,  120, 1,  10, 15,     firstInit, changeDif);
-            Game.knife          = new Weapon("Knife",        false, true,  125, 2,  10, 20,     firstInit, changeDif);
-            Game.pipe           = new Weapon("Pipe",         false, false, 0,   0,  5,  20,     firstInit, changeDif);
-            Game.pistol         = new Weapon("Pistol",           1,  18, true,  250, 1, 4,  15, firstInit, changeDif);
-            Game.smg            = new Weapon("Smg",              10, 75, true,  700, 1, 10, 75, firstInit, changeDif);
-            Game.shotgun        = new Weapon("Shotgun",          1,  12, true,  375, 2, 9,  60, firstInit, changeDif);
-            Game.rifle          = new Weapon("Rifle",            1,  18, true,  275, 1, 5,  10, firstInit, changeDif);
-            Game.sniper         = new Weapon("Sniper",           1,  10, true,  700, 2, 7,  0,  firstInit, changeDif);
+            Game.nothing        = new Weapon("Nothing",      true, false,  0,   0, 5,  10, firstInit, changeDif);
+            Game.baseballBat    = new Weapon("Baseball Bat", false, true,  120, 1, 10, 15, firstInit, changeDif);
+            Game.knife          = new Weapon("Knife",        false, true,  125, 2, 10, 20, firstInit, changeDif);
+            Game.pipe           = new Weapon("Pipe",         false, false, 0,   0, 5,  20, firstInit, changeDif);
+            Game.pistol         = new Weapon("Pistol",       1,  18, true, 250, 1, 4,  15, firstInit, changeDif);
+            Game.smg            = new Weapon("Smg",          10, 75, true, 700, 1, 10, 75, firstInit, changeDif);
+            Game.shotgun        = new Weapon("Shotgun",      1,  12, true, 375, 2, 9,  60, firstInit, changeDif);
+            Game.rifle          = new Weapon("Rifle",        1,  18, true, 275, 1, 5,  10, firstInit, changeDif);
+            Game.sniper         = new Weapon("Sniper",       1,  10, true, 700, 2, 7,  0,  firstInit, changeDif);
 
 			//Price
             Power.price           = 25;
@@ -203,15 +203,15 @@ public class Settings {
 			//Weapons
 			//Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, firstInit, changeDif)
             //Melee: (name, startingWeapon, buyable, price, level, damageMin, damageMax, firstInit, changeDif)
-            Game.nothing        = new Weapon("Nothing",       true, false,  0,   0,  5,  10,      firstInit, changeDif);
-            Game.baseballBat    = new Weapon("Baseball Bat", false,  true,  170, 1,  10, 15,      firstInit, changeDif);
-            Game.knife          = new Weapon("Knife",        false,  true,  175, 2,  10, 20,      firstInit, changeDif);
-            Game.pipe           = new Weapon("Pipe",         false, false,  0,   0,  5,  20,      firstInit, changeDif);
-            Game.pistol         = new Weapon("Pistol",           1,  18, true,  275, 1, 4,  15,   firstInit, changeDif);
-            Game.smg            = new Weapon("Smg",              10, 75, true,  800, 1, 10, 75,   firstInit, changeDif);
-            Game.shotgun        = new Weapon("Shotgun",          1,  12, true,  415, 2, 9,  60,   firstInit, changeDif);
-            Game.rifle          = new Weapon("Rifle",            1,  18, true,  300, 1, 5,  10,   firstInit, changeDif);
-            Game.sniper         = new Weapon("Sniper",           1,  10, true,  750, 2, 7,  0,    firstInit, changeDif);
+            Game.nothing        = new Weapon("Nothing",       true, false,  0,   0,  5,  10, firstInit, changeDif);
+            Game.baseballBat    = new Weapon("Baseball Bat", false,  true,  170, 1,  10, 15, firstInit, changeDif);
+            Game.knife          = new Weapon("Knife",        false,  true,  175, 2,  10, 20, firstInit, changeDif);
+            Game.pipe           = new Weapon("Pipe",         false, false,  0,   0,  5,  20, firstInit, changeDif);
+            Game.pistol         = new Weapon("Pistol",       1,  18, true,  275, 1, 4,  15,  firstInit, changeDif);
+            Game.smg            = new Weapon("Smg",          10, 75, true,  800, 1, 10, 75,  firstInit, changeDif);
+            Game.shotgun        = new Weapon("Shotgun",      1,  12, true,  415, 2, 9,  60,  firstInit, changeDif);
+            Game.rifle          = new Weapon("Rifle",        1,  18, true,  300, 1, 5,  10,  firstInit, changeDif);
+            Game.sniper         = new Weapon("Sniper",       1,  10, true,  750, 2, 7,  0,   firstInit, changeDif);
 
             //PRICE
             Power.price            = 75;

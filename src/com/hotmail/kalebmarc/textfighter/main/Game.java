@@ -73,6 +73,7 @@ public class Game {
 			//Runs all the tests and clears the screen
 			if(Stats.kills > Stats.highScore) Stats.highScore = Stats.kills;
 			Ach.check();
+			SaveAndLoad.save();
 			Action.cls();
 
 			/*

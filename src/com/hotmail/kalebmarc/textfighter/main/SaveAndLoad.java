@@ -160,7 +160,7 @@ class SaveAndLoad {
             System.exit(1);
 		}
 
-		input.close();
+		//input.close();
 		return true;
 	}
 	public static void save(){
@@ -170,7 +170,6 @@ class SaveAndLoad {
 		} catch (Exception e) {
 			Handle.error("Error Code - 008");
 		}
-		Ui.println("Saving your game...");
 
         //Version
 		output.println(Version.getFull());
@@ -270,6 +269,6 @@ class SaveAndLoad {
         output.println(Stats.diceGamesPlayed);
         output.println(Stats.slotGamesPlayed);
 
-		output.close();
+		//output.close();
 	}
 }
