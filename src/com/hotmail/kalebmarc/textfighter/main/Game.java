@@ -57,14 +57,16 @@ public class Game {
 		Ui.println("| 1) Yes                                    |");
 		Ui.println("| 2) No, Start a new game                   |");
 		Ui.println("|___________________________________________|");
-		
-		switch(Action.getValidInt()){
+		int choice = Action.getValidInt();
+		switch(choice){
 		case 1:
 			if(SaveAndLoad.load()) break;
 		default:
 			setDif(getDifficulty(), true, false);
 			Health.set(100, 100);
 			Enemy.encounterNew();
+			if(choice != 1)
+				User.promptNameSelection();
 			break;
 		}
 
@@ -92,7 +94,7 @@ public class Game {
 			Ui.println("     Level " + Xp.getLevel() + "      " + Xp.getFull());
 			Ui.println("     Kill Streak: " + Stats.kills);
 			Ui.println("     Highest Kill Streak: " + Stats.highScore);
-			Ui.println("--Player Info--");
+			Ui.println("--" + User.name() + "--");
 			Ui.println("     Health: " + getStr());
 			Ui.println("     Coins: " + Coins.get());
 			Ui.println("     First-Aid kits: " + FirstAid.get());
