@@ -8,6 +8,12 @@ public class Casino {
 
 	public static int totalCoinsWon  = 0;
     public static int gamesPlayed = 0;
+	private static final String SLOT_HEADER = "------------------------------------------------------------------\n" +
+											  "                                Slots                             \n" +
+											  "------------------------------------------------------------------";
+	private static final String DICE_HEADER = "------------------------------------------------------------------\n" +
+			                                  "                            Dice Game                             \n" +
+											  "------------------------------------------------------------------";
 	public static void menu(){
 		
 		while (true){
@@ -41,9 +47,7 @@ public class Casino {
 	private static void dice(){
 		while (true){
 			Action.cls();
-			Ui.println("------------------------------------------------------------------");
-			Ui.println("                            Dice Game                             ");
-			Ui.println(                                                                    );
+			Ui.println(DICE_HEADER);
 			Ui.println("     Coins: " + Coins.get()                                        );
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                           How to play                            ");
@@ -78,9 +82,7 @@ public class Casino {
 
 			Action.cls();
 
-			Ui.println("------------------------------------------------------------------");
-			Ui.println("                              Slots                               ");
-			Ui.println(                                                                    );
+			Ui.println(SLOT_HEADER);
 			Ui.println("     Coins: " + Coins.get()                                        );
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                           How to play                            ");
@@ -121,9 +123,7 @@ public class Casino {
 		
 		//Greeting & Input
 		Action.cls();
-		Ui.println("------------------------------------------------------------------");
-		Ui.println("                              Dice Game                           ");
-		Ui.println("------------------------------------------------------------------");
+		Ui.println(DICE_HEADER);
 		Ui.println();
 		Ui.println("Coins: " + Coins.get());
 		Ui.println();
@@ -145,9 +145,7 @@ public class Casino {
 		
 		do{//First Number
 			Action.cls();
-			Ui.println("------------------------------------------------------------------");
-			Ui.println("                              Dice Game                           ");
-			Ui.println("------------------------------------------------------------------");
+			Ui.println(DICE_HEADER);
 			Ui.println();
 			Ui.println("Now, pick your first number.");
 			Ui.println("It must be between 1, and 6.");
@@ -155,9 +153,7 @@ public class Casino {
 		}while(firstNumber < 1 || firstNumber > 6);
 		do{//Second Number
 			Action.cls();
-			Ui.println("------------------------------------------------------------------");
-			Ui.println("                              Dice Game                           ");
-			Ui.println("------------------------------------------------------------------");
+			Ui.println(DICE_HEADER);
 			Ui.println();
 			Ui.println("Finally, pick your second number.");
 			Ui.println("It must be between 1, and 6.");
@@ -184,9 +180,7 @@ public class Casino {
 		if (fNum ^ sNum) coinsWon = bet * 2;
 		if (fNum && sNum) coinsWon = bet * 5;
 		Action.cls();
-		Ui.println("------------------------------------------------------------------");
-		Ui.println("                              Dice Game                           ");
-		Ui.println("------------------------------------------------------------------");
+		Ui.println(DICE_HEADER);
 		Ui.println("Your bet: " + bet);
 		Ui.println("First number: " + firstNumber);
 		Ui.println("Second Number: " + secondNumber);
@@ -211,9 +205,7 @@ public class Casino {
 		
 		//Greetings/Input
 		Action.cls();
-		Ui.println("------------------------------------------------------------------");
-		Ui.println("                                Slots                             ");
-		Ui.println("------------------------------------------------------------------");
+		Ui.println(SLOT_HEADER);
 		Ui.println();
 		Ui.println("Coins: " + Coins.get());
 		Ui.println();
@@ -285,9 +277,7 @@ public class Casino {
 		}
 		Ui.println("Results Ready! Press enter to continue.");
 		Action.pause();
-		Ui.println("------------------------------------------------------------------");
-		Ui.println("                                Slots                             ");
-		Ui.println("------------------------------------------------------------------");
+		Ui.println(SLOT_HEADER);
 		Ui.println("Your bet: " + bet);
 		Ui.println();
 		Ui.println("Rolled Slots: " + slots[1] + "  " + slots[2] + "  " + slots[3] + "  " + slots[4]);
