@@ -15,18 +15,11 @@ class SaveAndLoad {
 	private static PrintStream output;
     private static String path = SaveAndLoad.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
 
-	static{
-        /*
-         * TODO In A4.7
-         * Get file name and replace (filename) with (Username)
-         * Also uncomment line below this comment.
-         * (Replace filename with username after getting rid of ".jar"
-         */
-        //path = path.replace(".jar", "");
-		path = path.replaceAll("%20", " ");
-	}
 	public static boolean load(){
 
+        User.promptNameSelection();
+        path = path.replace(".jar", "_" + User.name());
+        path = path.replaceAll("%20", " ");
         Scanner input;
 		try {
 			input = new Scanner(new File(path));
@@ -164,6 +157,9 @@ class SaveAndLoad {
 		return true;
 	}
 	public static void save(){
+
+        path = path.replace(".jar", User.name());
+        path = path.replaceAll("%20", " ");
 
 		try {
 			output = new PrintStream(path);

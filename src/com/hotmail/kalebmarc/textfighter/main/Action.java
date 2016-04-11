@@ -13,7 +13,14 @@ public class Action {
 		}
 		return in.nextInt();
 	}
-	
+
+	public static String getValidString(){
+
+		in.reset();
+		return in.next();
+
+	}
+
 	/*
 	 * Stops the program until the user presses enter, then continues
 	 */
