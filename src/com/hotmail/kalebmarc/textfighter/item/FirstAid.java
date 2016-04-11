@@ -12,8 +12,8 @@ public class FirstAid {
 	
 	private static int firstAid;
 	public static int used = 0;
-    public static int price;
-    public static int level;
+        public static int price;
+        public static int level;
 
 	public static int get(){
 		return firstAid;

@@ -35,7 +35,7 @@ public class Game {
     public static Weapon shotgun;
     public static Weapon rifle;
     public static Weapon sniper;
-
+    
 	//Amours
 	public static Armour none     = new Armour("None",     0,   0,  1);//DO NOT REMOVE
 	public static Armour basic    = new Armour("Basic",    400, 15, 5);
@@ -96,6 +96,7 @@ public class Game {
 			Ui.println("     Health: " + getStr());
 			Ui.println("     Coins: " + Coins.get());
 			Ui.println("     First-Aid kits: " + FirstAid.get());
+                        Ui.println("     Potions: " + (Potion.get("survival") + Potion.get("recovery")));
 			Ui.println("     Equipped armour: " + Armour.getEquipped().toString());
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			//Displays ammo only if a weapon is equipped
@@ -109,9 +110,10 @@ public class Game {
 			Ui.println("2) Go Home");
 			Ui.println("3) Go to the town");
 			Ui.println("4) Use First-Aid kit");
-			Ui.println("5) Use Insta-Health");
-			Ui.println("6) Use POWER");
-			Ui.println("7) Quit Game (Game will automatically be saved)");
+                        Ui.println("5) Use Potion");
+			Ui.println("6) Use Insta-Health");
+			Ui.println("7) Use POWER");
+			Ui.println("8) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
 
 			switch(Action.getValidInt()){
@@ -135,13 +137,32 @@ public class Game {
     			case 4:
     				FirstAid.use();
     				break;
-    			case 5:
+                        case 5:
+                                Action.cls();
+                                Ui.println("Which potion would you like to use?");
+                                Ui.println("1) Survival Potion");
+                                Ui.println("2) Recovery Potion");
+                                Ui.println("3) Back");
+                                switch(Action.getValidInt()){
+                                    case 1:
+                                        Potion.use("survival");
+                                        break;
+                                    case 2:
+                                        Potion.use("recovery");
+                                        break;
+                                    case 3:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+    			case 6:
     				InstaHealth.use();
     				break;
-    			case 6:
+    			case 7:
     				Power.use();
 	    			break;
-    			case 7:
+    			case 8:
     				return;
     			case 0:
     				Cheats.cheatGateway();

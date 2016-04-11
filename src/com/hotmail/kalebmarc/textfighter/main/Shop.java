@@ -7,6 +7,7 @@ import com.hotmail.kalebmarc.textfighter.item.Power;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
+import com.hotmail.kalebmarc.textfighter.player.Potion;
 
 class Shop{
     private Shop(){}
@@ -54,6 +55,8 @@ class Shop{
             Ui.println("-------------------------------------------------------------------");
             Ui.println("                               Health                              ");
             Ui.println();
+            NPC.welcome("Health");
+            Ui.println();         
             Ui.println("Coins: " + Coins.get());
             Ui.println("First-Aid kits: " + FirstAid.get());
             Ui.println("Insta-Healths: " + InstaHealth.get());
@@ -63,20 +66,42 @@ class Shop{
             Ui.println("   Price - " + FirstAid.price + " coins");
             Ui.println("   Level - " + FirstAid.level);
             Ui.println();
-            Ui.println("2) INSTA-HEALTH");
+            Ui.println("2) SURVIVAL POTION");
+            Ui.println("   Price - " + Potion.spPrice + " coins");
+            Ui.println("   Level - " + Potion.spLevel);
+            Ui.println();
+            Ui.println("3) RECOVERY POTION");
+            Ui.println("   Price - " + Potion.rpPrice + " coins");
+            Ui.println("   Level - " + Potion.rpLevel);
+            Ui.println();
+            Ui.println("4) INSTA-HEALTH");
             Ui.println("   Price - " + InstaHealth.price + " coins");
             Ui.println("   Level - " + InstaHealth.level);
             Ui.println();
-            Ui.println("3) Back");
+            Ui.println("5) Back");
             Ui.println("-------------------------------------------------------------------");
             switch(Action.getValidInt()){
                 case 1:
+                    Action.cls();
                     FirstAid.buy();
+                    NPC.gratitude("Health", "purchase");
                     break;
                 case 2:
-                    InstaHealth.buy();
+                    Action.cls();
+                    Potion.buy("survival");
+                    NPC.gratitude("Health", "purchase");
                     break;
                 case 3:
+                    Action.cls();
+                    Potion.buy("recovery");
+                    NPC.gratitude("Health", "purchase");
+                    break;
+                case 4:
+                    Action.cls();
+                    InstaHealth.buy();
+                    NPC.gratitude("Health", "purchase");
+                    break;
+                case 5:
                     return;
                 default:
                     break;
@@ -88,6 +113,8 @@ class Shop{
             Action.cls();
             Ui.println("-------------------------------------------------------------------");
             Ui.println("                              Weapons                              ");
+            Ui.println();
+            NPC.welcome("Weapon");
             Ui.println();
             Ui.println("Coins: " + Coins.get());
             Ui.println("Level: " + Xp.getLevel());
@@ -123,15 +150,18 @@ class Shop{
                     menuItem = menuItem + weaponShopOffset[menuItem - 1]; // this reverts back to Weapon indexing
                                                                           // this provides minimal changes to the rest of the code, for now
                     Weapon.arrayWeapon.get(menuItem - 1).buy();
+                    NPC.gratitude("Weapon", "purchase");
                     break;
 
                 } catch (Exception e) {
 
                     if (menuItem == (j + 1)) {
                         Power.buy();
+                        NPC.gratitude("Weapon", "purchase");
                         break;
                     }
                     if (menuItem == (j + 2)) {
+                        NPC.gratitude("Weapon", "purchase");
                         buyAmmo();
                         break;
                     }
@@ -164,6 +194,8 @@ class Shop{
 			Ui.println("-------------------------------------------------------------------");
 			Ui.println("                                 XP                                ");
 			Ui.println();
+                        NPC.welcome("XP");
+                        Ui.println();
 			Ui.println("Level: " + Xp.getLevel());
 			Ui.println("XP: " + Xp.getFull());
 			Ui.println("Coins: " + Coins.get());
@@ -208,6 +240,7 @@ class Shop{
 				Xp.set(buy, true);
 				Coins.set(-buy, true);
                 Stats.xpBought += buy;
+                NPC.gratitude("XP", "purchase");
             }
 
 		}
@@ -267,6 +300,8 @@ class Shop{
             Ui.println("-------------------------------------------------------------------");
             Ui.println("                            Body Armour                            ");
             Ui.println();
+            NPC.welcome("Armour");
+            Ui.println();
             Ui.println("Coins: " + Coins.get());
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
@@ -293,6 +328,7 @@ class Shop{
                     
                     menuItem = menuItem + armourShopOffset[menuItem];
                     Armour.getArmours().get(menuItem).buy();
+                    NPC.gratitude("Armour", "purchase");
                     break;
 
                 } catch (Exception e) {

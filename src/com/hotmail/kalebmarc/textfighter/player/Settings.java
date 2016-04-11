@@ -177,14 +177,18 @@ public class Settings {
             Power.price           = 25;
 			Weapon.BULLET_DAMAGE  = 10;
             FirstAid.price        = 5;
+            Potion.spPrice        = 10;
+            Potion.rpPrice        = 20;
             InstaHealth.price     = 30;
             Bank.setInterest      (0.05);
             Health.setUpgradePrice(100);
 
 			//Levels needed
             FirstAid.level        = 1;
-            InstaHealth.level     = 2;
-            Power.level           = 3;
+            Potion.spLevel        = 2;
+            Potion.rpLevel        = 2;
+            InstaHealth.level     = 3;
+            Power.level           = 4;
 
         }else{//Sets variables for HARD mode
 
@@ -217,14 +221,18 @@ public class Settings {
             Power.price            = 75;
 			Weapon.BULLET_DAMAGE   = 5;
             FirstAid.price         = 15;
+            Potion.spPrice         = 25;
+            Potion.rpPrice         = 35;
             InstaHealth.price      = 45;
             Bank.setInterest       (0.10);
             Health.setUpgradePrice (100);
 
             //Levels needed
             FirstAid.level        = 1;
-            InstaHealth.level     = 2;
-            Power.level           = 3;
+            Potion.spLevel        = 2;
+            Potion.rpLevel        = 2;
+            InstaHealth.level     = 3;
+            Power.level           = 4;
 
         }
         if (firstInit) newGameSetup();
@@ -233,6 +241,8 @@ public class Settings {
 
         Coins.set(50, false);
         FirstAid.set(3, false);
+        Potion.set("survival", 2, false);
+        Potion.set("recovery", 2, false);
         Xp.setAll(0, 500, 1);
         Game.none.setOwns(true);
         Game.none.equipSilent();

@@ -77,6 +77,7 @@ public class Enemy{
 		
 		//Get rewards & store in temp vars
 		int tempCoin = Random.RInt(coinDropMin, coinDropMax);
+                int tempHealth = Random.RInt(0, 2);
 		
 		//Prompt enemy death
 		Ui.popup("You have defeated an enemy! You've found " + tempCoin + " coins, and " + xp + "Xp!", "You've defeated an enemy!", JOptionPane.PLAIN_MESSAGE);
@@ -84,7 +85,17 @@ public class Enemy{
 		//Rewards
 		testFoundPipe();
 		com.hotmail.kalebmarc.textfighter.player.Coins.set(tempCoin, true);
-		com.hotmail.kalebmarc.textfighter.player.Health.gain(10);
+                switch(tempHealth){
+                    case 0:
+                        com.hotmail.kalebmarc.textfighter.player.Health.gain(10);
+                        break;
+                    case 1:
+                        com.hotmail.kalebmarc.textfighter.player.Potion.set("survival", 1, true);
+                        break;
+                    case 2:
+                        com.hotmail.kalebmarc.textfighter.player.Potion.set("recovery", 1, true);
+                        break;
+                }
 		com.hotmail.kalebmarc.textfighter.player.Xp.set(xp, true);
 		com.hotmail.kalebmarc.textfighter.player.Stats.kills++;
 		Stats.totalKills++;
