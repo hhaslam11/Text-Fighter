@@ -39,12 +39,19 @@ public class Bank {
             Ui.println();
             Ui.println("1) Deposit");
             Ui.println("2) Withdraw");
-            Ui.println("3) Back");
+            Ui.println("3) Request Loan");
+            Ui.println("4) Back");
             Ui.println("---------------------------------------");
 
             switch (Action.getValidInt()) {
                 case 1:
                     //-----------------------------------------------------------------------------------
+                    if (Loan.hasLoan()){
+                        Action.cls();
+                        Ui.println("You can not deposit coins until you pay off your loan!");
+                        Action.pause();
+                        break;
+                    }
                     Ui.println("How much money would you like to deposit? (You will have to pay " + (interest * 100) + "% of this)");
                     Ui.println("You currently have " + Coins.get() + " coins.");
                     do {
@@ -80,6 +87,9 @@ public class Bank {
                     //-----------------------------------------------------------------------------------
                     break;
                 case 3:
+                    Loan.menu();
+                    break;
+                case 4:
                     return;
             }
         }
