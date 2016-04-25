@@ -19,3 +19,4 @@ src/META-INF/
 .classpath
 .project
 Text Fighter.iml
+/dist/

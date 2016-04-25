@@ -195,6 +195,7 @@ public class Game {
 			Ui.println("     Health: " + getStr());
 			Ui.println("     Coins: " + Coins.get());
 			Ui.println("     First-Aid kits: " + FirstAid.get());
+                        Ui.println("     Potions: " + (Potion.get("survival") + Potion.get("recovery")));
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("1) Casino");
@@ -247,6 +248,7 @@ public class Game {
 			Ui.println("     Health: " + getStr());
 			Ui.println("     Coins: " + Coins.get());
 			Ui.println("     First-Aid kits: " + FirstAid.get());
+                        Ui.println("     Potions: " + (Potion.get("survival") + Potion.get("recovery")));
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("1) Equip weapon");

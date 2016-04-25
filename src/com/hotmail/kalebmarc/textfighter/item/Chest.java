@@ -4,6 +4,7 @@ import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.main.Weapon;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
+import com.hotmail.kalebmarc.textfighter.player.Potion;
 
 public class Chest {
 	private Chest(){}
@@ -15,6 +16,7 @@ public class Chest {
 		Ui.println();
 		Ui.println("First-Aid kits: " + FirstAid.get());
 		Ui.println("Insta-Healths: " + InstaHealth.get());
+                Ui.println("Potions: " + (Potion.get("survival") + Potion.get("recovery")));
 		Ui.println("Coins: " + Coins.get());
 		Ui.println("POWERS: " + Power.get());
 		for(int i = 0; i < Weapon.arrayWeapon.size(); i++){

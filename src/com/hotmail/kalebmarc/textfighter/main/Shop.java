@@ -20,6 +20,7 @@ class Shop{
 			Ui.println();
 			Ui.println("Coins: " + Coins.get());
 			Ui.println("First-Aid kits: " + FirstAid.get());
+                        Ui.println("Potions: " + (Potion.get("survival") + Potion.get("recovery")));
 			Ui.println();
 			Ui.println("-------------------------------------------------------------------");
 			Ui.println("1) Health");
@@ -59,6 +60,7 @@ class Shop{
             Ui.println();         
             Ui.println("Coins: " + Coins.get());
             Ui.println("First-Aid kits: " + FirstAid.get());
+            Ui.println("Potions: " + (Potion.get("survival") + Potion.get("recovery")));
             Ui.println("Insta-Healths: " + InstaHealth.get());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
