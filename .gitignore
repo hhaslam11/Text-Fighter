@@ -20,3 +20,8 @@ src/META-INF/
 .project
 Text Fighter.iml
 /dist/
+
+#Remove if needed in future
+*.xml
+*.mf
+nbproject/

@@ -2,18 +2,15 @@ package com.hotmail.kalebmarc.textfighter.player;
 
 import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
-import com.hotmail.kalebmarc.textfighter.player.Coins;
-import com.hotmail.kalebmarc.textfighter.player.Health;
-import com.hotmail.kalebmarc.textfighter.player.Stats;
-import com.hotmail.kalebmarc.textfighter.player.Xp;
 
 public class Potion {
     private Potion(){}
     
     private static int survivalPotion; //potion that heals 25% of health
     private static int recoveryPotion; //potion that heals 75% of health
-    //will eventually add potions to heal status ailments
-    
+    //TODO will eventually add potions to heal status ailments
+    //TODO possibly add potion that gives player a temporary strength boost (Does more damage)
+
     public static int spUsed = 0;
     public static int spLevel;
     public static int spPrice;
@@ -139,7 +136,7 @@ public class Potion {
             case "recovery":
                 return rpLevel;
             default:
-                return 0; //need to motify
+                return 0; //need to modify
         }
     }
     public static int getPrice(String kind){
@@ -149,7 +146,7 @@ public class Potion {
             case "recovery":
                 return rpPrice;
             default:
-                return 0; //need to motify
+                return 0; //need to modify
         }
     }
 }
