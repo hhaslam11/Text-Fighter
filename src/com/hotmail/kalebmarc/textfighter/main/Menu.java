@@ -19,7 +19,7 @@ class Menu {
 			Ui.println("| 1) Start Game                             |");
 			Ui.println("| 2) About Game                             |");
 			Ui.println("| 3) Exit                                   |");
-			Ui.println("|             ==Kaleb Haslam==              |");
+			Ui.println("|             www.TextFighter.tk            |");
 			Ui.println("|___________________________________________|");
 
 			switch(Action.getValidInt()){

@@ -3,7 +3,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 class Version {
 	private Version(){}
 	
-	private static final String VERSION = "4.7DEV";
+	private static final String VERSION = "4.7";
 	
 	private static final String STAGE = "Alpha";
 	
@@ -20,15 +20,22 @@ class Version {
 			+ "(Not compatible with previous saves)\n\n"
 			
 			+ "New Stuff:\n"
-			+ "-\n"
-			+ "-\n"
-			+ "-\n"
-			+ "-\n"
-			+ "-\n\n"
+			+ "- Remove \"Not available\" in amour & weapon shop, and equip armour & equip weapon menu\n"
+			+ "- nogui on by default\n"
+			+ "- Potions\n"
+			+ "- NPC's\n"
+            + "- Changed way to access cheat menu\n"
+            + "- Added more cheats\n"
+            + "- Loans\n"
+            + "- Better save file names\n"
+            + "- Usernames (Again...)\n"
+            + "- General optimizations\n"
+			+ "- Auto Save\n\n"
 
 			+ "Bug Fixes:\n"
-			+ "-\n"
-			+ " ";
+			+ "- Remove crafting from help menu\n"
+			+ "- Fixed not showing option 1 in Body Armour menu\n"
+			+ "- Fixed showing no armour is equipped when starting new game";
 	
 	public static String get(){
 		return VERSION;
