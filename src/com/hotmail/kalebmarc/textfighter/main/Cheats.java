@@ -90,6 +90,10 @@ public class Cheats {
 			Settings.toggleGodMode();
             Stats.timesCheated++;
 			break;
+		case "loanshark":
+			Loan.setCurrentLoan(0);
+            Loan.setNetDue(0);
+			break;
 		}
 	}
     public static boolean enabled(){

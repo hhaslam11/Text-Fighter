@@ -124,4 +124,13 @@ public class Loan {
     public static int getGrossDue(){
         return (int)(netDue + (netDue * INTEREST_RATE));
     }
+    public static int getNetDue(){
+        return netDue;
+    }
+    public static void setNetDue(int due){
+        netDue = due;
+    }
+    public static void setCurrentLoan(int loan){
+        currentLoan = loan;
+    }
 }

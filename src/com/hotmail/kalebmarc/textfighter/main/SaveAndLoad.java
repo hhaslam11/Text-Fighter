@@ -73,12 +73,21 @@ class SaveAndLoad {
             Stats.coinsSpentOnWeapons = Integer.parseInt(input.nextLine());
             Stats.coinsSpentOnHealth = Integer.parseInt(input.nextLine());
             Stats.xpBought = Integer.parseInt(input.nextLine());
+            Loan.setCurrentLoan(Integer.parseInt(input.nextLine()));
+            Loan.setNetDue(Integer.parseInt(input.nextLine()));
 
 			//Xp
             Xp.setLevel(Integer.parseInt(input.nextLine()));
             Xp.setOutOf(Integer.parseInt(input.nextLine()));
 			Xp.set(Integer.parseInt(input.nextLine()), false);
 			Xp.total = Integer.parseInt(input.nextLine());
+
+            //Potions
+            Potion.spUsed = Integer.parseInt(input.nextLine());
+            Potion.rpUsed = Integer.parseInt(input.nextLine());
+            Potion.set("survival", Integer.parseInt(input.nextLine()), false);
+            Potion.set("recovery", Integer.parseInt(input.nextLine()), false);
+
 
             //Settings
             Settings.setDif(input.nextLine(), false, false);
@@ -190,12 +199,20 @@ class SaveAndLoad {
         output.println(Stats.coinsSpentOnWeapons);
         output.println(Stats.coinsSpentOnHealth);
         output.println(Stats.xpBought);
+        output.println(Loan.getCurrentLoan());
+        output.println(Loan.getNetDue());
 
         //Xp
         output.println(Xp.getLevel());
         output.println(Xp.getOutOf());
         output.println(Xp.get());
         output.println(Xp.total);
+
+        //Potions
+        output.println(Potion.spUsed);
+        output.println(Potion.rpUsed);
+        output.println(Potion.get("survival"));
+        output.println(Potion.get("recovery"));
 
         //Settings
         output.println(Settings.getDif());

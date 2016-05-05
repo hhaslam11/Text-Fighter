@@ -188,6 +188,8 @@ class Help{
 		Ui.println("   givemeachallenge | Gives enemy 1000 health");
 		Ui.println("   lotsofkills      | Sets kill-streak to 5000");
 		Ui.println("   suicide          | Kills you");
+		Ui.println("   godmode          | Never dies");
+        Ui.println("   loanshark        | Removes current loan");
 		Ui.println("------------------------------------------------------------------------");
 		Action.pause();
 		Ach.viewedCheats = true;

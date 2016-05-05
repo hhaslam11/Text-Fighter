@@ -59,14 +59,14 @@ public class Stats {
         Ui.println("   Total coins spent - " + totalCoinsSpent);
         Ui.println("   Coins spent on bank interest - " + coinsSpentOnBankInterest);
         Ui.println("   Coins spent on weapons - " + coinsSpentOnWeapons);
-        Ui.println("   Coins spent on health - " + coinsSpentOnBankInterest);
+        Ui.println("   Coins spent on health - " + coinsSpentOnHealth);
         Ui.println("   XP bought - " + xpBought);
 		Ui.println();
 		Ui.println("Health:");
 		Ui.println("   Health - " + Health.getStr());
         Ui.println("   Insta-Healths used - " + InstaHealth.used);
         Ui.println("   First-Aid kits used - " + FirstAid.used);
-        Ui.println("   Potions used - " + (Potion.get("survival") + Potion.get("recovery")));
+        Ui.println("   Potions used - " + (Potion.spUsed + Potion.rpUsed));
 		Ui.println("   Times Died - " + Health.timesDied);
 		Ui.println();
 		Ui.println("Other: ");
