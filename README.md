@@ -34,4 +34,4 @@ In the beta stage, I want to add a better UI while still keeping the game mostly
 
 License
 --------------
-Published under the MIT license (See LICENSE file)
+Published under the [MIT license](https://github.com/hhaslam11/Text-Fighter/blob/master/LICENSE)
