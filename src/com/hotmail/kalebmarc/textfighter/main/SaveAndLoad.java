@@ -14,13 +14,14 @@ class SaveAndLoad {
 
 	private static PrintStream output;
     private static String path = SaveAndLoad.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
+    private static Scanner input;
 
 	public static boolean load(){
 
         User.promptNameSelection();
         path = path.replace(".jar", "_" + User.name());
         path = path.replaceAll("%20", " ");
-        Scanner input;
+
 		try {
 			input = new Scanner(new File(path));
 		} catch (Exception e) {
@@ -55,106 +56,106 @@ class SaveAndLoad {
 				}
 			}
 
-            Health.set(Integer.parseInt(input.nextLine()), Integer.parseInt(input.nextLine()));
-			FirstAid.set(Integer.parseInt(input.nextLine()), false);
-			FirstAid.used = Integer.parseInt(input.nextLine());
-			InstaHealth.set(Integer.parseInt(input.nextLine()), false);
-			InstaHealth.used = Integer.parseInt(input.nextLine());
-			Health.timesDied = Integer.parseInt(input.nextLine());
+            Health.set(readInt(), readInt());
+			FirstAid.set(readInt(), false);
+			FirstAid.used = readInt();
+			InstaHealth.set(readInt(), false);
+			InstaHealth.used = readInt();
+			Health.timesDied = readInt();
 
 			//Coins
-			Coins.set(Integer.parseInt(input.nextLine()), false);
-			Bank.set(Integer.parseInt(input.nextLine()), false);
-			Casino.totalCoinsWon = Integer.parseInt(input.nextLine());
-			Casino.gamesPlayed = Integer.parseInt(input.nextLine());
-            Ach.boughtItem = Boolean.parseBoolean(input.nextLine());
-            Stats.totalCoinsSpent = Integer.parseInt(input.nextLine());
-            Stats.coinsSpentOnBankInterest = Integer.parseInt(input.nextLine());
-            Stats.coinsSpentOnWeapons = Integer.parseInt(input.nextLine());
-            Stats.coinsSpentOnHealth = Integer.parseInt(input.nextLine());
-            Stats.xpBought = Integer.parseInt(input.nextLine());
-            Loan.setCurrentLoan(Integer.parseInt(input.nextLine()));
-            Loan.setNetDue(Integer.parseInt(input.nextLine()));
+			Coins.set(readInt(), false);
+			Bank.set(readInt(), false);
+			Casino.totalCoinsWon = readInt();
+			Casino.gamesPlayed = readInt();
+            Ach.boughtItem = readBoolean();
+            Stats.totalCoinsSpent = readInt();
+            Stats.coinsSpentOnBankInterest = readInt();
+            Stats.coinsSpentOnWeapons = readInt();
+            Stats.coinsSpentOnHealth = readInt();
+            Stats.xpBought = readInt();
+            Loan.setCurrentLoan(readInt());
+            Loan.setNetDue(readInt());
 
 			//Xp
-            Xp.setLevel(Integer.parseInt(input.nextLine()));
-            Xp.setOutOf(Integer.parseInt(input.nextLine()));
-			Xp.set(Integer.parseInt(input.nextLine()), false);
-			Xp.total = Integer.parseInt(input.nextLine());
+            Xp.setLevel(readInt());
+            Xp.setOutOf(readInt());
+			Xp.set(readInt(), false);
+			Xp.total = readInt();
 
             //Potions
-            Potion.spUsed = Integer.parseInt(input.nextLine());
-            Potion.rpUsed = Integer.parseInt(input.nextLine());
-            Potion.set("survival", Integer.parseInt(input.nextLine()), false);
-            Potion.set("recovery", Integer.parseInt(input.nextLine()), false);
+            Potion.spUsed = readInt();
+            Potion.rpUsed = readInt();
+            Potion.set("survival", readInt(), false);
+            Potion.set("recovery", readInt(), false);
 
 
             //Settings
             Settings.setDif(input.nextLine(), false, false);
-            if(Boolean.parseBoolean(input.nextLine())) Cheats.enable();
-            if(Boolean.parseBoolean(input.nextLine())) Cheats.lock();
-            Settings.difLocked = Boolean.parseBoolean(input.nextLine());
-            Ui.guiEnabled = Boolean.parseBoolean(input.nextLine());
+            if(readBoolean()) Cheats.enable();
+            if(readBoolean()) Cheats.lock();
+            Settings.difLocked = readBoolean();
+            Ui.guiEnabled = readBoolean();
 
 			//Combat
-			Stats.kills = Integer.parseInt(input.nextLine());
-			Stats.highScore = Integer.parseInt(input.nextLine());
-			Stats.totalKills = Integer.parseInt(input.nextLine());
-			Weapon.set(Integer.parseInt(input.nextLine()));
+			Stats.kills = readInt();
+			Stats.highScore = readInt();
+			Stats.totalKills = readInt();
+			Weapon.set(readInt());
 			for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-				Weapon.arrayWeapon.get(i).owns = Boolean.parseBoolean(input.nextLine());
+				Weapon.arrayWeapon.get(i).owns = readBoolean();
 			}
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-                Weapon.arrayWeapon.get(i).setAmmo(Integer.parseInt(input.nextLine()), false);
+                Weapon.arrayWeapon.get(i).setAmmo(readInt(), false);
             }
-			Power.set(Integer.parseInt(input.nextLine()), false);
-			Power.used = Integer.parseInt(input.nextLine());
-			Stats.totalDamageDealt = Integer.parseInt(input.nextLine());
-            Stats.bulletsFired = Integer.parseInt(input.nextLine());
-            Stats.bulletsThatHit = Integer.parseInt(input.nextLine());
+			Power.set(readInt(), false);
+			Power.used = readInt();
+			Stats.totalDamageDealt = readInt();
+            Stats.bulletsFired = readInt();
+            Stats.bulletsThatHit = readInt();
             for(int i = 0; i < Armour.getArmours().size(); i++){
-                Armour.getArmours().get(i).setOwns(Boolean.parseBoolean(input.nextLine()));
+                Armour.getArmours().get(i).setOwns(readBoolean());
             }
-            Armour.set(Integer.parseInt(input.nextLine()));
+            Armour.set(readInt());
 
             //Enemy
-            Enemy.set(Integer.parseInt(input.nextLine()));
-            Enemy.get().setHealth(Integer.parseInt(input.nextLine()), Enemy.get().getHealthMax());
+            Enemy.set(readInt());
+            Enemy.get().setHealth(readInt(), Enemy.get().getHealthMax());
 
 			//Achs
-            Ach.moneyMaker         = Boolean.parseBoolean(input.nextLine());
-            Ach.enemySlayer        = Boolean.parseBoolean(input.nextLine());
-            Ach.firstKill          = Boolean.parseBoolean(input.nextLine());
-            Ach.timeForAnUpgrade   = Boolean.parseBoolean(input.nextLine());
+            Ach.moneyMaker         = readBoolean();
+            Ach.enemySlayer        = readBoolean();
+            Ach.firstKill          = readBoolean();
+            Ach.timeForAnUpgrade   = readBoolean();
             for(int i = 0; i < Enemy.arrayEnemy.size(); i++){
-                 Ach.arrayKilled.set(i, Boolean.parseBoolean(input.nextLine()));
+                 Ach.arrayKilled.set(i, readBoolean());
             }
-            Ach.textFighterMaster  = Boolean.parseBoolean(input.nextLine());
-            Ach.YAYPOWER           = Boolean.parseBoolean(input.nextLine());
-            Ach.awwYouCareAboutMe  = Boolean.parseBoolean(input.nextLine());
-            Ach.slayer             = Boolean.parseBoolean(input.nextLine());
-            Ach.nobodysPerfect     = Boolean.parseBoolean(input.nextLine());
-            Ach.makingMoney        = Boolean.parseBoolean(input.nextLine());
-            Ach.gamblingAddiction  = Boolean.parseBoolean(input.nextLine());
-            Ach.level2Fighter      = Boolean.parseBoolean(input.nextLine());
-            Ach.level3Fighter      = Boolean.parseBoolean(input.nextLine());
-            Ach.level4Fighter      = Boolean.parseBoolean(input.nextLine());
-            Ach.level5Fighter      = Boolean.parseBoolean(input.nextLine());
-            Ach.level6Fighter      = Boolean.parseBoolean(input.nextLine());
-            Ach.level7Fighter      = Boolean.parseBoolean(input.nextLine());
-            Ach.level8Fighter      = Boolean.parseBoolean(input.nextLine());
-            Ach.level9Fighter      = Boolean.parseBoolean(input.nextLine());
-            Ach.level10Fighter     = Boolean.parseBoolean(input.nextLine());
-            Ach.honestPlayer       = Boolean.parseBoolean(input.nextLine());
-            Ach.learning           = Boolean.parseBoolean(input.nextLine());
+            Ach.textFighterMaster  = readBoolean();
+            Ach.YAYPOWER           = readBoolean();
+            Ach.awwYouCareAboutMe  = readBoolean();
+            Ach.slayer             = readBoolean();
+            Ach.nobodysPerfect     = readBoolean();
+            Ach.makingMoney        = readBoolean();
+            Ach.gamblingAddiction  = readBoolean();
+            Ach.level2Fighter      = readBoolean();
+            Ach.level3Fighter      = readBoolean();
+            Ach.level4Fighter      = readBoolean();
+            Ach.level5Fighter      = readBoolean();
+            Ach.level6Fighter      = readBoolean();
+            Ach.level7Fighter      = readBoolean();
+            Ach.level8Fighter      = readBoolean();
+            Ach.level9Fighter      = readBoolean();
+            Ach.level10Fighter     = readBoolean();
+            Ach.honestPlayer       = readBoolean();
+            Ach.learning           = readBoolean();
 
 			//Other Stuff
-            About.setViewed(Boolean.parseBoolean(input.nextLine()));
-            Stats.timesCheated = Integer.parseInt(input.nextLine());
-            Stats.timesQuit = Integer.parseInt(input.nextLine());
-            Stats.itemsCrafted = Integer.parseInt(input.nextLine());
-            Stats.diceGamesPlayed = Integer.parseInt(input.nextLine());
-            Stats.slotGamesPlayed = Integer.parseInt(input.nextLine());
+            About.setViewed(readBoolean());
+            Stats.timesCheated = readInt();
+            Stats.timesQuit = readInt();
+            Stats.itemsCrafted = readInt();
+            Stats.diceGamesPlayed = readInt();
+            Stats.slotGamesPlayed = readInt();
 
 
 		}catch(Exception e){
@@ -284,4 +285,28 @@ class SaveAndLoad {
 
 		//output.close();
 	}
+
+    /**
+     *
+     * @return the next line as an integer
+     */
+    private static int readInt(){
+        return Integer.parseInt(input.nextLine());
+    }
+
+    /**
+     *
+     * @return the next line as a boolean
+     */
+    private static boolean readBoolean(){
+        return Boolean.parseBoolean(input.nextLine());
+    }
+
+    /**
+     *
+     * @return the next line as a String
+     */
+    private static String readString(){
+        return input.nextLine();
+    }
 }
