@@ -25,18 +25,18 @@ class SaveAndLoad {
 		try {
 			input = new Scanner(new File(path));
 		} catch (Exception e) {
-			Action.cls();
+			Ui.cls();
 			Ui.println("------------------------------");
 			Ui.println("Cannot find save file.  ");
 			Ui.println("Starting a new game...  ");
 			Ui.println("------------------------------");
-			Action.pause();
+			Ui.pause();
 			return false;
 		}
 
 		try{
 			if(!input.nextLine().equals(Version.getFull())){
-				Action.cls();
+				Ui.cls();
 				Ui.println("------------------------------------");
 				Ui.println("WARNING- This save file is from");
 				Ui.println("a different version of TextFighter,");
@@ -46,7 +46,7 @@ class SaveAndLoad {
 				Ui.println("------------------------------------");
 				Ui.println("1) No, start a new game");
 				Ui.println("2) Yes, attempt to load");
-				switch(Action.getValidInt()){
+				switch(Ui.getValidInt()){
 				case 1:
 					return false;
 				case 2:

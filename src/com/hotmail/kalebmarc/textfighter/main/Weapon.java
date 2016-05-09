@@ -114,7 +114,7 @@ public class Weapon{
     }
     public static void choose(){
         while(true) {
-            Action.cls();
+            Ui.cls();
             Ui.println("----------------------------");
             Ui.println("Equip new weapon");
             Ui.println();
@@ -134,20 +134,20 @@ public class Weapon{
             //Get valid weapon index
             int choice = 0;
             do{
-                choice  = Action.getValidInt() - 1 + offset[choice];
+                choice  = Ui.getValidInt() - 1 + offset[choice];
             }while(choice < 0 || choice > arrayWeapon.size());
 
             //Equip if player has the selected weapon
             if(arrayWeapon.get(choice).owns()){
                 current = arrayWeapon.get(choice);
-                Action.cls();
+                Ui.cls();
                 Ui.println("You have equipped a " + arrayWeapon.get(choice).getName());
-                Action.pause();
+                Ui.pause();
                 return;
             }else{
-                Action.cls();
+                Ui.cls();
                 Ui.println("You don't have this weapon.");
-                Action.pause();
+                Ui.pause();
             }
 
         }
@@ -189,7 +189,7 @@ public class Weapon{
         com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += damageDealt;
         com.hotmail.kalebmarc.textfighter.player.Xp.set(damageDealt, true);
         Enemy.get().takeDamage(damageDealt);
-        Action.cls();
+        Ui.cls();
         Ui.println("----------------------------------------------------");
         Ui.println("You have attacked a " + Enemy.get().getName() + "!");
         Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
@@ -198,14 +198,14 @@ public class Weapon{
         Ui.println("Enemy health: " + Enemy.get().getHeathStr());
         Ui.println("----------------------------------------------------");
 
-        Action.pause();
+        Ui.pause();
     }
     public void viewAbout(){
 
         final int BORDER_LENGTH = 39;
 
         //Start of weapon Info
-        Action.cls();
+        Ui.cls();
         for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.println();
         for(int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++) Ui.print(" ");//Set correct spacing to get name in middle of box
@@ -215,8 +215,8 @@ public class Weapon{
         Ui.println("Ammo Used: " + this.ammoUsed);
         Ui.println("Damage: " + this.getDamage());
         for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
-        Action.pause();
-        Action.cls();
+        Ui.pause();
+        Ui.cls();
         //End of weapon Info
         this.setViewed(true);
     }
@@ -241,25 +241,25 @@ public class Weapon{
         return this.buyable;
     }
     public void buy(){
-        Action.cls();
+        Ui.cls();
         if(!isBuyable()){
             Ui.println("Sorry, this item is no longer in stock.");
-            Action.pause();
+            Ui.pause();
             return;
         }
         if(this.owns()){
             Ui.println("You already own this weapon.");
-            Action.pause();
+            Ui.pause();
             return;
         }
         if(level > Xp.getLevel()){
             Ui.println("You are not a high enough level to buy this item.");
-            Action.pause();
+            Ui.pause();
             return;
         }
         if(price > Coins.get()){
             Ui.println("You do not have enough coins to buy this item.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
@@ -271,7 +271,7 @@ public class Weapon{
         current = this;
         Ui.println("You have bought a " + this.getName() + " for " + this.price + " coins.");
         Ui.println("Coins: " + Coins.get());
-        Action.pause();
+        Ui.pause();
 
         //Give ammo
         ammo += this.ammoIncludedWithPurchase;
@@ -279,12 +279,12 @@ public class Weapon{
     }
     public void buyAmmo(){
 
-        Action.cls();
+        Ui.cls();
 
         //Make sure player is a high enough level
         if(Xp.getLevel() < this.level){
             Ui.println("You are not a high enough level. You need to be at least level " + this.level + ".");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
@@ -292,13 +292,13 @@ public class Weapon{
         Ui.println("How much ammo would you like to buy?");
         Ui.println("1 ammo cost " + this.ammoPrice + " coins.");
         Ui.println("You have " + Coins.get() + " coins.");
-        int ammoToBuy = Action.getValidInt();
+        int ammoToBuy = Ui.getValidInt();
         int cost = ammoToBuy * ammoPrice;
 
         //Make sure player has enough coins
         if(Coins.get() < (cost)){
             Ui.println("You don't have enough coins. You need " + (cost - Coins.get()) + " more coins.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
@@ -307,7 +307,7 @@ public class Weapon{
         Stats.coinsSpentOnWeapons += cost;
 
         Ui.println("You have bought " + ammoToBuy + " ammo.");
-        Action.pause();
+        Ui.pause();
     }
     private static void noAmmo(){
         Ui.popup("You've run out of ammo!", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -315,5 +315,10 @@ public class Weapon{
     }
     public int getAmmoPrice(){
         return this.ammoPrice;
+    }
+    public static void displayAmmo() {
+        if (!(Weapon.get().melee)) {
+            Ui.println("     Ammo: " + Weapon.get().getAmmo());
+        }
     }
 }

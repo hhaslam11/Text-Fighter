@@ -49,7 +49,7 @@ public class Game {
 		/*
 		 * Asks if the user wants to load from the save file
 		 */
-		Action.cls();
+		Ui.cls();
 		Ui.println("____________________________________________");
 		Ui.println("|                                           |");
 		Ui.println("|       Do you want to load your game       |");
@@ -59,7 +59,7 @@ public class Game {
 		Ui.println("| 2) No, Start a new game                   |");
 		Ui.println("|___________________________________________|");
 
-		int choice = Action.getValidInt();
+		int choice = Ui.getValidInt();
 		switch(choice){
 			case 1:
 				if(SaveAndLoad.load()) break;
@@ -78,7 +78,7 @@ public class Game {
 			if (Stats.kills > Stats.highScore) Stats.highScore = Stats.kills;
 			Ach.check();
 			SaveAndLoad.save();
-			Action.cls();
+			Ui.cls();
 
 			/*
 			 * MAIN GAME MENU
@@ -104,7 +104,7 @@ public class Game {
 			Ui.println("     Equipped armour: " + Armour.getEquipped().toString());
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			//Displays ammo only if a weapon is equipped
-			Action.displayAmmo();
+			Weapon.displayAmmo();
 			//--------------------
 			Ui.println("--Enemy Info--");
 			Ui.println("     Enemy: " + Enemy.get().getName());
@@ -120,7 +120,7 @@ public class Game {
 			Ui.println("8) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
 
-			switch (Action.getValidInt()) {
+			switch (Ui.getValidInt()) {
 				case 1:
 					int fightPath = Random.RInt(100);
 
@@ -142,12 +142,12 @@ public class Game {
 					FirstAid.use();
 					break;
 				case 5:
-					Action.cls();
+					Ui.cls();
 					Ui.println("Which potion would you like to use?");
 					Ui.println("1) Survival Potion");
 					Ui.println("2) Recovery Potion");
 					Ui.println("3) Back");
-					switch (Action.getValidInt()) {
+					switch (Ui.getValidInt()) {
 						case 1:
 							Potion.use("survival");
 							break;
@@ -185,7 +185,7 @@ public class Game {
 
 		//TOWN MENU
 		while (true) {
-			Action.cls();
+			Ui.cls();
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                      WELCOME TO THE TOWN                         ");
 			Ui.println("--Score Info--");
@@ -206,7 +206,7 @@ public class Game {
 			Ui.println("6) Back");
 			Ui.println("------------------------------------------------------------------");
 
-			menuChoice = Action.getValidInt();
+			menuChoice = Ui.getValidInt();
 
 			switch (menuChoice) {
 				case 1:
@@ -238,7 +238,7 @@ public class Game {
 
 		//HOME MENU
 		while (true) {
-			Action.cls();
+			Ui.cls();
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                          WELCOME HOME                            ");
 			Ui.println("--Score Info--");
@@ -262,7 +262,7 @@ public class Game {
 			Ui.println("9) Back");
 			Ui.println("------------------------------------------------------------------");
 
-			menuChoice = Action.getValidInt();
+			menuChoice = Ui.getValidInt();
 
 			switch (menuChoice) {
 				case 1:
@@ -305,7 +305,7 @@ public class Game {
 		 * they want to play on. Sets variables
 		 * according.
 		 */
-		Action.cls();
+		Ui.cls();
 		Ui.println("_____________________________________________");
 		Ui.println("|                                           |");
 		Ui.println("|       What difficulty would you           |");
@@ -316,15 +316,15 @@ public class Game {
 		Ui.println("|___________________________________________|");
 
 		if (!scan.hasNextInt()) {
-			Action.cls();
+			Ui.cls();
 			return "Easy";
 		} else {
 			int difficultyChoice = scan.nextInt();
 			if (difficultyChoice == 2) {
-				Action.cls();
+				Ui.cls();
 				return "Hard";
 			} else {
-				Action.cls();
+				Ui.cls();
 				return "Easy";
 			}
 		}

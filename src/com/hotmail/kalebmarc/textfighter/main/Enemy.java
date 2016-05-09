@@ -156,7 +156,7 @@ public class Enemy{
         final int BORDER_LENGTH = 39;
 
         //Start of weapon Info
-        Action.cls();
+        Ui.cls();
         for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.println();
         for(int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++) Ui.print(" ");//Set correct spacing to get name in middle of box
@@ -167,8 +167,8 @@ public class Enemy{
         Ui.println();
         Ui.println("XP Dropped: " + this.xp + "Xp");
         for(int i = 0; i < 39; i++) Ui.print("-");//Make line
-        Action.pause();
-        Action.cls();
+        Ui.pause();
+        Ui.cls();
         //End of weapon Info
         this.setViewed(true);
     }

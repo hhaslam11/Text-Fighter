@@ -15,9 +15,9 @@ public class User {
     }
     public static void promptNameSelection(){
 
-        Action.cls();
+        Ui.cls();
         Ui.println("Please enter your username.");
-        String name = Action.getValidString();
+        String name = Ui.getValidString();
 
         //Validate
         name = name.trim();

@@ -1,6 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.item;
 
-import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.main.Weapon;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
@@ -10,7 +9,7 @@ public class Chest {
 	private Chest(){}
 	public static void view(){
 		
-		Action.cls();
+		Ui.cls();
 		Ui.println("------------------------------");
 		Ui.println("          Item Chest          ");
 		Ui.println();
@@ -28,7 +27,7 @@ public class Chest {
 		}
 		Ui.println();
 		Ui.println("------------------------------");
-		Action.pause();
+		Ui.pause();
 		
 	}
 }

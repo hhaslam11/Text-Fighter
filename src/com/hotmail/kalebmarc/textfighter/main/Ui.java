@@ -1,11 +1,13 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
 import javax.swing.*;
+import java.util.Scanner;
 
 public class Ui {
     private Ui(){}
 
     public static boolean guiEnabled = true;
+    private static Scanner in = new Scanner(System.in);
 
     /*
      * The whole purpose of this class is to make it easy to change from using the Console to other
@@ -50,9 +52,9 @@ public class Ui {
         if (guiEnabled) {
             JOptionPane.showMessageDialog(null, body, title, msgType);
         } else {
-            Action.cls();
+            Ui.cls();
             println(body);
-            Action.pause();
+            Ui.pause();
         }
     }
 
@@ -60,7 +62,7 @@ public class Ui {
         if (guiEnabled){
             return JOptionPane.showConfirmDialog(null, body, title, JOptionPane.YES_NO_OPTION);
         } else {
-            Action.cls();
+            Ui.cls();
             println(body);
             println("(Y/N)");
 
@@ -78,9 +80,47 @@ public class Ui {
             char input = valid.charAt(0);
             //-----------------------------------------------------
 
-            Action.cls();
+            Ui.cls();
             if(input == 'Y') return 0;
             return 1;
+        }
+    }
+
+    /*
+	 * Clears the console
+	 */
+    public static void cls(){
+        for (int i = 1; i < 50; i++){
+            Ui.println("\n");
+        }
+    }
+
+    public static int getValidInt(){
+        while(!in.hasNextInt()) {
+            in.nextLine();
+        }
+        return in.nextInt();
+    }
+
+    public static String getValidString(){
+
+        in.reset();
+        return in.next();
+
+    }
+
+    /*
+     * Stops the program until the user presses enter, then continues
+     */
+    public static void pause(){
+        try{
+
+            Scanner pauseScan = new Scanner(System.in);
+            String temp = pauseScan.nextLine();
+            Ui.println(temp);
+
+        }catch (Exception e){
+            //Blank for a reason - Not supposed to do anything.
         }
     }
 }

@@ -19,7 +19,7 @@ class Start {
 		Menu.load();
 		
 		//Clears Console
-		Action.cls();
+		Ui.cls();
 
 	}
 }

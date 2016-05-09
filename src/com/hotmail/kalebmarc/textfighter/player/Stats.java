@@ -35,7 +35,7 @@ public class Stats {
 
         updateKillDeathRatio();
 
-		Action.cls();
+		Ui.cls();
 		Ui.println("-------------------------------------------------");
 		Ui.println("                   PLAYER STATS                  ");
 		Ui.println();
@@ -81,7 +81,7 @@ public class Stats {
 		Ui.println("   Slot Games Played - " + slotGamesPlayed);
 		Ui.println();
 		Ui.println("-------------------------------------------------");
-		Action.pause();
+		Ui.pause();
 	}
     private static void updateKillDeathRatio(){
         killDeathRatio = totalKills + ":" + Health.timesDied;

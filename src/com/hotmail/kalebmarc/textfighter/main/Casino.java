@@ -17,7 +17,7 @@ public class Casino {
 	public static void menu(){
 		
 		while (true){
-			Action.cls();
+			Ui.cls();
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                      WELCOME TO THE CASINO                       ");
 			Ui.println();
@@ -28,7 +28,7 @@ public class Casino {
 			Ui.println("3) Back");
 			Ui.println("------------------------------------------------------------------");
 
-			int menuChoice = Action.getValidInt();
+			int menuChoice = Ui.getValidInt();
 
 			switch(menuChoice){
 			case 1:
@@ -46,7 +46,7 @@ public class Casino {
 	}
 	private static void dice(){
 		while (true){
-			Action.cls();
+			Ui.cls();
 			Ui.println(DICE_HEADER);
 			Ui.println("     Coins: " + Coins.get()                                        );
 			Ui.println("------------------------------------------------------------------");
@@ -63,7 +63,7 @@ public class Casino {
 			Ui.println("2) Back to casino menu                                            ");
 			Ui.println("------------------------------------------------------------------");
 
-			int menuChoice = Action.getValidInt();
+			int menuChoice = Ui.getValidInt();
 
 			switch(menuChoice){
 			case 1:
@@ -80,7 +80,7 @@ public class Casino {
 	private static void slots(){
 		while (true){
 
-			Action.cls();
+			Ui.cls();
 
 			Ui.println(SLOT_HEADER);
 			Ui.println("     Coins: " + Coins.get()                                        );
@@ -100,7 +100,7 @@ public class Casino {
 			Ui.println("2) Back to casino menu                                            ");
 			Ui.println("------------------------------------------------------------------");
 
-			int menuChoice = Action.getValidInt();
+			int menuChoice = Ui.getValidInt();
 
 			switch(menuChoice){
 			case 1:
@@ -122,7 +122,7 @@ public class Casino {
 		int coinsWon = 0;
 		
 		//Greeting & Input
-		Action.cls();
+		Ui.cls();
 		Ui.println(DICE_HEADER);
 		Ui.println();
 		Ui.println("Coins: " + Coins.get());
@@ -131,37 +131,37 @@ public class Casino {
 		Ui.println("It must be between 10, and 250.");
 		Ui.println("Enter 0 to go back");
 		do{//Bet
-			bet = Action.getValidInt();
+			bet = Ui.getValidInt();
 			if (bet == 0) return;
 			if (bet > Coins.get()){
-				Action.cls();
+				Ui.cls();
 				bet = 0;
 				Ui.println("You do not have enough coins. Please enter a smaller amount. (Or enter 0 to go back)");
-				Action.pause();
+				Ui.pause();
 			}
 		}while(bet < 10 || bet > 250);
 		
 		Coins.set(-bet, true);
 		
 		do{//First Number
-			Action.cls();
+			Ui.cls();
 			Ui.println(DICE_HEADER);
 			Ui.println();
 			Ui.println("Now, pick your first number.");
 			Ui.println("It must be between 1, and 6.");
-			firstNumber = Action.getValidInt();
+			firstNumber = Ui.getValidInt();
 		}while(firstNumber < 1 || firstNumber > 6);
 		do{//Second Number
-			Action.cls();
+			Ui.cls();
 			Ui.println(DICE_HEADER);
 			Ui.println();
 			Ui.println("Finally, pick your second number.");
 			Ui.println("It must be between 1, and 6.");
-			secondNumber = Action.getValidInt();
+			secondNumber = Ui.getValidInt();
 		}while(secondNumber < 1 || secondNumber > 6);
 
 		//Rolling Dice
-		Action.cls();
+		Ui.cls();
 		Ui.println("Rolling the two dice...");
 		try {
 			Thread.sleep(3000);
@@ -171,7 +171,7 @@ public class Casino {
 		dice1 = Random.RInt(6);
 		dice2 = Random.RInt(6);
 		Ui.println("Results are ready! Press enter to continue.");
-		Action.pause();
+		Ui.pause();
 		
 		//Results
 		boolean fNum = false, sNum = false;
@@ -179,7 +179,7 @@ public class Casino {
 		if (secondNumber == dice1 || secondNumber == dice2) sNum = true;
 		if (fNum ^ sNum) coinsWon = bet * 2;
 		if (fNum && sNum) coinsWon = bet * 5;
-		Action.cls();
+		Ui.cls();
 		Ui.println(DICE_HEADER);
 		Ui.println("Your bet: " + bet);
 		Ui.println("First number: " + firstNumber);
@@ -193,7 +193,7 @@ public class Casino {
 		totalCoinsWon += coinsWon;
 		gamesPlayed++;
 		Stats.diceGamesPlayed++;
-		Action.pause();
+		Ui.pause();
 	}
 	private static void slotsPlay(){
 		
@@ -204,7 +204,7 @@ public class Casino {
 		int s[] = {0, 0, 0, 0, 0, 0};
 		
 		//Greetings/Input
-		Action.cls();
+		Ui.cls();
 		Ui.println(SLOT_HEADER);
 		Ui.println();
 		Ui.println("Coins: " + Coins.get());
@@ -212,13 +212,13 @@ public class Casino {
 		Ui.println("To begin, enter the amount of coins you would like to bet.. ");
 		Ui.println("It must be between 10, and 250.");
 		do{//Bet
-			bet = Action.getValidInt();
+			bet = Ui.getValidInt();
 			if (bet == 0) return;
 			if (bet > Coins.get()){
-				Action.cls();
+				Ui.cls();
 				bet = 0;
 				Ui.println("You do not have enough coins. Please enter a smaller amount, or type 0 to go back.");
-				Action.pause();
+				Ui.pause();
 			}
 		}while(bet < 10 || bet > 250);
 		Coins.set(-bet, true);
@@ -254,7 +254,7 @@ public class Casino {
 		if (slot == 5) slots[4] = "@";
 		
 		//Result
-		Action.cls();
+		Ui.cls();
 		Ui.println("Spinning slots...");
 		try {
 			Thread.sleep(3000);
@@ -276,7 +276,7 @@ public class Casino {
 			if (s[i] == 4) coinsWon = bet * 8;
 		}
 		Ui.println("Results Ready! Press enter to continue.");
-		Action.pause();
+		Ui.pause();
 		Ui.println(SLOT_HEADER);
 		Ui.println("Your bet: " + bet);
 		Ui.println();
@@ -287,6 +287,6 @@ public class Casino {
 		totalCoinsWon += coinsWon;
 		gamesPlayed++;
         Stats.slotGamesPlayed++;
-		Action.pause();		
+		Ui.pause();
 	}
 }

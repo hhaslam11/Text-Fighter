@@ -18,9 +18,9 @@ public class Cheats {
 
 		//Makes sure cheats aren't locked
 		if(locked()){
-			Action.cls();
+			Ui.cls();
 			Ui.println("Cheats are locked off- You cannot use cheats!");
-			Action.pause();
+			Ui.pause();
 			return;
 		}
 		
