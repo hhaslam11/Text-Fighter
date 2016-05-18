@@ -19,11 +19,15 @@ public class Chest {
 		Ui.println("Coins: " + Coins.get());
 		Ui.println("POWERS: " + Power.get());
 		for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-            Ui.print(Weapon.arrayWeapon.get(i).getName() + ": " + Weapon.arrayWeapon.get(i).owns());
-			Ui.println(" (Ammo: " + Weapon.arrayWeapon.get(i).getAmmo() + ")");
-        }
+			if (Weapon.arrayWeapon.get(i).owns()) {
+	        		Ui.print(Weapon.arrayWeapon.get(i).getName());
+				Ui.println(" (Ammo: " + Weapon.arrayWeapon.get(i).getAmmo() + ")");
+			}
+        	}
 		for(int i = 1; i < Armour.getArmours().size(); i++){
-			Ui.println(Armour.getArmours().get(i).toString() + ": " + Armour.getArmours().get(i).isOwns());
+			if (Armour.getArmours().get(i).isOwns()) {
+				Ui.println(Armour.getArmours().get(i).toString());
+			}
 		}
 		Ui.println();
 		Ui.println("------------------------------");
