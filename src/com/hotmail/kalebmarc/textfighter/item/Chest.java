@@ -20,10 +20,11 @@ public class Chest {
 		Ui.println("POWERS: " + Power.get());
 		for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
 			if (Weapon.arrayWeapon.get(i).owns()) {
-	        		Ui.print(Weapon.arrayWeapon.get(i).getName());
-				Ui.println(" (Ammo: " + Weapon.arrayWeapon.get(i).getAmmo() + ")");
+	        	Ui.print(Weapon.arrayWeapon.get(i).getName());
+				if(!Weapon.arrayWeapon.get(i).melee)
+					Ui.println(" (Ammo: " + Weapon.arrayWeapon.get(i).getAmmo() + ")");
 			}
-        	}
+		}
 		for(int i = 1; i < Armour.getArmours().size(); i++){
 			if (Armour.getArmours().get(i).isOwns()) {
 				Ui.println(Armour.getArmours().get(i).toString());
