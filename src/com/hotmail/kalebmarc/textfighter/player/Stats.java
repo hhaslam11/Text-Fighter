@@ -84,7 +84,7 @@ public class Stats {
 		Ui.pause();
 	}
     private static void updateKillDeathRatio(){
-    	int i, gcm, first = totalKills, second = Health.timesDied;
+    	int i, gcm = 1, first = totalKills, second = Health.timesDied;
     	
     	i = (first >= second) ? first : second;
     	
