@@ -145,12 +145,6 @@ public class Health {
 			Ui.println("-----------------------------------------------------------");
 
 			if (Ui.getValidInt() == 1) {
-			/*
-			 * - Figure out what health-level player is trying to upgrade to
-			 * - Make sure player has enough money, and a high enough level
-			 * - Upgrade health
-			 * - Finish
-			 */
 
 				//Level that player is trying to upgrade to,
 				//and level needed to upgrade.

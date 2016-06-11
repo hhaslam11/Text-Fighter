@@ -27,7 +27,7 @@ public class Game {
 	public static Enemy ogre;
 
 	//Weapons
-	public static Weapon nothing;
+	public static Weapon fists;
 	public static Weapon baseballBat;
 	public static Weapon knife;
 	public static Weapon pipe;
