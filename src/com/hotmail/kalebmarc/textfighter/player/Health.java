@@ -29,18 +29,10 @@ public class Health {
 	}
 	public static void set(int h){
 		health = h;
-		if (health > outOf){
-			Handle.error("Error Code - 002");
-			health = outOf;
-		}
 	}
 	public static void set(int h, int hOutOf){
 		health = h;
 		outOf = hOutOf;
-		if (health > outOf){
-			Handle.error("Error Code - 002");
-			health = outOf;
-		}
 	}
 	public static void setUpgradePrice(int price){
 		UPGRADE_PRICE = price;
@@ -116,7 +108,7 @@ public class Health {
 		case 200:
 			return 10;
 		default:
-			Handle.error("Error Code - 003");
+			Handle.error("Unable to get health level");
 			return 0;
 		}
 	}

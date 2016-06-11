@@ -23,7 +23,8 @@ public class Xp {
 			com.hotmail.kalebmarc.textfighter.player.Coins.set(250, true);
 			
 		}else if(level > 100){
-			Handle.error("Error code 006");
+			Handle.error("Error - Level is greater than 100");
+            level = 100;
 		}else if(level == 99){
             level = 100;
             xp = 49000;

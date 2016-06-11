@@ -259,19 +259,19 @@ class Shop{
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            int j = 0;
+            int ammoIndex = 0;
             int[] ammoShopOffset = new int[Weapon.arrayWeapon.size()];
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                 if(!Weapon.arrayWeapon.get(i).melee){
-                    Ui.println((j + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                    Ui.println((ammoIndex + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).getAmmoPrice());
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    ammoShopOffset[j] = i - j;
-                    j++;
+                    ammoShopOffset[ammoIndex] = i - ammoIndex;
+                    ammoIndex++;
                     Ui.println();
                 }
             }
-            Ui.println((j + 1) + ") Back");
+            Ui.println((ammoIndex + 1) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
@@ -285,7 +285,7 @@ class Shop{
                     
                 } catch (Exception e) {
 
-                    if (menuItem == (j + 1)) {
+                    if (menuItem == (ammoIndex + 1)) {
                         return;
                     }
                     Ui.println();
@@ -308,19 +308,19 @@ class Shop{
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            int j = 1;
+            int armourIndex = 1;
             int[] armourShopOffset = new int[Armour.getArmours().size()];
             for(int i = 1; i < Armour.getArmours().size(); i++){
                 if(Armour.getArmours().get(i).getPrice() != 0){
-                    Ui.println((j) + ") " + Armour.getArmours().get(i).getName());
+                    Ui.println((armourIndex) + ") " + Armour.getArmours().get(i).getName());
                     Ui.println("   Price: " + Armour.getArmours().get(i).getPrice());
                     Ui.println("   Level: " + Armour.getArmours().get(i).getLevel());
-                    armourShopOffset[j - 1] = i - j - 1;
-                    j++;
+                    armourShopOffset[armourIndex - 1] = i - armourIndex - 1;
+                    armourIndex++;
                     Ui.println();
                 }
             }
-            Ui.println((j) + ") Back");
+            Ui.println((armourIndex) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
@@ -334,7 +334,7 @@ class Shop{
                     break;
 
                 } catch (Exception e) {
-                    if (menuItem == (j)) {
+                    if (menuItem == (armourIndex)) {
                         return;
                     }
                     Ui.println();

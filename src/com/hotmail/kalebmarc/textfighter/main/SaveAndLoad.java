@@ -159,7 +159,7 @@ class SaveAndLoad {
 
 
 		}catch(Exception e){
-			Handle.error("Error Code - 009\n\n" + e.toString());
+			Handle.error(e.toString());
             System.exit(1);
 		}
 
@@ -174,7 +174,7 @@ class SaveAndLoad {
 		try {
 			output = new PrintStream(path);
 		} catch (Exception e) {
-			Handle.error("Error Code - 008");
+			Handle.error(e.toString());
 		}
 
         //Version

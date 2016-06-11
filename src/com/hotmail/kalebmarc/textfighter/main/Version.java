@@ -7,11 +7,11 @@ class Version {
 	
 	private static final String STAGE = "Alpha";
 	
-	private static final String DESC = ""
+	private static final String DESC = "" //Award for "worse game description" goes to:
+										  //But seriously; add information that the user actually cares about
 			+ "Text-Fighter is a Text-Based\n"
 			+ "Fighter RPG game, completely\n"
-			+ "written in Java. Text-Fighter\n"
-			+ "is made by Kaleb Haslam\n\n"
+			+ "written in Java.\n\n"
 			+ "Text-Fighter is currently in Alpha stage\n"
 			+ "which means it's still in early development,\n"
 			+ "and will contain lots of bugs and missing features.";
