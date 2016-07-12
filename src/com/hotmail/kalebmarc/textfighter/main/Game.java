@@ -42,6 +42,15 @@ public class Game {
 	public static Armour basic = new Armour("Basic", 400, 15, 5);
 	public static Armour advanced = new Armour("Advanced", 750, 30, 7);
 
+	//Food
+	//TODO Change the values from all 10. (And eventually, when the StatusEffect system is implemented, change effect types
+	public static Food apple       = new Food("Apple",         EffectType.HEALTH, 10);
+	public static Food orange      = new Food("Orange",        EffectType.HEALTH, 10);
+	public static Food dragonfruit = new Food("Dragon Fruit",  EffectType.HEALTH, 10);
+	public static Food meat        = new Food("Chunk of meat", EffectType.HEALTH, 10);
+	public static Food mushroom    = new Food("Mushroom",      EffectType.HEALTH, 10);
+	public static Food fish        = new Food("Fish",          EffectType.HEALTH, 10);
+
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void start() {
