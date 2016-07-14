@@ -370,16 +370,20 @@ public class Ach {
 	}
 	private static void checkLearning(){
 
-        for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-            if (!Weapon.arrayWeapon.get(i).viewedAbout()) return;
-        }
-
-        for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
-            if (!Enemy.arrayEnemy.get(i).viewedAbout()) return;
-        }
+		for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
+			if (!Weapon.arrayWeapon.get(i).viewedAbout()) return;
+		}
 
 		for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
+			if (!Enemy.arrayEnemy.get(i).viewedAbout()) return;
+		}
+
+		for (int i = 0; i < Armour.getArmours().size(); i++) {
 			if (!Armour.getArmours().get(i).getViewed()) return;
+		}
+
+		for (int i = 0; i < Food.arrayFood.size(); i++) {
+			if (!Food.arrayFood.get(i).viewedAbout()) return;
 		}
 
         if(!viewedArmour)   return;

@@ -18,10 +18,11 @@ class Help{
 			Ui.println("2) Armour");
 			Ui.println("3) Weapon");
 			Ui.println("4) Health");
-			Ui.println("5) XP");
-			Ui.println("6) Cheats");
-			Ui.println("7) Achievements");
-			Ui.println("8) Back");
+			Ui.println("5) Food");
+			Ui.println("6) XP");
+			Ui.println("7) Cheats");
+			Ui.println("8) Achievements");
+			Ui.println("9) Back");
 			Ui.println("------------------------------------------------------------");
 			switch(Ui.getValidInt()){
 			case 1:
@@ -37,15 +38,18 @@ class Help{
 				info_health();
 				break;
 			case 5:
-				info_xp();
+				info_food();
 				break;
 			case 6:
-				info_cheats();
+				info_xp();
 				break;
 			case 7:
-				info_achs();
+				info_cheats();
 				break;
 			case 8:
+				info_achs();
+				break;
+			case 9:
 				return;
 			}
 		}
@@ -137,6 +141,30 @@ class Help{
 		Ui.println("------------------------------------------------------------");
 		Ui.pause();
 		Ach.viewedHealth = true;
+	}
+	private static void info_food(){
+		while(true) {
+			Ui.cls();
+			Ui.println("------------------------------------------------------------");
+			Ui.println("                          FOOD INFO                         ");
+			Ui.println("Which food would you like to know about?");
+			Ui.println();
+			for(int i = 0; i < Food.arrayFood.size(); i++){
+				Ui.println((i + 1) + ") " + Food.arrayFood.get(i).getName());
+			}
+			Ui.println((Food.arrayFood.size() + 1) + ") Back");
+			Ui.println("------------------------------------------------------------");
+
+			int menuItem = Ui.getValidInt();
+
+			try{
+				Food.arrayFood.get(menuItem - 1).viewAbout();
+			}catch(Exception e){
+				if(menuItem == (Food.arrayFood.size() + 1)) return;
+				Ui.println(menuItem + " is not an option.");
+				Ui.pause();
+			}
+		}
 	}
 	private static void info_xp(){
 		Ui.cls();
