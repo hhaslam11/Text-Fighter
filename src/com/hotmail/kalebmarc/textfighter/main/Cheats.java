@@ -45,7 +45,7 @@ public class Cheats {
 			Coins.set(5000, false);
 			FirstAid.set(5000, false);
 			InstaHealth.set(5000, false);
-			for(int i = 0; i <= Weapon.arrayWeapon.size(); i++){
+			for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
 				Weapon.arrayWeapon.get(i).setAmmo(5000, false);
 			}
 			Power.set(5000, false);
