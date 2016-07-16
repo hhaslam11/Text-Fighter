@@ -8,7 +8,6 @@ import java.util.ArrayList;
  * - Way to obtain
  * - Way to eat
  * - Way to see in inv
- * - Make effects actually do something
  */
 public class Food {
 
