@@ -168,7 +168,7 @@ class SaveAndLoad {
 	}
 	public static void save(){
 
-        path = path.replace(".jar", User.name());
+        path = path.replace(".jar", "_" + User.name());
         path = path.replaceAll("%20", " ");
 
 		try {
