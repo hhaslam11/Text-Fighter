@@ -56,11 +56,11 @@ public class Cheats {
 			break;
 		case "weaponstash":
 			for(int i = 0; i <= Weapon.arrayWeapon.size(); i++){
-				Weapon.get().setAmmo(5000, false);
+				Weapon.arrayWeapon.get(i).setAmmo(5000, false);
 			}
 
             Power.set(5000, false);
-            for(int i = 0; i <= Weapon.arrayWeapon.size(); i++){
+			for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                 Weapon.arrayWeapon.get(i).owns = true;
             }
             Stats.timesCheated++;
@@ -74,7 +74,7 @@ public class Cheats {
 			Health.set(Health.getOutOf());
             Stats.timesCheated++;
 			break;
-		case "givemeachallange":
+		case "givemeachallenge":
 			Enemy.get().setHealth(1000, 1000);
             Stats.timesCheated++;
 			break;
@@ -83,7 +83,7 @@ public class Cheats {
             Stats.timesCheated++;
 			break;
 		case "suicide":
-			Health.set(0);
+			Health.die();
             Stats.timesCheated++;
 			break;
 		case "godmode":

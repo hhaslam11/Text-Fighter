@@ -49,7 +49,7 @@ public class Health {
 			die();
 		}
 	}
-    private static void die(){
+    public static void die(){
         Ui.popup("You have died! You lost half of your coins. ", "You've died!", JOptionPane.WARNING_MESSAGE);
         Coins.set(-(Coins.get() / 2), true);
         Stats.kills = 0;
