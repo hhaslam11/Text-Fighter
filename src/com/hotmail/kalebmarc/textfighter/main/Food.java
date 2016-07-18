@@ -44,7 +44,7 @@ public class Food {
     public void eat(){
         Ui.cls();
         Ui.println("You have ate a " + getName());
-        Ui.println("You've gained " + effectLevel + " " + statusEffect.toString() + "points.");
+        Ui.println("You've gained " + effectLevel + " " + statusEffect.toString() + " points.");
         this.quantity--;
         Ui.pause();
 
@@ -96,7 +96,7 @@ public class Food {
             int[] offset = new int[arrayFood.size()];
             for(int i = 0; i < arrayFood.size(); i++){
                 if(arrayFood.get(i).quantity > 0){
-                    Ui.println((j + 1) + ") " + arrayFood.get(i).getName());
+                    Ui.println((j + 1) + ") " + arrayFood.get(i).getName() + "(" + arrayFood.get(i).quantity + ")");
                     offset[j] = i - j;
                     j++;
                 }
@@ -111,8 +111,6 @@ public class Food {
             //Equip if player has the selected food
             if(arrayFood.get(choice).quantity > 0){
                 arrayFood.get(choice).eat();
-                Ui.cls();
-                Ui.pause();
                 return;
             }else{
                 Ui.cls();
