@@ -124,9 +124,10 @@ public class Game {
 			Ui.println("3) Go to the town");
 			Ui.println("4) Use First-Aid kit");
 			Ui.println("5) Use Potion");
-			Ui.println("6) Use Insta-Health");
-			Ui.println("7) Use POWER");
-			Ui.println("8) Quit Game (Game will automatically be saved)");
+			Ui.println("6) Eat Food");
+			Ui.println("7) Use Insta-Health");
+			Ui.println("8) Use POWER");
+			Ui.println("9) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
 
 			switch (Ui.getValidInt()) {
@@ -170,12 +171,15 @@ public class Game {
 					}
 					break;
 				case 6:
-					InstaHealth.use();
+					Food.list();
 					break;
 				case 7:
-					Power.use();
+					InstaHealth.use();
 					break;
 				case 8:
+					Power.use();
+					break;
+				case 9:
 					return;
 				case 0:
 					Cheats.cheatGateway();

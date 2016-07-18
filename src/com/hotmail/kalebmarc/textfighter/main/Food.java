@@ -7,13 +7,12 @@ import java.util.ArrayList;
 /* TODO
  * - Way to obtain
  * - Way to eat
- * - Way to see in inv
  */
 public class Food {
 
     private String name;
     private String desc;
-    private int quantity;
+    private int quantity = 3;
     private EffectType statusEffect;
     private int effectLevel;
 
@@ -46,6 +45,7 @@ public class Food {
         Ui.cls();
         Ui.println("You have ate a " + getName());
         Ui.println("You've gained " + effectLevel + " " + statusEffect.toString() + "points.");
+        this.quantity--;
         Ui.pause();
 
         switch(this.statusEffect){
@@ -87,5 +87,40 @@ public class Food {
     }
     public void setViewed(boolean v){
         this.viewedAbout = v;
+    }
+    public static void list(){
+
+        while(true) {
+            Ui.cls();
+            int j = 0;
+            int[] offset = new int[arrayFood.size()];
+            for(int i = 0; i < arrayFood.size(); i++){
+                if(arrayFood.get(i).quantity > 0){
+                    Ui.println((j + 1) + ") " + arrayFood.get(i).getName());
+                    offset[j] = i - j;
+                    j++;
+                }
+            }
+
+            //Get valid food index
+            int choice = 0;
+            do{
+                choice  = Ui.getValidInt() - 1 + offset[choice];
+            }while(choice < 0 || choice > arrayFood.size());
+
+            //Equip if player has the selected food
+            if(arrayFood.get(choice).quantity > 0){
+                arrayFood.get(choice).eat();
+                Ui.cls();
+                Ui.pause();
+                return;
+            }else{
+                Ui.cls();
+                Ui.println("You don't have this food.");
+                Ui.pause();
+            }
+
+        }
+        
     }
 }
