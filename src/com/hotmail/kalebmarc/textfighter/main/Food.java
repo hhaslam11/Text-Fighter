@@ -101,6 +101,7 @@ public class Food {
                     j++;
                 }
             }
+            Ui.println((j + 1) + ") Back");
 
             //Get valid food index
             int choice = 0;
@@ -109,6 +110,8 @@ public class Food {
             }while(choice < 0 || choice > arrayFood.size());
 
             //Equip if player has the selected food
+            if(choice >= arrayFood.size())
+                return;
             if(arrayFood.get(choice).quantity > 0){
                 arrayFood.get(choice).eat();
                 return;
