@@ -44,12 +44,12 @@ public class Game {
 
 	//Food
 	//TODO when the StatusEffect system is implemented, change effect types
-	public static Food apple       = new Food("Apple",         "A boring 'ol apple.",                EffectType.HEALTH, 5);
-	public static Food orange      = new Food("Orange",        "Sort of like an apple, but orange.", EffectType.HEALTH, 5);
-	public static Food dragonfruit = new Food("Dragon Fruit",  "Unfortunately, not a real dragon.",  EffectType.HEALTH, 10);
-	public static Food meat        = new Food("Chunk of meat", "Probably not rotten.",               EffectType.HEALTH, 15);
-	public static Food mushroom    = new Food("Mushroom",      "The good kind!",                     EffectType.HEALTH, 5);
-	public static Food fish        = new Food("Fish",          "Found in rivers and lakes.",         EffectType.HEALTH, 15);
+	public static Food apple       = new Food("Apple",         "A boring 'ol apple.",                StatusEffect.type.HEALTH, Food.type.FRUIT,      5);
+	public static Food orange      = new Food("Orange",        "Sort of like an apple, but orange.", StatusEffect.type.HEALTH, Food.type.FRUIT,      5);
+	public static Food dragonfruit = new Food("Dragon Fruit",  "Unfortunately, not a real dragon.",  StatusEffect.type.HEALTH, Food.type.FRUIT,      10);
+	public static Food meat        = new Food("Chunk of meat", "Probably not rotten.",               StatusEffect.type.HEALTH, Food.type.MEAT_OTHER, 15);
+	public static Food mushroom    = new Food("Mushroom",      "The good kind!",                     StatusEffect.type.HEALTH, Food.type.OTHER,      5);
+	public static Food fish        = new Food("Fish",          "Found in rivers and lakes.",         StatusEffect.type.HEALTH, Food.type.MEAT_FISH,  15);
 
 	private static Scanner scan = new Scanner(System.in);
 

@@ -4,17 +4,14 @@ import com.hotmail.kalebmarc.textfighter.player.Health;
 
 import java.util.ArrayList;
 
-/* TODO
- * - Way to obtain
- * - Way to eat
- */
 public class Food {
 
     private String name;
     private String desc;
     private int quantity = 3;
-    private EffectType statusEffect;
+    private StatusEffect.type statusEffect;
     private int effectLevel;
+    private type foodType;
 
     //for ach
     private boolean viewedAbout;
@@ -22,10 +19,11 @@ public class Food {
     //Weapon List
     public static final ArrayList<Food> arrayFood = new ArrayList<>();
 
-    public Food(String name, String desc, EffectType statusEffect, int effectLevel){
+    public Food(String name, String desc, StatusEffect.type statusEffect, type foodType, int effectLevel){
         this.name = name;
         this.desc = desc;
         this.statusEffect = statusEffect;
+        this.foodType = foodType;
         this.effectLevel = effectLevel;
         arrayFood.add(this);
     }
@@ -35,7 +33,7 @@ public class Food {
     public int getEffectLevel(){
         return effectLevel;
     }
-    public EffectType getStatusEffect(){
+    public StatusEffect.type getStatusEffect(){
         return statusEffect;
     }
     public int getQuantity(){
@@ -74,6 +72,7 @@ public class Food {
         for(int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++) Ui.print(" ");//Set correct spacing to get name in middle of box
         Ui.println(this.getName());
         Ui.println(this.desc);
+        Ui.println("Category: " + this.foodType.toString());
         Ui.println("Status effect type: " + this.statusEffect.toString());
         Ui.println("Status effect level: " + this.getEffectLevel());
         for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//draw line
@@ -124,4 +123,20 @@ public class Food {
         }
         
     }
+    public static enum type{
+        MEAT_FISH,
+        MEAT_OTHER,
+        FRUIT,
+        OTHER;
+
+        @Override
+        public String toString() {
+            String effectString = super.toString();
+            effectString = effectString.replace("_", " ");
+            effectString = effectString.replace("MEAT", "");
+            effectString = effectString.trim();
+            return effectString.substring(0, 1) + effectString.substring(1).toLowerCase();
+        }
+    }
 }
+
