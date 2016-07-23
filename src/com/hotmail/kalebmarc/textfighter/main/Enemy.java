@@ -1,7 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import com.hotmail.kalebmarc.textfighter.player.Ach;
-import com.hotmail.kalebmarc.textfighter.player.Stats;
+import com.hotmail.kalebmarc.textfighter.player.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -71,7 +70,7 @@ public class Enemy{
 	}
 	public void dealDamage(){
 		int damage = Random.RInt(this.damageMin, this.damageMax);
-		com.hotmail.kalebmarc.textfighter.player.Health.takeDamage(damage);
+		Health.takeDamage(damage);
 	}
 	private void die(){
 		
@@ -84,20 +83,20 @@ public class Enemy{
 		
 		//Rewards
 		testFoundPipe();
-		com.hotmail.kalebmarc.textfighter.player.Coins.set(tempCoin, true);
+		Coins.set(tempCoin, true);
                 switch(tempHealth){
                     case 0:
-                        com.hotmail.kalebmarc.textfighter.player.Health.gain(10);
+                        Health.gain(10);
                         break;
                     case 1:
-                        com.hotmail.kalebmarc.textfighter.player.Potion.set("survival", 1, true);
+                        Potion.set("survival", 1, true);
                         break;
                     case 2:
-                        com.hotmail.kalebmarc.textfighter.player.Potion.set("recovery", 1, true);
+                        Potion.set("recovery", 1, true);
                         break;
                 }
-		com.hotmail.kalebmarc.textfighter.player.Xp.set(xp, true);
-		com.hotmail.kalebmarc.textfighter.player.Stats.kills++;
+		Xp.set(xp, true);
+		Stats.kills++;
 		Stats.totalKills++;
 
 		//Get Achievement
