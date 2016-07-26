@@ -9,6 +9,8 @@ import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 import com.hotmail.kalebmarc.textfighter.player.Potion;
 
+import java.util.ArrayList;
+
 class Shop{
     private Shop(){}
 
@@ -121,57 +123,54 @@ class Shop{
             Ui.println("Coins: " + Coins.get());
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
-            Ui.println("-------------------------------------------------------------------"); 
-            int j = 0; 
-            int[] weaponShopOffset = new int[Weapon.arrayWeapon.size()];
+            Ui.println("-------------------------------------------------------------------");
+            int buyableWeaponIndex = 0; //Basically i, except only increments when arrayWeapon[i] is buyable.
+                                        // Prevents menu from counting like : 2, 3, 5, 6, 7, 8...
+            ArrayList<Weapon> buyableWeapons = new ArrayList<Weapon>();
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                 if(Weapon.arrayWeapon.get(i).isBuyable()){
-                    Ui.println((j + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                    Ui.println((buyableWeaponIndex + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).price);
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    weaponShopOffset[j] = i - j;
-                    j++;
+                    buyableWeaponIndex++;
+                    buyableWeapons.add(Weapon.arrayWeapon.get(i));
                     Ui.println();
                 }
             }
-            Ui.println((j + 1) + ") POWER");
+            Ui.println((buyableWeapons.size() + 1) + ") POWER");
             Ui.println("   Price: " + Power.price);
             Ui.println("   Level: " + Power.level);
             Ui.println();
-            Ui.println((j + 2) + ") AMMO");
+            Ui.println((buyableWeapons.size() + 2) + ") AMMO");
             Ui.println();
-            Ui.println((j + 3) + ") Back");
-
+            Ui.println((buyableWeapons.size() + 3) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
                 int menuItem = Action.getValidInt();
                 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
-                    
-                    menuItem = menuItem + weaponShopOffset[menuItem - 1]; // this reverts back to Weapon indexing
-                                                                          // this provides minimal changes to the rest of the code, for now
-                    Weapon.arrayWeapon.get(menuItem - 1).buy();
+
+                    buyableWeapons.get(menuItem - 1).buy();
                     NPC.gratitude("Weapon", "purchase");
                     break;
 
                 } catch (Exception e) {
 
-                    if (menuItem == (j + 1)) {
+                    if (menuItem == (buyableWeapons.size() + 1)) {
                         Power.buy();
                         NPC.gratitude("Weapon", "purchase");
                         break;
                     }
-                    if (menuItem == (j + 2)) {
+                    if (menuItem == (buyableWeapons.size() + 2)) {
                         NPC.gratitude("Weapon", "purchase");
                         buyAmmo();
                         break;
                     }
-                    if (menuItem == (j + 3)) {
+                    if (menuItem == (buyableWeapons.size() + 3)) {
                         return;
                     }
                     Ui.println();
-                    //if (menuItem == (Weapon.arrayWeapon.size() + 2)) return; TODO I don't remember why this line was here. Doesn't seem like it would do anything?
                     Ui.println(menuItem + " is not an option.");
                 }
             }
