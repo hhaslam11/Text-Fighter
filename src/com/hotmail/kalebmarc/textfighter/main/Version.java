@@ -3,7 +3,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 class Version {
 	private Version(){}
 	
-	private static final String VERSION = "4.8DEV";
+	private static final String VERSION = "4.7.1DEV";
 	
 	private static final String STAGE = "Alpha";
 	
