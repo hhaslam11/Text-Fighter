@@ -3,7 +3,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 class Version {
 	private Version(){}
 	
-	private static final String VERSION = "4.7.1DEV";
+	private static final String VERSION = "4.7.1";
 	
 	private static final String STAGE = "Alpha";
 	
@@ -17,18 +17,11 @@ class Version {
 			+ "and will contain lots of bugs and missing features.";
 	
 	private static final String CHANGE_LOG = ""
-			+ "(Not compatible with previous saves)\n\n"
-			
-			+ "New Stuff:\n"
-			+ "-\n"
-			+ "-\n"
-			+ "-\n"
-			+ "-\n"
-			+ "-\n\n"
+			+ "(Compatible with previous saves)\n\n"
 
 			+ "Bug Fixes:\n"
-			+ "-\n"
-			+ " ";
+			+ "- Player takes twice as much damage than supposed to\n"
+			+ "- Issue with buying certain weapons, buying ammo and equipping certain weapons";
 	
 	public static String get(){
 		return VERSION;
