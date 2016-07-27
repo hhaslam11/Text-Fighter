@@ -6,7 +6,13 @@ public class NPC {
     
     private static String name;
     private static String shop;
-    
+
+    private static final String NAME_HEALTH = "Corinna";
+    private static final String NAME_WEAPON = "Niel";
+    private static final String NAME_XP     = "Halette";
+    private static final String NAME_ARMOUR = "Leon";
+
+
     public NPC(){}
     
     public static String getName(String type){

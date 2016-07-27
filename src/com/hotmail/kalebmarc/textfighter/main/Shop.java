@@ -8,6 +8,9 @@ import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Potion;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
+import com.hotmail.kalebmarc.textfighter.player.Potion;
+
+import java.util.ArrayList;
 
 class Shop{
     private Shop(){}
@@ -121,57 +124,51 @@ class Shop{
             Ui.println("Coins: " + Coins.get());
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
-            Ui.println("-------------------------------------------------------------------"); 
-            int j = 0; 
-            int[] weaponShopOffset = new int[Weapon.arrayWeapon.size()];
+            Ui.println("-------------------------------------------------------------------");
+            ArrayList<Weapon> buyableWeapons = new ArrayList<Weapon>();
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                 if(Weapon.arrayWeapon.get(i).isBuyable()){
-                    Ui.println((j + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                    Ui.println((buyableWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).price);
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    weaponShopOffset[j] = i - j;
-                    j++;
+                    buyableWeapons.add(Weapon.arrayWeapon.get(i));
                     Ui.println();
                 }
             }
-            Ui.println((j + 1) + ") POWER");
+            Ui.println((buyableWeapons.size() + 1) + ") POWER");
             Ui.println("   Price: " + Power.price);
             Ui.println("   Level: " + Power.level);
             Ui.println();
-            Ui.println((j + 2) + ") AMMO");
+            Ui.println((buyableWeapons.size() + 2) + ") AMMO");
             Ui.println();
-            Ui.println((j + 3) + ") Back");
-
+            Ui.println((buyableWeapons.size() + 3) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
                 int menuItem = Ui.getValidInt();
                 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
-                    
-                    menuItem = menuItem + weaponShopOffset[menuItem - 1]; // this reverts back to Weapon indexing
-                                                                          // this provides minimal changes to the rest of the code, for now
-                    Weapon.arrayWeapon.get(menuItem - 1).buy();
+
+                    buyableWeapons.get(menuItem - 1).buy();
                     NPC.gratitude("Weapon", "purchase");
                     break;
 
                 } catch (Exception e) {
 
-                    if (menuItem == (j + 1)) {
+                    if (menuItem == (buyableWeapons.size() + 1)) {
                         Power.buy();
                         NPC.gratitude("Weapon", "purchase");
                         break;
                     }
-                    if (menuItem == (j + 2)) {
+                    if (menuItem == (buyableWeapons.size() + 2)) {
                         NPC.gratitude("Weapon", "purchase");
                         buyAmmo();
                         break;
                     }
-                    if (menuItem == (j + 3)) {
+                    if (menuItem == (buyableWeapons.size() + 3)) {
                         return;
                     }
                     Ui.println();
-                    //if (menuItem == (Weapon.arrayWeapon.size() + 2)) return; TODO I don't remember why this line was here. Doesn't seem like it would do anything?
                     Ui.println(menuItem + " is not an option.");
                 }
             }
@@ -259,33 +256,29 @@ class Shop{
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            int ammoIndex = 0;
-            int[] ammoShopOffset = new int[Weapon.arrayWeapon.size()];
+            ArrayList<Weapon> validWeapons = new ArrayList<Weapon>();
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-                if(!Weapon.arrayWeapon.get(i).melee){
-                    Ui.println((ammoIndex + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                if(Weapon.arrayWeapon.get(i).isBuyable() && !Weapon.arrayWeapon.get(i).melee && Weapon.arrayWeapon.get(i).owns()){
+                    Ui.println((validWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).getAmmoPrice());
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    ammoShopOffset[ammoIndex] = i - ammoIndex;
-                    ammoIndex++;
-                    Ui.println();
+                    validWeapons.add(Weapon.arrayWeapon.get(i));
                 }
             }
-            Ui.println((ammoIndex + 1) + ") Back");
+            Ui.println((validWeapons.size() + 1) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
                 int menuItem = Ui.getValidInt();
 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
-                    
-                    menuItem = menuItem + ammoShopOffset[menuItem - 1]; //Reverts back to weapon indexing
-                    Weapon.arrayWeapon.get(menuItem - 1).buyAmmo();
+                    validWeapons.get(menuItem - 1).buyAmmo();
+                    NPC.gratitude("Weapon", "purchase");
                     break;
-                    
+
                 } catch (Exception e) {
 
-                    if (menuItem == (ammoIndex + 1)) {
+                    if (menuItem == (validWeapons.size() + 1)) {
                         return;
                     }
                     Ui.println();
@@ -308,19 +301,19 @@ class Shop{
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            int armourIndex = 1;
+            int j = 1;
             int[] armourShopOffset = new int[Armour.getArmours().size()];
             for(int i = 1; i < Armour.getArmours().size(); i++){
                 if(Armour.getArmours().get(i).getPrice() != 0){
-                    Ui.println((armourIndex) + ") " + Armour.getArmours().get(i).getName());
+                    Ui.println((j) + ") " + Armour.getArmours().get(i).getName());
                     Ui.println("   Price: " + Armour.getArmours().get(i).getPrice());
                     Ui.println("   Level: " + Armour.getArmours().get(i).getLevel());
-                    armourShopOffset[armourIndex - 1] = i - armourIndex - 1;
-                    armourIndex++;
+                    armourShopOffset[j - 1] = i - j - 1;
+                    j++;
                     Ui.println();
                 }
             }
-            Ui.println((armourIndex) + ") Back");
+            Ui.println((j) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
@@ -334,7 +327,7 @@ class Shop{
                     break;
 
                 } catch (Exception e) {
-                    if (menuItem == (armourIndex)) {
+                    if (menuItem == (j)) {
                         return;
                     }
                     Ui.println();

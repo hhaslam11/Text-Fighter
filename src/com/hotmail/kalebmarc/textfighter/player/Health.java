@@ -69,12 +69,11 @@ public class Health {
 		damage = (int)(damage - (damage * resist));
 
         Ui.cls();
-        health -= damage;
         Ui.println("----------------------------------------------------");
         Ui.println("You have been hit by a " + Enemy.get().getName() + "!");
         Ui.println("You lost " + damage + " health.");
         Ui.println("----------------------------------------------------");
-        Ui.println("Your health: " + Health.getStr());
+        Ui.println("Your health: " + (health - damage));
         Ui.println("Enemy health: " + Enemy.get().getHeathStr());
         Ui.println("----------------------------------------------------");
         Ui.pause();
