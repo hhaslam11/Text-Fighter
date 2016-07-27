@@ -124,15 +124,12 @@ class Shop{
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            int buyableWeaponIndex = 0; //Basically i, except only increments when arrayWeapon[i] is buyable.
-                                        // Prevents menu from counting like : 2, 3, 5, 6, 7, 8...
             ArrayList<Weapon> buyableWeapons = new ArrayList<Weapon>();
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                 if(Weapon.arrayWeapon.get(i).isBuyable()){
-                    Ui.println((buyableWeaponIndex + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                    Ui.println((buyableWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).price);
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    buyableWeaponIndex++;
                     buyableWeapons.add(Weapon.arrayWeapon.get(i));
                     Ui.println();
                 }
@@ -258,39 +255,33 @@ class Shop{
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            int j = 0;
-            int[] ammoShopOffset = new int[Weapon.arrayWeapon.size()];
+            ArrayList<Weapon> validWeapons = new ArrayList<Weapon>();
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-                if(!Weapon.arrayWeapon.get(i).melee){
-                    Ui.println((j + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                if(Weapon.arrayWeapon.get(i).isBuyable() && !Weapon.arrayWeapon.get(i).melee && Weapon.arrayWeapon.get(i).owns()){
+                    Ui.println((validWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).getAmmoPrice());
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    ammoShopOffset[j] = i - j;
-                    j++;
-                    Ui.println();
+                    validWeapons.add(Weapon.arrayWeapon.get(i));
                 }
             }
-            Ui.println((j + 1) + ") Back");
+            Ui.println((validWeapons.size() + 1) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
                 int menuItem = Action.getValidInt();
 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
-                    
-                    menuItem = menuItem + ammoShopOffset[menuItem - 1]; //Reverts back to weapon indexing
-                    Weapon.arrayWeapon.get(menuItem - 1).buyAmmo();
+                    validWeapons.get(menuItem - 1).buyAmmo();
+                    NPC.gratitude("Weapon", "purchase");
                     break;
-                    
+
                 } catch (Exception e) {
 
-                    if (menuItem == (j + 1)) {
+                    if (menuItem == (validWeapons.size() + 1)) {
                         return;
                     }
                     Ui.println();
                     Ui.println(menuItem + " is not an option.");
-                    Action.pause();
-                    Action.cls();
                 }
             }
         }

@@ -121,35 +121,30 @@ public class Weapon{
             Ui.println("Ammo: " + current.getAmmo());
             Ui.println("Equipped weapon: " + current.getName());
             Ui.println("----------------------------");
-            int j = 0; 
-            int[] offset = new int[arrayWeapon.size()];
-            for(int i = 0; i < arrayWeapon.size(); i++){
-               if(arrayWeapon.get(i).owns()){
-                   Ui.println((j + 1) + ") " + arrayWeapon.get(i).getName());
-                   offset[j] = i - j;
-                   j++;
-               }
+            ArrayList<Weapon> validWeapons = new ArrayList<Weapon>();
+            for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+                if(Weapon.arrayWeapon.get(i).owns()){
+                    Ui.println((validWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                    validWeapons.add(Weapon.arrayWeapon.get(i));
+                }
             }
 
-            //Get valid weapon index
-            int choice = 0;
-            do{
-                choice  = Action.getValidInt() - 1 + offset[choice];
-            }while(choice < 0 || choice > arrayWeapon.size());
+            int menuItem = Action.getValidInt();
 
-            //Equip if player has the selected weapon
-            if(arrayWeapon.get(choice).owns()){
-                current = arrayWeapon.get(choice);
+            try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
+                current = validWeapons.get(menuItem - 1);
                 Action.cls();
-                Ui.println("You have equipped a " + arrayWeapon.get(choice).getName());
+                Ui.println("You have equipped a " + current.getName());
                 Action.pause();
-                return;
-            }else{
-                Action.cls();
-                Ui.println("You don't have this weapon.");
-                Action.pause();
+                break;
+            } catch (Exception e) {
+
+                if (menuItem == (validWeapons.size() + 1)) {
+                    return;
+                }
+                Ui.println();
+                Ui.println(menuItem + " is not an option.");
             }
-
         }
     }
     public void dealDam(){
