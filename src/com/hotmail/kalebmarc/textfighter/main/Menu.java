@@ -6,7 +6,7 @@ class Menu {
 	public static void load(){
 		while(true){
 			
-			Action.cls();
+			Ui.cls();
 			//Menu Screen
 			Ui.println("_____________________________________________");
 			Ui.println("|          WELCOME TO TEXT FIGHTER          |");
@@ -22,9 +22,9 @@ class Menu {
 			Ui.println("|             www.TextFighter.tk            |");
 			Ui.println("|___________________________________________|");
 
-			switch(Action.getValidInt()){
+			switch(Ui.getValidInt()){
 			case 1:
-				Action.cls();
+				Ui.cls();
 				Ui.guiEnabled = false;
 				Game.start();
 

@@ -35,7 +35,7 @@ public class Stats {
 
         updateKillDeathRatio();
 
-		Action.cls();
+		Ui.cls();
 		Ui.println("-------------------------------------------------");
 		Ui.println("                   PLAYER STATS                  ");
 		Ui.println();
@@ -81,9 +81,21 @@ public class Stats {
 		Ui.println("   Slot Games Played - " + slotGamesPlayed);
 		Ui.println();
 		Ui.println("-------------------------------------------------");
-		Action.pause();
+		Ui.pause();
 	}
     private static void updateKillDeathRatio(){
-        killDeathRatio = totalKills + ":" + Health.timesDied;
+    	int i, gcm = 1, first = totalKills, second = Health.timesDied;
+    	
+    	i = (first >= second) ? first : second;
+    	
+    	while (i != 0) {
+    		if (first % i == 0 && second % i == 0) {
+    			gcm = i;
+    			break;
+    		}
+    		i--;
+    	}
+    	
+        killDeathRatio = first/gcm + ":" + second/gcm;
     }
 }

@@ -1,6 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.item;
 
-import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Health;
@@ -30,14 +29,14 @@ public class InstaHealth {
 
     public static void use() {
 
-        Action.cls();
+        Ui.cls();
         if (get() <= 0) {
 
             Ui.println("----------------------------------------------------");
             Ui.println("You have no Insta-Health's left!");
             Ui.println("Go to the shop to buy some more.");
             Ui.println("----------------------------------------------------");
-            Action.pause();
+            Ui.pause();
 
         } else if (Health.get() == 100) {
 
@@ -48,7 +47,7 @@ public class InstaHealth {
             Ui.println("Your health: " + Health.getStr());
             Ui.println("Insta-Health's: " + get());
             Ui.println("----------------------------------------------------");
-            Action.pause();
+            Ui.pause();
 
         } else {
 
@@ -63,23 +62,23 @@ public class InstaHealth {
             Ui.println("Your health: " + Health.getStr());
             Ui.println("Insta-Health's: " + get());
             Ui.println("----------------------------------------------------");
-            Action.pause();
+            Ui.pause();
 
         }
     }
     public static void buy(){
         if(Xp.getLevel() < level){
             Ui.println("You have to be at least level " + level + " to buy this!");
-            Action.pause();
+            Ui.pause();
         }else if(price <= Coins.get()){
             Coins.set(-price, true);
             Stats.coinsSpentOnHealth += price;
             set(1, true);
             Ui.println("Thank you for your purchase. Come again soon! ");
-            Action.pause();
+            Ui.pause();
         }else{
             Ui.println("You do not have enough coins.");
-            Action.pause();
+            Ui.pause();
         }
     }
 }

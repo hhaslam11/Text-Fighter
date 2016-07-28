@@ -1,6 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
-import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 
 public class Potion {
@@ -51,7 +50,7 @@ public class Potion {
     public static void use(String k){
 		String kind = k.trim().substring(0, 1).toUpperCase()
                                 + k.substring(1).toLowerCase();
-		Action.cls();
+		Ui.cls();
 		
 		if(get(kind) <= 0){
 			
@@ -59,7 +58,7 @@ public class Potion {
 			Ui.println("You have no " + kind + " Potions left!");
 			Ui.println("Go to the shop to buy some more.");
 			Ui.println("----------------------------------------------------");
-			Action.pause();
+			Ui.pause();
 			
 		}else if(Health.get() == 100){
 						
@@ -70,7 +69,7 @@ public class Potion {
 			Ui.println("Your health: " + Health.getStr());
 			Ui.println(kind + " Potions: " + get(kind));
 			Ui.println("----------------------------------------------------");
-			Action.pause();
+			Ui.pause();
 			
 		}else{
 			
@@ -86,7 +85,7 @@ public class Potion {
 			Ui.println("Your health: " + Health.getStr());
 			Ui.println(kind + " Potions: " + get(kind));
 			Ui.println("----------------------------------------------------");
-			Action.pause();
+			Ui.pause();
 			
 		}
 		
@@ -117,16 +116,16 @@ public class Potion {
         
         if(Xp.getLevel() < level){
             Ui.println("You have to be at least level " + level + " to buy this!");
-            Action.pause();
+            Ui.pause();
         }else if(price <= Coins.get()){
             Coins.set(-price, true);
             Stats.coinsSpentOnHealth += price;
             set(kind, 1, true);
             Ui.println("Thank you for your purchase. Come again soon! ");
-            Action.pause();
+            Ui.pause();
         }else{
             Ui.println("You do not have enough coins.");
-            Action.pause();
+            Ui.pause();
         }
     }
     public static int getLevel(String kind){

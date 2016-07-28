@@ -27,7 +27,7 @@ public class Game {
 	public static Enemy ogre;
 
 	//Weapons
-	public static Weapon nothing;
+	public static Weapon fists;
 	public static Weapon baseballBat;
 	public static Weapon knife;
 	public static Weapon pipe;
@@ -42,6 +42,15 @@ public class Game {
 	public static Armour basic = new Armour("Basic", 400, 15, 5);
 	public static Armour advanced = new Armour("Advanced", 750, 30, 7);
 
+	//Food
+	//TODO when the StatusEffect system is implemented, change effect types
+	public static Food apple       = new Food("Apple",         "A boring 'ol apple.",                StatusEffect.type.HEALTH, Food.type.FRUIT,      5);
+	public static Food orange      = new Food("Orange",        "Sort of like an apple, but orange.", StatusEffect.type.HEALTH, Food.type.FRUIT,      5);
+	public static Food dragonfruit = new Food("Dragon Fruit",  "Unfortunately, not a real dragon.",  StatusEffect.type.HEALTH, Food.type.FRUIT,      10);
+	public static Food meat        = new Food("Chunk of meat", "Probably not rotten.",               StatusEffect.type.HEALTH, Food.type.MEAT_OTHER, 15);
+	public static Food mushroom    = new Food("Mushroom",      "The good kind!",                     StatusEffect.type.HEALTH, Food.type.OTHER,      5);
+	public static Food fish        = new Food("Fish",          "Found in rivers and lakes.",         StatusEffect.type.HEALTH, Food.type.MEAT_FISH,  15);
+
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void start() {
@@ -49,7 +58,7 @@ public class Game {
 		/*
 		 * Asks if the user wants to load from the save file
 		 */
-		Action.cls();
+		Ui.cls();
 		Ui.println("____________________________________________");
 		Ui.println("|                                           |");
 		Ui.println("|       Do you want to load your game       |");
@@ -59,7 +68,7 @@ public class Game {
 		Ui.println("| 2) No, Start a new game                   |");
 		Ui.println("|___________________________________________|");
 
-		int choice = Action.getValidInt();
+		int choice = Ui.getValidInt();
 		switch(choice){
 			case 1:
 				if(SaveAndLoad.load()) break;
@@ -78,7 +87,7 @@ public class Game {
 			if (Stats.kills > Stats.highScore) Stats.highScore = Stats.kills;
 			Ach.check();
 			SaveAndLoad.save();
-			Action.cls();
+			Ui.cls();
 
 			/*
 			 * MAIN GAME MENU
@@ -104,7 +113,7 @@ public class Game {
 			Ui.println("     Equipped armour: " + Armour.getEquipped().toString());
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			//Displays ammo only if a weapon is equipped
-			Action.displayAmmo();
+			Weapon.displayAmmo();
 			//--------------------
 			Ui.println("--Enemy Info--");
 			Ui.println("     Enemy: " + Enemy.get().getName());
@@ -115,12 +124,13 @@ public class Game {
 			Ui.println("3) Go to the town");
 			Ui.println("4) Use First-Aid kit");
 			Ui.println("5) Use Potion");
-			Ui.println("6) Use Insta-Health");
-			Ui.println("7) Use POWER");
-			Ui.println("8) Quit Game (Game will automatically be saved)");
+			Ui.println("6) Eat Food");
+			Ui.println("7) Use Insta-Health");
+			Ui.println("8) Use POWER");
+			Ui.println("9) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
 
-			switch (Action.getValidInt()) {
+			switch (Ui.getValidInt()) {
 				case 1:
 					int fightPath = Random.RInt(100);
 
@@ -142,12 +152,12 @@ public class Game {
 					FirstAid.use();
 					break;
 				case 5:
-					Action.cls();
+					Ui.cls();
 					Ui.println("Which potion would you like to use?");
 					Ui.println("1) Survival Potion");
 					Ui.println("2) Recovery Potion");
 					Ui.println("3) Back");
-					switch (Action.getValidInt()) {
+					switch (Ui.getValidInt()) {
 						case 1:
 							Potion.use("survival");
 							break;
@@ -161,12 +171,15 @@ public class Game {
 					}
 					break;
 				case 6:
-					InstaHealth.use();
+					Food.list();
 					break;
 				case 7:
-					Power.use();
+					InstaHealth.use();
 					break;
 				case 8:
+					Power.use();
+					break;
+				case 9:
 					return;
 				case 0:
 					Cheats.cheatGateway();
@@ -185,7 +198,7 @@ public class Game {
 
 		//TOWN MENU
 		while (true) {
-			Action.cls();
+			Ui.cls();
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                      WELCOME TO THE TOWN                         ");
 			Ui.println("--Score Info--");
@@ -206,7 +219,7 @@ public class Game {
 			Ui.println("6) Back");
 			Ui.println("------------------------------------------------------------------");
 
-			menuChoice = Action.getValidInt();
+			menuChoice = Ui.getValidInt();
 
 			switch (menuChoice) {
 				case 1:
@@ -238,7 +251,7 @@ public class Game {
 
 		//HOME MENU
 		while (true) {
-			Action.cls();
+			Ui.cls();
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("                          WELCOME HOME                            ");
 			Ui.println("--Score Info--");
@@ -262,7 +275,7 @@ public class Game {
 			Ui.println("9) Back");
 			Ui.println("------------------------------------------------------------------");
 
-			menuChoice = Action.getValidInt();
+			menuChoice = Ui.getValidInt();
 
 			switch (menuChoice) {
 				case 1:
@@ -305,7 +318,7 @@ public class Game {
 		 * they want to play on. Sets variables
 		 * according.
 		 */
-		Action.cls();
+		Ui.cls();
 		Ui.println("_____________________________________________");
 		Ui.println("|                                           |");
 		Ui.println("|       What difficulty would you           |");
@@ -316,15 +329,15 @@ public class Game {
 		Ui.println("|___________________________________________|");
 
 		if (!scan.hasNextInt()) {
-			Action.cls();
+			Ui.cls();
 			return "Easy";
 		} else {
 			int difficultyChoice = scan.nextInt();
 			if (difficultyChoice == 2) {
-				Action.cls();
+				Ui.cls();
 				return "Hard";
 			} else {
-				Action.cls();
+				Ui.cls();
 				return "Easy";
 			}
 		}

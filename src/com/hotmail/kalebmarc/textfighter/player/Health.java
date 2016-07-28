@@ -1,7 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
 import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
@@ -30,18 +29,10 @@ public class Health {
 	}
 	public static void set(int h){
 		health = h;
-		if (health > outOf){
-			Handle.error("Error Code - 002");
-			health = outOf;
-		}
 	}
 	public static void set(int h, int hOutOf){
 		health = h;
 		outOf = hOutOf;
-		if (health > outOf){
-			Handle.error("Error Code - 002");
-			health = outOf;
-		}
 	}
 	public static void setUpgradePrice(int price){
 		UPGRADE_PRICE = price;
@@ -58,7 +49,7 @@ public class Health {
 			die();
 		}
 	}
-    private static void die(){
+    public static void die(){
         Ui.popup("You have died! You lost half of your coins. ", "You've died!", JOptionPane.WARNING_MESSAGE);
         Coins.set(-(Coins.get() / 2), true);
         Stats.kills = 0;
@@ -77,16 +68,15 @@ public class Health {
 		double resist = Armour.getEquipped().getDamResist() / 100.0;
 		damage = (int)(damage - (damage * resist));
 
-        Action.cls();
-        health -= damage;
+        Ui.cls();
         Ui.println("----------------------------------------------------");
         Ui.println("You have been hit by a " + Enemy.get().getName() + "!");
         Ui.println("You lost " + damage + " health.");
         Ui.println("----------------------------------------------------");
-        Ui.println("Your health: " + Health.getStr());
+        Ui.println("Your health: " + (health - damage));
         Ui.println("Enemy health: " + Enemy.get().getHeathStr());
         Ui.println("----------------------------------------------------");
-        Action.pause();
+        Ui.pause();
         Health.lose(damage);
         
 	}
@@ -117,7 +107,7 @@ public class Health {
 		case 200:
 			return 10;
 		default:
-			Handle.error("Error Code - 003");
+			Handle.error("Unable to get health level");
 			return 0;
 		}
 	}
@@ -126,9 +116,9 @@ public class Health {
 
             //Make sure player didn't already upgrade fully
             if(Health.getOutOf() == 200){
-                Action.cls();
+                Ui.cls();
                 Ui.println("You have upgraded your health to the maximum level");
-                Action.pause();
+                Ui.pause();
                 return;
             }
 
@@ -140,7 +130,7 @@ public class Health {
 				health = 200;
 			}
 
-			Action.cls();
+			Ui.cls();
 			Ui.println("-----------------------------------------------------------");
 			Ui.println("                           Upgrade Health                     ");
 			Ui.println("You can increase your max health up to 200. ");
@@ -153,13 +143,7 @@ public class Health {
 			Ui.println("2) Go back");
 			Ui.println("-----------------------------------------------------------");
 
-			if (Action.getValidInt() == 1) {
-			/*
-			 * - Figure out what health-level player is trying to upgrade to
-			 * - Make sure player has enough money, and a high enough level
-			 * - Upgrade health
-			 * - Finish
-			 */
+			if (Ui.getValidInt() == 1) {
 
 				//Level that player is trying to upgrade to,
 				//and level needed to upgrade.
@@ -169,18 +153,18 @@ public class Health {
 
 					//Make sure user doesn't already have full health
 					if (getLevel() == 10) {
-						Action.cls();
+						Ui.cls();
 						Ui.println("You already have max health!");
-						Action.pause();
+						Ui.pause();
 					}
 
 					//Upgrade health
 					Health.set(health, health);
 					Coins.set(-UPGRADE_PRICE, true);
 
-					Action.cls();
+					Ui.cls();
 					Ui.println("You upgraded your health.");
-					Action.pause();
+					Ui.pause();
 
 
 				} else {
@@ -190,13 +174,13 @@ public class Health {
 				 * Coins: [coins]
 				 * Level: [level]
 				 */
-					Action.cls();
+					Ui.cls();
 					Ui.println("Cannot upgrade, make sure you are at least");
 					Ui.println("level " + level + ", and you have at least " + UPGRADE_PRICE + " coins.");
 					Ui.println();
 					Ui.println("Level: " + Xp.getLevel());
 					Ui.println("Coins: " + Coins.get());
-					Action.pause();
+					Ui.pause();
 				}//if
 			}else{
                 return;

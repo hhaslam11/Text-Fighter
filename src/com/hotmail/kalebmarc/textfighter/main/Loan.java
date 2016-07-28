@@ -11,7 +11,7 @@ public class Loan {
 
     public static void menu(){
         while (true) {
-            Action.cls();
+            Ui.cls();
             Ui.println("-------------------------------");
             Ui.println("          PLAYER LOAN          ");
             Ui.println();
@@ -26,7 +26,7 @@ public class Loan {
             Ui.println("1) Get loan");
             Ui.println("2) Pay off loan");
             Ui.println("3) Back");
-            switch (Action.getValidInt()) {
+            switch (Ui.getValidInt()) {
                 case 1:
                     createLoan();
                     break;
@@ -41,28 +41,28 @@ public class Loan {
     private static void createLoan(){
 
         if(hasLoan()){
-            Action.cls();
+            Ui.cls();
             Ui.println("You can not request a loan while you already have one.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
-        Action.cls();
+        Ui.cls();
         Ui.println("Enter the amount you would like");
         Ui.println("to borrow.");
         Ui.println("Your max amount allowed is " + getMaxLoan());
-        int request = Action.getValidInt();
+        int request = Ui.getValidInt();
 
-        Action.cls();
+        Ui.cls();
 
         if (request > getMaxLoan()) {
             Ui.println("Your max amount you can borrow is " + getMaxLoan() + "!");
-            Action.pause();
+            Ui.pause();
             return;
         }
         if (request <= 0){
             Ui.println("You must enter at least 1 coin.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
@@ -70,47 +70,47 @@ public class Loan {
         Coins.set(request, true);
         currentLoan = request;
         netDue = request;
-        Action.cls();
+        Ui.cls();
         Ui.println("You have borrowed " + request + " from the bank.");
         Ui.println("You will not be able to deposit coins into the bank until your loan is fully paid off.");
-        Action.pause();
+        Ui.pause();
     }
     private static void payLoan(){
         if(getGrossDue() == 0){
             Ui.println("You must enter at least 1 coin.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
-        Action.cls();
+        Ui.cls();
         Ui.println("You currently owe " + getGrossDue() + " coins.");
         Ui.println("You will not be able to deposit coins into the bank until your loan is fully paid off.");
         Ui.println("How much would you like to pay off?");
-        int amountToPay = Action.getValidInt();
+        int amountToPay = Ui.getValidInt();
 
-        Action.cls();
+        Ui.cls();
         if(Coins.get() < amountToPay){
             Ui.println("You don't have enough coins.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
         if(amountToPay <= 0){
             Ui.println("You must enter at least 1 coin.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
         if (amountToPay > getGrossDue()){
             Ui.println("You only owe " + getGrossDue() + "! Enter a small amount");
-            Action.pause();
+            Ui.pause();
         }
         netDue = getGrossDue() - amountToPay;
         Coins.set(-amountToPay, true);
 
         Ui.println("You have paid back " + amountToPay + " coins.\nYou now have " + getGrossDue() + " left to pay.");
         if(getGrossDue() == 0) currentLoan = 0;
-        Action.pause();
+        Ui.pause();
     }
     private static int getMaxLoan(){
         return Xp.getLevel() * 100;

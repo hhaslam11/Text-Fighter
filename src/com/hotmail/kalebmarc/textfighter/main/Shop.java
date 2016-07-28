@@ -5,16 +5,19 @@ import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
+import com.hotmail.kalebmarc.textfighter.player.Potion;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 import com.hotmail.kalebmarc.textfighter.player.Potion;
+
+import java.util.ArrayList;
 
 class Shop{
     private Shop(){}
 
     public static void menu() {
         while (true) {
-            Action.cls();
+            Ui.cls();
 			Ui.println("-------------------------------------------------------------------");
 			Ui.println("                        Welcome to the shop!                       ");
 			Ui.println();
@@ -29,7 +32,7 @@ class Shop{
 			Ui.println("4) XP");
 			Ui.println("5) Back");
 			Ui.println("-------------------------------------------------------------------");
-			switch(Action.getValidInt()){
+			switch(Ui.getValidInt()){
 			    case 1:
 				    health();
 				    break;
@@ -52,7 +55,7 @@ class Shop{
     private static void health(){
 
         while(true){
-            Action.cls();
+            Ui.cls();
             Ui.println("-------------------------------------------------------------------");
             Ui.println("                               Health                              ");
             Ui.println();
@@ -82,24 +85,24 @@ class Shop{
             Ui.println();
             Ui.println("5) Back");
             Ui.println("-------------------------------------------------------------------");
-            switch(Action.getValidInt()){
+            switch(Ui.getValidInt()){
                 case 1:
-                    Action.cls();
+                    Ui.cls();
                     FirstAid.buy();
                     NPC.gratitude("Health", "purchase");
                     break;
                 case 2:
-                    Action.cls();
+                    Ui.cls();
                     Potion.buy("survival");
                     NPC.gratitude("Health", "purchase");
                     break;
                 case 3:
-                    Action.cls();
+                    Ui.cls();
                     Potion.buy("recovery");
                     NPC.gratitude("Health", "purchase");
                     break;
                 case 4:
-                    Action.cls();
+                    Ui.cls();
                     InstaHealth.buy();
                     NPC.gratitude("Health", "purchase");
                     break;
@@ -112,7 +115,7 @@ class Shop{
     }
     private static void weapons(){
         while(true) {
-            Action.cls();
+            Ui.cls();
             Ui.println("-------------------------------------------------------------------");
             Ui.println("                              Weapons                              ");
             Ui.println();
@@ -121,57 +124,51 @@ class Shop{
             Ui.println("Coins: " + Coins.get());
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
-            Ui.println("-------------------------------------------------------------------"); 
-            int j = 0; 
-            int[] weaponShopOffset = new int[Weapon.arrayWeapon.size()];
+            Ui.println("-------------------------------------------------------------------");
+            ArrayList<Weapon> buyableWeapons = new ArrayList<Weapon>();
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                 if(Weapon.arrayWeapon.get(i).isBuyable()){
-                    Ui.println((j + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                    Ui.println((buyableWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).price);
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    weaponShopOffset[j] = i - j;
-                    j++;
+                    buyableWeapons.add(Weapon.arrayWeapon.get(i));
                     Ui.println();
                 }
             }
-            Ui.println((j + 1) + ") POWER");
+            Ui.println((buyableWeapons.size() + 1) + ") POWER");
             Ui.println("   Price: " + Power.price);
             Ui.println("   Level: " + Power.level);
             Ui.println();
-            Ui.println((j + 2) + ") AMMO");
+            Ui.println((buyableWeapons.size() + 2) + ") AMMO");
             Ui.println();
-            Ui.println((j + 3) + ") Back");
-
+            Ui.println((buyableWeapons.size() + 3) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
-                int menuItem = Action.getValidInt();
+                int menuItem = Ui.getValidInt();
                 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
-                    
-                    menuItem = menuItem + weaponShopOffset[menuItem - 1]; // this reverts back to Weapon indexing
-                                                                          // this provides minimal changes to the rest of the code, for now
-                    Weapon.arrayWeapon.get(menuItem - 1).buy();
+
+                    buyableWeapons.get(menuItem - 1).buy();
                     NPC.gratitude("Weapon", "purchase");
                     break;
 
                 } catch (Exception e) {
 
-                    if (menuItem == (j + 1)) {
+                    if (menuItem == (buyableWeapons.size() + 1)) {
                         Power.buy();
                         NPC.gratitude("Weapon", "purchase");
                         break;
                     }
-                    if (menuItem == (j + 2)) {
+                    if (menuItem == (buyableWeapons.size() + 2)) {
                         NPC.gratitude("Weapon", "purchase");
                         buyAmmo();
                         break;
                     }
-                    if (menuItem == (j + 3)) {
+                    if (menuItem == (buyableWeapons.size() + 3)) {
                         return;
                     }
                     Ui.println();
-                    //if (menuItem == (Weapon.arrayWeapon.size() + 2)) return; TODO I don't remember why this line was here. Doesn't seem like it would do anything?
                     Ui.println(menuItem + " is not an option.");
                 }
             }
@@ -186,13 +183,13 @@ class Shop{
 
             //Makes sure player isn't level 10 already
             if(Xp.getLevel() == 100){
-                Action.cls();
+                Ui.cls();
                 Ui.println("You're already level 100! You cannot buy any more xp.");
-                Action.pause();
+                Ui.pause();
                 return;
             }
 
-            Action.cls();
+            Ui.cls();
 			Ui.println("-------------------------------------------------------------------");
 			Ui.println("                                 XP                                ");
 			Ui.println();
@@ -206,37 +203,37 @@ class Shop{
 			Ui.println("**Enter 0 to go back**");
 			Ui.println("-------------------------------------------------------------------");
 
-			int buy = Action.getValidInt();
+			int buy = Ui.getValidInt();
 			valid = true;
 
 			//Tests
 			if (buy > Coins.get()){
 				//Not enough coins
-				Action.cls();
+				Ui.cls();
 				Ui.println("You don't have enough coins to buy this much xp.");
 				valid = false;
-				Action.pause();
+				Ui.pause();
 			}
             if (Xp.getLevel() == 100){
-                Action.cls();
+                Ui.cls();
                 Ui.println("You are already level 100; which is the maximum level.");
                 valid = false;
-                Action.pause();
+                Ui.pause();
             }
 			if (buy < 0){
-				Action.cls();
+				Ui.cls();
 				Ui.println("You can't buy a negative amount of Xp.. Nice try though ;)");
 				valid = false;
-				Action.pause();
+				Ui.pause();
 			}
 			if (buy == 0){
 				return;
 			}
 
 			if (valid){
-				Action.cls();
+				Ui.cls();
 				Ui.println("You have bought " + buy + " xp.");
-				Action.pause();
+				Ui.pause();
 
 				//Results
 				Xp.set(buy, true);
@@ -251,7 +248,7 @@ class Shop{
 
 
         while(true) {
-            Action.cls();
+            Ui.cls();
             Ui.println("-------------------------------------------------------------------");
             Ui.println("                                Ammo                               ");
             Ui.println();
@@ -259,46 +256,42 @@ class Shop{
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            int j = 0;
-            int[] ammoShopOffset = new int[Weapon.arrayWeapon.size()];
+            ArrayList<Weapon> validWeapons = new ArrayList<Weapon>();
             for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-                if(!Weapon.arrayWeapon.get(i).melee){
-                    Ui.println((j + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                if(Weapon.arrayWeapon.get(i).isBuyable() && !Weapon.arrayWeapon.get(i).melee && Weapon.arrayWeapon.get(i).owns()){
+                    Ui.println((validWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).getAmmoPrice());
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    ammoShopOffset[j] = i - j;
-                    j++;
-                    Ui.println();
+                    validWeapons.add(Weapon.arrayWeapon.get(i));
                 }
             }
-            Ui.println((j + 1) + ") Back");
+            Ui.println((validWeapons.size() + 1) + ") Back");
 
             while(true) {//Make it easy to break, without going back to main store menu
 
-                int menuItem = Action.getValidInt();
+                int menuItem = Ui.getValidInt();
 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
-                    
-                    menuItem = menuItem + ammoShopOffset[menuItem - 1]; //Reverts back to weapon indexing
-                    Weapon.arrayWeapon.get(menuItem - 1).buyAmmo();
+                    validWeapons.get(menuItem - 1).buyAmmo();
+                    NPC.gratitude("Weapon", "purchase");
                     break;
-                    
+
                 } catch (Exception e) {
 
-                    if (menuItem == (j + 1)) {
+                    if (menuItem == (validWeapons.size() + 1)) {
                         return;
                     }
                     Ui.println();
                     Ui.println(menuItem + " is not an option.");
-                    Action.pause();
-                    Action.cls();
+                    Ui.pause();
+                    Ui.cls();
                 }
             }
         }
     }
     private static void armour(){
         while(true) {
-            Action.cls();
+            Ui.cls();
             Ui.println("-------------------------------------------------------------------");
             Ui.println("                            Body Armour                            ");
             Ui.println();
@@ -324,7 +317,7 @@ class Shop{
 
             while(true) {//Make it easy to break, without going back to main store menu
 
-                int menuItem = Action.getValidInt();
+                int menuItem = Ui.getValidInt();
 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
                     

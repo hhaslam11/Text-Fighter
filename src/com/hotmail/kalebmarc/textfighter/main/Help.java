@@ -8,7 +8,7 @@ class Help{
 	
 	public static void view(){
 		while(true){
-			Action.cls();
+			Ui.cls();
 			Ui.println("------------------------------------------------------------");
 			Ui.println("                         HELP MENU                          ");
 			Ui.println("Here you can find (almost) all the information you need to");
@@ -18,12 +18,13 @@ class Help{
 			Ui.println("2) Armour");
 			Ui.println("3) Weapon");
 			Ui.println("4) Health");
-			Ui.println("5) XP");
-			Ui.println("6) Cheats");
-			Ui.println("7) Achievements");
-			Ui.println("8) Back");
+			Ui.println("5) Food");
+			Ui.println("6) XP");
+			Ui.println("7) Cheats");
+			Ui.println("8) Achievements");
+			Ui.println("9) Back");
 			Ui.println("------------------------------------------------------------");
-			switch(Action.getValidInt()){
+			switch(Ui.getValidInt()){
 			case 1:
 				info_enemy();
 				break;
@@ -37,15 +38,18 @@ class Help{
 				info_health();
 				break;
 			case 5:
-				info_xp();
+				info_food();
 				break;
 			case 6:
-				info_cheats();
+				info_xp();
 				break;
 			case 7:
-				info_achs();
+				info_cheats();
 				break;
 			case 8:
+				info_achs();
+				break;
+			case 9:
 				return;
 			}
 		}
@@ -53,7 +57,7 @@ class Help{
 	
 	private static void info_enemy(){
 		while(true) {
-			Action.cls();
+			Ui.cls();
 			Ui.println("------------------------------------------------------------");
 			Ui.println("                         ENEMY INFO                         ");
 			Ui.println("Which enemy would you like to know about?");
@@ -64,21 +68,21 @@ class Help{
             Ui.println((Enemy.arrayEnemy.size() + 1) + ") Back");
 			Ui.println("------------------------------------------------------------");
 
-            int menuItem = Action.getValidInt();
+            int menuItem = Ui.getValidInt();
 
             try{
                 Enemy.arrayEnemy.get(menuItem - 1).viewAbout();
             }catch(Exception e){
                 if(menuItem == (Enemy.arrayEnemy.size() + 1)) return;
                 Ui.println(menuItem + " is not an option.");
-                Action.pause();
+                Ui.pause();
             }
 		}
 	}
 	private static void info_armour(){
 		//Start of armour info
 		while(true) {
-			Action.cls();
+			Ui.cls();
 			Ui.println("--------------------------------------------------");
 			Ui.println("                    ARMOUR INFO                   ");
 			Ui.println("Which armour type would you like to know about?");
@@ -89,21 +93,21 @@ class Help{
 			Ui.println((Armour.getArmours().size() + 1) + ") Back");
 			Ui.println("--------------------------------------------------");
 
-			int menuItem = Action.getValidInt();
+			int menuItem = Ui.getValidInt();
 
 			try{
 				Armour.getArmours().get(menuItem - 1).viewAbout();
 			}catch(Exception e){
 				if(menuItem == (Armour.getArmours().size() + 1)) return;
 				Ui.println(menuItem + " is not an option.");
-				Action.pause();
+				Ui.pause();
 			}
 		}
 		//End of armour info
 	}
 	private static void info_weapons(){
         while(true) {
-            Action.cls();
+            Ui.cls();
             Ui.println("------------------------------------------------------------");
             Ui.println("                         WEAPON INFO                        ");
             Ui.println("Which weapon would you like to know about?");
@@ -114,19 +118,19 @@ class Help{
             Ui.println((Weapon.arrayWeapon.size() + 1) + ") Back");
             Ui.println("------------------------------------------------------------");
 
-            int menuItem = Action.getValidInt();
+            int menuItem = Ui.getValidInt();
 
             try{
                 Weapon.arrayWeapon.get(menuItem - 1).viewAbout();
             }catch(Exception e){
                 if(menuItem == (Weapon.arrayWeapon.size() + 1)) return;
                 Ui.println(menuItem + " is not an option.");
-                Action.pause();
+                Ui.pause();
             }
         }
     }
 	private static void info_health(){
-		Action.cls();
+		Ui.cls();
 		Ui.println("------------------------------------------------------------");
 		Ui.println("                        HEALTH INFO                         ");
 		Ui.println("You will start off with 100 health, and you can upgrade your");
@@ -135,11 +139,35 @@ class Help{
 		Ui.println("You will be able to upgrade once per level.");
 		//TODO Add more health info
 		Ui.println("------------------------------------------------------------");
-		Action.pause();
+		Ui.pause();
 		Ach.viewedHealth = true;
 	}
+	private static void info_food(){
+		while(true) {
+			Ui.cls();
+			Ui.println("------------------------------------------------------------");
+			Ui.println("                          FOOD INFO                         ");
+			Ui.println("Which food would you like to know about?");
+			Ui.println();
+			for(int i = 0; i < Food.arrayFood.size(); i++){
+				Ui.println((i + 1) + ") " + Food.arrayFood.get(i).getName());
+			}
+			Ui.println((Food.arrayFood.size() + 1) + ") Back");
+			Ui.println("------------------------------------------------------------");
+
+			int menuItem = Ui.getValidInt();
+
+			try{
+				Food.arrayFood.get(menuItem - 1).viewAbout();
+			}catch(Exception e){
+				if(menuItem == (Food.arrayFood.size() + 1)) return;
+				Ui.println(menuItem + " is not an option.");
+				Ui.pause();
+			}
+		}
+	}
 	private static void info_xp(){
-		Action.cls();
+		Ui.cls();
 		Ui.println("------------------------------------------------------------");
 		Ui.println("                              XP                            ");
 		Ui.println("Getting XP levels you up, which unlocks more items to buy.  ");
@@ -162,11 +190,11 @@ class Help{
 		Ui.println("100 XP for each achievement you unlock. Using a POWER will  ");
 		Ui.println("give you 20 XP");
 		Ui.println("------------------------------------------------------------");
-		Action.pause();
+		Ui.pause();
 		Ach.viewedXP = true;
 	}
 	private static void info_cheats(){
-		Action.cls();
+		Ui.cls();
 		Ui.println("------------------------------------------------------------------------");
 		Ui.println("                            CHEATS                          ");
 		Ui.println("To use a cheat code, make sure to be in the main game menu, ");
@@ -191,11 +219,11 @@ class Help{
 		Ui.println("   godmode          | Never dies");
         Ui.println("   loanshark        | Removes current loan");
 		Ui.println("------------------------------------------------------------------------");
-		Action.pause();
+		Ui.pause();
 		Ach.viewedCheats = true;
 	}
 	private static void info_achs(){
-		Action.cls();
+		Ui.cls();
 		Ui.println("-------------------------------------------------------------------------");
 		Ui.println("                         ACHIEVEMENTS                       ");
 		Ui.println("You are rewarded 100 xp for each achievement you get. ");
@@ -233,7 +261,7 @@ class Help{
 		Ui.println("   Honest Player          | Lock cheats off");
 		Ui.println("   Learning               | Look at every single help page in one session");
 		Ui.println("-------------------------------------------------------------------------");
-		Action.pause();
+		Ui.pause();
 		Ach.viewedAchs = true;
 	}
 }

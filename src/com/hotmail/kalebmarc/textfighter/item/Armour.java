@@ -1,6 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.item;
 
-import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
@@ -62,18 +61,18 @@ public class Armour {
     }
     public void equip(){
         if(!(this.owns)){
-            Action.cls();
+            Ui.cls();
             Ui.println("You do not own this.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
         this.equipped = true;//To make sure something is already equipped
         getEquipped().unequip();
         this.equipped = true;
-        Action.cls();
+        Ui.cls();
         Ui.println("You have equipped " + this.toString());
-        Action.pause();
+        Ui.pause();
     }
     public void equipSilent(){
         if(!(this.owns)){
@@ -103,22 +102,22 @@ public class Armour {
     public boolean buy(){
         if(Xp.getLevel() < this.getLevel()){
             Ui.println("You have to be at least level " + this.getLevel() + " to buy this!");
-            Action.pause();
+            Ui.pause();
             return false;
         }else if (this.isOwns()) {
             Ui.println("You already own this.");
-            Action.pause();
+            Ui.pause();
             return false;
         }else if(this.getPrice() <= Coins.get()){
             Coins.set(-this.price, true);
             setOwns(true);
             equip();
             Ui.println("Thank you for your purchase. Come again soon! ");
-            Action.pause();
+            Ui.pause();
             return true;
         }else{
             Ui.println("You do not have enough coins.");
-            Action.pause();
+            Ui.pause();
             return false;
         }
     }
@@ -133,7 +132,7 @@ public class Armour {
         final int BORDER_LENGTH = 39;
 
         //Start of armour Info
-        Action.cls();
+        Ui.cls();
         for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.println();
         for(int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++) Ui.print(" ");//Set correct spacing to get name in middle of box
@@ -142,8 +141,8 @@ public class Armour {
         Ui.println("Damage Resistance(%): " + this.damResist + "%");
         Ui.println("Level needed: " + this.level);
         for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
-        Action.pause();
-        Action.cls();
+        Ui.pause();
+        Ui.cls();
         //End of armour Info
         this.setViewed(true);
     }
@@ -155,7 +154,7 @@ public class Armour {
     }
     public static void choose(){
         while(true) {
-            Action.cls();
+            Ui.cls();
             Ui.println("----------------------------");
             Ui.println("Equip new armour");
             Ui.println();
@@ -174,7 +173,7 @@ public class Armour {
             //Get valid weapon index
             int choice;
             do{
-                choice  = Action.getValidInt() - 1;
+                choice  = Ui.getValidInt() - 1;
             }while(choice < 0 || choice > getArmours().size());
             
             choice = choice + offset[choice]; // reverts to Armours indexing
@@ -183,9 +182,9 @@ public class Armour {
                 getArmours().get(choice).equip();
                 return;
             }else{
-                Action.cls();
+                Ui.cls();
                 Ui.println("You don't have this armour.");
-                Action.pause();
+                Ui.pause();
             }
         }
     }

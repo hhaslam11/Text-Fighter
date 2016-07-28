@@ -27,7 +27,7 @@ class Debug {
         }
 
         while(true){
-            Action.cls();
+            Ui.cls();
             Ui.println("==================");
             Ui.println("=== DEBUG MENU ===");
             Ui.println();
@@ -40,37 +40,37 @@ class Debug {
             Ui.println("7) God Mode");
             Ui.println("8)");
             Ui.println("9) Go back");
-            switch(Action.getValidInt()){
+            switch(Ui.getValidInt()){
                 case 1:
-                    Action.cls();
+                    Ui.cls();
                     Ui.println("How much?");
-                    Coins.set(Action.getValidInt(), false);
+                    Coins.set(Ui.getValidInt(), false);
                     break;
                 case 2:
-                    Action.cls();
+                    Ui.cls();
                     Ui.println("How much?");
-                    Xp.set(Action.getValidInt(), false);
+                    Xp.set(Ui.getValidInt(), false);
                     break;
                 case 3:
                     for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                         Weapon.arrayWeapon.get(i).owns = true;
                     }
                     Power.set(100, true);
-                    for(int i = 0; i <= Weapon.arrayWeapon.size(); i++){
+                    for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
                         Weapon.arrayWeapon.get(i).setAmmo(10000, false);
                     }
                     Ui.println("You now have all weapons");
-                    Action.pause();
+                    Ui.pause();
                     break;
                 case 4:
-                    Action.cls();
+                    Ui.cls();
                     Ui.println("How much?");
-                    FirstAid.set(Action.getValidInt(), false);
+                    FirstAid.set(Ui.getValidInt(), false);
                     break;
                 case 5:
-                    Action.cls();
+                    Ui.cls();
                     Ui.println("How much?");
-                    InstaHealth.set(Action.getValidInt(), false);
+                    InstaHealth.set(Ui.getValidInt(), false);
                     break;
                 case 6:
                     Enemy.encounterNew();

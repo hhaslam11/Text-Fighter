@@ -15,15 +15,15 @@ public class Bank {
 
         //Makes sure user level 2
         if (Xp.getLevel() < 2) {
-            Action.cls();
+            Ui.cls();
             Ui.println("You have to be at least level 2 to use the bank.");
-            Action.pause();
+            Ui.pause();
             return;
         }
 
         while (true) {
 
-            Action.cls();
+            Ui.cls();
             Ui.println("---------------------------------------");
             Ui.println("                BANK              ");
             Ui.println();
@@ -43,19 +43,19 @@ public class Bank {
             Ui.println("4) Back");
             Ui.println("---------------------------------------");
 
-            switch (Action.getValidInt()) {
+            switch (Ui.getValidInt()) {
                 case 1:
                     //-----------------------------------------------------------------------------------
                     if (Loan.hasLoan()){
-                        Action.cls();
+                        Ui.cls();
                         Ui.println("You can not deposit coins until you pay off your loan!");
-                        Action.pause();
+                        Ui.pause();
                         break;
                     }
                     Ui.println("How much money would you like to deposit? (You will have to pay " + (interest * 100) + "% of this)");
                     Ui.println("You currently have " + Coins.get() + " coins.");
                     do {
-                        amount = Action.getValidInt();
+                        amount = Ui.getValidInt();
                         if (amount > Coins.get()) {
                             Ui.println("You don't have enough coins. You only have " + Coins.get() + " coins.");
                             amount = -1;
@@ -69,13 +69,13 @@ public class Bank {
                     break;
                 case 2:
                     //-----------------------------------------------------------------------------------
-                    Action.cls();
+                    Ui.cls();
 
                     //Input
                     Ui.println("How much money would you like to withdraw?");
                     Ui.println("You currently have " + get() + " coins in your bank.");
                     do {
-                        amount = Action.getValidInt();
+                        amount = Ui.getValidInt();
                         if (amount > get()) {
                             Ui.println("You don't have enough coins in your bank. You only have " + get() + " coins.");
                             amount = -1;
@@ -115,10 +115,10 @@ public class Bank {
         set(-amount, true);
 
         //Result
-        Action.cls();
+        Ui.cls();
         Ui.println("Amount withdrawn: " + amount);
         Ui.println("Current Balance: " + get());
-        Action.pause();
+        Ui.pause();
     }
     private static void deposit(int amount, double interest){
 
@@ -138,10 +138,10 @@ public class Bank {
         set(amount, true);
 
         //Display
-        Action.cls();
+        Ui.cls();
         Ui.println("Amount Deposited: " + amount + " coins");
         Ui.println("Interest Paid: " + Math.round(interest) + " coins");
         Ui.println("Current Balance: " + get() + " coins");
-        Action.pause();
+        Ui.pause();
     }
 }

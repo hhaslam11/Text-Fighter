@@ -16,7 +16,7 @@ public class Settings {
 	public static void menu(){
 		while(true){
 			
-			Action.cls();
+			Ui.cls();
 			Ui.println("-------------------------------------------------");
 			Ui.println("                  Settings                  ");
 			Ui.println();
@@ -27,7 +27,7 @@ public class Settings {
 			Ui.println("5) Back");
 			Ui.println("-------------------------------------------------");
 			
-			switch(Action.getValidInt()){
+			switch(Ui.getValidInt()){
 			case 1:
 				switchDif();
 				break;
@@ -38,7 +38,7 @@ public class Settings {
 				lockCheats();
 				break;
             case 4:
-                Action.cls();
+                Ui.cls();
                 if(Ui.guiEnabled) {
                     Ui.guiEnabled = false;
                     Ui.println("Popup windows disabled");
@@ -46,7 +46,7 @@ public class Settings {
                     Ui.guiEnabled = true;
                     Ui.println("Popup windows enabled");
                 }
-                Action.pause();
+                Ui.pause();
                 break;
 			case 5:
 				return;
@@ -62,9 +62,9 @@ public class Settings {
 		 * Make sure difficulty isn't locked
 		 */
 		if(difLocked){
-			Action.cls();
+			Ui.cls();
 			Ui.println("Difficulty is locked. You cannot switch difficulties.");
-			Action.pause();
+			Ui.pause();
 			return;
 		}
 		
@@ -79,24 +79,24 @@ public class Settings {
 		 * Make sure difficulty isn't already locked
 		 */
 		if(difLocked){
-			Action.cls();
+			Ui.cls();
 			Ui.println("Difficulty is already locked.");
-			Action.pause();
+			Ui.pause();
 			return;
 		}
 		
 		while(true){
-			Action.cls();
+			Ui.cls();
 			Ui.println("Are you sure you want to lock the difficulty to " + difficulty + " ?\n"
 					+ "You wont be able to change difficulties in the future!");
 			Ui.println("1) Continue");
 			Ui.println("2) Cancel");
-			switch(Action.getValidInt()){
+			switch(Ui.getValidInt()){
 			case 1:
-				Action.cls();
+				Ui.cls();
 				Ui.println("Difficulty has been locked to " + difficulty);
 				difLocked = true;
-				Action.pause();
+				Ui.pause();
 				return;
 			case 2:
 				return;
@@ -108,9 +108,9 @@ public class Settings {
 		 * Make sure cheats aren't already locked
 		 */
 		if(Cheats.locked()){
-			Action.cls();
+			Ui.cls();
 			Ui.println("Cheats are already locked.");
-			Action.pause();
+			Ui.pause();
 			return;
 		}
 		
@@ -118,24 +118,24 @@ public class Settings {
 		 * Makes sure cheats aren't already enabled
 		 */
 		if(Cheats.enabled()){
-			Action.cls();
+			Ui.cls();
 			Ui.println("Cheats are already enabled. You cannot turn them off.");
-			Action.pause();
+			Ui.pause();
 			return;
 		}
 		
 		while(true){
-			Action.cls();
+			Ui.cls();
 			Ui.println("Are you sure you want to lock cheats off?");
 			Ui.println("You wont be able to use cheats in the future!");
 			Ui.println("1) Continue");
 			Ui.println("2) Cancel");
-			switch(Action.getValidInt()){
+			switch(Ui.getValidInt()){
 			case 1:
-				Action.cls();
+				Ui.cls();
 				Ui.println("Cheats have been locked off");
 				Cheats.lock();
-				Action.pause();
+				Ui.pause();
 				return;
 			case 2:
 				return;
@@ -163,7 +163,7 @@ public class Settings {
             //Weapons
             //Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, firstInit, changeDif)
             //Melee: (name, startingWeapon, buyable, price, level, damageMin, damageMax, firstInit)
-            Game.nothing        = new Weapon("Nothing",      true, false,  0,   0, 5,  10, firstInit, changeDif);
+            Game.fists          = new Weapon("Fists",        true, false,  0,   0, 5,  10, firstInit, changeDif);
             Game.baseballBat    = new Weapon("Baseball Bat", false, true,  120, 1, 10, 15, firstInit, changeDif);
             Game.knife          = new Weapon("Knife",        false, true,  125, 2, 10, 20, firstInit, changeDif);
             Game.pipe           = new Weapon("Pipe",         false, false, 0,   0, 5,  20, firstInit, changeDif);
@@ -207,7 +207,7 @@ public class Settings {
 			//Weapons
 			//Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, firstInit, changeDif)
             //Melee: (name, startingWeapon, buyable, price, level, damageMin, damageMax, firstInit, changeDif)
-            Game.nothing        = new Weapon("Nothing",       true, false,  0,   0,  5,  10, firstInit, changeDif);
+            Game.fists          = new Weapon("Fists",        true, false,  0,   0,  5,  10, firstInit, changeDif);
             Game.baseballBat    = new Weapon("Baseball Bat", false,  true,  170, 1,  10, 15, firstInit, changeDif);
             Game.knife          = new Weapon("Knife",        false,  true,  175, 2,  10, 20, firstInit, changeDif);
             Game.pipe           = new Weapon("Pipe",         false, false,  0,   0,  5,  20, firstInit, changeDif);
@@ -262,7 +262,7 @@ public class Settings {
         return "";
     }
     public static void toggleGodMode(){
-        Action.cls();
+        Ui.cls();
         if(godMode){
             godMode = false;
             Ui.println("Godmode has been disabled");
@@ -270,6 +270,6 @@ public class Settings {
             godMode = true;
             Ui.println("Godmode has been enabled");
         }
-        Action.pause();
+        Ui.pause();
     }
 }

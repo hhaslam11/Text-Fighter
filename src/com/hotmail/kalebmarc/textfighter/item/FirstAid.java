@@ -1,6 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.item;
 
-import com.hotmail.kalebmarc.textfighter.main.Action;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Health;
@@ -28,7 +27,7 @@ public class FirstAid {
 	}
 	public static void use(){
 		
-		Action.cls();
+		Ui.cls();
 		
 		if(get() <= 0){
 			
@@ -36,7 +35,7 @@ public class FirstAid {
 			Ui.println("You have no First-Aid kits left!");
 			Ui.println("Go to the shop to buy some more.");
 			Ui.println("----------------------------------------------------");
-			Action.pause();
+			Ui.pause();
 			
 		}else if(Health.get() == 100){
 						
@@ -47,7 +46,7 @@ public class FirstAid {
 			Ui.println("Your health: " + Health.getStr());
 			Ui.println("First-Aid kits: " + get());
 			Ui.println("----------------------------------------------------");
-			Action.pause();
+			Ui.pause();
 			
 		}else{
 			
@@ -62,7 +61,7 @@ public class FirstAid {
 			Ui.println("Your health: " + Health.getStr());
 			Ui.println("First-Aid kits: " + get());
 			Ui.println("----------------------------------------------------");
-			Action.pause();
+			Ui.pause();
 			
 		}
 		
@@ -70,16 +69,16 @@ public class FirstAid {
 	public static void buy(){
         if(Xp.getLevel() < level){
 			Ui.println("You have to be at least level " + level + " to buy this!");
-			Action.pause();
+			Ui.pause();
 		}else if(price <= Coins.get()){
 			Coins.set(-price, true);
 			Stats.coinsSpentOnHealth += price;
 			set(1, true);
 			Ui.println("Thank you for your purchase. Come again soon! ");
-			Action.pause();
+			Ui.pause();
 		}else{
 			Ui.println("You do not have enough coins.");
-			Action.pause();
+			Ui.pause();
 		}
     }
 }
