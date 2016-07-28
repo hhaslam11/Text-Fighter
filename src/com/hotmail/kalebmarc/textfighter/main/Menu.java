@@ -29,7 +29,7 @@ class Menu {
 				Game.start();
 
 				//Saves the game before exiting
-				SaveAndLoad.save();
+				Saves.save(false);
 				return;
 			case 2:
 				About.view(false);

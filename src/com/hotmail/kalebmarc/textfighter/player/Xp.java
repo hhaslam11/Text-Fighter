@@ -2,6 +2,7 @@ package com.hotmail.kalebmarc.textfighter.player;
 
 import com.hotmail.kalebmarc.textfighter.main.Cheats;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
+import com.hotmail.kalebmarc.textfighter.main.Saves;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 
 import javax.swing.*;
@@ -20,8 +21,8 @@ public class Xp {
 
 			Ui.popup("You've reached level 10!\nYou have been rewarded 250 coins!", "Level Up!", JOptionPane.INFORMATION_MESSAGE);
 			level = 10;
-			com.hotmail.kalebmarc.textfighter.player.Coins.set(250, true);
-			
+			Coins.set(250, true);
+
 		}else if(level > 100){
 			Handle.error("Error - Level is greater than 100");
             level = 100;
@@ -29,12 +30,12 @@ public class Xp {
             level = 100;
             xp = 49000;
         }else {
-			
+
 			Ui.popup("You've leveled up! You are now level " + (level + 1) + "!\nYou have been rewarded 100 coins!", "Level Up!", JOptionPane.INFORMATION_MESSAGE);
 			xp = 0;
 			xpNeeded += 500;
 			level++;
-            com.hotmail.kalebmarc.textfighter.player.Coins.set(100, true);
+            Coins.set(100, true);
 
 		}
 		Ach.check();
