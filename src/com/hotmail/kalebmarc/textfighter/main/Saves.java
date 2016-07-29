@@ -735,37 +735,43 @@ public class Saves {
 					currParent = new HashMap<>();
 					currParent.put(nodes[i], prevParent);
 				}
-
+				// set top-level node to previous parent
 				data.put(nodes[0], currParent);
 				return;
-			}
+			} else { // if data contains top-level node, work through each Map
+				Map<String, Object> currParent;
+				List<Map> prevParents = new ArrayList<>();
 
-			// if data contains top-level node, work through each Map
-			if (data.containsKey(nodes[0])) {
-				Map currParent, prevParent;
-
-				if (data.containsKey(nodes[0]) && (data.get(nodes[0]) instanceof Map))
+				if (!(data.get(nodes[0]) instanceof Map)) return;
+				else {
+					// sets the top-level parent
 					currParent = (Map) data.get(nodes[0]);
-				else return;
+					prevParents.add(0, currParent);
 
-				if (nodes.length > 1) {
-					for (int i = 1; i < nodes.length - 1; i++) {
-						if (currParent.containsKey(nodes[i]) && (currParent.get(nodes[i]) instanceof Map))
-							currParent = (Map) currParent.get(nodes[i]);
-						else return;
+					if (nodes.length > 1) {
+						// iterate through each node, if child nodes don't exist, create them
+						for (int i = 0; i < nodes.length - 1; i++) {
+							if (currParent.containsKey(nodes[i])) {
+								if (currParent.get(nodes[i]) instanceof Map) {
+									currParent = (Map) currParent.get(nodes[i]);
+									prevParents.add(i, currParent);
+								} else return;
+								return;
+							}
+
+							currParent = new HashMap<>();
+							prevParents.add(i, currParent);
+						}
+
+						currParent.put(nodes[nodes.length - 1], object);
+						prevParents.add(nodes.length - 1, currParent);
+
+						// rebuild tree, starting from bottom-level node
+						for (int i = prevParents.size() - 1; i > 1; i--) // TODO: Can't figure out this issue
+							prevParents.get(i - 1).put(nodes[i], prevParents.get(i));
+						data.put(nodes[0], prevParents.get(0));
+						return;
 					}
-
-					currParent.put(nodes[nodes.length - 1], object);
-
-					for (int i = nodes.length - 2; i > 0; i--) {
-						prevParent = currParent;
-
-						currParent = new HashMap<>();
-						currParent.put(nodes[i], prevParent);
-					}
-
-					data.put(nodes[0], currParent);
-					return;
 				}
 			}
 		}
