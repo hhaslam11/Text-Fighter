@@ -123,9 +123,9 @@ public class Game {
 			Ui.println("2) Go Home");
 			Ui.println("3) Go to the town");
 			Ui.println("4) Use First-Aid kit");
-			Ui.println("5) Use Potion");
-			Ui.println("6) Eat Food");
-			Ui.println("7) Use Insta-Health");
+			Ui.println("5) Use Insta-Health");
+			Ui.println("6) Use Potion");
+			Ui.println("7) Eat Food");
 			Ui.println("8) Use POWER");
 			Ui.println("9) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
@@ -152,6 +152,9 @@ public class Game {
 					FirstAid.use();
 					break;
 				case 5:
+					InstaHealth.use();
+					break;
+				case 6:
 					Ui.cls();
 					Ui.println("Which potion would you like to use?");
 					Ui.println("1) Survival Potion");
@@ -170,11 +173,8 @@ public class Game {
 							break;
 					}
 					break;
-				case 6:
-					Food.list();
-					break;
 				case 7:
-					InstaHealth.use();
+					Food.list();
 					break;
 				case 8:
 					Power.use();
