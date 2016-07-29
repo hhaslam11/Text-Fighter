@@ -1,0 +1,58 @@
+User:
+  Health: 100
+  Max_Health: 100
+  Balance: 50
+  Power: 0
+Bank:
+  Balance: 0
+Casino:
+  Plays: 0
+  Winnings: 0
+Version: Alpha 4.8DEV
+Battle:
+  Current:
+    Enemy: 0
+    Enemy_Health: 45
+    Enemy_Max_Health: 45
+Achievements:
+  Enemies_Killed: []
+  Aww_You_Care_About_Me: false
+  Level_6_Fighter: false
+  Bought_Item: false
+  First_Kill: false
+  Gambling_Addiction: false
+  Making_Money: false
+  Level_7_Fighter: false
+  Level_5_Fighter: false
+  Nobodys_Perfect: false
+  Learning: false
+  Level_2_Fighter: false
+  Level_10_Fighter: false
+  Time_For_An_Upgrade: false
+  Enemy_Slayer: false
+  Level_4_Fighter: false
+  Text_Fighter_Master: false
+  Level_9_Fighter: false
+  Honest_Player: false
+  Level_8_Fighter: false
+  Money_Maker: false
+  Slayer: false
+  YAY_POWER: false
+  Level_3_Fighter: false
+Stats:
+  Times_Cheated: 0
+  High_Score: 0
+  Times_Quit: 0
+  Kills: 0
+  Bullets_Hit: 0
+  Items_Crafted: 0
+  Damage_Dealt: 0
+  Bullets_Fired: 0
+  FirstAid:
+    Used: 0
+  TimesDied: 0
+Settings:
+  About_Viewed: false
+  Difficulty:
+    Locked: false
+    Level: Easy
