@@ -41,6 +41,12 @@ public class Food {
     }
     public void eat(){
         Ui.cls();
+
+
+        if(Health.get() == Health.getOutOf()){
+
+        }
+
         Ui.println("You have ate a " + getName());
         Ui.println("You've gained " + effectLevel + " " + statusEffect.toString() + " points.");
         this.quantity--;
@@ -108,9 +114,18 @@ public class Food {
                 choice  = Ui.getValidInt() - 1 + offset[choice];
             }while(choice < 0 || choice > arrayFood.size());
 
-            //Equip if player has the selected food
-            if(choice >= arrayFood.size())
+            //Eat if player has the selected food
+            if(choice >= arrayFood.size())//Does this even do anything?? Do while loop should prevent this.
                 return;
+
+            //TODO once more status effects are implimented, use a switch here if appropiate.
+            if(arrayFood.get(choice).getStatusEffect() == StatusEffect.type.HEALTH && Health.get() == Health.getOutOf()){
+                Ui.cls();
+                Ui.println("Your health is already full. No need to eat this!");
+                Ui.pause();
+                return;
+            }
+
             if(arrayFood.get(choice).quantity > 0){
                 arrayFood.get(choice).eat();
                 return;
