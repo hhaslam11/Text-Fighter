@@ -726,38 +726,44 @@ public class Saves {
 
 			// if data doesn't contain top-level node, create nested Maps
 			if (!data.containsKey(nodes[0])) {
-				Map<String, Object> currParent = new HashMap<>(), prevParent;
-				currParent.put(nodes[nodes.length - 1], object);
+				Map<String, Object> currNode = new HashMap<>(), prevNode;
+				currNode.put(nodes[nodes.length - 1], object);
 
 				for (int i = nodes.length - 2; i > 0; i--) {
-					prevParent = currParent;
+					prevNode = currNode;
 
-					currParent = new HashMap<>();
-					currParent.put(nodes[i], prevParent);
+					currNode = new HashMap<>();
+					currNode.put(nodes[i], prevNode);
 				}
 				// set top-level node to previous parent
-				data.put(nodes[0], currParent);
-				return;
+				data.put(nodes[0], currNode);
 			} else { // if data contains top-level node, work through each Map
-				Map currParent = new HashMap<>();
-				List<Map> prevParents = new ArrayList<>();
+				Map currNode = new HashMap<>(), prevNode;
+				List<Map> prevNodes = new ArrayList<>();
+
+				if (data.containsKey(nodes[0])) {
+					if (data.get(nodes[0]) instanceof Map)
+						currNode = (Map) data.get(nodes[0]);
+					else return; // TODO: Add boolean for safety net (no overwriting)
+				}
 
 				for (int i = 0; i < nodes.length - 1; i++) {
-					if (data.get(nodes[i]) instanceof Map) {
-						Ui.println("Maps: " + nodes[i]);
-						currParent = (Map) data.get(nodes[i]);
-						prevParents.add(i, currParent);
-					} else break;
+					if (data.containsKey(nodes[i])) {
+						if (data.get(nodes[i]) instanceof Map)
+							prevNodes.add(i, (Map) data.get(i));
+						else return; // TODO: Add boolean for safety net (no overwriting)
+					} else prevNodes.add(i, new HashMap<>());
 				}
 
-				currParent.put(nodes[nodes.length - 1], object);
-				prevParents.set(nodes.length - 2, currParent);
+				currNode.put(nodes[nodes.length - 1], object);
 
-				for (int i = prevParents.size() - 1; i > 1; i--) {
-					prevParents.get(i - 1).put(nodes[i], prevParents.get(i));
-					currParent = prevParents.get(i - 1);
+				for (int i = prevNodes.size() - 2; i > 0; i--) {
+					prevNode = currNode;
+
+					currNode = prevNodes.get(i);
+					currNode.put(nodes[i], prevNode);
 				}
-				data.put(nodes[0], currParent);
+				data.put(nodes[0], currNode);
 			}
 			return;
 		}
