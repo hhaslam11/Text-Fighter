@@ -578,7 +578,7 @@ public class Saves {
 
 		/*
 		 * TODO: make a version checker that checks each part of a version ex: 1.4.1DEV
-		 * then determince whether or not it's older, current or newer.
+		 * then determine whether or not it's older, current or newer.
 		 */
 		set("Version", Version.getFull());
 
@@ -739,41 +739,27 @@ public class Saves {
 				data.put(nodes[0], currParent);
 				return;
 			} else { // if data contains top-level node, work through each Map
-				Map<String, Object> currParent;
+				Map currParent = new HashMap<>();
 				List<Map> prevParents = new ArrayList<>();
 
-				if (!(data.get(nodes[0]) instanceof Map)) return;
-				else {
-					// sets the top-level parent
-					currParent = (Map) data.get(nodes[0]);
-					prevParents.add(0, currParent);
-
-					if (nodes.length > 1) {
-						// iterate through each node, if child nodes don't exist, create them
-						for (int i = 0; i < nodes.length - 1; i++) {
-							if (currParent.containsKey(nodes[i])) {
-								if (currParent.get(nodes[i]) instanceof Map) {
-									currParent = (Map) currParent.get(nodes[i]);
-									prevParents.add(i, currParent);
-								} else return;
-								return;
-							}
-
-							currParent = new HashMap<>();
-							prevParents.add(i, currParent);
-						}
-
-						currParent.put(nodes[nodes.length - 1], object);
-						prevParents.add(nodes.length - 1, currParent);
-
-						// rebuild tree, starting from bottom-level node
-						for (int i = prevParents.size() - 1; i > 1; i--) // TODO: Can't figure out this issue
-							prevParents.get(i - 1).put(nodes[i], prevParents.get(i));
-						data.put(nodes[0], prevParents.get(0));
-						return;
-					}
+				for (int i = 0; i < nodes.length - 1; i++) {
+					if (data.get(nodes[i]) instanceof Map) {
+						Ui.println("Maps: " + nodes[i]);
+						currParent = (Map) data.get(nodes[i]);
+						prevParents.add(i, currParent);
+					} else break;
 				}
+
+				currParent.put(nodes[nodes.length - 1], object);
+				prevParents.set(nodes.length - 2, currParent);
+
+				for (int i = prevParents.size() - 1; i > 1; i--) {
+					prevParents.get(i - 1).put(nodes[i], prevParents.get(i));
+					currParent = prevParents.get(i - 1);
+				}
+				data.put(nodes[0], currParent);
 			}
+			return;
 		}
 		data.put(key, object);
 	}
