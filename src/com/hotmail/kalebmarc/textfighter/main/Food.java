@@ -150,7 +150,7 @@ public class Food {
                  * (This comment turned into more of a book, woops,)
                  */
 
-                int 1choice2 = Ui.getValidInt();
+                int choice2 = Ui.getValidInt();
                 if(choice2 == (j + 1))
                     return;
                 choice = choice2 - 1 + offset[choice2];
