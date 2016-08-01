@@ -54,6 +54,20 @@ public class Ui {
     }
 
     /**
+     * Clears screen, prints msg, then calls pause();.
+     * @param msg
+     */
+    public static void msg(String msg){//TODO use this instead throughout project
+        if (msg == null || msg == ""){
+            cls();
+            pause();
+        }
+
+        cls();
+        println(msg);
+        pause();
+    }
+    /**
      * @param msgType Ex. JOptionPane.ERROR_MESSAGE
      */
     public static void popup(String body, String title, int msgType) {

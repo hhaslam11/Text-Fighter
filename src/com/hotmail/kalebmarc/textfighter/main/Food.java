@@ -8,7 +8,7 @@ public class Food {
 
     private String name;
     private String desc;
-    private int quantity = 3;
+    private int quantity = 1;//TODO change to not have a default value once done testing
     private StatusEffect.type statusEffect;
     private int effectLevel;
     private type foodType;
@@ -41,11 +41,6 @@ public class Food {
     }
     public void eat(){
         Ui.cls();
-
-
-        if(Health.get() == Health.getOutOf()){
-
-        }
 
         Ui.println("You have ate a " + getName());
         Ui.println("You've gained " + effectLevel + " " + statusEffect.toString() + " points.");
@@ -111,22 +106,70 @@ public class Food {
             //Get valid food index
             int choice = 0;
             do{
-                choice  = Ui.getValidInt() - 1 + offset[choice];
+
+                /*
+                 * TODO
+                 * Just found a bug in the following LOC.
+                 * choice is set to 0 above, and then
+                 * offset[choice] is used. Meaning
+                 * its always offset[0]. I doubt this was
+                 * intentional, and since this whole snippet
+                 * of code is used in multiple different
+                 * places, the same bug is in a few different
+                 * places as well. Look into this...
+                 * Also, since the code is so similar, see
+                 * if it can just be put into a single
+                 * method somewhere.....
+                 *
+                 * Old code mentioned in comment above (Keeping for reference):
+                 * choice = Ui.getValidInt() - 1 + offset[choice];
+                 *
+                 * Update: commenting that and "Fixing" the bug broke something.
+                 * Guess that bug made it work. New mission; try and figure out
+                 * what 'j' and 'offset' do. Probably should have done that
+                 * a while ago.
+                 * Commenting 'fixed' code too..
+                 *
+                 * choice = Ui.getValidInt();
+                 * if(choice == (j + 1))
+                 *   return;
+                 * choice = choice - 1 + offset[choice];
+                 *
+                 * I'm going to temporarily revert back to the old method that
+                 * seems like it would have a bug. Maybe I'm missing something
+                 * obvious.... I'll deal with it later, when I have time to work
+                 * things out better.
+                 * I'll also hack some temp workaround for exiting the menu, so
+                 * sorry for the messy code that follows, I'll get around to it
+                 * soon :P
+                 *
+                 * Another Update:
+                 * Actually just turned out to be a mixture of both methods.
+                 * Still needs to be fixed though.
+                 *
+                 * (This comment turned into more of a book, woops,)
+                 */
+
+                int 1choice2 = Ui.getValidInt();
+                if(choice2 == (j + 1))
+                    return;
+                choice = choice2 - 1 + offset[choice2];
+
+
             }while(choice < 0 || choice > arrayFood.size());
 
             //Eat if player has the selected food
             if(choice >= arrayFood.size())//Does this even do anything?? Do while loop should prevent this.
                 return;
 
-            //TODO once more status effects are implimented, use a switch here if appropiate.
-            if(arrayFood.get(choice).getStatusEffect() == StatusEffect.type.HEALTH && Health.get() == Health.getOutOf()){
-                Ui.cls();
-                Ui.println("Your health is already full. No need to eat this!");
-                Ui.pause();
-                return;
-            }
-
-            if(arrayFood.get(choice).quantity > 0){
+            if(arrayFood.get(choice).quantity > 0){//TODO This shouldnt ever be = 0 anyways..
+                //TODO once more status effects are implemented, use a switch here if appropriate.
+                if(arrayFood.get(choice).getStatusEffect() == StatusEffect.type.HEALTH && Health.get() == Health.getOutOf()){
+                    Ui.cls();
+                    Ui.println("Your health is already full. No need to eat this!");
+                    Ui.pause();
+                    return;
+                }
                 arrayFood.get(choice).eat();
                 return;
             }else{
@@ -136,7 +179,6 @@ public class Food {
             }
 
         }
-        
     }
     public static enum type{
         MEAT_FISH,
