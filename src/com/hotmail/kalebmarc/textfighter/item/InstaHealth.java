@@ -7,12 +7,13 @@ import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 
 public class InstaHealth {
-    private InstaHealth() {}
-
-    private static int instaHealth;
     public static int used = 0;
     public static int price;
     public static int level;
+    private static int instaHealth;
+
+    private InstaHealth() {
+    }
 
     public static int get() {
         return instaHealth;
@@ -66,17 +67,18 @@ public class InstaHealth {
 
         }
     }
-    public static void buy(){
-        if(Xp.getLevel() < level){
+
+    public static void buy() {
+        if (Xp.getLevel() < level) {
             Ui.println("You have to be at least level " + level + " to buy this!");
             Ui.pause();
-        }else if(price <= Coins.get()){
+        } else if (price <= Coins.get()) {
             Coins.set(-price, true);
             Stats.coinsSpentOnHealth += price;
             set(1, true);
             Ui.println("Thank you for your purchase. Come again soon! ");
             Ui.pause();
-        }else{
+        } else {
             Ui.println("You do not have enough coins.");
             Ui.pause();
         }

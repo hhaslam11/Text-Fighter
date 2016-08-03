@@ -7,13 +7,15 @@ public class User {
 
     private static String playerName = "Player";
 
-    public static String name(){
+    public static String name() {
         return playerName;
     }
-    public static void setName(String name){
+
+    public static void setName(String name) {
         playerName = name;
     }
-    public static void promptNameSelection(){
+
+    public static void promptNameSelection() {
 
         Ui.cls();
         Ui.println("Please enter your username.");
@@ -21,7 +23,7 @@ public class User {
 
         //Validate
         name = name.trim();
-        if(name.equals("")){
+        if (name.equals("")) {
             Ui.println("Name cannot be blank. Using default name.");
             name = "Player";
         }

@@ -1,27 +1,27 @@
 package com.hotmail.kalebmarc.textfighter.main;
-	
+
 class Start {
 
-	public static void main(String args[]){
+    public static void main(String args[]) {
 
-		if (args.length != 0 && args[0].equalsIgnoreCase("nogui")) Ui.guiEnabled = false;
-		Ui.println("Loading..");
+        if (args.length != 0 && args[0].equalsIgnoreCase("nogui")) Ui.guiEnabled = false;
+        Ui.println("Loading..");
 
         //Check if current version is a developer version, if so, enable debug menu
-        if(Version.get().contains("DEV")){
+        if (Version.get().contains("DEV")) {
             Debug.enable();
         }
 
-		//Displays splash screen for a moment
-		Splash.screen();
-		
-		//Runs the game  
-		Menu.load();
-		
-		//Clears Console
-		Ui.cls();
+        //Displays splash screen for a moment
+        Splash.screen();
 
-	}
+        //Runs the game
+        Menu.load();
+
+        //Clears Console
+        Ui.cls();
+
+    }
 }
 
 /*

@@ -9,7 +9,7 @@ public class Loan {
     private static int currentLoan;
     private static int netDue;
 
-    public static void menu(){
+    public static void menu() {
         while (true) {
             Ui.cls();
             Ui.println("-------------------------------");
@@ -38,9 +38,10 @@ public class Loan {
             }
         }
     }
-    private static void createLoan(){
 
-        if(hasLoan()){
+    private static void createLoan() {
+
+        if (hasLoan()) {
             Ui.cls();
             Ui.println("You can not request a loan while you already have one.");
             Ui.pause();
@@ -60,7 +61,7 @@ public class Loan {
             Ui.pause();
             return;
         }
-        if (request <= 0){
+        if (request <= 0) {
             Ui.println("You must enter at least 1 coin.");
             Ui.pause();
             return;
@@ -75,8 +76,9 @@ public class Loan {
         Ui.println("You will not be able to deposit coins into the bank until your loan is fully paid off.");
         Ui.pause();
     }
-    private static void payLoan(){
-        if(getGrossDue() == 0){
+
+    private static void payLoan() {
+        if (getGrossDue() == 0) {
             Ui.println("You must enter at least 1 coin.");
             Ui.pause();
             return;
@@ -89,19 +91,19 @@ public class Loan {
         int amountToPay = Ui.getValidInt();
 
         Ui.cls();
-        if(Coins.get() < amountToPay){
+        if (Coins.get() < amountToPay) {
             Ui.println("You don't have enough coins.");
             Ui.pause();
             return;
         }
 
-        if(amountToPay <= 0){
+        if (amountToPay <= 0) {
             Ui.println("You must enter at least 1 coin.");
             Ui.pause();
             return;
         }
 
-        if (amountToPay > getGrossDue()){
+        if (amountToPay > getGrossDue()) {
             Ui.println("You only owe " + getGrossDue() + "! Enter a small amount");
             Ui.pause();
         }
@@ -109,28 +111,35 @@ public class Loan {
         Coins.set(-amountToPay, true);
 
         Ui.println("You have paid back " + amountToPay + " coins.\nYou now have " + getGrossDue() + " left to pay.");
-        if(getGrossDue() == 0) currentLoan = 0;
+        if (getGrossDue() == 0) currentLoan = 0;
         Ui.pause();
     }
-    private static int getMaxLoan(){
+
+    private static int getMaxLoan() {
         return Xp.getLevel() * 100;
     }
+
     public static int getCurrentLoan() {
         return currentLoan;
     }
-    public static boolean hasLoan(){
+
+    public static void setCurrentLoan(int loan) {
+        currentLoan = loan;
+    }
+
+    public static boolean hasLoan() {
         return getCurrentLoan() > 0;
     }
-    public static int getGrossDue(){
-        return (int)(netDue + (netDue * INTEREST_RATE));
+
+    public static int getGrossDue() {
+        return (int) (netDue + (netDue * INTEREST_RATE));
     }
-    public static int getNetDue(){
+
+    public static int getNetDue() {
         return netDue;
     }
-    public static void setNetDue(int due){
+
+    public static void setNetDue(int due) {
         netDue = due;
-    }
-    public static void setCurrentLoan(int loan){
-        currentLoan = loan;
     }
 }

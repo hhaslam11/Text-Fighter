@@ -3,20 +3,20 @@ package com.hotmail.kalebmarc.textfighter.main;
 //import com.hotmail.kalebmarc.textfighter.main.Quest;
 
 public class NPC {
-    
-    private static String name;
-    private static String shop;
 
     private static final String NAME_HEALTH = "Corinna";
     private static final String NAME_WEAPON = "Niel";
-    private static final String NAME_XP     = "Halette";
+    private static final String NAME_XP = "Halette";
     private static final String NAME_ARMOUR = "Leon";
+    private static String name;
+    private static String shop;
 
 
-    public NPC(){}
-    
-    public static String getName(String type){
-        switch(type.toLowerCase()){
+    public NPC() {
+    }
+
+    public static String getName(String type) {
+        switch (type.toLowerCase()) {
             case "health":
                 name = "Corinna";
                 break;
@@ -35,9 +35,9 @@ public class NPC {
         }
         return name;
     }
-    
-    public static String getShop(String npc){
-        switch(npc.toLowerCase()){
+
+    public static String getShop(String npc) {
+        switch (npc.toLowerCase()) {
             case "corinna":
                 shop = "Health";
                 break;
@@ -55,28 +55,28 @@ public class NPC {
         }
         return shop;
     }
-    
-    public static void setName(String npc){
+
+    public static void setName(String npc) {
         name = npc;
     }
-    
-    public static void setShop(String type){
+
+    public static void setShop(String type) {
         shop = type;
     }
-    
-    public static void welcome(String type){
+
+    public static void welcome(String type) {
         Ui.println(getName(type) + ": \n\tWelcome to the " + type + " shop.");
         Ui.println("\tHow can I help you today?");
     }
-    
-    public static void gratitude(String shop, String type){
-        if(type.toLowerCase().equals("purchase")){
+
+    public static void gratitude(String shop, String type) {
+        if (type.toLowerCase().equals("purchase")) {
             Ui.println(getName(shop) + ": \nThank you for your purchase.");
         }
-        
+
     }
-    
-    public boolean hasQuests(){
+
+    public boolean hasQuests() {
         return Quest.checkQuestsForNPC(name);
     }
 

@@ -3,7 +3,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 public class StatusEffect {
     //Will be used for Stats
     //https://github.com/hhaslam11/Text-Fighter/issues/16
-    public static enum type{
+    public enum type {
         HEALTH, STRENGTH, STANIMA, ACCURACY, LUCK;
 
         @Override

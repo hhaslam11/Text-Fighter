@@ -8,112 +8,98 @@ import com.hotmail.kalebmarc.textfighter.player.Xp;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Weapon{
+public class Weapon {
 
+    //Weapon List
+    public static final ArrayList<Weapon> arrayWeapon = new ArrayList<>();
     //Properties
     public static int BULLET_DAMAGE;
-    public int        price;
-    public int        level;
-    private int       damageMin;
-    private int       damageMax;
-    private double    chanceOfMissing;
-    private String    name;
-    private boolean   buyable;
-    private boolean   viewedAbout;
-    public boolean    melee;
-
     //Variables
-    public static Weapon  starting;
+    public static Weapon starting;
     private static Weapon current = null;
-    public boolean        owns;
-
+    public int price;
+    public int level;
+    public boolean melee;
+    public boolean owns;
+    private int damageMin;
+    private int damageMax;
+    private double chanceOfMissing;
+    private String name;
+    private boolean buyable;
+    private boolean viewedAbout;
     //Ammo
     private int ammo;
     private int ammoUsed;
     private int ammoPrice;//Per 1
     private int ammoIncludedWithPurchase;
 
-    //Weapon List
-    public static final ArrayList<Weapon> arrayWeapon = new ArrayList<>();
-
     public Weapon(String name, int ammoUsed, int ammoIncludedWithPurchase, boolean buyable, int price, //For guns
-                  int ammoPrice, int level, double chanceOfMissing, boolean firstInit, boolean changeDif){
+                  int ammoPrice, int level, double chanceOfMissing, boolean firstInit, boolean changeDif) {
 
-        this.name                     = name;
-        this.ammoUsed                 = ammoUsed;
+        this.name = name;
+        this.ammoUsed = ammoUsed;
         this.ammoIncludedWithPurchase = ammoIncludedWithPurchase;
-        this.buyable                  = buyable;
-        this.price                    = price;
-        this.ammoPrice                = ammoPrice;
-        this.level                    = level;
-        this.chanceOfMissing          = chanceOfMissing;
-        this.melee                    = false;
+        this.buyable = buyable;
+        this.price = price;
+        this.ammoPrice = ammoPrice;
+        this.level = level;
+        this.chanceOfMissing = chanceOfMissing;
+        this.melee = false;
 
-       if(!changeDif){
-           arrayWeapon.add(this);
-       }
-
-       if(firstInit){
-           this.owns = false;
-
-       }
-
-    }
-    public Weapon(String name, boolean startingWeapon, boolean buyable, int price, int level,//For Melee
-                  int damageMin, int damageMax, boolean firstInit, boolean changeDif){
-       this.name            = name;
-       this.buyable         = buyable;
-       this.price           = price;
-       this.level           = level;
-       this.damageMin       = damageMin;
-       this.damageMax       = damageMax;
-       this.melee           = true;
-
-        if(!changeDif){
+        if (!changeDif) {
             arrayWeapon.add(this);
         }
 
-       if(firstInit){
-           if (startingWeapon){//If first init, see if player starts with this or not.
-               this.owns = true;
-               current = this;
-               starting = this;
-           }else{
-               this.owns = false;
-           }
-       }
+        if (firstInit) {
+            this.owns = false;
+
+        }
+
     }
-    public static Weapon get(){
-        return current;
-    }
-    public String getName(){
-        return name;
-    }
-    public boolean owns(){
-        return owns;
-    }
-    static int getIndex(Weapon i){
-        return arrayWeapon.indexOf(i);
-    }
-    public static void set(Weapon x){
-        current = x;
-    }
-    public static void set(int i){
-        current = arrayWeapon.get(i);
-    }
-    public void setAmmo(int amount, boolean add){
-        if(this.melee) return;
-        if(add){
-            this.ammo += amount;
-        }else{
-            this.ammo = amount;
+
+    public Weapon(String name, boolean startingWeapon, boolean buyable, int price, int level,//For Melee
+                  int damageMin, int damageMax, boolean firstInit, boolean changeDif) {
+        this.name = name;
+        this.buyable = buyable;
+        this.price = price;
+        this.level = level;
+        this.damageMin = damageMin;
+        this.damageMax = damageMax;
+        this.melee = true;
+
+        if (!changeDif) {
+            arrayWeapon.add(this);
+        }
+
+        if (firstInit) {
+            if (startingWeapon) {//If first init, see if player starts with this or not.
+                this.owns = true;
+                current = this;
+                starting = this;
+            } else {
+                this.owns = false;
+            }
         }
     }
-    public int getAmmo(){
-        return this.ammo;
+
+    public static Weapon get() {
+        return current;
     }
-    public static void choose(){
-        while(true) {
+
+    static int getIndex(Weapon i) {
+        return arrayWeapon.indexOf(i);
+    }
+
+    public static void set(Weapon x) {
+        current = x;
+    }
+
+    public static void set(int i) {
+        current = arrayWeapon.get(i);
+    }
+
+    public static void choose() {
+        while (true) {
             Ui.cls();
             Ui.println("----------------------------");
             Ui.println("Equip new weapon");
@@ -122,8 +108,8 @@ public class Weapon{
             Ui.println("Equipped weapon: " + current.getName());
             Ui.println("----------------------------");
             ArrayList<Weapon> validWeapons = new ArrayList<Weapon>();
-            for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-                if(Weapon.arrayWeapon.get(i).owns()){
+            for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
+                if (Weapon.arrayWeapon.get(i).owns()) {
                     Ui.println((validWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     validWeapons.add(Weapon.arrayWeapon.get(i));
                 }
@@ -147,15 +133,48 @@ public class Weapon{
             }
         }
     }
-    public void dealDam(){
+
+    private static void noAmmo() {
+        Ui.popup("You've run out of ammo!", "Warning", JOptionPane.WARNING_MESSAGE);
+        Weapon.current = Weapon.starting;
+    }
+
+    public static void displayAmmo() {
+        if (!(Weapon.get().melee)) {
+            Ui.println("     Ammo: " + Weapon.get().getAmmo());
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean owns() {
+        return owns;
+    }
+
+    public void setAmmo(int amount, boolean add) {
+        if (this.melee) return;
+        if (add) {
+            this.ammo += amount;
+        } else {
+            this.ammo = amount;
+        }
+    }
+
+    public int getAmmo() {
+        return this.ammo;
+    }
+
+    public void dealDam() {
         int damageDealt = 0;
 
-        if (this.melee){
-			/*
-			 * Melee Attack
+        if (this.melee) {
+            /*
+             * Melee Attack
 			 */
             damageDealt = Random.RInt(this.damageMin, this.damageMax);
-        }else{
+        } else {
 
 			/*
 			 * Gun Attack
@@ -175,8 +194,8 @@ public class Weapon{
                 }
 
             } else {
-                    noAmmo();
-                    damageDealt = 0;
+                noAmmo();
+                damageDealt = 0;
             }
         }
 
@@ -195,64 +214,71 @@ public class Weapon{
 
         Ui.pause();
     }
-    public void viewAbout(){
+
+    public void viewAbout() {
 
         final int BORDER_LENGTH = 39;
 
         //Start of weapon Info
         Ui.cls();
-        for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
+        for (int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.println();
-        for(int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++) Ui.print(" ");//Set correct spacing to get name in middle of box
+        for (int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++)
+            Ui.print(" ");//Set correct spacing to get name in middle of box
         Ui.println(this.getName());
         Ui.println("Price: " + this.price + " coins");
         Ui.println("Chance of missing: " + this.chanceOfMissing + "%");
         Ui.println("Ammo Used: " + this.ammoUsed);
         Ui.println("Damage: " + this.getDamage());
-        for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
+        for (int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.pause();
         Ui.cls();
         //End of weapon Info
         this.setViewed(true);
     }
-    private String getDamage(){
-        if(this.melee){
+
+    private String getDamage() {
+        if (this.melee) {
             return (this.damageMin + " - " + this.damageMax);
-        }else{
-            if(this.chanceOfMissing == 0){
+        } else {
+            if (this.chanceOfMissing == 0) {
                 return String.valueOf((BULLET_DAMAGE * this.ammoUsed));
-            }else{
+            } else {
                 return ("0 - " + String.valueOf((BULLET_DAMAGE * this.ammoUsed)));
             }
         }
     }
-    public boolean viewedAbout(){
+
+    public boolean viewedAbout() {
         return this.viewedAbout;
     }
-    public void setViewed(boolean v){
+
+    public void setViewed(boolean v) {
         this.viewedAbout = v;
     }
-    public boolean isBuyable(){
+
+    public boolean isBuyable() {
         return this.buyable;
     }
-    public void buy(){
+
+    public void buy() {
         Ui.cls();
-        if(!isBuyable()){
+        if (!isBuyable()) {
             Ui.println("Sorry, this item is no longer in stock.");
             Ui.pause();
             return;
         }
-        if(this.owns()){
+        if (this.owns()) {
             Ui.println("You already own this weapon.");
             Ui.pause();
             return;
         }
-        if(level > Xp.getLevel()){
+        if (level > Xp.getLevel()) {
             Ui.println("You are not a high enough level to buy this item.");
             Ui.pause();
             return;
         }
-        if(price > Coins.get()){
+        if (price > Coins.get()) {
             Ui.println("You do not have enough coins to buy this item.");
             Ui.pause();
             return;
@@ -272,12 +298,13 @@ public class Weapon{
         ammo += this.ammoIncludedWithPurchase;
 
     }
-    public void buyAmmo(){
+
+    public void buyAmmo() {
 
         Ui.cls();
 
         //Make sure player is a high enough level
-        if(Xp.getLevel() < this.level){
+        if (Xp.getLevel() < this.level) {
             Ui.println("You are not a high enough level. You need to be at least level " + this.level + ".");
             Ui.pause();
             return;
@@ -291,7 +318,7 @@ public class Weapon{
         int cost = ammoToBuy * ammoPrice;
 
         //Make sure player has enough coins
-        if(Coins.get() < (cost)){
+        if (Coins.get() < (cost)) {
             Ui.println("You don't have enough coins. You need " + (cost - Coins.get()) + " more coins.");
             Ui.pause();
             return;
@@ -304,16 +331,8 @@ public class Weapon{
         Ui.println("You have bought " + ammoToBuy + " ammo.");
         Ui.pause();
     }
-    private static void noAmmo(){
-        Ui.popup("You've run out of ammo!", "Warning", JOptionPane.WARNING_MESSAGE);
-        Weapon.current = Weapon.starting;
-    }
-    public int getAmmoPrice(){
+
+    public int getAmmoPrice() {
         return this.ammoPrice;
-    }
-    public static void displayAmmo() {
-        if (!(Weapon.get().melee)) {
-            Ui.println("     Ammo: " + Weapon.get().getAmmo());
-        }
     }
 }
