@@ -107,29 +107,45 @@ public class Weapon {
             Ui.println("Ammo: " + current.getAmmo());
             Ui.println("Equipped weapon: " + current.getName());
             Ui.println("----------------------------");
-            ArrayList<Weapon> validWeapons = new ArrayList<Weapon>();
-            for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-                if (Weapon.arrayWeapon.get(i).owns()) {
-                    Ui.println((validWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
-                    validWeapons.add(Weapon.arrayWeapon.get(i));
+            int j = 0;
+            int[] offset = new int[arrayWeapon.size()];
+            for (int i = 0; i < arrayWeapon.size(); i++) {
+                if (arrayWeapon.get(i).owns()) {
+                    Ui.println((j + 1) + ") " + arrayWeapon.get(i).getName());
+                    offset[j] = i - j;
+                    j++;
                 }
             }
+            Ui.println((j + 1) + ") Back");
 
-            int menuItem = Ui.getValidInt();
+            while (true) {
 
-            try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
-                current = validWeapons.get(menuItem - 1);
-                Ui.cls();
-                Ui.println("You have equipped a " + current.getName());
-                Ui.pause();
-                break;
-            } catch (Exception e) {
+                int menuItem = Ui.getValidInt();
 
-                if (menuItem == (validWeapons.size() + 1)) {
+                try {
+
+                    //choices other than options in the array go here:
+                    if (menuItem == (j + 1) || menuItem > j)
+                        return;
+
+                    //reverts back to Weapon indexing
+                    menuItem--;
+                    menuItem = menuItem + offset[menuItem];
+
+                    //Testing to make sure the option is valid goes here:
+                    if (!arrayWeapon.get(menuItem).owns) {
+                        Ui.msg("You do not own this weapon!");
+                        return;
+                    }
+
+                    current = arrayWeapon.get(menuItem);
+                    Ui.msg("You have equipped a " + arrayWeapon.get(menuItem).getName());
                     return;
+
+                } catch (Exception e) {
+                    Ui.println();
+                    Ui.println(menuItem + " is not an option.");
                 }
-                Ui.println();
-                Ui.println(menuItem + " is not an option.");
             }
         }
     }

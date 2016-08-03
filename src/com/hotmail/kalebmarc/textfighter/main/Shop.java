@@ -127,23 +127,25 @@ class Shop {
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            ArrayList<Weapon> buyableWeapons = new ArrayList<Weapon>();
+            int j = 0;
+            int[] offset = new int[Weapon.arrayWeapon.size()];
             for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
                 if (Weapon.arrayWeapon.get(i).isBuyable()) {
-                    Ui.println((buyableWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+                    Ui.println((j + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
                     Ui.println("   Price: " + Weapon.arrayWeapon.get(i).price);
                     Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    buyableWeapons.add(Weapon.arrayWeapon.get(i));
+                    offset[j] = i - j;
+                    j++;
                     Ui.println();
                 }
             }
-            Ui.println((buyableWeapons.size() + 1) + ") POWER");
+            Ui.println((j + 1) + ") POWER");
             Ui.println("   Price: " + Power.price);
             Ui.println("   Level: " + Power.level);
             Ui.println();
-            Ui.println((buyableWeapons.size() + 2) + ") AMMO");
+            Ui.println((j + 2) + ") AMMO");
             Ui.println();
-            Ui.println((buyableWeapons.size() + 3) + ") Back");
+            Ui.println((j + 3) + ") Back");
 
             while (true) {//Make it easy to break, without going back to main store menu
 
@@ -151,25 +153,23 @@ class Shop {
 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
 
-                    buyableWeapons.get(menuItem - 1).buy();
-                    NPC.gratitude("Weapon", "purchase");
-                    break;
+                    //choices other than options in the array go here:
+                    if (menuItem == (j + 1))
+                        Power.buy();
+                    if (menuItem == (j + 2))
+                        buyAmmo();
+                    if (menuItem == (j + 3) || menuItem > j)
+                        return;
+
+                    //reverts back to Weapon indexing
+                    menuItem--;
+                    menuItem = menuItem + offset[menuItem];
+
+                    //Results go here:
+                    Weapon.arrayWeapon.get(menuItem).buy();
+                    return;
 
                 } catch (Exception e) {
-
-                    if (menuItem == (buyableWeapons.size() + 1)) {
-                        Power.buy();
-                        NPC.gratitude("Weapon", "purchase");
-                        break;
-                    }
-                    if (menuItem == (buyableWeapons.size() + 2)) {
-                        NPC.gratitude("Weapon", "purchase");
-                        buyAmmo();
-                        break;
-                    }
-                    if (menuItem == (buyableWeapons.size() + 3)) {
-                        return;
-                    }
                     Ui.println();
                     Ui.println(menuItem + " is not an option.");
                 }
@@ -320,17 +320,17 @@ class Shop {
             }
             Ui.println((j + 1) + ") Back");
 
-            while (true) {//Make it easy to break, without going back to main store menu
+            while (true) {
 
                 int menuItem = Ui.getValidInt();
 
-                try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
+                try {
 
                     //choices other than options in the array go here:
                     if (menuItem == j + 1 || menuItem > j)
                         return;
 
-                    //reverts back to Weapon indexing
+                    //reverts back to armour indexing
                     menuItem--;
                     menuItem = menuItem + armourShopOffset[menuItem];
 
