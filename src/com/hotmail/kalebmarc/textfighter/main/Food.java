@@ -40,80 +40,37 @@ public class Food {
                 }
             }
             Ui.println((j + 1) + ") Back");
+            while (true) {//Make it easy to break, without going back to main store menu
 
-            //Get valid food index
-            int choice = 0;
-            do {
+                int menuItem = Ui.getValidInt();
 
-                /*
-                 * TODO
-                 * Just found a bug in the following LOC.
-                 * choice is set to 0 above, and then
-                 * offset[choice] is used. Meaning
-                 * its always offset[0]. I doubt this was
-                 * intentional, and since this whole snippet
-                 * of code is used in multiple different
-                 * places, the same bug is in a few different
-                 * places as well. Look into this...
-                 * Also, since the code is so similar, see
-                 * if it can just be put into a single
-                 * method somewhere.....
-                 *
-                 * Old code mentioned in comment above (Keeping for reference):
-                 * choice = Ui.getValidInt() - 1 + offset[choice];
-                 *
-                 * Update: commenting that and "Fixing" the bug broke something.
-                 * Guess that bug made it work. New mission; try and figure out
-                 * what 'j' and 'offset' do. Probably should have done that
-                 * a while ago.
-                 * Commenting 'fixed' code too..
-                 *
-                 * choice = Ui.getValidInt();
-                 * if(choice == (j + 1))
-                 *   return;
-                 * choice = choice - 1 + offset[choice];
-                 *
-                 * I'm going to temporarily revert back to the old method that
-                 * seems like it would have a bug. Maybe I'm missing something
-                 * obvious.... I'll deal with it later, when I have time to work
-                 * things out better.
-                 * I'll also hack some temp workaround for exiting the menu, so
-                 * sorry for the messy code that follows, I'll get around to it
-                 * soon :P
-                 *
-                 * Another Update:
-                 * Actually just turned out to be a mixture of both methods.
-                 * Still needs to be fixed though.
-                 *
-                 * (This comment turned into more of a book, woops,)
-                 */
+                try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
 
-                int choice2 = Ui.getValidInt();
-                if (choice2 == (j + 1))
+                    //choices other than options in the array go here:
+                    if (menuItem == (j + 1) || menuItem > j)
+                        return;
+
+                    //reverts back to Weapon indexing
+                    menuItem--;
+                    menuItem = menuItem + offset[menuItem];
+
+                    //TODO once more status effects are implemented, use a switch here if appropriate.
+                    //Testing to make sure the option is valid goes here:
+                    if (arrayFood.get(menuItem).getStatusEffect() == StatusEffect.type.HEALTH && Health.get() == Health.getOutOf()) {
+                        Ui.msg("Your health is already full. No need to eat this!");
+                        return;
+                    }
+
+                    //Results go here:
+                    if (arrayFood.get(menuItem).quantity > 0) {
+                        Food.arrayFood.get(menuItem).eat();
+                    }
                     return;
-                choice = choice2 - 1 + offset[choice2];
 
-
-            } while (choice < 0 || choice > arrayFood.size());
-
-            //Eat if player has the selected food
-            if (choice >= arrayFood.size())//Does this even do anything?? Do while loop should prevent this.
-                return;
-
-            if (arrayFood.get(choice).quantity > 0) {//TODO This shouldnt ever be = 0 anyways..
-                //TODO once more status effects are implemented, use a switch here if appropriate.
-                if (arrayFood.get(choice).getStatusEffect() == StatusEffect.type.HEALTH && Health.get() == Health.getOutOf()) {
-                    Ui.cls();
-                    Ui.println("Your health is already full. No need to eat this!");
-                    Ui.pause();
-                    return;
+                } catch (Exception e) {
+                    Ui.println();
+                    Ui.println(menuItem + " is not an option.");
                 }
-                arrayFood.get(choice).eat();
-                return;
-            } else {
-                Ui.cls();
-                Ui.println("You don't have this food.");
-                Ui.pause();
             }
         }
     }
