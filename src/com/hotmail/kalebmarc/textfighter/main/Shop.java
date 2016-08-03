@@ -306,19 +306,19 @@ class Shop {
             Ui.println("Level: " + Xp.getLevel());
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
-            int j = 1;
+            int j = 0;
             int[] armourShopOffset = new int[Armour.getArmours().size()];
-            for (int i = 1; i < Armour.getArmours().size(); i++) {
+            for (int i = 0; i < Armour.getArmours().size(); i++) {
                 if (Armour.getArmours().get(i).getPrice() != 0) {
-                    Ui.println((j) + ") " + Armour.getArmours().get(i).getName());
+                    Ui.println((j + 1) + ") " + Armour.getArmours().get(i).getName());
                     Ui.println("   Price: " + Armour.getArmours().get(i).getPrice());
                     Ui.println("   Level: " + Armour.getArmours().get(i).getLevel());
-                    armourShopOffset[j - 1] = i - j - 1;
+                    armourShopOffset[j] = i - j;
                     j++;
                     Ui.println();
                 }
             }
-            Ui.println((j) + ") Back");
+            Ui.println((j + 1) + ") Back");
 
             while (true) {//Make it easy to break, without going back to main store menu
 
@@ -326,15 +326,19 @@ class Shop {
 
                 try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
 
+                    //choices other than options in the array go here:
+                    if (menuItem == j + 1 || menuItem > j)
+                        return;
+
+                    //reverts back to Weapon indexing
+                    menuItem--;
                     menuItem = menuItem + armourShopOffset[menuItem];
+
+                    //Results go here:
                     Armour.getArmours().get(menuItem).buy();
-                    NPC.gratitude("Armour", "purchase");
-                    break;
+                    return;
 
                 } catch (Exception e) {
-                    if (menuItem == (j)) {
-                        return;
-                    }
                     Ui.println();
                     Ui.println(menuItem + " is not an option.");
                 }

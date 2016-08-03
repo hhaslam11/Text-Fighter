@@ -1,6 +1,7 @@
 package com.hotmail.kalebmarc.textfighter.item;
 
 import com.hotmail.kalebmarc.textfighter.main.Handle;
+import com.hotmail.kalebmarc.textfighter.main.NPC;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
@@ -65,20 +66,24 @@ public class Armour {
             }
 
             //Get valid weapon index
-            int choice;
-            do {
-                choice = Ui.getValidInt() - 1;
-            } while (choice < 0 || choice > getArmours().size());
+            while (true) {//Make it easy to break, without going back to main store menu
 
-            choice = choice + offset[choice]; // reverts to Armours indexing
-            //Equip if player has the selected weapon
-            if (getArmours().get(choice).isOwns()) {
-                getArmours().get(choice).equip();
-                return;
-            } else {
-                Ui.cls();
-                Ui.println("You don't have this armour.");
-                Ui.pause();
+                int menuItem = Ui.getValidInt();
+
+                try { //This is probably pretty bad practice. Using exceptions as a functional part of the program.. Use variables!
+
+                    //reverts back to Weapon indexing
+                    menuItem--;
+                    menuItem = menuItem + offset[menuItem];
+
+                    //Results go here:
+                    Armour.getArmours().get(menuItem).equip();
+                    return;
+
+                } catch (Exception e) {
+                    Ui.println();
+                    Ui.println((menuItem + 1) + " is not an option.");
+                }
             }
         }
     }
@@ -174,8 +179,8 @@ public class Armour {
         } else if (this.getPrice() <= Coins.get()) {
             Coins.set(-this.price, true);
             setOwns(true);
-            equip();
-            Ui.println("Thank you for your purchase. Come again soon! ");
+            equipSilent();
+            NPC.gratitude("Armour", "purchase");
             Ui.pause();
             return true;
         } else {
