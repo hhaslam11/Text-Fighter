@@ -696,6 +696,8 @@ public class Saves {
 		set("Stats.Games_Played.Dice", Stats.diceGamesPlayed); // not saving
 		set("Stats.Games_Played.Slots", Stats.slotGamesPlayed); // not saving
 
+		// TODO: more testing. Files seem to be saving all the data, and then some. Data is also not mapped properly. More set method issues? Or data issues?
+
 		try {
 			if (!saveLocation.exists())
 				saveLocation.createNewFile();
@@ -738,14 +740,12 @@ public class Saves {
 				// set top-level node to previous parent
 				data.put(nodes[0], currNode);
 			} else { // if data contains top-level node, work through each Map
-				Map currNode = new HashMap<>(), prevNode;
+				Map currNode, prevNode;
 				List<Map> prevNodes = new ArrayList<>();
 
-				if (data.containsKey(nodes[0])) {
-					if (data.get(nodes[0]) instanceof Map)
-						currNode = (Map) data.get(nodes[0]);
-					else return; // TODO: Add boolean for safety net (no overwriting)
-				}
+				if (data.get(nodes[0]) instanceof Map)
+					currNode = (Map) data.get(nodes[0]);
+				else return; // TODO: Add boolean for safety net (no overwriting)
 
 				for (int i = 0; i < nodes.length - 1; i++) {
 					if (data.containsKey(nodes[i])) {
@@ -763,6 +763,8 @@ public class Saves {
 					currNode = prevNodes.get(i);
 					currNode.put(nodes[i], prevNode);
 				}
+
+				Ui.println("Node: " + key + " | Object: " + object.toString());
 				data.put(nodes[0], currNode);
 			}
 			return;
