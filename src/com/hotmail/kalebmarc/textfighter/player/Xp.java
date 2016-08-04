@@ -2,7 +2,6 @@ package com.hotmail.kalebmarc.textfighter.player;
 
 import com.hotmail.kalebmarc.textfighter.main.Cheats;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
-import com.hotmail.kalebmarc.textfighter.main.Saves;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 
 import javax.swing.*;
