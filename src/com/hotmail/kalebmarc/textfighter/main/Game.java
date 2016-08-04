@@ -3,7 +3,6 @@ package com.hotmail.kalebmarc.textfighter.main;
 import com.hotmail.kalebmarc.textfighter.item.*;
 import com.hotmail.kalebmarc.textfighter.player.*;
 
-import java.io.File;
 import java.util.Scanner;
 
 import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
@@ -79,7 +78,7 @@ public class Game {
 				Enemy.encounterNew();
 				if(choice != 1) {
 					User.promptNameSelection();
-					Saves.save(false);
+					Saves.save();
 				}
 				break;
 		}
@@ -89,7 +88,7 @@ public class Game {
 			//Runs all the tests and clears the screen
 			if (Stats.kills > Stats.highScore) Stats.highScore = Stats.kills;
 			Ach.check();
-			Saves.save(false);
+			Saves.save();
 			Ui.cls();
 
 			/*

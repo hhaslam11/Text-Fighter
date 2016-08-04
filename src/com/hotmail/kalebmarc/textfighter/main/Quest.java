@@ -1,7 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
 import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.main.Weapon;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 import java.util.ArrayList;
 

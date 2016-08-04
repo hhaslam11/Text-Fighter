@@ -39,7 +39,7 @@ public class Saves {
 		setupDumper();
 
 		yaml = new Yaml(representer, options);
-		data = new HashMap<>();
+		data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
 	}
 
 	private static void setupDumper() {
@@ -92,11 +92,11 @@ public class Saves {
 			Ui.println("------------------------------");
 			Ui.pause();
 
-			data = Collections.synchronizedMap(new HashMap<String, Object>());
+			data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
 			return true;
 		}
 
-		data = (Map<String, Object>) yaml.load(reader);
+		data = Collections.synchronizedMap((Map<String, Object>) yaml.load(reader));
 
 		//Health
 		Health.set(getInteger("User.Health"), getInteger("User.Max_Health"));
@@ -237,10 +237,16 @@ public class Saves {
 		}
 
 		try {
-			input = new Scanner(new File(path));
+			File file = new File(path);
+
+			if (!file.exists()) {
+				Ui.println("File not found. Please put an \"_\" before your username in the save file.");
+				System.exit(0);
+			}
+
+			input = new Scanner(file);
 
 			setup();
-
 			readString();
 
 			//Health
@@ -280,8 +286,8 @@ public class Saves {
 
 			//Settings
 			Settings.setDif(input.nextLine(), false, false);
-			if(readBoolean()) Cheats.enable();
-			if(readBoolean()) Cheats.lock();
+			if (readBoolean()) Cheats.enable();
+			if (readBoolean()) Cheats.lock();
 			Settings.difLocked = readBoolean();
 			Ui.guiEnabled = readBoolean();
 
@@ -290,24 +296,17 @@ public class Saves {
 			Stats.highScore = readInt();
 			Stats.totalKills = readInt();
 			Weapon.set(readInt());
-
-			for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
+			for (int i = 0; i < Weapon.arrayWeapon.size(); i++)
 				Weapon.arrayWeapon.get(i).owns = readBoolean();
-			}
-
-			for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
+			for (int i = 0; i < Weapon.arrayWeapon.size(); i++)
 				Weapon.arrayWeapon.get(i).setAmmo(readInt(), false);
-			}
-
 			Power.set(readInt(), false);
 			Power.used = readInt();
 			Stats.totalDamageDealt = readInt();
 			Stats.bulletsFired = readInt();
 			Stats.bulletsThatHit = readInt();
-
 			for (int i = 0; i < Armour.getArmours().size(); i++)
 				Armour.getArmours().get(i).setOwns(readBoolean());
-
 			Armour.set(readInt());
 
 			//Enemy
@@ -315,30 +314,30 @@ public class Saves {
 			Enemy.get().setHealth(readInt(), Enemy.get().getHealthMax());
 
 			//Achs
-			Ach.moneyMaker         = readBoolean();
-			Ach.enemySlayer        = readBoolean();
-			Ach.firstKill          = readBoolean();
-			Ach.timeForAnUpgrade   = readBoolean();
+			Ach.moneyMaker = readBoolean();
+			Ach.enemySlayer = readBoolean();
+			Ach.firstKill = readBoolean();
+			Ach.timeForAnUpgrade = readBoolean();
 			for (int i = 0; i < Enemy.arrayEnemy.size(); i++)
 				Ach.arrayKilled.set(i, readBoolean());
-			Ach.textFighterMaster  = readBoolean();
-			Ach.YAYPOWER           = readBoolean();
-			Ach.awwYouCareAboutMe  = readBoolean();
-			Ach.slayer             = readBoolean();
-			Ach.nobodysPerfect     = readBoolean();
-			Ach.makingMoney        = readBoolean();
-			Ach.gamblingAddiction  = readBoolean();
-			Ach.level2Fighter      = readBoolean();
-			Ach.level3Fighter      = readBoolean();
-			Ach.level4Fighter      = readBoolean();
-			Ach.level5Fighter      = readBoolean();
-			Ach.level6Fighter      = readBoolean();
-			Ach.level7Fighter      = readBoolean();
-			Ach.level8Fighter      = readBoolean();
-			Ach.level9Fighter      = readBoolean();
-			Ach.level10Fighter     = readBoolean();
-			Ach.honestPlayer       = readBoolean();
-			Ach.learning           = readBoolean();
+			Ach.textFighterMaster = readBoolean();
+			Ach.YAYPOWER = readBoolean();
+			Ach.awwYouCareAboutMe = readBoolean();
+			Ach.slayer = readBoolean();
+			Ach.nobodysPerfect = readBoolean();
+			Ach.makingMoney = readBoolean();
+			Ach.gamblingAddiction = readBoolean();
+			Ach.level2Fighter = readBoolean();
+			Ach.level3Fighter = readBoolean();
+			Ach.level4Fighter = readBoolean();
+			Ach.level5Fighter = readBoolean();
+			Ach.level6Fighter = readBoolean();
+			Ach.level7Fighter = readBoolean();
+			Ach.level8Fighter = readBoolean();
+			Ach.level9Fighter = readBoolean();
+			Ach.level10Fighter = readBoolean();
+			Ach.honestPlayer = readBoolean();
+			Ach.learning = readBoolean();
 
 			//Other Stuff
 			About.setViewed(readBoolean());
@@ -348,8 +347,7 @@ public class Saves {
 			Stats.diceGamesPlayed = readInt();
 			Stats.slotGamesPlayed = readInt();
 
-
-			save(true);
+			save();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -569,7 +567,7 @@ public class Saves {
 		return input.nextLine();
 	}
 
-	public static void save(boolean converted) {
+	public static void save() {
 		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
 		path = path.replace(".jar", "_" + User.name());
 		path = path.replaceAll("%20", " ");
@@ -587,9 +585,9 @@ public class Saves {
 		set("User.Max_Health", Health.getOutOf());
 		set("User.FirstAid.Owns", FirstAid.get());
 		set("Stats.FirstAid.Used", FirstAid.used);
-		set("User.InstaHealth.Owns", InstaHealth.get()); // not saving
+		set("User.InstaHealth.Owns", InstaHealth.get());
 		set("Stats.InstaHealth.Used", InstaHealth.used); // not saving
-		set("Stats.TimesDied", Health.timesDied); // not saving
+		set("Stats.TimesDied", Health.timesDied);
 
 		//Coins
 		set("User.Balance", Coins.get());
@@ -597,25 +595,25 @@ public class Saves {
 		set("Casino.Winnings", Casino.totalCoinsWon);
 		set("Casino.Plays", Casino.gamesPlayed);
 		set("Achievements.Bought_Item", Ach.boughtItem);
-		set("Stats.Money_Spent.Coins", Stats.totalCoinsSpent); // not saving
-		set("Stats.Money_Spent.Interest", Stats.coinsSpentOnBankInterest); // not saving
-		set("Stats.Money_Spent.Weapons", Stats.coinsSpentOnWeapons); // not saving
-		set("Stats.Money_Spent.Health", Stats.coinsSpentOnHealth); // not saving
-		set("Stats.Money_Spent.XP", Stats.xpBought); // not saving
-		set("Bank.Current_Loan.Balance", Loan.getCurrentLoan()); // not saving
-		set("Bank.Current_Loan.Due", Loan.getNetDue()); // not saving
+		set("Stats.Money_Spent.Coins", Stats.totalCoinsSpent);
+		set("Stats.Money_Spent.Interest", Stats.coinsSpentOnBankInterest);
+		set("Stats.Money_Spent.Weapons", Stats.coinsSpentOnWeapons);
+		set("Stats.Money_Spent.Health", Stats.coinsSpentOnHealth);
+		set("Stats.Money_Spent.XP", Stats.xpBought);
+		set("Bank.Current_Loan.Balance", Loan.getCurrentLoan());
+		set("Bank.Current_Loan.Due", Loan.getNetDue());
 
 		//Xp
-		set("Stats.XP.Level", Xp.getLevel()); // not saving
-		set("Stats.XP.Needed", Xp.getOutOf()); // not saving
-		set("Stats.XP.Amount", Xp.get()); // not saving
-		set("Stats.XP.Total", Xp.total); // not saving
+		set("Stats.XP.Level", Xp.getLevel());
+		set("Stats.XP.Needed", Xp.getOutOf());
+		set("Stats.XP.Amount", Xp.get());
+		set("Stats.XP.Total", Xp.total);
 
 		//Potions
-		set("Stats.Potions.Survival.Used", Potion.spUsed); // not saving
-		set("Stats.Potions.Recovery.Used", Potion.rpUsed); // not saving
-		set("User.Potions.Survival", Potion.get("survival")); // not saving
-		set("User.Potions.Recovery", Potion.get("recovery")); // not saving
+		set("Stats.Potions.Survival.Used", Potion.spUsed);
+		set("Stats.Potions.Recovery.Used", Potion.rpUsed);
+		set("User.Potions.Survival", Potion.get("survival"));
+		set("User.Potions.Recovery", Potion.get("recovery"));
 
 		//Settings
 		set("Settings.Difficulty.Level", Settings.getDif());
@@ -627,17 +625,17 @@ public class Saves {
 		//Combat
 		set("Stats.Kills", Stats.kills);
 		set("Stats.High_Score", Stats.highScore);
-		set("User.Weapons.Current", Weapon.get()); // not saving
+		set("User.Weapons.Current", Weapon.get());
 
 		List<String> ownedWeapons = new ArrayList<>();
 
 		for (int i = 0; i < Weapon.arrayWeapon.size(); i++)
 			if (Weapon.arrayWeapon.get(i).owns())
 				ownedWeapons.add(i + ":" + Weapon.arrayWeapon.get(i).getAmmo());
-		set("User.Weapons.Owns", ownedWeapons); // not saving
+		set("User.Weapons.Owns", ownedWeapons);
 
 		set("User.Power", Power.get());
-		set("Stats.Power.Used", Power.used); // not saving
+		set("Stats.Power.Used", Power.used);
 		set("Stats.Damage_Dealt", Stats.totalDamageDealt);
 		set("Stats.Bullets_Fired", Stats.bulletsFired);
 		set("Stats.Bullets_Hit", Stats.bulletsThatHit);
@@ -647,9 +645,9 @@ public class Saves {
 		for (int i = 0; i < Armour.getArmours().size(); i++)
 			if (Armour.getArmours().get(i).isOwns())
 				ownedArmour.add(i);
-		set("User.Armour.Owns", ownedArmour); // not saving
+		set("User.Armour.Owns", ownedArmour);
 
-		set("User.Armour.Current", Armour.get()); // not saving
+		set("User.Armour.Current", Armour.get());
 
 		//Enemy
 		set("Battle.Current.Enemy", Enemy.arrayEnemy.indexOf(Enemy.get()));
@@ -693,21 +691,12 @@ public class Saves {
 		set("Stats.Times_Cheated", Stats.timesCheated);
 		set("Stats.Times_Quit", Stats.timesQuit);
 		set("Stats.Items_Crafted", Stats.timesCheated);
-		set("Stats.Games_Played.Dice", Stats.diceGamesPlayed); // not saving
-		set("Stats.Games_Played.Slots", Stats.slotGamesPlayed); // not saving
-
-		// TODO: more testing. Files seem to be saving all the data, and then some. Data is also not mapped properly. More set method issues? Or data issues?
+		set("Stats.Games_Played.Dice", Stats.diceGamesPlayed);
+		set("Stats.Games_Played.Slots", Stats.slotGamesPlayed);
 
 		try {
 			if (!saveLocation.exists())
 				saveLocation.createNewFile();
-
-			//Clears file contents
-			if (converted) {
-				PrintWriter writer = new PrintWriter(saveLocation);
-				writer.print("");
-				writer.close();
-			}
 
 			FileWriter writer = new FileWriter(saveLocation);
 
@@ -740,32 +729,24 @@ public class Saves {
 				// set top-level node to previous parent
 				data.put(nodes[0], currNode);
 			} else { // if data contains top-level node, work through each Map
-				Map currNode, prevNode;
-				List<Map> prevNodes = new ArrayList<>();
+				Map[] prevNodes = new LinkedHashMap[nodes.length - 1];
 
-				if (data.get(nodes[0]) instanceof Map)
-					currNode = (Map) data.get(nodes[0]);
-				else return; // TODO: Add boolean for safety net (no overwriting)
+				if (nodes.length > 1) {
+					for (int i = 0; i <= nodes.length - 2; i++) {
+						if (data.containsKey(nodes[i]) && (data.get(nodes[i]) instanceof Map))
+							prevNodes[i] = new LinkedHashMap((Map) data.get(nodes[i]));
+						else if (!data.containsKey(nodes[i]))
+							prevNodes[i] = new LinkedHashMap();
+						else return; // TODO: Add protection boolean
+					}
 
-				for (int i = 0; i < nodes.length - 1; i++) {
-					if (data.containsKey(nodes[i])) {
-						if (data.get(nodes[i]) instanceof Map)
-							prevNodes.add(i, (Map) data.get(i));
-						else return; // TODO: Add boolean for safety net (no overwriting)
-					} else prevNodes.add(i, new HashMap<>());
-				}
+					prevNodes[prevNodes.length - 1].put(nodes[nodes.length - 1], object);
 
-				currNode.put(nodes[nodes.length - 1], object);
+					for (int i = prevNodes.length - 1; i > 1; i--)
+						prevNodes[i - 1].put(nodes[i], prevNodes[i]);
 
-				for (int i = prevNodes.size() - 2; i > 0; i--) {
-					prevNode = currNode;
-
-					currNode = prevNodes.get(i);
-					currNode.put(nodes[i], prevNode);
-				}
-
-				Ui.println("Node: " + key + " | Object: " + object.toString());
-				data.put(nodes[0], currNode);
+					data.put(nodes[0], prevNodes[0]);
+				} else data.put(nodes[0], object);
 			}
 			return;
 		}

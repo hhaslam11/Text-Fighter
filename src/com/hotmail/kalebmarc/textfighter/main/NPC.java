@@ -1,6 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-//import com.hotmail.kalebmarc.textfighter.main.Quest;
+//import Quest;
 
 public class NPC {
     

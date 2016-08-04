@@ -8,7 +8,6 @@ import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Potion;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
-import com.hotmail.kalebmarc.textfighter.player.Potion;
 
 import java.util.ArrayList;
 
