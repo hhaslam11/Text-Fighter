@@ -208,7 +208,7 @@ public class Saves {
 		About.setViewed(getBoolean("Settings.About_Viewed"));
         Stats.timesCheated = getInteger("Stats.Times_Cheated");
         Stats.timesQuit = getInteger("Stats.Times_Quit");
-		Stats.itemsCrafted = getInteger("Stats.Items_Crafted");
+        Stats.itemsCrafted = getInteger("Stats.Items_Crafted");
 		Stats.diceGamesPlayed = getInteger("Stats.Games_Played.Dice");
 		Stats.slotGamesPlayed = getInteger("Stats.Games_Played.Slots");
 
