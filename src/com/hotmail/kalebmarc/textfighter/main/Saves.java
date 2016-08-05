@@ -163,7 +163,7 @@ public class Saves {
 		Stats.bulletsFired = getInteger("Stats.Bullets_Fired");
 		Stats.bulletsThatHit = getInteger("Stats.Bullets_Hit");
 
-		List<Integer> armours = (List<Integer>) getList("User.Aromur.Owns");
+		List<Integer> armours = (List<Integer>) getList("User.Armour.Owns");
 
 		for(int i = 0; i < armours.size(); i++)
 			Armour.getArmours().get(i).setOwns(true);
