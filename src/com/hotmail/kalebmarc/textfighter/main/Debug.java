@@ -10,23 +10,27 @@ import com.hotmail.kalebmarc.textfighter.player.Xp;
 class Debug {
 
     private static boolean enabled = false;
-    Debug(){}
 
-    public static void enable(){
+    Debug() {
+    }
+
+    public static void enable() {
         Ui.println("Enabling debug menu..");
         enabled = true;
     }
-    public static boolean enabled(){
+
+    public static boolean enabled() {
         return enabled;
     }
-    public static void menu(){
+
+    public static void menu() {
 
         //Validate
-        if(!enabled()){
+        if (!enabled()) {
             return;
         }
 
-        while(true){
+        while (true) {
             Ui.cls();
             Ui.println("==================");
             Ui.println("=== DEBUG MENU ===");
@@ -40,7 +44,7 @@ class Debug {
             Ui.println("7) God Mode");
             Ui.println("8)");
             Ui.println("9) Go back");
-            switch(Ui.getValidInt()){
+            switch (Ui.getValidInt()) {
                 case 1:
                     Ui.cls();
                     Ui.println("How much?");
@@ -52,11 +56,11 @@ class Debug {
                     Xp.set(Ui.getValidInt(), false);
                     break;
                 case 3:
-                    for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+                    for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
                         Weapon.arrayWeapon.get(i).owns = true;
                     }
                     Power.set(100, true);
-                    for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+                    for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
                         Weapon.arrayWeapon.get(i).setAmmo(10000, false);
                     }
                     Ui.println("You now have all weapons");

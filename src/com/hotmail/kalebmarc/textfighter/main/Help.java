@@ -3,11 +3,12 @@ package com.hotmail.kalebmarc.textfighter.main;
 import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.player.Ach;
 
-class Help{
-	private Help(){}
-	
-	public static void view(){
-		while(true){
+class Help {
+	private Help() {
+	}
+
+	public static void view() {
+		while (true) {
 			Ui.cls();
 			Ui.println("------------------------------------------------------------");
 			Ui.println("                         HELP MENU                          ");
@@ -24,64 +25,65 @@ class Help{
 			Ui.println("8) Achievements");
 			Ui.println("9) Back");
 			Ui.println("------------------------------------------------------------");
-			switch(Ui.getValidInt()){
-			case 1:
-				info_enemy();
-				break;
-			case 2:
-				info_armour();
-				break;
-			case 3:
-				info_weapons();
-				break;
-			case 4:
-				info_health();
-				break;
-			case 5:
-				info_food();
-				break;
-			case 6:
-				info_xp();
-				break;
-			case 7:
-				info_cheats();
-				break;
-			case 8:
-				info_achs();
-				break;
-			case 9:
-				return;
+			switch (Ui.getValidInt()) {
+				case 1:
+					info_enemy();
+					break;
+				case 2:
+					info_armour();
+					break;
+				case 3:
+					info_weapons();
+					break;
+				case 4:
+					info_health();
+					break;
+				case 5:
+					info_food();
+					break;
+				case 6:
+					info_xp();
+					break;
+				case 7:
+					info_cheats();
+					break;
+				case 8:
+					info_achs();
+					break;
+				case 9:
+					return;
 			}
 		}
 	}
-	
-	private static void info_enemy(){
-		while(true) {
+
+	private static void info_enemy() {
+		while (true) {
 			Ui.cls();
 			Ui.println("------------------------------------------------------------");
 			Ui.println("                         ENEMY INFO                         ");
 			Ui.println("Which enemy would you like to know about?");
 			Ui.println();
-            for(int i = 0; i < Enemy.arrayEnemy.size(); i++){
-                Ui.println((i + 1) + ") " + Enemy.arrayEnemy.get(i).getName());
+			for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
+				Ui.println((i + 1) + ") " + Enemy.arrayEnemy.get(i).getName());
             }
             Ui.println((Enemy.arrayEnemy.size() + 1) + ") Back");
 			Ui.println("------------------------------------------------------------");
 
             int menuItem = Ui.getValidInt();
 
-            try{
-                Enemy.arrayEnemy.get(menuItem - 1).viewAbout();
-            }catch(Exception e){
-                if(menuItem == (Enemy.arrayEnemy.size() + 1)) return;
-                Ui.println(menuItem + " is not an option.");
+			try {
+				Enemy.arrayEnemy.get(menuItem - 1).viewAbout();
+			} catch (Exception e) {
+				if (menuItem == (Enemy.arrayEnemy.size() + 1)) return;
+				Ui.println(menuItem + " is not an option.");
                 Ui.pause();
             }
 		}
 	}
-	private static void info_armour(){
+
+	private static void info_armour() {
 		//Start of armour info
-		while(true) {
+		while (true) {
 			Ui.cls();
 			Ui.println("--------------------------------------------------");
 			Ui.println("                    ARMOUR INFO                   ");
@@ -95,41 +97,43 @@ class Help{
 
 			int menuItem = Ui.getValidInt();
 
-			try{
+			try {
 				Armour.getArmours().get(menuItem - 1).viewAbout();
-			}catch(Exception e){
-				if(menuItem == (Armour.getArmours().size() + 1)) return;
+			} catch (Exception e) {
+				if (menuItem == (Armour.getArmours().size() + 1)) return;
 				Ui.println(menuItem + " is not an option.");
 				Ui.pause();
 			}
 		}
 		//End of armour info
 	}
-	private static void info_weapons(){
-        while(true) {
-            Ui.cls();
+
+	private static void info_weapons() {
+		while (true) {
+			Ui.cls();
             Ui.println("------------------------------------------------------------");
             Ui.println("                         WEAPON INFO                        ");
             Ui.println("Which weapon would you like to know about?");
             Ui.println();
-            for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-                Ui.println((i + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+			for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
+				Ui.println((i + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
             }
             Ui.println((Weapon.arrayWeapon.size() + 1) + ") Back");
             Ui.println("------------------------------------------------------------");
 
             int menuItem = Ui.getValidInt();
 
-            try{
-                Weapon.arrayWeapon.get(menuItem - 1).viewAbout();
-            }catch(Exception e){
-                if(menuItem == (Weapon.arrayWeapon.size() + 1)) return;
-                Ui.println(menuItem + " is not an option.");
+			try {
+				Weapon.arrayWeapon.get(menuItem - 1).viewAbout();
+			} catch (Exception e) {
+				if (menuItem == (Weapon.arrayWeapon.size() + 1)) return;
+				Ui.println(menuItem + " is not an option.");
                 Ui.pause();
             }
         }
     }
-	private static void info_health(){
+
+	private static void info_health() {
 		Ui.cls();
 		Ui.println("------------------------------------------------------------");
 		Ui.println("                        HEALTH INFO                         ");
@@ -142,14 +146,15 @@ class Help{
 		Ui.pause();
 		Ach.viewedHealth = true;
 	}
-	private static void info_food(){
-		while(true) {
+
+	private static void info_food() {
+		while (true) {
 			Ui.cls();
 			Ui.println("------------------------------------------------------------");
 			Ui.println("                          FOOD INFO                         ");
 			Ui.println("Which food would you like to know about?");
 			Ui.println();
-			for(int i = 0; i < Food.arrayFood.size(); i++){
+			for (int i = 0; i < Food.arrayFood.size(); i++) {
 				Ui.println((i + 1) + ") " + Food.arrayFood.get(i).getName());
 			}
 			Ui.println((Food.arrayFood.size() + 1) + ") Back");
@@ -157,16 +162,17 @@ class Help{
 
 			int menuItem = Ui.getValidInt();
 
-			try{
+			try {
 				Food.arrayFood.get(menuItem - 1).viewAbout();
-			}catch(Exception e){
-				if(menuItem == (Food.arrayFood.size() + 1)) return;
+			} catch (Exception e) {
+				if (menuItem == (Food.arrayFood.size() + 1)) return;
 				Ui.println(menuItem + " is not an option.");
 				Ui.pause();
 			}
 		}
 	}
-	private static void info_xp(){
+
+	private static void info_xp() {
 		Ui.cls();
 		Ui.println("------------------------------------------------------------");
 		Ui.println("                              XP                            ");
@@ -193,7 +199,8 @@ class Help{
 		Ui.pause();
 		Ach.viewedXP = true;
 	}
-	private static void info_cheats(){
+
+	private static void info_cheats() {
 		Ui.cls();
 		Ui.println("------------------------------------------------------------------------");
 		Ui.println("                            CHEATS                          ");
@@ -217,12 +224,13 @@ class Help{
 		Ui.println("   lotsofkills      | Sets kill-streak to 5000");
 		Ui.println("   suicide          | Kills you");
 		Ui.println("   godmode          | Never dies");
-        Ui.println("   loanshark        | Removes current loan");
+		Ui.println("   loanshark        | Removes current loan");
 		Ui.println("------------------------------------------------------------------------");
 		Ui.pause();
 		Ach.viewedCheats = true;
 	}
-	private static void info_achs(){
+
+	private static void info_achs() {
 		Ui.cls();
 		Ui.println("-------------------------------------------------------------------------");
 		Ui.println("                         ACHIEVEMENTS                       ");
@@ -237,8 +245,8 @@ class Help{
 		Ui.println("   Enemy Slayer           | Kill a total of 100 enemies");
 		Ui.println("   First Kill             | Kill one enemy");
 		Ui.println("   Time For An Upgrade    | Buy any weapon from the shop");
-        for (int i = 0; i < Enemy.arrayEnemy.size(); i++){
-            Ui.print("   Goodbye, " + Enemy.arrayEnemy.get(i).getName());
+		for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
+			Ui.print("   Goodbye, " + Enemy.arrayEnemy.get(i).getName());
             for (int x = 0; x < (14 - Enemy.arrayEnemy.get(i).getName().length()); x++) Ui.print(" ");
             Ui.println("| Kill a " + Enemy.arrayEnemy.get(i).getName());
 

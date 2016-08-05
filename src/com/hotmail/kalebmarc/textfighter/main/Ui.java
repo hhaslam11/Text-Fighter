@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.util.Scanner;
 
 public class Ui {
-    private Ui() {
-    }
-
     public static boolean guiEnabled = true;
     private static Scanner in = new Scanner(System.in);
+    private Ui() {
+    }
 
     public static boolean isDecimalNumber(String string) {
         if (string == null) {
@@ -110,6 +109,22 @@ public class Ui {
 
     public static void println() {
         print("\n");
+    }
+
+    /**
+     * Clears screen, prints msg, then calls pause();.
+     *
+     * @param msg
+     */
+    public static void msg(String msg) {//TODO use this instead throughout project
+        if (msg == null || msg == "") {
+            cls();
+            pause();
+        }
+
+        cls();
+        println(msg);
+        pause();
     }
 
     /**

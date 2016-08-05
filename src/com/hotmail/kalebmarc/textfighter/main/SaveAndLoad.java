@@ -12,62 +12,62 @@ import java.util.Scanner;
 
 class SaveAndLoad {
 
-	private static PrintStream output;
+    private static PrintStream output;
     private static String path = SaveAndLoad.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
     private static Scanner input;
 
-	public static boolean load(){
+    public static boolean load() {
 
         User.promptNameSelection();
         path = path.replace(".jar", "_" + User.name());
         path = path.replaceAll("%20", " ");
 
-		try {
-			input = new Scanner(new File(path));
-		} catch (Exception e) {
-			Ui.cls();
-			Ui.println("------------------------------");
-			Ui.println("Cannot find save file.  ");
-			Ui.println("Starting a new game...  ");
-			Ui.println("------------------------------");
-			Ui.pause();
-			return false;
-		}
+        try {
+            input = new Scanner(new File(path));
+        } catch (Exception e) {
+            Ui.cls();
+            Ui.println("------------------------------");
+            Ui.println("Cannot find save file.  ");
+            Ui.println("Starting a new game...  ");
+            Ui.println("------------------------------");
+            Ui.pause();
+            return false;
+        }
 
-		try{
-			if(!input.nextLine().equals(Version.getFull())){
-				Ui.cls();
-				Ui.println("------------------------------------");
-				Ui.println("WARNING- This save file is from");
-				Ui.println("a different version of TextFighter,");
-				Ui.println("and will probably crash the game");
-				Ui.println("if you try and load it. Do you");
-				Ui.println("want to continue anyways?");
-				Ui.println("------------------------------------");
-				Ui.println("1) No, start a new game");
-				Ui.println("2) Yes, attempt to load");
-				switch(Ui.getValidInt()){
-				case 1:
-					return false;
-				case 2:
-					break;
-				default:
-					return false;
-				}
-			}
+        try {
+            if (!input.nextLine().equals(Version.getFull())) {
+                Ui.cls();
+                Ui.println("------------------------------------");
+                Ui.println("WARNING- This save file is from");
+                Ui.println("a different version of TextFighter,");
+                Ui.println("and will probably crash the game");
+                Ui.println("if you try and load it. Do you");
+                Ui.println("want to continue anyways?");
+                Ui.println("------------------------------------");
+                Ui.println("1) No, start a new game");
+                Ui.println("2) Yes, attempt to load");
+                switch (Ui.getValidInt()) {
+                    case 1:
+                        return false;
+                    case 2:
+                        break;
+                    default:
+                        return false;
+                }
+            }
 
             Health.set(readInt(), readInt());
-			FirstAid.set(readInt(), false);
-			FirstAid.used = readInt();
-			InstaHealth.set(readInt(), false);
-			InstaHealth.used = readInt();
-			Health.timesDied = readInt();
+            FirstAid.set(readInt(), false);
+            FirstAid.used = readInt();
+            InstaHealth.set(readInt(), false);
+            InstaHealth.used = readInt();
+            Health.timesDied = readInt();
 
-			//Coins
-			Coins.set(readInt(), false);
-			Bank.set(readInt(), false);
-			Casino.totalCoinsWon = readInt();
-			Casino.gamesPlayed = readInt();
+            //Coins
+            Coins.set(readInt(), false);
+            Bank.set(readInt(), false);
+            Casino.totalCoinsWon = readInt();
+            Casino.gamesPlayed = readInt();
             Ach.boughtItem = readBoolean();
             Stats.totalCoinsSpent = readInt();
             Stats.coinsSpentOnBankInterest = readInt();
@@ -77,11 +77,11 @@ class SaveAndLoad {
             Loan.setCurrentLoan(readInt());
             Loan.setNetDue(readInt());
 
-			//Xp
+            //Xp
             Xp.setLevel(readInt());
             Xp.setOutOf(readInt());
-			Xp.set(readInt(), false);
-			Xp.total = readInt();
+            Xp.set(readInt(), false);
+            Xp.total = readInt();
 
             //Potions
             Potion.spUsed = readInt();
@@ -92,28 +92,28 @@ class SaveAndLoad {
 
             //Settings
             Settings.setDif(input.nextLine(), false, false);
-            if(readBoolean()) Cheats.enable();
-            if(readBoolean()) Cheats.lock();
+            if (readBoolean()) Cheats.enable();
+            if (readBoolean()) Cheats.lock();
             Settings.difLocked = readBoolean();
             Ui.guiEnabled = readBoolean();
 
-			//Combat
-			Stats.kills = readInt();
-			Stats.highScore = readInt();
-			Stats.totalKills = readInt();
-			Weapon.set(readInt());
-			for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
-				Weapon.arrayWeapon.get(i).owns = readBoolean();
-			}
-            for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+            //Combat
+            Stats.kills = readInt();
+            Stats.highScore = readInt();
+            Stats.totalKills = readInt();
+            Weapon.set(readInt());
+            for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
+                Weapon.arrayWeapon.get(i).owns = readBoolean();
+            }
+            for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
                 Weapon.arrayWeapon.get(i).setAmmo(readInt(), false);
             }
-			Power.set(readInt(), false);
-			Power.used = readInt();
-			Stats.totalDamageDealt = readInt();
+            Power.set(readInt(), false);
+            Power.used = readInt();
+            Stats.totalDamageDealt = readInt();
             Stats.bulletsFired = readInt();
             Stats.bulletsThatHit = readInt();
-            for(int i = 0; i < Armour.getArmours().size(); i++){
+            for (int i = 0; i < Armour.getArmours().size(); i++) {
                 Armour.getArmours().get(i).setOwns(readBoolean());
             }
             Armour.set(readInt());
@@ -122,34 +122,34 @@ class SaveAndLoad {
             Enemy.set(readInt());
             Enemy.get().setHealth(readInt(), Enemy.get().getHealthMax());
 
-			//Achs
-            Ach.moneyMaker         = readBoolean();
-            Ach.enemySlayer        = readBoolean();
-            Ach.firstKill          = readBoolean();
-            Ach.timeForAnUpgrade   = readBoolean();
-            for(int i = 0; i < Enemy.arrayEnemy.size(); i++){
-                 Ach.arrayKilled.set(i, readBoolean());
+            //Achs
+            Ach.moneyMaker = readBoolean();
+            Ach.enemySlayer = readBoolean();
+            Ach.firstKill = readBoolean();
+            Ach.timeForAnUpgrade = readBoolean();
+            for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
+                Ach.arrayKilled.set(i, readBoolean());
             }
-            Ach.textFighterMaster  = readBoolean();
-            Ach.YAYPOWER           = readBoolean();
-            Ach.awwYouCareAboutMe  = readBoolean();
-            Ach.slayer             = readBoolean();
-            Ach.nobodysPerfect     = readBoolean();
-            Ach.makingMoney        = readBoolean();
-            Ach.gamblingAddiction  = readBoolean();
-            Ach.level2Fighter      = readBoolean();
-            Ach.level3Fighter      = readBoolean();
-            Ach.level4Fighter      = readBoolean();
-            Ach.level5Fighter      = readBoolean();
-            Ach.level6Fighter      = readBoolean();
-            Ach.level7Fighter      = readBoolean();
-            Ach.level8Fighter      = readBoolean();
-            Ach.level9Fighter      = readBoolean();
-            Ach.level10Fighter     = readBoolean();
-            Ach.honestPlayer       = readBoolean();
-            Ach.learning           = readBoolean();
+            Ach.textFighterMaster = readBoolean();
+            Ach.YAYPOWER = readBoolean();
+            Ach.awwYouCareAboutMe = readBoolean();
+            Ach.slayer = readBoolean();
+            Ach.nobodysPerfect = readBoolean();
+            Ach.makingMoney = readBoolean();
+            Ach.gamblingAddiction = readBoolean();
+            Ach.level2Fighter = readBoolean();
+            Ach.level3Fighter = readBoolean();
+            Ach.level4Fighter = readBoolean();
+            Ach.level5Fighter = readBoolean();
+            Ach.level6Fighter = readBoolean();
+            Ach.level7Fighter = readBoolean();
+            Ach.level8Fighter = readBoolean();
+            Ach.level9Fighter = readBoolean();
+            Ach.level10Fighter = readBoolean();
+            Ach.honestPlayer = readBoolean();
+            Ach.learning = readBoolean();
 
-			//Other Stuff
+            //Other Stuff
             About.setViewed(readBoolean());
             Stats.timesCheated = readInt();
             Stats.timesQuit = readInt();
@@ -158,31 +158,32 @@ class SaveAndLoad {
             Stats.slotGamesPlayed = readInt();
 
 
-		}catch(Exception e){
-			Handle.error(e.toString());
+        } catch (Exception e) {
+            Handle.error(e.toString());
             System.exit(1);
-		}
+        }
 
-		//input.close();
-		return true;
-	}
-	public static void save(){
+        //input.close();
+        return true;
+    }
+
+    public static void save() {
 
         path = path.replace(".jar", "_" + User.name());
         path = path.replaceAll("%20", " ");
 
-		try {
-			output = new PrintStream(path);
-		} catch (Exception e) {
-			Handle.error(e.toString());
-		}
+        try {
+            output = new PrintStream(path);
+        } catch (Exception e) {
+            Handle.error(e.toString());
+        }
 
         //Version
-		output.println(Version.getFull());
+        output.println(Version.getFull());
 
         //Player Health
-		output.println(Health.get());
-		output.println(Health.getOutOf());
+        output.println(Health.get());
+        output.println(Health.getOutOf());
         output.println(FirstAid.get());
         output.println(FirstAid.used);
         output.println(InstaHealth.get());
@@ -227,11 +228,11 @@ class SaveAndLoad {
         output.println(Stats.highScore);
         output.println(Stats.totalKills);
         output.println(Weapon.getIndex(Weapon.get()));
-        for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+        for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
             //Weapons owned
             output.println(Weapon.arrayWeapon.get(i).owns());
         }
-        for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+        for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
             output.println(Weapon.arrayWeapon.get(i).getAmmo());
         }
         output.println(Power.get());
@@ -239,7 +240,7 @@ class SaveAndLoad {
         output.println(Stats.totalDamageDealt);
         output.println(Stats.bulletsFired);
         output.println(Stats.bulletsThatHit);
-        for(int i = 0; i < Armour.getArmours().size(); i++){
+        for (int i = 0; i < Armour.getArmours().size(); i++) {
             output.println(Armour.getArmours().get(i).isOwns());
         }
         output.println(Armour.get());
@@ -253,7 +254,7 @@ class SaveAndLoad {
         output.println(Ach.enemySlayer);
         output.println(Ach.firstKill);
         output.println(Ach.timeForAnUpgrade);
-        for(int i = 0; i < Enemy.arrayEnemy.size(); i++){
+        for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
             output.println(Ach.arrayKilled.get(i));
         }
         output.println(Ach.textFighterMaster);
@@ -283,30 +284,27 @@ class SaveAndLoad {
         output.println(Stats.diceGamesPlayed);
         output.println(Stats.slotGamesPlayed);
 
-		//output.close();
-	}
+        //output.close();
+    }
 
     /**
-     *
      * @return the next line as an integer
      */
-    private static int readInt(){
+    private static int readInt() {
         return Integer.parseInt(input.nextLine());
     }
 
     /**
-     *
      * @return the next line as a boolean
      */
-    private static boolean readBoolean(){
+    private static boolean readBoolean() {
         return Boolean.parseBoolean(input.nextLine());
     }
 
     /**
-     *
      * @return the next line as a String
      */
-    private static String readString(){
+    private static String readString() {
         return input.nextLine();
     }
 }

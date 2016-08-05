@@ -5,37 +5,34 @@ import com.hotmail.kalebmarc.textfighter.player.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Enemy{
-	
-	//Static Variables
-	private static Enemy current;
-	
-	//Properties (Constant)
-	private String name;
-	private int healthMax;
-	private int coinDropMin;
-	private int coinDropMax;
-	private int damageMin;
-	private int damageMax;
-	private int xp;
+public class Enemy {
+
+    //Enemy List
+    public static final ArrayList<Enemy> arrayEnemy = new ArrayList<>();
+    //Static Variables
+    private static Enemy current;
+    //Properties (Constant)
+    private String name;
+    private int healthMax;
+    private int coinDropMin;
+    private int coinDropMax;
+    private int damageMin;
+    private int damageMax;
+    private int xp;
     private boolean viewedAbout = false;//For help section
-	
-	//Variables
-	private int health;
+    //Variables
+    private int health;
 
-	//Enemy List
-	public static final ArrayList<Enemy> arrayEnemy = new ArrayList<>();
+    public Enemy(String name, int healthMax, int coinDropMin, int coinDropMax,
+                 int damageMin, int damageMax, int xp, boolean firstInit, boolean changeDif) {
 
-	public Enemy(String name, int healthMax, int coinDropMin, int coinDropMax,
-			      int damageMin, int damageMax, int xp, boolean firstInit, boolean changeDif){
-
-		this.name        = name;
-		this.healthMax   = healthMax;
-		this.coinDropMin = coinDropMin;
-		this.coinDropMax = coinDropMax;
-		this.damageMin   = damageMin;
-		this.damageMax   = damageMax;
-		this.xp          = xp;
+        this.name = name;
+        this.healthMax = healthMax;
+        this.coinDropMin = coinDropMin;
+        this.coinDropMax = coinDropMax;
+        this.damageMin = damageMin;
+        this.damageMax = damageMax;
+        this.xp = xp;
 
         /*
          * Finding a way to only have one boolean here (either firstInit, changeDif, or something else) would be nicer.
@@ -51,132 +48,149 @@ public class Enemy{
          * than one initializer. Might cause confusion, though. TODO fix this before BETA
          * ===Don't forget to do this with the weapon class, as well===
          */
-		if(!changeDif) {
+        if (!changeDif) {
             arrayEnemy.add(this);
             Ach.setUpEnemyAch(name, this);
         }
         if (firstInit) {//Only call if its the first time initializing the enemy. (Not if changing difficulties)
-			this.health = healthMax;
+            this.health = healthMax;
         }
-	}
-	
-	public boolean takeDamage(int damage){
-		this.health -= damage;
-		if (this.health <= 0){
-			die();
-			return true;
-		}
-		return false;
-	}
-	public void dealDamage(){
-		int damage = Random.RInt(this.damageMin, this.damageMax);
-		Health.takeDamage(damage);
-	}
-	private void die(){
-		
-		//Get rewards & store in temp vars
-		int tempCoin = Random.RInt(coinDropMin, coinDropMax);
-                int tempHealth = Random.RInt(0, 2);
-		
-		//Prompt enemy death
-		Ui.popup("You have defeated an enemy! You've found " + tempCoin + " coins, and " + xp + "Xp!", "You've defeated an enemy!", JOptionPane.PLAIN_MESSAGE);
-		
-		//Rewards
-		testFoundPipe();
-		Coins.set(tempCoin, true);
-                switch(tempHealth){
-                    case 0:
-                        Health.gain(10);
-                        break;
-                    case 1:
-                        Potion.set("survival", 1, true);
-                        break;
-                    case 2:
-                        Potion.set("recovery", 1, true);
-                        break;
-                }
-		Xp.set(xp, true);
-		Stats.kills++;
-		Stats.totalKills++;
-
-		//Get Achievement
-		Ach.getEnemyAch(Enemy.get());
-
-		encounterNew();
-	}
-	public static void set(int i){
-		current = arrayEnemy.get(i);
-	}
-	public void setDamage(int min, int max){
-		this.damageMin = min;
-		this.damageMax = max;
-	}
-	public void setCoinDrop(int min, int max){
-		this.coinDropMin = min;
-		this.coinDropMax = max;
-	} 
-	public void setHealth(int current, int max){
-		this.health    = current;
-		this.healthMax = max;
-	}
-	public int getHealth(){
-		return health;
-	}
-	public int getHealthMax(){
-		return healthMax;
-	}
-	public String getHeathStr(){
-		return (health + "/" + healthMax);
-	}
-	public String getName(){
-		return name;
-	}
-	public static Enemy get(){
-		return current;
-	}
-    public void setViewed(boolean viewed){
-        this.viewedAbout = viewed;
     }
-    public boolean viewedAbout(){
-        return viewedAbout;
+
+    public static void set(int i) {
+        current = arrayEnemy.get(i);
     }
-    public static int getIndex(Enemy i){
+
+    public static Enemy get() {
+        return current;
+    }
+
+    public static int getIndex(Enemy i) {
         return arrayEnemy.indexOf(i);
     }
-	public static void encounterNew(){
 
-		current = arrayEnemy.get(Random.RInt(0, arrayEnemy.size() - 1));
-		current.health = current.healthMax;
-		Ui.popup("You have encountered a " + current.getName(), "Encounter", JOptionPane.INFORMATION_MESSAGE);
+    public static void encounterNew() {
 
-	}
+        current = arrayEnemy.get(Random.RInt(0, arrayEnemy.size() - 1));
+        current.health = current.healthMax;
+        Ui.popup("You have encountered a " + current.getName(), "Encounter", JOptionPane.INFORMATION_MESSAGE);
 
-    public void viewAbout(){
+    }
+
+    private static void testFoundPipe() {
+        int found = Random.RInt(100);
+        if (found <= 2 && !Game.pipe.owns) {
+            Game.pipe.owns = true;
+            Weapon.set(Game.pipe);
+            Ui.popup("You have found an old pipe!", "You found something!", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public boolean takeDamage(int damage) {
+        this.health -= damage;
+        if (this.health <= 0) {
+            die();
+            return true;
+        }
+        return false;
+    }
+
+    public void dealDamage() {
+        int damage = Random.RInt(this.damageMin, this.damageMax);
+        Health.takeDamage(damage);
+    }
+
+    private void die() {
+
+        //Get rewards & store in temp vars
+        int tempCoin = Random.RInt(coinDropMin, coinDropMax);
+        int tempHealth = Random.RInt(0, 2);
+
+        //Prompt enemy death
+        Ui.popup("You have defeated an enemy! You've found " + tempCoin + " coins, and " + xp + "Xp!", "You've defeated an enemy!", JOptionPane.PLAIN_MESSAGE);
+
+        //Rewards
+        testFoundPipe();
+        Coins.set(tempCoin, true);
+        switch (tempHealth) {
+            case 0:
+                Health.gain(10);
+                break;
+            case 1:
+                Potion.set("survival", 1, true);
+                break;
+            case 2:
+                Potion.set("recovery", 1, true);
+                break;
+        }
+        Xp.set(xp, true);
+        Stats.kills++;
+        Stats.totalKills++;
+
+        //Get Achievement
+        Ach.getEnemyAch(Enemy.get());
+
+        encounterNew();
+    }
+
+    public void setDamage(int min, int max) {
+        this.damageMin = min;
+        this.damageMax = max;
+    }
+
+    public void setCoinDrop(int min, int max) {
+        this.coinDropMin = min;
+        this.coinDropMax = max;
+    }
+
+    public void setHealth(int current, int max) {
+        this.health = current;
+        this.healthMax = max;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getHealthMax() {
+        return healthMax;
+    }
+
+    public String getHeathStr() {
+        return (health + "/" + healthMax);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setViewed(boolean viewed) {
+        this.viewedAbout = viewed;
+    }
+
+    public boolean viewedAbout() {
+        return viewedAbout;
+    }
+
+    public void viewAbout() {
         final int BORDER_LENGTH = 39;
 
         //Start of weapon Info
         Ui.cls();
-        for(int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
+        for (int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.println();
-        for(int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++) Ui.print(" ");//Set correct spacing to get name in middle of box
+        for (int i = 0; i < ((BORDER_LENGTH / 2) - (this.getName().length() / 2)); i++)
+            Ui.print(" ");//Set correct spacing to get name in middle of box
         Ui.println(this.getName());
         Ui.println("Health: " + this.getHealthMax());
         Ui.println("Damage: " + this.damageMin + "-" + this.damageMax);
         Ui.println("Coin Drop: " + this.coinDropMin + "-" + this.coinDropMax);
         Ui.println();
         Ui.println("XP Dropped: " + this.xp + "Xp");
-        for(int i = 0; i < 39; i++) Ui.print("-");//Make line
+        for (int i = 0; i < 39; i++) Ui.print("-");//Make line
         Ui.pause();
         Ui.cls();
         //End of weapon Info
         this.setViewed(true);
     }
-	private static void testFoundPipe(){
-		int found = Random.RInt(100);
-		if (found <= 2 && !Game.pipe.owns){
-			Game.pipe.owns = true;
-			Weapon.set(Game.pipe);
-			Ui.popup("You have found an old pipe!", "You found something!", JOptionPane.INFORMATION_MESSAGE);
-		}
-	}
 }
