@@ -6,8 +6,9 @@ import java.util.ArrayList;
 
 public class Food {
 
-    //Weapon List
+    //Food List
     public static final ArrayList<Food> arrayFood = new ArrayList<>();
+    public static int totalEaten;
     private String name;
     private String desc;
     private int quantity = 1;//TODO change to not have a default value once done testing
@@ -100,6 +101,7 @@ public class Food {
         Ui.println("You have ate a " + getName());
         Ui.println("You've gained " + effectLevel + " " + statusEffect.toString() + " points.");
         this.quantity--;
+        totalEaten++;
         Ui.pause();
 
         switch (this.statusEffect) {

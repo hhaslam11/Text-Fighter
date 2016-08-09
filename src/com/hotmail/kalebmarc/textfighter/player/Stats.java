@@ -67,6 +67,7 @@ public class Stats {
         Ui.println("   First-Aid kits used - " + FirstAid.used);
         Ui.println("   Potions used - " + (Potion.spUsed + Potion.rpUsed));
         Ui.println("   Times Died - " + Health.timesDied);
+        Ui.println("   Food items eaten - " + Food.totalEaten);
         Ui.println();
         Ui.println("Other: ");
         Ui.println("   Cheats Enabled? - " + Cheats.enabled());
