@@ -91,6 +91,9 @@ public class Food {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
     public void eat() {
         Ui.cls();
 
