@@ -42,7 +42,7 @@ class Debug {
             Ui.println("5) Insta-health");
             Ui.println("6) Encounter new");
             Ui.println("7) God Mode");
-            Ui.println("8)");
+            Ui.println("8) Food (x10)");
             Ui.println("9) Go back");
             switch (Ui.getValidInt()) {
                 case 1:
@@ -83,6 +83,11 @@ class Debug {
                     Settings.toggleGodMode();
                     break;
                 case 8:
+                    Ui.cls();
+                    for (int i = 0; i < Food.arrayFood.size(); i++) {
+                        Ui.println(i + ") " + Food.arrayFood.get(i).getName());
+                    }
+                    Food.arrayFood.get(Ui.getValidInt()).setQuantity(10);
                     break;
                 case 9:
                     return;
