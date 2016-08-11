@@ -201,8 +201,10 @@ public class Ach {
     }
 
     public static void getEnemyAch(Enemy x) {
-        get("Goodbye, " + x.getName() + "!");
-        arrayKilled.set(arrayEnemy.indexOf(x), true);
+        if (!arrayKilled.get(arrayEnemy.indexOf(x))) {
+            get("Goodbye, " + x.getName() + "!");
+            arrayKilled.set(arrayEnemy.indexOf(x), true);
+        }
     }
 
     private static void get(String ach) {
