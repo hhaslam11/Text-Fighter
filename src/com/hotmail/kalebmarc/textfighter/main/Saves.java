@@ -586,8 +586,8 @@ public class Saves {
 		set("User.FirstAid.Owns", FirstAid.get());
 		set("Stats.FirstAid.Used", FirstAid.used);
 		set("User.InstaHealth.Owns", InstaHealth.get());
-		set("Stats.InstaHealth.Used", InstaHealth.used); // not saving
-		set("Stats.TimesDied", Health.timesDied);
+        set("Stats.InstaHealth.Used", InstaHealth.used);
+        set("Stats.TimesDied", Health.timesDied);
 
 		//Coins
 		set("User.Balance", Coins.get());
@@ -618,14 +618,14 @@ public class Saves {
 		//Settings
 		set("Settings.Difficulty.Level", Settings.getDif());
 		set("Settings.Difficulty.Locked", Settings.difLocked);
-		set("Settings.Cheats.Enabled", Cheats.enabled()); // not saving
-		set("Settings.Cheats.Locked", Cheats.locked()); // not saving
-		set("Settings.GUI.Enabled", Ui.guiEnabled); // not saving
+        set("Settings.Cheats.Enabled", Cheats.enabled());
+        set("Settings.Cheats.Locked", Cheats.locked());
+        set("Settings.GUI.Enabled", Ui.guiEnabled);
 
 		//Combat
 		set("Stats.Kills", Stats.kills);
 		set("Stats.High_Score", Stats.highScore);
-		set("User.Weapons.Current", Weapon.get());
+        set("User.Weapons.Current", Weapon.arrayWeapon.indexOf(Weapon.get()));
 
 		List<String> ownedWeapons = new ArrayList<>();
 
@@ -708,48 +708,26 @@ public class Saves {
 		}
 	}
 
-	public static void set(String key, Object object) {
-		if (!exists())
-			return;
+    //Thanks http://stackoverflow.com/a/38951302/3291305 !
+    public static void set(String key, Object object) {
 
-		if (key.contains(".")) {
-			String[] nodes = key.split("\\.");
+        if (!exists())
+            return;
 
-			// if data doesn't contain top-level node, create nested Maps
-			if (!data.containsKey(nodes[0])) {
-				Map<String, Object> currNode = new HashMap<>(), prevNode;
-				currNode.put(nodes[nodes.length - 1], object);
+        final String[] nodes = key.split("\\.");
 
-				for (int i = nodes.length - 2; i > 0; i--) {
-					prevNode = currNode;
+        Map cur = data;
 
-					currNode = new HashMap<>();
-					currNode.put(nodes[i], prevNode);
-				}
-				// set top-level node to previous parent
-				data.put(nodes[0], currNode);
-			} else { // if data contains top-level node, work through each Map
-				Map[] prevNodes = new LinkedHashMap[nodes.length - 1];
-
-				if (nodes.length > 1) {
-					for (int i = 0; i <= nodes.length - 2; i++) {
-						if (data.containsKey(nodes[i]) && (data.get(nodes[i]) instanceof Map))
-							prevNodes[i] = new LinkedHashMap((Map) data.get(nodes[i]));
-						else if (!data.containsKey(nodes[i]))
-							prevNodes[i] = new LinkedHashMap();
-						else return; // TODO: Add protection boolean
-					}
-
-					prevNodes[prevNodes.length - 1].put(nodes[nodes.length - 1], object);
-
-                    for (int i = prevNodes.length - 1; i >= 1; i--)
-                        prevNodes[i - 1].put(nodes[i], prevNodes[i]);
-
-					data.put(nodes[0], prevNodes[0]);
-				} else data.put(nodes[0], object);
-			}
-			return;
-		}
-		data.put(key, object);
-	}
+        for (int i = 0; i <= nodes.length - 2; ++i) {
+            Object val = cur.get(nodes[i]);
+            if (val == null) {
+                val = new LinkedHashMap();
+                cur.put(nodes[i], val);
+            } else if (!(val instanceof Map)) {
+                Handle.error("There was a problem saving your game.");
+            }
+            cur = (Map) val;
+        }
+        cur.put(nodes[nodes.length - 1], object);
+    }
 }
