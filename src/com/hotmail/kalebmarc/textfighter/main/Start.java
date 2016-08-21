@@ -12,9 +12,6 @@ class Start {
             Debug.enable();
         }
 
-        //Displays splash screen for a moment
-        Splash.screen();
-
         //Runs the game
         Menu.load();
 
