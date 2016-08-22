@@ -105,7 +105,9 @@ public class Game {
             Ui.println("     Health: " + getStr());
             Ui.println("     Coins: " + Coins.get());
             Ui.println("     First-Aid kits: " + FirstAid.get());
-            Ui.println("     Potions: " + (Potion.get("survival") + Potion.get("recovery")));
+            Ui.println("     Potions: ");
+            Ui.println("          Survival: " + Potion.get("survival"));
+            Ui.println("          Recovery: " + Potion.get("recovery"));
             Ui.println("     Equipped armour: " + Armour.getEquipped().toString());
             Ui.println("     Equipped Weapon: " + Weapon.get().getName());
             //Displays ammo only if a weapon is equipped
