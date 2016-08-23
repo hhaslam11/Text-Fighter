@@ -54,6 +54,10 @@ public class Cheats {
                     Weapon.arrayWeapon.get(i).owns = true;
                 }
                 Stats.timesCheated++;
+                for (int i = 0; i < Food.arrayFood.size(); i++)
+                    Food.arrayFood.get(i).setQuantity(5000);
+                Potion.set("Survival", 5000, false);
+                Potion.set("Recovery", 5000, false);
                 break;
             case "weaponstash":
                 for (int i = 0; i <= Weapon.arrayWeapon.size(); i++) {
@@ -69,6 +73,10 @@ public class Cheats {
             case "nomorepain":
                 FirstAid.set(1000, false);
                 InstaHealth.set(500, false);
+                Potion.set("Survival", 500, false);
+                Potion.set("Recovery", 500, false);
+                for (int i = 0; i < Food.arrayFood.size(); i++)
+                    Food.arrayFood.get(i).setQuantity(100);
                 Stats.timesCheated++;
                 break;
             case "healme":
@@ -94,7 +102,14 @@ public class Cheats {
             case "loanshark":
                 Loan.setCurrentLoan(0);
                 Loan.setNetDue(0);
+                Stats.timesCheated++;
                 break;
+            case "thirstforfood":
+                for (int i = 0; i < Food.arrayFood.size(); i++)
+                    Food.arrayFood.get(i).setQuantity(10);
+                Stats.timesCheated++;
+                break;
+
         }
     }
 

@@ -16,7 +16,7 @@ public class Ui {
 
         int length = string.length();
 
-        if (length == 1 ) {
+        if (length == 1) {
             return false;
         }
 
@@ -159,6 +159,9 @@ public class Ui {
 
             String valid = in.nextLine();
             valid = valid.toUpperCase();
+            if (valid.isEmpty()) {
+                return 1;
+            }
             char input = valid.charAt(0);
             //-----------------------------------------------------
 

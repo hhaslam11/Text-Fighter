@@ -14,7 +14,11 @@ import java.nio.charset.Charset;
 import java.util.*;
 
 /**
+<<<<<<< HEAD
  * Created by Brendon Butler on 7/27/2016
+=======
+ * Created by Brendon Butler on 7/27/2016.
+>>>>>>> master
  */
 public class Saves {
 
@@ -481,28 +485,22 @@ public class Saves {
 		if (isEmpty())
 			return null;
 
-		if (key.contains(".")) {
-			String[] nodes = key.split("\\.");
-			Map<String, Object> currParent;
+		final String[] nodes = key.split("\\.");
+		Map curMap = data;
 
-			if (data.containsKey(nodes[0]) && (data.get(nodes[0]) instanceof Map))
-				currParent = (Map<String, Object>) data.get(nodes[0]);
-			else return null;
+		for (int i = 0; i <= nodes.length - 1; ++i) {
+			Object child = curMap.get(nodes[i]);
 
-			if (nodes.length > 1) {
-				for (int i = 1; i < nodes.length - 1; i++) {
-					if (currParent.containsKey(nodes[i]) && (currParent.get(nodes[i]) instanceof Map))
-						currParent = (Map<String, Object>) currParent.get(nodes[i]);
-					else return null;
-				}
-
-				if (currParent.containsKey(nodes[nodes.length - 1]))
-					return currParent.get(nodes[nodes.length - 1]);
+			if (child == null) return null;
+			else if (!(child instanceof Map)) {
+				if (i == nodes.length - 1)
+					return child;
+				else return null;
 			}
-		} else if (!contains(key) || (contains(key) && !hasValue(key)))
-			return null;
 
-		return data.get(key);
+			curMap = (Map) child;
+		}
+		return null;
 	}
 
 	public static Set<String> getKeys() {

@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
+import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 
 public class Potion {
@@ -37,6 +38,7 @@ public class Potion {
                     survivalPotion += amount;
                     if (survivalPotion < 0) survivalPotion = 0;
                 }
+                break;
             case "recovery":
                 if (!add) {
                     recoveryPotion = amount;
@@ -44,7 +46,9 @@ public class Potion {
                     recoveryPotion += amount;
                     if (recoveryPotion < 0) recoveryPotion = 0;
                 }
+                break;
             default:
+                Handle.error("Unknown potion type: " + kind);
         }
     }
 
