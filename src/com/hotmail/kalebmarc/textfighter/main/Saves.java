@@ -14,7 +14,11 @@ import java.nio.charset.Charset;
 import java.util.*;
 
 /**
+<<<<<<< HEAD
+ * Created by Brendon Butler on 7/27/2016
+=======
  * Created by Brendon Butler on 7/27/2016.
+>>>>>>> master
  */
 public class Saves {
 
@@ -121,10 +125,10 @@ public class Saves {
 		Loan.setNetDue(getInteger("Bank.Current_Loan.Due"));
 
 		//Xp
-		Xp.setLevel(getInteger("Stats.XP.Level"));
-		Xp.setOutOf(getInteger("Stats.XP.Needed"));
-		Xp.set(getInteger("Stats.XP.Amount"), false);
-		Xp.total = getInteger("Stats.XP.Total");
+		Xp.setLevel(getInteger("User.XP.Level"));
+		Xp.setOutOf(getInteger("User.XP.Needed"));
+		Xp.set(getInteger("User.XP.Amount"), false);
+		Xp.total = getInteger("User.XP.Total");
 
 		//Potions
 		Potion.spUsed = getInteger("Stats.Potions.Survival.Used");
@@ -241,7 +245,7 @@ public class Saves {
 
 			if (!file.exists()) {
 				Ui.println("File not found. Please put an \"_\" before your username in the save file.");
-				System.exit(0);
+				System.exit(0); //TODO shouldn't just exit like this.... Go back to main menu
 			}
 
 			input = new Scanner(file);
@@ -481,28 +485,22 @@ public class Saves {
 		if (isEmpty())
 			return null;
 
-		if (key.contains(".")) {
-			String[] nodes = key.split("\\.");
-			Map<String, Object> currParent;
+		final String[] nodes = key.split("\\.");
+		Map curMap = data;
 
-			if (data.containsKey(nodes[0]) && (data.get(nodes[0]) instanceof Map))
-				currParent = (Map) data.get(nodes[0]);
-			else return null;
+		for (int i = 0; i <= nodes.length - 1; ++i) {
+			Object child = curMap.get(nodes[i]);
 
-			if (nodes.length > 1) {
-				for (int i = 1; i < nodes.length - 1; i++) {
-					if (currParent.containsKey(nodes[i]) && (currParent.get(nodes[i]) instanceof Map))
-						currParent = (Map) currParent.get(nodes[i]);
-					else return null;
-				}
-
-				if (currParent.containsKey(nodes[nodes.length - 1]))
-					return currParent.get(nodes[nodes.length - 1]);
+			if (child == null) return null;
+			else if (!(child instanceof Map)) {
+				if (i == nodes.length - 1)
+					return child;
+				else return null;
 			}
-		} else if (!contains(key) || (contains(key) && !hasValue(key)))
-			return null;
 
-		return data.get(key);
+			curMap = (Map) child;
+		}
+		return null;
 	}
 
 	public static Set<String> getKeys() {
@@ -604,10 +602,10 @@ public class Saves {
 		set("Bank.Current_Loan.Due", Loan.getNetDue());
 
 		//Xp
-		set("Stats.XP.Level", Xp.getLevel());
-		set("Stats.XP.Needed", Xp.getOutOf());
-		set("Stats.XP.Amount", Xp.get());
-		set("Stats.XP.Total", Xp.total);
+		set("User.XP.Level", Xp.getLevel());
+		set("User.XP.Needed", Xp.getOutOf());
+		set("User.XP.Amount", Xp.get());
+		set("User.XP.Total", Xp.total);
 
 		//Potions
 		set("Stats.Potions.Survival.Used", Potion.spUsed);
@@ -716,7 +714,7 @@ public class Saves {
 
         final String[] nodes = key.split("\\.");
 
-        Map cur = data;
+		Map<String, Object> cur = data;
 
         for (int i = 0; i <= nodes.length - 2; ++i) {
             Object val = cur.get(nodes[i]);
@@ -726,8 +724,8 @@ public class Saves {
             } else if (!(val instanceof Map)) {
                 Handle.error("There was a problem saving your game.");
             }
-            cur = (Map) val;
-        }
+			cur = (Map<String, Object>) val;
+		}
         cur.put(nodes[nodes.length - 1], object);
     }
 }

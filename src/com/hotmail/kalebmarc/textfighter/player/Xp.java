@@ -7,7 +7,6 @@ import com.hotmail.kalebmarc.textfighter.main.Ui;
 import javax.swing.*;
 
 public class Xp {
-	private Xp(){}
 
 	//Variables
     private static int xp;
@@ -15,12 +14,14 @@ public class Xp {
     private static int level;
 	public static int total;
 
-	private static void levelUp(){
-		if (level == 9){
+    private Xp() {
+    }
 
-			Ui.popup("You've reached level 10!\nYou have been rewarded 250 coins!", "Level Up!", JOptionPane.INFORMATION_MESSAGE);
-			level = 10;
-			Coins.set(250, true);
+    private static void levelUp() {
+        if (level == 9) {
+            Ui.popup("You've reached level 10!\nYou have been rewarded 250 coins!", "Level Up!", JOptionPane.INFORMATION_MESSAGE);
+            level = 10;
+            Coins.set(250, true);
 
 		}else if(level > 100){
 			Handle.error("Error - Level is greater than 100");
@@ -35,7 +36,6 @@ public class Xp {
 			xpNeeded += 500;
 			level++;
             Coins.set(100, true);
-
 		}
 		Ach.check();
 	}

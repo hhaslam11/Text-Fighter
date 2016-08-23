@@ -69,6 +69,7 @@ public class Game {
 		Ui.println("|___________________________________________|");
 
 		int choice = Ui.getValidInt();
+		
 		switch(choice){
 			case 1:
 				if(Saves.savesPrompt()) break;

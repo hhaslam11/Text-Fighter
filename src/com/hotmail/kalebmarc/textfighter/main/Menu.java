@@ -22,23 +22,23 @@ class Menu {
 			Ui.println("|             www.TextFighter.tk            |");
 			Ui.println("|___________________________________________|");
 
-			switch(Ui.getValidInt()){
-			case 1:
-				Ui.cls();
-				Ui.guiEnabled = false;
-				Game.start();
+            switch (Ui.getValidInt()) {
+                case 1:
+                    Ui.cls();
+                    Ui.guiEnabled = false;
+                    Game.start();
 
-				//Saves the game before exiting
-				Saves.save();
-				return;
-			case 2:
-				About.view(false);
-				break;
-			case 3:
-				return;
-			default: 
-				break;
-			}
-		}//Loop
-	}//Method
+                    //Saves the game before exiting
+                    Saves.save();
+                    return;
+                case 2:
+                    About.view(false);
+                    break;
+                case 3:
+                    return;
+                default:
+                    break;
+            }
+        }//Loop
+    }//Method
 }//Class
