@@ -14,11 +14,7 @@ import java.nio.charset.Charset;
 import java.util.*;
 
 /**
-<<<<<<< HEAD
- * Created by Brendon Butler on 7/27/2016
-=======
  * Created by Brendon Butler on 7/27/2016.
->>>>>>> master
  */
 public class Saves {
 
