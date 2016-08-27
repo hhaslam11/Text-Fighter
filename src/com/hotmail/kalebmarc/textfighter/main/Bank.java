@@ -39,7 +39,7 @@ public class Bank {
             Ui.println();
             Ui.println("1) Deposit");
             Ui.println("2) Withdraw");
-            Ui.println("3) Request Loan");
+            Ui.println("3) Loans");
             Ui.println("4) Back");
             Ui.println("---------------------------------------");
 

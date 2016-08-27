@@ -3,6 +3,8 @@ package com.hotmail.kalebmarc.textfighter.main;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 
+import static sun.audio.AudioPlayer.player;
+
 public class Loan {
 
     private static final double INTEREST_RATE = 0.15;
@@ -85,7 +87,7 @@ public class Loan {
         }
 
         Ui.cls();
-        Ui.println("You currently owe " + getGrossDue() + " coins.");
+        Ui.println("You currently owe " + getGrossDue() + " coins, and have " + Coins.get() + " with you.");
         Ui.println("You will not be able to deposit coins into the bank until your loan is fully paid off.");
         Ui.println("How much would you like to pay off?");
         int amountToPay = Ui.getValidInt();
