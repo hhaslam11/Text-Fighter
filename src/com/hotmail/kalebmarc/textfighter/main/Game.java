@@ -183,6 +183,7 @@ public class Game {
 					Power.use();
 					break;
 				case 9:
+					Stats.timesQuit++;
 					return;
 				case 0:
 					Cheats.cheatGateway();
