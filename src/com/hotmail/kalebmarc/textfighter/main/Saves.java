@@ -180,11 +180,15 @@ public class Saves {
 		Ach.firstKill          = getBoolean("Achievements.First_Kill");
 		Ach.timeForAnUpgrade   = getBoolean("Achievements.Time_For_An_Upgrade");
 
-		List<Boolean> achSet = (List<Boolean>) getList("Achievements.Enemies_Killed");
+        List<String> achSet = (List<String>) getList("Achievements.Enemies_Killed");
 
-		for (int i = 0; i < achSet.size(); i++)
-			Ach.arrayKilled.set(i, achSet.get(i));
-
+        for (int i = 0; i < achSet.size(); i++){
+            for (int x = 0; x < Enemy.arrayEnemy.size(); x++){
+                if(Enemy.arrayEnemy.get(x).getName().equals(achSet.get(i))){
+                    Ach.arrayKilled.set(x, true);
+                }
+            }
+        }
 		Ach.textFighterMaster  = getBoolean("Achievements.Text_Fighter_Master");
 		Ach.YAYPOWER           = getBoolean("Achievements.YAY_POWER");
 		Ach.awwYouCareAboutMe  = getBoolean("Achievements.Aww_You_Care_About_Me");
@@ -660,8 +664,7 @@ public class Saves {
 			if (Ach.arrayKilled.get(i))
 				enemiesKilled.add(Enemy.arrayEnemy.get(i).getName());
 		set("Achievements.Enemies_Killed", enemiesKilled);
-
-		set("Achievements.Text_Fighter_Master", Ach.textFighterMaster);
+        set("Achievements.Text_Fighter_Master", Ach.textFighterMaster);
 		set("Achievements.YAY_POWER", Ach.YAYPOWER);
 		set("Achievements.Aww_You_Care_About_Me", Ach.awwYouCareAboutMe);
 		set("Achievements.Slayer", Ach.slayer);
