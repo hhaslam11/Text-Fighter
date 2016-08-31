@@ -18,7 +18,9 @@ public class Chest {
         Ui.println();
         Ui.println("First-Aid kits: " + FirstAid.get());
         Ui.println("Insta-Healths: " + InstaHealth.get());
-        Ui.println("Potions: " + (Potion.get("survival") + Potion.get("recovery")));
+        Ui.println("     Potions: ");
+        Ui.println("          Survival: " + Potion.get("survival"));
+        Ui.println("          Recovery: " + Potion.get("recovery"));
         Ui.println("Coins: " + Coins.get());
         Ui.println("POWERS: " + Power.get());
         for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
