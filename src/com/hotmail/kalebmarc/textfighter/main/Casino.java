@@ -221,10 +221,8 @@ public class Casino {
             bet = Ui.getValidInt();
             if (bet == 0) return;
             if (bet > Coins.get()) {
-                Ui.cls();
                 bet = 0;
-                Ui.println("You do not have enough coins. Please enter a smaller amount, or type 0 to go back.");
-                Ui.pause();
+                Ui.msg("You do not have enough coins. Please enter a smaller amount, or type 0 to go back.");
             }
         } while (bet < 10 || bet > 250);
         Coins.set(-bet, true);

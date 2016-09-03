@@ -278,25 +278,20 @@ public class Weapon {
     }
 
     public void buy() {
-        Ui.cls();
         if (!isBuyable()) {
-            Ui.println("Sorry, this item is no longer in stock.");
-            Ui.pause();
+            Ui.msg("Sorry, this item is no longer in stock.");
             return;
         }
         if (this.owns()) {
-            Ui.println("You already own this weapon.");
-            Ui.pause();
+            Ui.msg("You already own this weapon.");
             return;
         }
         if (level > Xp.getLevel()) {
-            Ui.println("You are not a high enough level to buy this item.");
-            Ui.pause();
+            Ui.msg("You are not a high enough level to buy this item.");
             return;
         }
         if (price > Coins.get()) {
-            Ui.println("You do not have enough coins to buy this item.");
-            Ui.pause();
+            Ui.msg("You do not have enough coins to buy this item.");
             return;
         }
 

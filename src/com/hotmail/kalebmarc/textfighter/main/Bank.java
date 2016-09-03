@@ -15,9 +15,7 @@ public class Bank {
 
         //Makes sure user level 2
         if (Xp.getLevel() < 2) {
-            Ui.cls();
-            Ui.println("You have to be at least level 2 to use the bank.");
-            Ui.pause();
+            Ui.msg("You have to be at least level 2 to use the bank.");
             return;
         }
 
@@ -47,9 +45,7 @@ public class Bank {
                 case 1:
                     //-----------------------------------------------------------------------------------
                     if (Loan.hasLoan()) {
-                        Ui.cls();
-                        Ui.println("You can not deposit coins until you pay off your loan!");
-                        Ui.pause();
+                        Ui.msg("You can not deposit coins until you pay off your loan!");
                         break;
                     }
                     Ui.println("How much money would you like to deposit? (You will have to pay " + (interest * 100) + "% of this)");

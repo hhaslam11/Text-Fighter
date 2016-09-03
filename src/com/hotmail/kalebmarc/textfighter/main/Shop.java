@@ -186,9 +186,7 @@ class Shop {
 
             //Makes sure player isn't level 10 already
             if (Xp.getLevel() == 100) {
-                Ui.cls();
-                Ui.println("You're already level 100! You cannot buy any more xp.");
-                Ui.pause();
+                Ui.msg("You're already level 100! You cannot buy any more xp.");
                 return;
             }
 
@@ -212,31 +210,23 @@ class Shop {
             //Tests
             if (buy > Coins.get()) {
                 //Not enough coins
-                Ui.cls();
-                Ui.println("You don't have enough coins to buy this much xp.");
+                Ui.msg("You don't have enough coins to buy this much xp.");
                 valid = false;
-                Ui.pause();
             }
             if (Xp.getLevel() == 100) {
-                Ui.cls();
-                Ui.println("You are already level 100; which is the maximum level.");
+                Ui.msg("You are already level 100; which is the maximum level.");
                 valid = false;
-                Ui.pause();
             }
             if (buy < 0) {
-                Ui.cls();
-                Ui.println("You can't buy a negative amount of Xp.. Nice try though ;)");
+                Ui.msg("You can't buy a negative amount of Xp.. Nice try though ;)");
                 valid = false;
-                Ui.pause();
             }
             if (buy == 0) {
                 return;
             }
 
             if (valid) {
-                Ui.cls();
-                Ui.println("You have bought " + buy + " xp.");
-                Ui.pause();
+                Ui.msg("You have bought " + buy + " xp.");
 
                 //Results
                 Xp.set(buy, true);

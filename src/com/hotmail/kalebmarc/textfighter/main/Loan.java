@@ -44,9 +44,7 @@ public class Loan {
     private static void createLoan() {
 
         if (hasLoan()) {
-            Ui.cls();
-            Ui.println("You can not request a loan while you already have one.");
-            Ui.pause();
+            Ui.msg("You can not request a loan while you already have one.");
             return;
         }
 
@@ -56,16 +54,12 @@ public class Loan {
         Ui.println("Your max amount allowed is " + getMaxLoan());
         int request = Ui.getValidInt();
 
-        Ui.cls();
-
         if (request > getMaxLoan()) {
-            Ui.println("Your max amount you can borrow is " + getMaxLoan() + "!");
-            Ui.pause();
+            Ui.msg("Your max amount you can borrow is " + getMaxLoan() + "!");
             return;
         }
         if (request <= 0) {
-            Ui.println("You must enter at least 1 coin.");
-            Ui.pause();
+            Ui.msg("You must enter at least 1 coin.");
             return;
         }
 

@@ -134,9 +134,7 @@ public class Ui {
         if (guiEnabled) {
             JOptionPane.showMessageDialog(null, body, title, msgType);
         } else {
-            Ui.cls();
-            println(body);
-            Ui.pause();
+            msg(body);
         }
     }
 

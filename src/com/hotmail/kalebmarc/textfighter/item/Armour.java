@@ -135,18 +135,14 @@ public class Armour {
 
     public void equip() {
         if (!(this.owns)) {
-            Ui.cls();
-            Ui.println("You do not own this.");
-            Ui.pause();
+            Ui.msg("You do not own this.");
             return;
         }
 
         this.equipped = true;//To make sure something is already equipped
         getEquipped().unequip();
         this.equipped = true;
-        Ui.cls();
-        Ui.println("You have equipped " + this.toString());
-        Ui.pause();
+        Ui.msg("You have equipped " + this.toString());
     }
 
     public void equipSilent() {

@@ -39,15 +39,13 @@ public class Settings {
                     lockCheats();
                     break;
                 case 4:
-                    Ui.cls();
                     if (Ui.guiEnabled) {
                         Ui.guiEnabled = false;
-                        Ui.println("Popup windows disabled");
+                        Ui.msg("Popup windows disabled");
                     } else {
                         Ui.guiEnabled = true;
-                        Ui.println("Popup windows enabled");
+                        Ui.msg("Popup windows enabled");
                     }
-                    Ui.pause();
                     break;
                 case 5:
                     return;
@@ -65,9 +63,7 @@ public class Settings {
          * Make sure difficulty isn't locked
 		 */
         if (difLocked) {
-            Ui.cls();
-            Ui.println("Difficulty is locked. You cannot switch difficulties.");
-            Ui.pause();
+            Ui.msg("Difficulty is locked. You cannot switch difficulties.");
             return;
         }
 
@@ -83,9 +79,7 @@ public class Settings {
 		 * Make sure difficulty isn't already locked
 		 */
         if (difLocked) {
-            Ui.cls();
-            Ui.println("Difficulty is already locked.");
-            Ui.pause();
+            Ui.msg("Difficulty is already locked.");
             return;
         }
 
@@ -97,10 +91,8 @@ public class Settings {
             Ui.println("2) Cancel");
             switch (Ui.getValidInt()) {
                 case 1:
-                    Ui.cls();
-                    Ui.println("Difficulty has been locked to " + difficulty);
+                    Ui.msg("Difficulty has been locked to " + difficulty);
                     difLocked = true;
-                    Ui.pause();
                     return;
                 case 2:
                     return;
@@ -113,9 +105,7 @@ public class Settings {
 		 * Make sure cheats aren't already locked
 		 */
         if (Cheats.locked()) {
-            Ui.cls();
-            Ui.println("Cheats are already locked.");
-            Ui.pause();
+            Ui.msg("Cheats are already locked.");
             return;
         }
 
@@ -123,9 +113,7 @@ public class Settings {
 		 * Makes sure cheats aren't already enabled
 		 */
         if (Cheats.enabled()) {
-            Ui.cls();
-            Ui.println("Cheats are already enabled. You cannot turn them off.");
-            Ui.pause();
+            Ui.msg("Cheats are already enabled. You cannot turn them off.");
             return;
         }
 
@@ -137,10 +125,8 @@ public class Settings {
             Ui.println("2) Cancel");
             switch (Ui.getValidInt()) {
                 case 1:
-                    Ui.cls();
-                    Ui.println("Cheats have been locked off");
+                    Ui.msg("Cheats have been locked off");
                     Cheats.lock();
-                    Ui.pause();
                     return;
                 case 2:
                     return;
@@ -271,14 +257,12 @@ public class Settings {
     }
 
     public static void toggleGodMode() {
-        Ui.cls();
         if (godMode) {
             godMode = false;
-            Ui.println("Godmode has been disabled");
+            Ui.msg("Godmode has been disabled");
         } else {
             godMode = true;
-            Ui.println("Godmode has been enabled");
+            Ui.msg("Godmode has been enabled");
         }
-        Ui.pause();
     }
 }

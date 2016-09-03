@@ -127,9 +127,7 @@ public class Health {
 
             //Make sure player didn't already upgrade fully
             if (Health.getOutOf() == 200) {
-                Ui.cls();
-                Ui.println("You have upgraded your health to the maximum level");
-                Ui.pause();
+                Ui.msg("You have upgraded your health to the maximum level");
                 return;
             }
 
@@ -164,19 +162,14 @@ public class Health {
 
                     //Make sure user doesn't already have full health
                     if (getLevel() == 10) {
-                        Ui.cls();
-                        Ui.println("You already have max health!");
-                        Ui.pause();
+                        Ui.msg("You already have max health!");
                     }
 
                     //Upgrade health
                     Health.set(health, health);
                     Coins.set(-UPGRADE_PRICE, true);
 
-                    Ui.cls();
-                    Ui.println("You upgraded your health.");
-                    Ui.pause();
-
+                    Ui.msg("You upgraded your health.");
 
                 } else {
                 /*
