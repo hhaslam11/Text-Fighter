@@ -37,7 +37,7 @@ public class Xp {
 			level++;
             Coins.set(100, true);
 		}
-		Ach.check();
+		Achievements.check();
 	}
 
 	public static void set(int amount, boolean add) {

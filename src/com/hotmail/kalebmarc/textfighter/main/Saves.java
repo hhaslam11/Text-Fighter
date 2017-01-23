@@ -111,7 +111,7 @@ public class Saves {
 		Bank.set(getInteger("Bank.Balance"), false);
 		Casino.totalCoinsWon = getInteger("Casino.Winnings");
 		Casino.gamesPlayed = getInteger("Casino.Plays");
-		Ach.boughtItem = getBoolean("Achievements.Bought_Item");
+		Achievements.boughtItem = getBoolean("Achievements.Bought_Item");
 		Stats.totalCoinsSpent = getInteger("Stats.Money_Spent.Coins");
 		Stats.coinsSpentOnBankInterest = getInteger("Stats.Money_Spent.Interest");
 		Stats.coinsSpentOnWeapons = getInteger("Stats.Money_Spent.Weapons");
@@ -175,38 +175,38 @@ public class Saves {
 		Enemy.get().setHealth(getInteger("Battle.Current.Enemy_Health"), getInteger("Battle.Current.Enemy_Max_Health"));
 
 		//Achs
-		Ach.moneyMaker         = getBoolean("Achievements.Money_Maker");
-		Ach.enemySlayer        = getBoolean("Achievements.Enemy_Slayer");
-		Ach.firstKill          = getBoolean("Achievements.First_Kill");
-		Ach.timeForAnUpgrade   = getBoolean("Achievements.Time_For_An_Upgrade");
+		Achievements.moneyMaker         = getBoolean("Achievements.Money_Maker");
+		Achievements.enemySlayer        = getBoolean("Achievements.Enemy_Slayer");
+		Achievements.firstKill          = getBoolean("Achievements.First_Kill");
+		Achievements.timeForAnUpgrade   = getBoolean("Achievements.Time_For_An_Upgrade");
 
         List<String> achSet = (List<String>) getList("Achievements.Enemies_Killed");
 
         for (int i = 0; i < achSet.size(); i++){
             for (int x = 0; x < Enemy.arrayEnemy.size(); x++){
                 if(Enemy.arrayEnemy.get(x).getName().equals(achSet.get(i))){
-                    Ach.arrayKilled.set(x, true);
+                    Achievements.arrayKilled.set(x, true);
                 }
             }
         }
-		Ach.textFighterMaster  = getBoolean("Achievements.Text_Fighter_Master");
-		Ach.YAYPOWER           = getBoolean("Achievements.YAY_POWER");
-		Ach.awwYouCareAboutMe  = getBoolean("Achievements.Aww_You_Care_About_Me");
-		Ach.slayer             = getBoolean("Achievements.Slayer");
-		Ach.nobodysPerfect     = getBoolean("Achievements.Nobodys_Perfect");
-		Ach.makingMoney        = getBoolean("Achievements.Making_Money");
-		Ach.gamblingAddiction  = getBoolean("Achievements.Gabling_Addiction");
-		Ach.level2Fighter      = getBoolean("Achievements.Level_2_Fighter");
-		Ach.level3Fighter      = getBoolean("Achievements.Level_3_Fighter");
-		Ach.level4Fighter      = getBoolean("Achievements.Level_4_Fighter");
-		Ach.level5Fighter      = getBoolean("Achievements.Level_5_Fighter");
-		Ach.level6Fighter      = getBoolean("Achievements.Level_6_Fighter");
-		Ach.level7Fighter      = getBoolean("Achievements.Level_7_Fighter");
-		Ach.level8Fighter      = getBoolean("Achievements.Level_8_Fighter");
-		Ach.level9Fighter      = getBoolean("Achievements.Level_9_Fighter");
-		Ach.level10Fighter     = getBoolean("Achievements.Level_10_Fighter");
-		Ach.honestPlayer       = getBoolean("Achievements.Honest_Player");
-		Ach.learning           = getBoolean("Achievements.Learning");
+		Achievements.textFighterMaster  = getBoolean("Achievements.Text_Fighter_Master");
+		Achievements.YAYPOWER           = getBoolean("Achievements.YAY_POWER");
+		Achievements.awwYouCareAboutMe  = getBoolean("Achievements.Aww_You_Care_About_Me");
+		Achievements.slayer             = getBoolean("Achievements.Slayer");
+		Achievements.nobodysPerfect     = getBoolean("Achievements.Nobodys_Perfect");
+		Achievements.makingMoney        = getBoolean("Achievements.Making_Money");
+		Achievements.gamblingAddiction  = getBoolean("Achievements.Gabling_Addiction");
+		Achievements.level2Fighter      = getBoolean("Achievements.Level_2_Fighter");
+		Achievements.level3Fighter      = getBoolean("Achievements.Level_3_Fighter");
+		Achievements.level4Fighter      = getBoolean("Achievements.Level_4_Fighter");
+		Achievements.level5Fighter      = getBoolean("Achievements.Level_5_Fighter");
+		Achievements.level6Fighter      = getBoolean("Achievements.Level_6_Fighter");
+		Achievements.level7Fighter      = getBoolean("Achievements.Level_7_Fighter");
+		Achievements.level8Fighter      = getBoolean("Achievements.Level_8_Fighter");
+		Achievements.level9Fighter      = getBoolean("Achievements.Level_9_Fighter");
+		Achievements.level10Fighter     = getBoolean("Achievements.Level_10_Fighter");
+		Achievements.honestPlayer       = getBoolean("Achievements.Honest_Player");
+		Achievements.learning           = getBoolean("Achievements.Learning");
 
 		//Other Stuff
 		About.setViewed(getBoolean("Settings.About_Viewed"));
@@ -266,7 +266,7 @@ public class Saves {
 			Bank.set(readInt(), false);
 			Casino.totalCoinsWon = readInt();
 			Casino.gamesPlayed = readInt();
-			Ach.boughtItem = readBoolean();
+			Achievements.boughtItem = readBoolean();
 			Stats.totalCoinsSpent = readInt();
 			Stats.coinsSpentOnBankInterest = readInt();
 			Stats.coinsSpentOnWeapons = readInt();
@@ -318,30 +318,30 @@ public class Saves {
 			Enemy.get().setHealth(readInt(), Enemy.get().getHealthMax());
 
 			//Achs
-			Ach.moneyMaker = readBoolean();
-			Ach.enemySlayer = readBoolean();
-			Ach.firstKill = readBoolean();
-			Ach.timeForAnUpgrade = readBoolean();
+			Achievements.moneyMaker = readBoolean();
+			Achievements.enemySlayer = readBoolean();
+			Achievements.firstKill = readBoolean();
+			Achievements.timeForAnUpgrade = readBoolean();
 			for (int i = 0; i < Enemy.arrayEnemy.size(); i++)
-				Ach.arrayKilled.set(i, readBoolean());
-			Ach.textFighterMaster = readBoolean();
-			Ach.YAYPOWER = readBoolean();
-			Ach.awwYouCareAboutMe = readBoolean();
-			Ach.slayer = readBoolean();
-			Ach.nobodysPerfect = readBoolean();
-			Ach.makingMoney = readBoolean();
-			Ach.gamblingAddiction = readBoolean();
-			Ach.level2Fighter = readBoolean();
-			Ach.level3Fighter = readBoolean();
-			Ach.level4Fighter = readBoolean();
-			Ach.level5Fighter = readBoolean();
-			Ach.level6Fighter = readBoolean();
-			Ach.level7Fighter = readBoolean();
-			Ach.level8Fighter = readBoolean();
-			Ach.level9Fighter = readBoolean();
-			Ach.level10Fighter = readBoolean();
-			Ach.honestPlayer = readBoolean();
-			Ach.learning = readBoolean();
+				Achievements.arrayKilled.set(i, readBoolean());
+			Achievements.textFighterMaster = readBoolean();
+			Achievements.YAYPOWER = readBoolean();
+			Achievements.awwYouCareAboutMe = readBoolean();
+			Achievements.slayer = readBoolean();
+			Achievements.nobodysPerfect = readBoolean();
+			Achievements.makingMoney = readBoolean();
+			Achievements.gamblingAddiction = readBoolean();
+			Achievements.level2Fighter = readBoolean();
+			Achievements.level3Fighter = readBoolean();
+			Achievements.level4Fighter = readBoolean();
+			Achievements.level5Fighter = readBoolean();
+			Achievements.level6Fighter = readBoolean();
+			Achievements.level7Fighter = readBoolean();
+			Achievements.level8Fighter = readBoolean();
+			Achievements.level9Fighter = readBoolean();
+			Achievements.level10Fighter = readBoolean();
+			Achievements.honestPlayer = readBoolean();
+			Achievements.learning = readBoolean();
 
 			//Other Stuff
 			About.setViewed(readBoolean());
@@ -592,7 +592,7 @@ public class Saves {
 		set("Bank.Balance", Bank.get());
 		set("Casino.Winnings", Casino.totalCoinsWon);
 		set("Casino.Plays", Casino.gamesPlayed);
-		set("Achievements.Bought_Item", Ach.boughtItem);
+		set("Achievements.Bought_Item", Achievements.boughtItem);
 		set("Stats.Money_Spent.Coins", Stats.totalCoinsSpent);
 		set("Stats.Money_Spent.Interest", Stats.coinsSpentOnBankInterest);
 		set("Stats.Money_Spent.Weapons", Stats.coinsSpentOnWeapons);
@@ -653,35 +653,35 @@ public class Saves {
 		set("Battle.Current.Enemy_Max_Health", Enemy.get().getHealthMax());
 
 		//Achs
-		set("Achievements.Money_Maker", Ach.moneyMaker);
-		set("Achievements.Enemy_Slayer", Ach.enemySlayer);
-		set("Achievements.First_Kill", Ach.firstKill);
-		set("Achievements.Time_For_An_Upgrade", Ach.timeForAnUpgrade);
+		set("Achievements.Money_Maker", Achievements.moneyMaker);
+		set("Achievements.Enemy_Slayer", Achievements.enemySlayer);
+		set("Achievements.First_Kill", Achievements.firstKill);
+		set("Achievements.Time_For_An_Upgrade", Achievements.timeForAnUpgrade);
 
 		List<String> enemiesKilled = new ArrayList<>();
 
 		for (int i = 0; i < Enemy.arrayEnemy.size(); i++)
-			if (Ach.arrayKilled.get(i))
+			if (Achievements.arrayKilled.get(i))
 				enemiesKilled.add(Enemy.arrayEnemy.get(i).getName());
 		set("Achievements.Enemies_Killed", enemiesKilled);
-        set("Achievements.Text_Fighter_Master", Ach.textFighterMaster);
-		set("Achievements.YAY_POWER", Ach.YAYPOWER);
-		set("Achievements.Aww_You_Care_About_Me", Ach.awwYouCareAboutMe);
-		set("Achievements.Slayer", Ach.slayer);
-		set("Achievements.Nobodys_Perfect", Ach.nobodysPerfect);
-		set("Achievements.Making_Money", Ach.makingMoney);
-		set("Achievements.Gambling_Addiction", Ach.gamblingAddiction);
-		set("Achievements.Level_2_Fighter", Ach.level2Fighter);
-		set("Achievements.Level_3_Fighter", Ach.level3Fighter);
-		set("Achievements.Level_4_Fighter", Ach.level4Fighter);
-		set("Achievements.Level_5_Fighter", Ach.level5Fighter);
-		set("Achievements.Level_6_Fighter", Ach.level6Fighter);
-		set("Achievements.Level_7_Fighter", Ach.level7Fighter);
-		set("Achievements.Level_8_Fighter", Ach.level8Fighter);
-		set("Achievements.Level_9_Fighter", Ach.level9Fighter);
-		set("Achievements.Level_10_Fighter", Ach.level10Fighter);
-		set("Achievements.Honest_Player", Ach.honestPlayer);
-		set("Achievements.Learning", Ach.learning);
+        set("Achievements.Text_Fighter_Master", Achievements.textFighterMaster);
+		set("Achievements.YAY_POWER", Achievements.YAYPOWER);
+		set("Achievements.Aww_You_Care_About_Me", Achievements.awwYouCareAboutMe);
+		set("Achievements.Slayer", Achievements.slayer);
+		set("Achievements.Nobodys_Perfect", Achievements.nobodysPerfect);
+		set("Achievements.Making_Money", Achievements.makingMoney);
+		set("Achievements.Gambling_Addiction", Achievements.gamblingAddiction);
+		set("Achievements.Level_2_Fighter", Achievements.level2Fighter);
+		set("Achievements.Level_3_Fighter", Achievements.level3Fighter);
+		set("Achievements.Level_4_Fighter", Achievements.level4Fighter);
+		set("Achievements.Level_5_Fighter", Achievements.level5Fighter);
+		set("Achievements.Level_6_Fighter", Achievements.level6Fighter);
+		set("Achievements.Level_7_Fighter", Achievements.level7Fighter);
+		set("Achievements.Level_8_Fighter", Achievements.level8Fighter);
+		set("Achievements.Level_9_Fighter", Achievements.level9Fighter);
+		set("Achievements.Level_10_Fighter", Achievements.level10Fighter);
+		set("Achievements.Honest_Player", Achievements.honestPlayer);
+		set("Achievements.Learning", Achievements.learning);
 
 		//Other Stuff
 		set("Settings.About_Viewed", About.viewed());

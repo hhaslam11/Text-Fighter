@@ -6,7 +6,7 @@ import com.hotmail.kalebmarc.textfighter.main.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Ach {
+public class Achievements {
     //Arrays for achievements
     public static final ArrayList<Boolean> arrayKilled = new ArrayList<>();
     private static final ArrayList<Enemy> arrayEnemy = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Ach {
     public static boolean viewedCheats = false;
     public static boolean viewedAchs = false;
 
-    private Ach() {
+    private Achievements() {
     }
 
     public static void setUpEnemyAch(String name, Enemy type) {

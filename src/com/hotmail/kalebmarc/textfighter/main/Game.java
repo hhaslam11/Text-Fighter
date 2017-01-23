@@ -88,7 +88,7 @@ public class Game {
 
 			//Runs all the tests and clears the screen
 			if (Stats.kills > Stats.highScore) Stats.highScore = Stats.kills;
-			Ach.check();
+			Achievements.check();
 			Saves.save();
 			Ui.cls();
 
@@ -296,14 +296,14 @@ public class Game {
 					Chest.view();
 					break;
 				case 4:
-					Ach.view();
+					Achievements.view();
 					break;
 				case 5:
 					Stats.view();
 					break;
 				case 6:
 					About.view(true);
-					Ach.viewedAbout = true;
+					Achievements.viewedAbout = true;
 					break;
 				case 7:
 					menu();

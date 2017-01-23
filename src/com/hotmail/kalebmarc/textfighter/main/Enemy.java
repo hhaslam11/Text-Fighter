@@ -50,7 +50,7 @@ public class Enemy {
          */
         if (!changeDif) {
             arrayEnemy.add(this);
-            Ach.setUpEnemyAch(name, this);
+            Achievements.setUpEnemyAch(name, this);
         }
         if (firstInit) {//Only call if its the first time initializing the enemy. (Not if changing difficulties)
             this.health = healthMax;
@@ -128,7 +128,7 @@ public class Enemy {
         Stats.totalKills++;
 
         //Get Achievement
-        Ach.getEnemyAch(Enemy.get());
+        Achievements.getEnemyAch(Enemy.get());
 
         encounterNew();
     }

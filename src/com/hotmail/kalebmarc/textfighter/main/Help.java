@@ -1,7 +1,7 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
 import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.player.Ach;
+import com.hotmail.kalebmarc.textfighter.player.Achievements;
 
 class Help {
     private Help() {
@@ -144,7 +144,7 @@ class Help {
         //TODO Add more health info
         Ui.println("------------------------------------------------------------");
         Ui.pause();
-        Ach.viewedHealth = true;
+        Achievements.viewedHealth = true;
     }
 
     private static void info_food() {
@@ -197,7 +197,7 @@ class Help {
         Ui.println("give you 20 XP");
         Ui.println("------------------------------------------------------------");
         Ui.pause();
-        Ach.viewedXP = true;
+        Achievements.viewedXP = true;
     }
 
     private static void info_cheats() {
@@ -228,7 +228,7 @@ class Help {
         Ui.println("   thirstforfood    | Gives you 10 of each type of food");
         Ui.println("------------------------------------------------------------------------");
         Ui.pause();
-        Ach.viewedCheats = true;
+        Achievements.viewedCheats = true;
     }
 
     private static void info_achs() {
@@ -271,6 +271,6 @@ class Help {
         Ui.println("   Learning               | Look at every single help page in one session");
         Ui.println("-------------------------------------------------------------------------");
         Ui.pause();
-        Ach.viewedAchs = true;
+        Achievements.viewedAchs = true;
     }
 }

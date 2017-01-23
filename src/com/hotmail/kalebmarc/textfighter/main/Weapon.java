@@ -1,6 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import com.hotmail.kalebmarc.textfighter.player.Ach;
+import com.hotmail.kalebmarc.textfighter.player.Achievements;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
@@ -296,7 +296,7 @@ public class Weapon {
         }
 
         //Buy
-        Ach.boughtItem = true;
+        Achievements.boughtItem = true;
         Coins.set(-price, true);
         Stats.coinsSpentOnWeapons += price;
         this.owns = true;
