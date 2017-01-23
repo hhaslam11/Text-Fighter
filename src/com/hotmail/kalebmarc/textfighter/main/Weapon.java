@@ -205,8 +205,8 @@ public class Weapon {
                     }
 
                     //Results
-                    setAmmo(-ammoUsed, true);
-                    Stats.bulletsFired += ammoUsed;
+                    setAmmo(-1, true);
+                    Stats.bulletsFired += 1;
                 }
 
             } else {
