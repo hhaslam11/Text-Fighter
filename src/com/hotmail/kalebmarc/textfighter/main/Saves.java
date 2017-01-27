@@ -26,57 +26,148 @@ public class Saves {
 	private static String path;
 	private static Yaml yaml;
 
-	private static void setup() {
-		saveLocation = new File(path);
-
-		if (!saveLocation.exists())
-			try {
-				saveLocation.createNewFile();
-			} catch (IOException exception) {
-				exception.printStackTrace();
-			}
-
-		setupDumper();
-
-		yaml = new Yaml(representer, options);
-		data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
-	}
-
-	private static void setupDumper() {
-		options = new DumperOptions();
-		representer = new Representer();
-
-		options.setIndent(2);
-		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-		options.setAllowUnicode(Charset.defaultCharset().name().contains("UTF"));
-		representer.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-	}
-
-	public static boolean savesPrompt() {
-		User.promptNameSelection();
+	public static void save() {
 		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
 		path = path.replace(".jar", "_" + User.name());
 		path = path.replaceAll("%20", " ");
 
-		Ui.cls();
-		Ui.println("------------------------------");
-		Ui.println("What would you like to do?");
-		Ui.println("------------------------------");
-		Ui.println("1) Load Save");
-		Ui.println("2) Convert Old Save");
-		Ui.println("3) Exit");
+		setup();
 
-		switch (Ui.getValidInt()) {
-			case 1:
-				load();
-				break;
-			case 2:
-				convert();
-				break;
-			default:
-				return false;
+		/*
+		 * TODO: make a version checker that checks each part of a version ex: 1.4.1DEV
+		 * then determine whether or not it's older, current or newer.
+		 */
+		set("Version", Version.getFull());
+
+		//Health
+		set("User.Health", Health.get());
+		set("User.Max_Health", Health.getOutOf());
+		set("User.FirstAid.Owns", FirstAid.get());
+		set("Stats.FirstAid.Used", FirstAid.used);
+		set("User.InstaHealth.Owns", InstaHealth.get());
+		set("Stats.InstaHealth.Used", InstaHealth.used);
+		set("Stats.TimesDied", Health.timesDied);
+
+		//Coins
+		set("User.Balance", Coins.get());
+		set("Bank.Balance", Bank.get());
+		set("Casino.Winnings", Casino.totalCoinsWon);
+		set("Casino.Plays", Casino.gamesPlayed);
+		set("Achievements.Bought_Item", Achievements.boughtItem);
+		set("Stats.Money_Spent.Coins", Stats.totalCoinsSpent);
+		set("Stats.Money_Spent.Interest", Stats.coinsSpentOnBankInterest);
+		set("Stats.Money_Spent.Weapons", Stats.coinsSpentOnWeapons);
+		set("Stats.Money_Spent.Health", Stats.coinsSpentOnHealth);
+		set("Stats.Money_Spent.XP", Stats.xpBought);
+		set("Bank.Current_Loan.Balance", Loan.getCurrentLoan());
+		set("Bank.Current_Loan.Due", Loan.getNetDue());
+
+		//Xp
+		set("User.XP.Level", Xp.getLevel());
+		set("User.XP.Needed", Xp.getOutOf());
+		set("User.XP.Amount", Xp.get());
+		set("User.XP.Total", Xp.total);
+
+		//Potions
+		set("Stats.Potions.Survival.Used", Potion.spUsed);
+		set("Stats.Potions.Recovery.Used", Potion.rpUsed);
+		set("User.Potions.Survival", Potion.get("survival"));
+		set("User.Potions.Recovery", Potion.get("recovery"));
+
+		//Settings
+		set("Settings.Difficulty.Level", Settings.getDif());
+		set("Settings.Difficulty.Locked", Settings.difLocked);
+		set("Settings.Cheats.Enabled", Cheats.enabled());
+		set("Settings.Cheats.Locked", Cheats.locked());
+		set("Settings.GUI.Enabled", Ui.guiEnabled);
+
+		//Combat
+		set("Stats.Kills", Stats.kills);
+		set("Stats.High_Score", Stats.highScore);
+		set("User.Weapons.Current", Weapon.arrayWeapon.indexOf(Weapon.get()));
+
+
+		for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
+			if (Weapon.arrayWeapon.get(i).owns()) {
+				set(("User.Weapons." + i), true);
+			} else {
+				set(("User.Weapons." + i), false);
+			}
+			set(("User.Weapons.Ammo." + i), Weapon.arrayWeapon.get(i).getAmmo());
 		}
-		return true;
+
+
+		set("User.Power", Power.get());
+		set("Stats.Power.Used", Power.used);
+		set("Stats.Damage_Dealt", Stats.totalDamageDealt);
+		set("Stats.Bullets_Fired", Stats.bulletsFired);
+		set("Stats.Bullets_Hit", Stats.bulletsThatHit);
+
+		List<Integer> ownedArmour = new ArrayList<>();
+
+		for (int i = 0; i < Armour.getArmours().size(); i++)
+			if (Armour.getArmours().get(i).isOwns())
+				ownedArmour.add(i);
+		set("User.Armour.Owns", ownedArmour);
+
+		set("User.Armour.Current", Armour.get());
+
+		//Enemy
+		set("Battle.Current.Enemy", Enemy.arrayEnemy.indexOf(Enemy.get()));
+		set("Battle.Current.Enemy_Health", Enemy.get().getHealth());
+		set("Battle.Current.Enemy_Max_Health", Enemy.get().getHealthMax());
+
+		//Achs
+		set("Achievements.Money_Maker", Achievements.moneyMaker);
+		set("Achievements.Enemy_Slayer", Achievements.enemySlayer);
+		set("Achievements.First_Kill", Achievements.firstKill);
+		set("Achievements.Time_For_An_Upgrade", Achievements.timeForAnUpgrade);
+
+		List<String> enemiesKilled = new ArrayList<>();
+
+		for (int i = 0; i < Enemy.arrayEnemy.size(); i++)
+			if (Achievements.arrayKilled.get(i))
+				enemiesKilled.add(Enemy.arrayEnemy.get(i).getName());
+		set("Achievements.Enemies_Killed", enemiesKilled);
+		set("Achievements.Text_Fighter_Master", Achievements.textFighterMaster);
+		set("Achievements.YAY_POWER", Achievements.YAYPOWER);
+		set("Achievements.Aww_You_Care_About_Me", Achievements.awwYouCareAboutMe);
+		set("Achievements.Slayer", Achievements.slayer);
+		set("Achievements.Nobodys_Perfect", Achievements.nobodysPerfect);
+		set("Achievements.Making_Money", Achievements.makingMoney);
+		set("Achievements.Gambling_Addiction", Achievements.gamblingAddiction);
+		set("Achievements.Level_2_Fighter", Achievements.level2Fighter);
+		set("Achievements.Level_3_Fighter", Achievements.level3Fighter);
+		set("Achievements.Level_4_Fighter", Achievements.level4Fighter);
+		set("Achievements.Level_5_Fighter", Achievements.level5Fighter);
+		set("Achievements.Level_6_Fighter", Achievements.level6Fighter);
+		set("Achievements.Level_7_Fighter", Achievements.level7Fighter);
+		set("Achievements.Level_8_Fighter", Achievements.level8Fighter);
+		set("Achievements.Level_9_Fighter", Achievements.level9Fighter);
+		set("Achievements.Level_10_Fighter", Achievements.level10Fighter);
+		set("Achievements.Honest_Player", Achievements.honestPlayer);
+		set("Achievements.Learning", Achievements.learning);
+
+		//Other Stuff
+		set("Settings.About_Viewed", About.viewed());
+		set("Stats.Times_Cheated", Stats.timesCheated);
+		set("Stats.Times_Quit", Stats.timesQuit);
+		set("Stats.Items_Crafted", Stats.timesCheated);
+		set("Stats.Games_Played.Dice", Stats.diceGamesPlayed);
+		set("Stats.Games_Played.Slots", Stats.slotGamesPlayed);
+
+		try {
+			if (!saveLocation.exists())
+				saveLocation.createNewFile();
+
+			FileWriter writer = new FileWriter(saveLocation);
+
+			writer.write(yaml.dump(data));
+			writer.flush();
+			writer.close();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
 	}
 
 	public static boolean load() {
@@ -145,16 +236,11 @@ public class Saves {
 		Stats.totalKills = getInteger("Stats.Total_Kills");
 		Weapon.set(getInteger("User.Weapons.Current"));
 
-		List<String> weapons = new ArrayList<>();
-		String[] part;
-
-		for(int i = 0; i < weapons.size(); i++){
-			part = weapons.get(i).split(":");
-			if (Ui.isNumber(part[0])) {
-				Weapon.arrayWeapon.get(Integer.parseInt(part[0])).owns = true;
-				if (Ui.isNumber(part[1]))
-					Weapon.arrayWeapon.get(i).setAmmo(Integer.parseInt(part[1]), false);
+		for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+			if (getBoolean("User.Weapons." + i)){
+				Weapon.arrayWeapon.get(i).owns = true;
 			}
+			Weapon.arrayWeapon.get(i).setAmmo(getInteger("User.Weapons.Ammo." + i), false);
 		}
 
 		Power.set(getInteger("User.Power"), false);
@@ -180,15 +266,15 @@ public class Saves {
 		Achievements.firstKill          = getBoolean("Achievements.First_Kill");
 		Achievements.timeForAnUpgrade   = getBoolean("Achievements.Time_For_An_Upgrade");
 
-        List<String> achSet = (List<String>) getList("Achievements.Enemies_Killed");
+		List<String> achSet = (List<String>) getList("Achievements.Enemies_Killed");
 
-        for (int i = 0; i < achSet.size(); i++){
-            for (int x = 0; x < Enemy.arrayEnemy.size(); x++){
-                if(Enemy.arrayEnemy.get(x).getName().equals(achSet.get(i))){
-                    Achievements.arrayKilled.set(x, true);
-                }
-            }
-        }
+		for (int i = 0; i < achSet.size(); i++){
+			for (int x = 0; x < Enemy.arrayEnemy.size(); x++){
+				if(Enemy.arrayEnemy.get(x).getName().equals(achSet.get(i))){
+					Achievements.arrayKilled.set(x, true);
+				}
+			}
+		}
 		Achievements.textFighterMaster  = getBoolean("Achievements.Text_Fighter_Master");
 		Achievements.YAYPOWER           = getBoolean("Achievements.YAY_POWER");
 		Achievements.awwYouCareAboutMe  = getBoolean("Achievements.Aww_You_Care_About_Me");
@@ -210,12 +296,65 @@ public class Saves {
 
 		//Other Stuff
 		About.setViewed(getBoolean("Settings.About_Viewed"));
-        Stats.timesCheated = getInteger("Stats.Times_Cheated");
-        Stats.timesQuit = getInteger("Stats.Times_Quit");
-        Stats.itemsCrafted = getInteger("Stats.Items_Crafted");
+		Stats.timesCheated = getInteger("Stats.Times_Cheated");
+		Stats.timesQuit = getInteger("Stats.Times_Quit");
+		Stats.itemsCrafted = getInteger("Stats.Items_Crafted");
 		Stats.diceGamesPlayed = getInteger("Stats.Games_Played.Dice");
 		Stats.slotGamesPlayed = getInteger("Stats.Games_Played.Slots");
 
+		return true;
+	}
+
+	private static void setup() {
+		saveLocation = new File(path);
+
+		if (!saveLocation.exists())
+			try {
+				saveLocation.createNewFile();
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
+
+		setupDumper();
+
+		yaml = new Yaml(representer, options);
+		data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
+	}
+
+	private static void setupDumper() {
+		options = new DumperOptions();
+		representer = new Representer();
+
+		options.setIndent(2);
+		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+		options.setAllowUnicode(Charset.defaultCharset().name().contains("UTF"));
+		representer.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+	}
+
+	public static boolean savesPrompt() {
+		User.promptNameSelection();
+		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
+		path = path.replace(".jar", "_" + User.name());
+		path = path.replaceAll("%20", " ");
+
+		Ui.cls();
+		Ui.println("------------------------------");
+		Ui.println("What would you like to do?");
+		Ui.println("------------------------------");
+		Ui.println("1) Load Save");
+		Ui.println("2) Convert Old Save");
+		Ui.println("3) Exit");
+
+		switch (Ui.getValidInt()) {
+			case 1:
+				load();
+				break;
+			case 2:
+				convert();
+				break;
+			default:
+				return false;
+		}
 		return true;
 	}
 
@@ -563,146 +702,6 @@ public class Saves {
 	 */
 	private static String readString(){
 		return input.nextLine();
-	}
-
-	public static void save() {
-		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
-		path = path.replace(".jar", "_" + User.name());
-		path = path.replaceAll("%20", " ");
-
-		setup();
-
-		/*
-		 * TODO: make a version checker that checks each part of a version ex: 1.4.1DEV
-		 * then determine whether or not it's older, current or newer.
-		 */
-		set("Version", Version.getFull());
-
-		//Health
-		set("User.Health", Health.get());
-		set("User.Max_Health", Health.getOutOf());
-		set("User.FirstAid.Owns", FirstAid.get());
-		set("Stats.FirstAid.Used", FirstAid.used);
-		set("User.InstaHealth.Owns", InstaHealth.get());
-        set("Stats.InstaHealth.Used", InstaHealth.used);
-        set("Stats.TimesDied", Health.timesDied);
-
-		//Coins
-		set("User.Balance", Coins.get());
-		set("Bank.Balance", Bank.get());
-		set("Casino.Winnings", Casino.totalCoinsWon);
-		set("Casino.Plays", Casino.gamesPlayed);
-		set("Achievements.Bought_Item", Achievements.boughtItem);
-		set("Stats.Money_Spent.Coins", Stats.totalCoinsSpent);
-		set("Stats.Money_Spent.Interest", Stats.coinsSpentOnBankInterest);
-		set("Stats.Money_Spent.Weapons", Stats.coinsSpentOnWeapons);
-		set("Stats.Money_Spent.Health", Stats.coinsSpentOnHealth);
-		set("Stats.Money_Spent.XP", Stats.xpBought);
-		set("Bank.Current_Loan.Balance", Loan.getCurrentLoan());
-		set("Bank.Current_Loan.Due", Loan.getNetDue());
-
-		//Xp
-		set("User.XP.Level", Xp.getLevel());
-		set("User.XP.Needed", Xp.getOutOf());
-		set("User.XP.Amount", Xp.get());
-		set("User.XP.Total", Xp.total);
-
-		//Potions
-		set("Stats.Potions.Survival.Used", Potion.spUsed);
-		set("Stats.Potions.Recovery.Used", Potion.rpUsed);
-		set("User.Potions.Survival", Potion.get("survival"));
-		set("User.Potions.Recovery", Potion.get("recovery"));
-
-		//Settings
-		set("Settings.Difficulty.Level", Settings.getDif());
-		set("Settings.Difficulty.Locked", Settings.difLocked);
-        set("Settings.Cheats.Enabled", Cheats.enabled());
-        set("Settings.Cheats.Locked", Cheats.locked());
-        set("Settings.GUI.Enabled", Ui.guiEnabled);
-
-		//Combat
-		set("Stats.Kills", Stats.kills);
-		set("Stats.High_Score", Stats.highScore);
-        set("User.Weapons.Current", Weapon.arrayWeapon.indexOf(Weapon.get()));
-
-		List<String> ownedWeapons = new ArrayList<>();
-
-		for (int i = 0; i < Weapon.arrayWeapon.size(); i++)
-			if (Weapon.arrayWeapon.get(i).owns())
-				ownedWeapons.add(i + ":" + Weapon.arrayWeapon.get(i).getAmmo());
-		set("User.Weapons.Owns", ownedWeapons);
-
-		set("User.Power", Power.get());
-		set("Stats.Power.Used", Power.used);
-		set("Stats.Damage_Dealt", Stats.totalDamageDealt);
-		set("Stats.Bullets_Fired", Stats.bulletsFired);
-		set("Stats.Bullets_Hit", Stats.bulletsThatHit);
-
-		List<Integer> ownedArmour = new ArrayList<>();
-
-		for (int i = 0; i < Armour.getArmours().size(); i++)
-			if (Armour.getArmours().get(i).isOwns())
-				ownedArmour.add(i);
-		set("User.Armour.Owns", ownedArmour);
-
-		set("User.Armour.Current", Armour.get());
-
-		//Enemy
-		set("Battle.Current.Enemy", Enemy.arrayEnemy.indexOf(Enemy.get()));
-		set("Battle.Current.Enemy_Health", Enemy.get().getHealth());
-		set("Battle.Current.Enemy_Max_Health", Enemy.get().getHealthMax());
-
-		//Achs
-		set("Achievements.Money_Maker", Achievements.moneyMaker);
-		set("Achievements.Enemy_Slayer", Achievements.enemySlayer);
-		set("Achievements.First_Kill", Achievements.firstKill);
-		set("Achievements.Time_For_An_Upgrade", Achievements.timeForAnUpgrade);
-
-		List<String> enemiesKilled = new ArrayList<>();
-
-		for (int i = 0; i < Enemy.arrayEnemy.size(); i++)
-			if (Achievements.arrayKilled.get(i))
-				enemiesKilled.add(Enemy.arrayEnemy.get(i).getName());
-		set("Achievements.Enemies_Killed", enemiesKilled);
-        set("Achievements.Text_Fighter_Master", Achievements.textFighterMaster);
-		set("Achievements.YAY_POWER", Achievements.YAYPOWER);
-		set("Achievements.Aww_You_Care_About_Me", Achievements.awwYouCareAboutMe);
-		set("Achievements.Slayer", Achievements.slayer);
-		set("Achievements.Nobodys_Perfect", Achievements.nobodysPerfect);
-		set("Achievements.Making_Money", Achievements.makingMoney);
-		set("Achievements.Gambling_Addiction", Achievements.gamblingAddiction);
-		set("Achievements.Level_2_Fighter", Achievements.level2Fighter);
-		set("Achievements.Level_3_Fighter", Achievements.level3Fighter);
-		set("Achievements.Level_4_Fighter", Achievements.level4Fighter);
-		set("Achievements.Level_5_Fighter", Achievements.level5Fighter);
-		set("Achievements.Level_6_Fighter", Achievements.level6Fighter);
-		set("Achievements.Level_7_Fighter", Achievements.level7Fighter);
-		set("Achievements.Level_8_Fighter", Achievements.level8Fighter);
-		set("Achievements.Level_9_Fighter", Achievements.level9Fighter);
-		set("Achievements.Level_10_Fighter", Achievements.level10Fighter);
-		set("Achievements.Honest_Player", Achievements.honestPlayer);
-		set("Achievements.Learning", Achievements.learning);
-
-		//Other Stuff
-		set("Settings.About_Viewed", About.viewed());
-		set("Stats.Times_Cheated", Stats.timesCheated);
-		set("Stats.Times_Quit", Stats.timesQuit);
-		set("Stats.Items_Crafted", Stats.timesCheated);
-		set("Stats.Games_Played.Dice", Stats.diceGamesPlayed);
-		set("Stats.Games_Played.Slots", Stats.slotGamesPlayed);
-
-		try {
-			if (!saveLocation.exists())
-				saveLocation.createNewFile();
-
-			FileWriter writer = new FileWriter(saveLocation);
-
-			writer.write(yaml.dump(data));
-			writer.flush();
-			writer.close();
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
 	}
 
     //Thanks http://stackoverflow.com/a/38951302/3291305 !
