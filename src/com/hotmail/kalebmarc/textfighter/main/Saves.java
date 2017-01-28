@@ -146,7 +146,6 @@ public class Saves {
 		set("Achievements.Level_9_Fighter", Achievements.level9Fighter);
 		set("Achievements.Level_10_Fighter", Achievements.level10Fighter);
 		set("Achievements.Honest_Player", Achievements.honestPlayer);
-		set("Achievements.Learning", Achievements.learning);
 
 		//Other Stuff
 		set("Settings.About_Viewed", About.viewed());
@@ -292,7 +291,6 @@ public class Saves {
 		Achievements.level9Fighter      = getBoolean("Achievements.Level_9_Fighter");
 		Achievements.level10Fighter     = getBoolean("Achievements.Level_10_Fighter");
 		Achievements.honestPlayer       = getBoolean("Achievements.Honest_Player");
-		Achievements.learning           = getBoolean("Achievements.Learning");
 
 		//Other Stuff
 		About.setViewed(getBoolean("Settings.About_Viewed"));
@@ -480,7 +478,6 @@ public class Saves {
 			Achievements.level9Fighter = readBoolean();
 			Achievements.level10Fighter = readBoolean();
 			Achievements.honestPlayer = readBoolean();
-			Achievements.learning = readBoolean();
 
 			//Other Stuff
 			About.setViewed(readBoolean());

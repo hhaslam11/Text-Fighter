@@ -17,7 +17,6 @@ public class Armour {
     private int level;
     private boolean owns;
     private boolean equipped;
-    private boolean viewed;
 
     public Armour(String name, int price, int damResist, int level) {
         this.name = name;
@@ -204,14 +203,6 @@ public class Armour {
         Ui.pause();
         Ui.cls();
         //End of armour Info
-        this.setViewed(true);
     }
 
-    public boolean getViewed() {
-        return this.viewed;
-    }
-
-    public void setViewed(boolean viewed) {
-        this.viewed = viewed;
-    }
 }

@@ -11,7 +11,7 @@ public class Achievements {
     public static final ArrayList<Boolean> arrayKilled = new ArrayList<>();
     private static final ArrayList<Enemy> arrayEnemy = new ArrayList<>();
     /* Achievements
-     * 32 Total
+     * 31 Total
      *
      * Booleans to check if the
      * achievement has been unlocked
@@ -37,18 +37,11 @@ public class Achievements {
     public static boolean level9Fighter = false;
     public static boolean level10Fighter = false;
     public static boolean honestPlayer = false;
-    public static boolean learning = false;
     //Variables for testing the achievements
     //Time for an upgrade
     public static boolean boughtItem = false;
     //Aww, You Care About Me
     public static boolean viewedAbout = false;
-    //Learning
-    public static boolean viewedArmour = false;
-    public static boolean viewedHealth = false;
-    public static boolean viewedXP = false;
-    public static boolean viewedCheats = false;
-    public static boolean viewedAchs = false;
 
     private Achievements() {
     }
@@ -65,8 +58,8 @@ public class Achievements {
         //Displays which achievements the user has gotten
         Ui.cls();
 
-        boolean ach[] = new boolean[22];
-        String strAch[] = new String[22];
+        boolean ach[] = new boolean[21];
+        String strAch[] = new String[21];
         ach[0] = moneyMaker;
         strAch[0] = "Money Maker";
 
@@ -130,9 +123,6 @@ public class Achievements {
         ach[20] = honestPlayer;
         strAch[20] = "Honest Player";
 
-        ach[21] = learning;
-        strAch[21] = "Learning";
-
         Ui.println("---------------------------------------");
         Ui.println("Achievements");
         Ui.println();
@@ -195,7 +185,6 @@ public class Achievements {
             if (!level9Fighter) checkLevel9Fighter();
             if (!level10Fighter) checkLevel10Fighter();
             if (!honestPlayer) checkHonestPlayer();
-            if (!learning) checkLearning();
             //Enemy achs get checked from textfighter.Enemy class
         }
     }
@@ -262,8 +251,7 @@ public class Achievements {
                         level8Fighter &&
                         level9Fighter &&
                         level10Fighter &&
-                        honestPlayer &&
-                        learning
+                        honestPlayer
                 ) {
 
             //Check Enemy Achs
@@ -391,33 +379,5 @@ public class Achievements {
             honestPlayer = true;
             get("Honest Player");
         }
-    }
-
-    private static void checkLearning() {
-
-        for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-            if (!Weapon.arrayWeapon.get(i).viewedAbout()) return;
-        }
-
-        for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
-            if (!Enemy.arrayEnemy.get(i).viewedAbout()) return;
-        }
-
-        for (int i = 0; i < Armour.getArmours().size(); i++) {
-            if (!Armour.getArmours().get(i).getViewed()) return;
-        }
-
-        for (int i = 0; i < Food.arrayFood.size(); i++) {
-            if (!Food.arrayFood.get(i).viewedAbout()) return;
-        }
-
-        if (!viewedArmour) return;
-        if (!viewedXP) return;
-        if (!viewedCheats) return;
-        if (!viewedAchs) return;
-        if (!viewedHealth) return;
-
-        learning = true;
-        get("Learning");
     }
 }

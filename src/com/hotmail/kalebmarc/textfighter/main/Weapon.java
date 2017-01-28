@@ -26,7 +26,6 @@ public class Weapon {
     private double chanceOfMissing;
     private String name;
     private boolean buyable;
-    private boolean viewedAbout;
     //Ammo
     private int ammo;
     private int ammoUsed;
@@ -195,7 +194,6 @@ public class Weapon {
 			/*
 			 * Gun Attack
 			 */
-
             if (getAmmo() >= this.ammoUsed) {
 
                 for (int i = 1; i <= this.ammoUsed; i++) {
@@ -250,7 +248,6 @@ public class Weapon {
         Ui.pause();
         Ui.cls();
         //End of weapon Info
-        this.setViewed(true);
     }
 
     private String getDamage() {
@@ -263,14 +260,6 @@ public class Weapon {
                 return ("0 - " + String.valueOf((BULLET_DAMAGE * this.ammoUsed)));
             }
         }
-    }
-
-    public boolean viewedAbout() {
-        return this.viewedAbout;
-    }
-
-    public void setViewed(boolean v) {
-        this.viewedAbout = v;
     }
 
     public boolean isBuyable() {
