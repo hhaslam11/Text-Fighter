@@ -19,7 +19,6 @@ public class Enemy {
     private int damageMin;
     private int damageMax;
     private int xp;
-    private boolean viewedAbout = false;//For help section
     //Variables
     private int health;
 
@@ -164,14 +163,6 @@ public class Enemy {
         return name;
     }
 
-    public void setViewed(boolean viewed) {
-        this.viewedAbout = viewed;
-    }
-
-    public boolean viewedAbout() {
-        return viewedAbout;
-    }
-
     public void viewAbout() {
         final int BORDER_LENGTH = 39;
 
@@ -191,6 +182,5 @@ public class Enemy {
         Ui.pause();
         Ui.cls();
         //End of weapon Info
-        this.setViewed(true);
     }
 }
