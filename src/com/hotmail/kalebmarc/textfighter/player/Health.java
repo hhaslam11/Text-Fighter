@@ -63,8 +63,6 @@ public class Health {
         Stats.kills = 0;
         Health.set(Health.getOutOf());
 
-        //Sets enemy health back to full health
-        Enemy.get().setHealth(Enemy.get().getHealthMax(), Enemy.get().getHealthMax());
         timesDied++;
     }
 

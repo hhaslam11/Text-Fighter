@@ -7,10 +7,16 @@ import java.util.ArrayList;
 
 public class Enemy {
 
+    //constants
+    private static final int FIRST_AID_KIT_MIN = 0;
+    private static final int FIRST_AID_KIT_MAX = 2;
+
     //Enemy List
     public static final ArrayList<Enemy> arrayEnemy = new ArrayList<>();
+
     //Static Variables
     private static Enemy current;
+
     //Properties (Constant)
     private String name;
     private int healthMax;
@@ -19,8 +25,10 @@ public class Enemy {
     private int damageMin;
     private int damageMax;
     private int xp;
+
     //Variables
     private int health;
+    private int firstAidKit;
 
     public Enemy(String name, int healthMax, int coinDropMin, int coinDropMax,
                  int damageMin, int damageMax, int xp, boolean firstInit, boolean changeDif) {
@@ -72,6 +80,7 @@ public class Enemy {
 
         current = arrayEnemy.get(Random.RInt(0, arrayEnemy.size() - 1));
         current.health = current.healthMax;
+        current.firstAidKit = Random.RInt(FIRST_AID_KIT_MIN, FIRST_AID_KIT_MAX);
         Ui.popup("You have encountered a " + current.getName(), "Encounter", JOptionPane.INFORMATION_MESSAGE);
 
     }
@@ -90,6 +99,8 @@ public class Enemy {
         if (this.health <= 0) {
             die();
             return true;
+        } else if (health <= (healthMax / 3)){
+            useFirstAidKit();//TODO Display this -after- it displays the attack msg
         }
         return false;
     }
@@ -130,6 +141,25 @@ public class Enemy {
         Achievements.getEnemyAch(Enemy.get());
 
         encounterNew();
+    }
+
+    private boolean useFirstAidKit(){
+        if (this.firstAidKit <= 0) {
+            return false;
+        } else {
+            this.firstAidKit--;
+            this.takeDamage(-20);
+            Ui.msg("The " + this.name + " has used a first-aid kit. They gained 20 health");
+            return true;
+        }
+    }
+
+    public int getFirstAidKit(){
+        return this.firstAidKit;
+    }
+
+    public void setFirstAidKit(int amount){
+        this.firstAidKit = amount;
     }
 
     public void setDamage(int min, int max) {

@@ -116,6 +116,7 @@ public class Saves {
 		set("Battle.Current.Enemy", Enemy.arrayEnemy.indexOf(Enemy.get()));
 		set("Battle.Current.Enemy_Health", Enemy.get().getHealth());
 		set("Battle.Current.Enemy_Max_Health", Enemy.get().getHealthMax());
+		set("Battle.Current.Enemy_First_Aid_Kit", Enemy.get().getFirstAidKit());
 
 		//Achs
 		set("Achievements.Money_Maker", Achievements.moneyMaker);
@@ -258,6 +259,7 @@ public class Saves {
 		//Enemy
 		Enemy.set(getInteger("Battle.Current.Enemy"));
 		Enemy.get().setHealth(getInteger("Battle.Current.Enemy_Health"), getInteger("Battle.Current.Enemy_Max_Health"));
+		Enemy.get().setFirstAidKit(getInteger("Battle.Current.Enemy_First_Aid_Kit"));
 
 		//Achs
 		Achievements.moneyMaker         = getBoolean("Achievements.Money_Maker");

@@ -123,6 +123,7 @@ public class Game {
 			Ui.println("--Enemy Info--");
 			Ui.println("     Enemy: " + Enemy.get().getName());
 			Ui.println("     Enemy Health: " + Enemy.get().getHeathStr());
+			Ui.println("     Enemy's First Aid Kit's: " + Enemy.get().getFirstAidKit());
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("1) Go to battle");
 			Ui.println("2) Go Home");

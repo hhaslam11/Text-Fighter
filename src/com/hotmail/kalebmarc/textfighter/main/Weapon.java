@@ -225,7 +225,6 @@ public class Weapon {
         Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
         Ui.println("Enemy health: " + Enemy.get().getHeathStr());
         Ui.println("----------------------------------------------------");
-
         Ui.pause();
     }
 
