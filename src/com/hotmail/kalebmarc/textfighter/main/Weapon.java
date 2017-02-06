@@ -226,6 +226,10 @@ public class Weapon {
         Ui.println("Enemy health: " + Enemy.get().getHeathStr());
         Ui.println("----------------------------------------------------");
         Ui.pause();
+
+        if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
+            Enemy.get().useFirstAidKit();
+        }
     }
 
     public void viewAbout() {

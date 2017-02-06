@@ -99,13 +99,11 @@ public class Enemy {
         if (this.health <= 0) {
             die();
             return true;
-        } else if (health <= (healthMax / 3)){
-            useFirstAidKit();//TODO Display this -after- it displays the attack msg
         }
         return false;
     }
 
-    public void dealDamage() {
+    void dealDamage() {
         int damage = Random.RInt(this.damageMin, this.damageMax);
         Health.takeDamage(damage);
     }
@@ -143,7 +141,7 @@ public class Enemy {
         encounterNew();
     }
 
-    private boolean useFirstAidKit(){
+    public boolean useFirstAidKit(){
         if (this.firstAidKit <= 0) {
             return false;
         } else {
