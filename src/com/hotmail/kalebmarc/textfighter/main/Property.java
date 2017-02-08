@@ -52,7 +52,7 @@ public class Property {
         return this.sqFtOwned;
     }
     public static void buyProperty(){
-        //... TODO
+
     }
 
     public enum Type{

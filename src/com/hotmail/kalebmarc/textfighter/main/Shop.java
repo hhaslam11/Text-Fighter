@@ -29,8 +29,9 @@ class Shop {
             Ui.println("1) Health");
             Ui.println("2) Weapons/Ammo");
             Ui.println("3) Body Armour");
-            Ui.println("4) XP");
-            Ui.println("5) Back");
+            Ui.println("4) Property");
+            Ui.println("5) XP");
+            Ui.println("6) Back");
             Ui.println("-------------------------------------------------------------------");
             switch (Ui.getValidInt()) {
                 case 1:
@@ -43,9 +44,12 @@ class Shop {
                     armour();
                     break;
                 case 4:
-                    xp();
+                    property();
                     break;
                 case 5:
+                    xp();
+                    break;
+                case 6:
                     return;
                 default:
                     break;
@@ -283,7 +287,24 @@ class Shop {
             }
         }
     }
+    private static void property(){
+        while (true){
 
+            Ui.cls();
+            Ui.println("________________________________________________");
+            Ui.println("                    Property                    ");
+            NPC.welcome("property");
+            Ui.println("Level: " + Xp.getLevel());
+            Ui.println("Coins: " + Coins.get());
+            Ui.println("________________________________________________");
+
+            //TODO do stuff to buy property
+            Ui.pause();//temp
+
+
+            return;
+        }
+    }
     private static void armour() {
         while (true) {
             Ui.cls();
