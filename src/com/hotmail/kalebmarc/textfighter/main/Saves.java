@@ -83,6 +83,7 @@ public class Saves {
 
 		//Combat
 		set("Stats.Kills", Stats.kills);
+		set("Stats.Total_Kills", Stats.totalKills);
 		set("Stats.High_Score", Stats.highScore);
 		set("User.Weapons.Current", Weapon.arrayWeapon.indexOf(Weapon.get()));
 
