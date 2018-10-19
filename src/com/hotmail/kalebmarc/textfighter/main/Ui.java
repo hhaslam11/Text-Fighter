@@ -199,8 +199,9 @@ public class Ui {
         try {
 
             Scanner pauseScan = new Scanner(System.in);
-            String temp = pauseScan.nextLine();
-            Ui.println(temp);
+            //String temp = pauseScan.nextLine();
+            //Ui.println(temp);
+		return;
 
         } catch (Exception e) {
             //Blank for a reason - Not supposed to do anything.
