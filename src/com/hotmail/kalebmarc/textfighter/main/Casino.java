@@ -142,7 +142,7 @@ public class Casino {
                 Ui.cls();
                 bet = 0;
                 Ui.println("You do not have enough coins. Please enter a smaller amount. (Or enter 0 to go back)");
-                Ui.pause();
+               
             }
         } while (bet < 10 || bet > 250);
 
