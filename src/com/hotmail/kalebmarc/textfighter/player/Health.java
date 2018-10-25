@@ -4,6 +4,7 @@ import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.*;
 
@@ -58,11 +59,12 @@ public class Health {
     }
 
     public static void die() {
-        Ui.popup("You have died! You lost half of your coins. ", "You've died!", JOptionPane.WARNING_MESSAGE);
-        Coins.set(-(Coins.get() / 2), true);
+        float randomCoinLoss = ThreadLocalRandom.current().nextInt(25, 51); //random between 25% and 50%
+        int coinsLost = Math.round(Coins.get() * (randomCoinLoss / 100));
+        Ui.popup("You have died! You lost " + coinsLost + " coin(s). ", "You've died!", JOptionPane.WARNING_MESSAGE);
+        Coins.set(-(coinsLost), true);
         Stats.kills = 0;
         Health.set(Health.getOutOf());
-
         timesDied++;
     }
 
