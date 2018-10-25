@@ -59,14 +59,12 @@ public class Health {
     }
 
     public static void die() {
-        Ui.popup("You have died! You lost half of your coins. ", "You've died!", JOptionPane.WARNING_MESSAGE);
         float randomCoinLoss = ThreadLocalRandom.current().nextInt(25, 51); //random between 25% and 50%
-        randomCoinLoss = randomCoinLoss / 100;
-        int coinsLost = Math.round(Coins.get() * randomCoinLoss);
+        int coinsLost = Math.round(Coins.get() * (randomCoinLoss / 100));
+        Ui.popup("You have died! You lost " + coinsLost + " coin(s). ", "You've died!", JOptionPane.WARNING_MESSAGE);
         Coins.set(-(coinsLost), true);
         Stats.kills = 0;
         Health.set(Health.getOutOf());
-
         timesDied++;
     }
 
