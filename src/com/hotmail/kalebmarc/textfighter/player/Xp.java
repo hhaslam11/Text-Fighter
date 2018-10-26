@@ -64,8 +64,12 @@ public class Xp {
 		return battleXp;
 	}
 	
-	public static void setBattleXp(int amount) {
-		battleXp += amount;
+	public static void setBattleXp(int amount, boolean add) {
+		if(add) {
+			battleXp += amount;
+		} else {
+			battleXp = amount;
+		}
 	}
 
 	public static void setLevel(int lvl){

@@ -81,6 +81,7 @@ public class Enemy {
         current = arrayEnemy.get(Random.RInt(0, arrayEnemy.size() - 1));
         current.health = current.healthMax;
         current.firstAidKit = Random.RInt(FIRST_AID_KIT_MIN, FIRST_AID_KIT_MAX);
+        com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(0, false);
         Ui.popup("You have encountered a " + current.getName(), "Encounter", JOptionPane.INFORMATION_MESSAGE);
 
     }
@@ -113,6 +114,8 @@ public class Enemy {
         //Get rewards & store in temp vars
         int tempCoin = Random.RInt(coinDropMin, coinDropMax);
         int tempHealth = Random.RInt(0, 2);
+        xp += com.hotmail.kalebmarc.textfighter.player.Xp.getBattleXp();
+        com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(0, false);
 
         //Prompt enemy death
         Ui.popup("You have defeated an enemy! You've found " + tempCoin + " coins, and " + xp + "Xp!", "You've defeated an enemy!", JOptionPane.PLAIN_MESSAGE);

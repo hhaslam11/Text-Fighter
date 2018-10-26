@@ -5,6 +5,8 @@ import com.hotmail.kalebmarc.textfighter.player.*;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
 import static com.hotmail.kalebmarc.textfighter.player.Health.upgrade;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
@@ -142,8 +144,10 @@ public class Game {
 					int fightPath = Random.RInt(100);
 
 					if (Weapon.get().getName().equals("Sniper")) {
-						if (fightPath <= 30) Enemy.get().dealDamage();
-						if (fightPath > 30) sniper.dealDam();
+//						if (fightPath <= 30) Enemy.get().dealDamage();
+//						if (fightPath > 30) sniper.dealDam();
+						if (fightPath == 1) Enemy.get().dealDamage();
+						if (fightPath != 1) sniper.dealDam();
 					} else {
 						if (fightPath <= 50) Enemy.get().dealDamage();
 						if (fightPath > 50) Weapon.get().dealDam();
@@ -190,7 +194,9 @@ public class Game {
 					Stats.timesQuit++;
 					return;
 				case 10:
-					
+					Ui.cls();
+					Ui.popup("You ran away from the battle.", "Ran Away", JOptionPane.INFORMATION_MESSAGE);
+					Enemy.encounterNew();
 					break;
 				case 0:
 					Cheats.cheatGateway();
