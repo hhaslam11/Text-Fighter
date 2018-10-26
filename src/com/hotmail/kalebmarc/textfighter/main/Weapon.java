@@ -215,7 +215,6 @@ public class Weapon {
 
         //Display stuff
         com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += damageDealt;
-        //com.hotmail.kalebmarc.textfighter.player.Xp.set(damageDealt, true);
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(damageDealt, true);
         if(!Enemy.get().takeDamage(damageDealt)) { // !dead
 	        Ui.cls();
