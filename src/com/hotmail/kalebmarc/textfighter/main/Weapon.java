@@ -216,19 +216,20 @@ public class Weapon {
         //Display stuff
         com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += damageDealt;
         com.hotmail.kalebmarc.textfighter.player.Xp.set(damageDealt, true);
-        Enemy.get().takeDamage(damageDealt);
-        Ui.cls();
-        Ui.println("----------------------------------------------------");
-        Ui.println("You have attacked a " + Enemy.get().getName() + "!");
-        Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
-        Ui.println("----------------------------------------------------");
-        Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
-        Ui.println("Enemy health: " + Enemy.get().getHeathStr());
-        Ui.println("----------------------------------------------------");
-        Ui.pause();
-
-        if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
-            Enemy.get().useFirstAidKit();
+        if(!Enemy.get().takeDamage(damageDealt)) { // !dead
+	        Ui.cls();
+	        Ui.println("----------------------------------------------------");
+	        Ui.println("You have attacked a " + Enemy.get().getName() + "!");
+	        Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
+	        Ui.println("----------------------------------------------------");
+	        Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
+	        Ui.println("Enemy health: " + Enemy.get().getHeathStr());
+	        Ui.println("----------------------------------------------------");
+	        Ui.pause();
+	
+	        if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
+	            Enemy.get().useFirstAidKit();
+	        }
         }
     }
 
