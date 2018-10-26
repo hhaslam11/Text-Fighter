@@ -10,6 +10,7 @@ public class Xp {
 
 	//Variables
     private static int xp;
+    private static int battleXp;
     private static int xpNeeded;
     private static int level;
 	public static int total;
@@ -57,6 +58,14 @@ public class Xp {
             set(leftOverXp, true);
 		}
 
+	}
+	
+	public static int getBattleXp() {
+		return battleXp;
+	}
+	
+	public static void setBattleXp(int amount) {
+		battleXp += amount;
 	}
 
 	public static void setLevel(int lvl){

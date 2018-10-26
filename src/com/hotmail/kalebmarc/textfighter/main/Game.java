@@ -134,6 +134,7 @@ public class Game {
 			Ui.println("7) Use Insta-Health");
 			Ui.println("8) Use POWER");
 			Ui.println("9) Quit Game (Game will automatically be saved)");
+			Ui.println("10) Run From Battle (You will lose any XP earned)");
 			Ui.println("------------------------------------------------------------------");
 
 			switch (Ui.getValidInt()) {
@@ -188,6 +189,9 @@ public class Game {
 				case 9:
 					Stats.timesQuit++;
 					return;
+				case 10:
+					
+					break;
 				case 0:
 					Cheats.cheatGateway();
 					break;
