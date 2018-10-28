@@ -1,6 +1,7 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Ui {
@@ -117,7 +118,7 @@ public class Ui {
      * @param msg
      */
     public static void msg(String msg) {//TODO use this instead throughout project
-        if (msg == null || msg == "") {
+        if (msg == null || msg.equals("")) {
             cls();
             pause();
         }
@@ -142,7 +143,7 @@ public class Ui {
         if (guiEnabled) {
             return JOptionPane.showConfirmDialog(null, body, title, JOptionPane.YES_NO_OPTION);
         } else {
-            Ui.cls();
+            cls();
             println(body);
             println("(Y/N)");
 
@@ -163,18 +164,26 @@ public class Ui {
             char input = valid.charAt(0);
             //-----------------------------------------------------
 
-            Ui.cls();
+            cls();
             if (input == 'Y') return 0;
             return 1;
         }
     }
 
     /*
-     * Clears the console
-	 */
+     * Clears the console by attempting to run either the 'cls' (Windows CMD) or
+     * 'clear' (Other terminals) command. If this is interrupted, the terminal
+     * will be brute-force cleared
+     */
     public static void cls() {
-        for (int i = 1; i < 50; i++) {
-            Ui.println("\n");
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        } catch (IOException | InterruptedException exception) {
+            for (int i = 1; i < 50; i++)
+                println("\n");
         }
     }
 
@@ -200,8 +209,8 @@ public class Ui {
 
             Scanner pauseScan = new Scanner(System.in);
             String temp = pauseScan.nextLine();
-            Ui.println(temp);
-		
+            println(temp);
+
 
         } catch (Exception e) {
             //Blank for a reason - Not supposed to do anything.
