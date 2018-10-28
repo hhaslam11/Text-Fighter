@@ -135,8 +135,8 @@ public class Game {
 			Ui.println("6) Eat Food");
 			Ui.println("7) Use Insta-Health");
 			Ui.println("8) Use POWER");
-			Ui.println("9) Quit Game (Game will automatically be saved)");
-			Ui.println("10) Run From Battle (You will lose any XP earned)");
+			Ui.println("9) Run From Battle (You will lose any XP earned)");
+			Ui.println("10) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
 
 			switch (Ui.getValidInt()) {
@@ -189,13 +189,13 @@ public class Game {
 					Power.use();
 					break;
 				case 9:
-					Stats.timesQuit++;
-					return;
-				case 10:
 					Ui.cls();
 					Ui.popup("You ran away from the battle.", "Ran Away", JOptionPane.INFORMATION_MESSAGE);
 					Enemy.encounterNew();
 					break;
+				case 10:
+					Stats.timesQuit++;
+					return;
 				case 0:
 					Cheats.cheatGateway();
 					break;
