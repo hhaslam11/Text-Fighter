@@ -33,3 +33,4 @@ Text Fighter.iml
 *.xml
 *.mf
 nbproject/
+.TFsave
