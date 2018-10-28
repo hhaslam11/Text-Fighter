@@ -67,6 +67,7 @@ public class Saves {
 		set("User.XP.Needed", Xp.getOutOf());
 		set("User.XP.Amount", Xp.get());
 		set("User.XP.Total", Xp.total);
+		set("User.XP.battleXp", Xp.getBattleXp());
 
 		//Potions
 		set("Stats.Potions.Survival.Used", Potion.spUsed);
@@ -217,6 +218,7 @@ public class Saves {
 		Xp.setOutOf(getInteger("User.XP.Needed"));
 		Xp.set(getInteger("User.XP.Amount"), false);
 		Xp.total = getInteger("User.XP.Total");
+		Xp.setBattleXp(getInteger("User.XP.battleXp"), false);
 
 		//Potions
 		Potion.spUsed = getInteger("Stats.Potions.Survival.Used");
@@ -420,6 +422,7 @@ public class Saves {
 			Xp.setOutOf(readInt());
 			Xp.set(readInt(), false);
 			Xp.total = readInt();
+			Xp.setBattleXp(readInt(), false);
 
 			//Potions
 			Potion.spUsed = readInt();

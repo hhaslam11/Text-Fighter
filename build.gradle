@@ -32,7 +32,7 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDirs 'src/com/hotmail/kalebmarc/textfighter'
+            srcDirs 'src'
         }
     }
 }

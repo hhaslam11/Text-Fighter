@@ -5,6 +5,8 @@ import com.hotmail.kalebmarc.textfighter.player.*;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
 import static com.hotmail.kalebmarc.textfighter.player.Health.upgrade;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
@@ -133,7 +135,8 @@ public class Game {
 			Ui.println("6) Eat Food");
 			Ui.println("7) Use Insta-Health");
 			Ui.println("8) Use POWER");
-			Ui.println("9) Quit Game (Game will automatically be saved)");
+			Ui.println("9) Run From Battle (You will lose any XP earned)");
+			Ui.println("10) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
 
 			switch (Ui.getValidInt()) {
@@ -186,6 +189,11 @@ public class Game {
 					Power.use();
 					break;
 				case 9:
+					Ui.cls();
+					Ui.popup("You ran away from the battle.", "Ran Away", JOptionPane.INFORMATION_MESSAGE);
+					Enemy.encounterNew();
+					break;
+				case 10:
 					Stats.timesQuit++;
 					return;
 				case 0:

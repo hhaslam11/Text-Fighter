@@ -3,8 +3,6 @@ package com.hotmail.kalebmarc.textfighter.main;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 
-import static sun.audio.AudioPlayer.player;
-
 public class Loan {
 
     private static final double INTEREST_RATE = 0.15;
