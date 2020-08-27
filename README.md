@@ -6,6 +6,12 @@ Text Fighter is a text-based RPG game. It's still in early development (Alpha st
 
 This is my first (and currently only "big") Java project, so this is meant as a learning experience for me. I've been lightly developing this over the past couple of years while I learn Java. 
 
+Contributing
+-------------
+I'm not actively developing this at the moment, but that doesn't mean the project is dead! Feel free to open PR's and I'll check them out! Whether you want to fix a small bug, or implement a new feature- all contributions are welcome and encouraged. Check out the [issues](https://github.com/hhaslam11/Text-Fighter/issues) if you're looking for some stuff to do!
+
+This project is very begginer friendly; I especially encourage new developers, or people learning java to contribute. I learned a lot developing this project, and hopefully you can learn from it as well! I'm always happy to give code-reviews or answer any questions; about the project, or about programming/java in general. Please don't hesitate to email me at `kalebmarc@hotmail.com`.
+
 
 Installation
 ----------------
