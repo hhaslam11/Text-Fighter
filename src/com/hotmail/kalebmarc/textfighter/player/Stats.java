@@ -25,6 +25,9 @@ public class Stats {
     public static int itemsCrafted;
     public static int diceGamesPlayed;
     public static int slotGamesPlayed;
+    public static int lotteryTicketsBought;
+    public static int lotteryWon;
+    public static int blackjackGamesPlayed;
     private static String killDeathRatio;
 
     private Stats() {
@@ -79,6 +82,9 @@ public class Stats {
         Ui.println("   Items Crafted - " + itemsCrafted);
         Ui.println("   Dice Games Played - " + diceGamesPlayed);
         Ui.println("   Slot Games Played - " + slotGamesPlayed);
+        Ui.println("   Blackjack Games Played - " + blackjackGamesPlayed);
+        Ui.println("   Lottery Tickets Bought - " + lotteryTicketsBought);
+        Ui.println("   Lotteries Won - " + lotteryWon);
         Ui.println();
         Ui.println("-------------------------------------------------");
         Ui.pause();
