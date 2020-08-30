@@ -9,7 +9,7 @@ public class DiceGame extends BasicCasinoGame{
 
     public DiceGame() {
         super("------------------------------------------------------------------\n" +
-                "                                Slots                             \n" +
+                "                                Dice Game                            \n" +
                 "------------------------------------------------------------------",
                 "You will pick two numbers between 1, and 6.\n" +
                 "Two dice will be rolled. If one of the dice matches one of your   \n" +
