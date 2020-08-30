@@ -6,14 +6,14 @@ import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 
 public abstract class BasicCasinoGame {
-    private final String description;
     private final String header;
+    private final String description;
     private final String options; //Options are the menu options presented to the player
     protected final GameType gameType;
 
-    protected BasicCasinoGame(String description, String header, String options, GameType gameType) {
-        this.description = description;
+    protected BasicCasinoGame(String header, String description, String options, GameType gameType) {
         this.header = header;
+        this.description = description;
         this.options = options;
         this.gameType = gameType;
     }

@@ -1,6 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-class Random {
+public class Random {
     private Random() {
     }
 
