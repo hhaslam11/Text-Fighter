@@ -65,8 +65,6 @@ public abstract class BasicCasinoGame {
                             break;
                         case BLACKJACK:
                             Stats.blackjackGamesPlayed++;
-                        case LOTTO:
-                            Stats.lotteryTicketsBought++;
                     }
 
                     Ui.pause();
