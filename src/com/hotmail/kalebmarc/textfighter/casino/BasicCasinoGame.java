@@ -27,9 +27,13 @@ public abstract class BasicCasinoGame {
     public abstract int play(int selection);
 
     /**
-     * Starts the game loop. Ui pauses automatically after each playthrough
+     * Starts the game loop. Ui pauses automatically after each playthrough. The exit option is determined by the getExitEntry() method
      */
     public void start(){
+        this.start(getExitEntry());
+    }
+
+    private void start(int exitOption){
         while (true) {
             Ui.cls();
             Ui.println(header);
@@ -44,37 +48,41 @@ public abstract class BasicCasinoGame {
 
             int menuChoice = Ui.getValidInt();
 
-            switch (menuChoice) {
-                case 1:
-                    int coinsWon = play(menuChoice); // Determines what to do after a played game
-                    if(coinsWon >= 0){
-                        Coins.set(coinsWon, true);
-                        Casino.totalCoinsWon += coinsWon;
-                        Casino.gamesPlayed++;
+            if (menuChoice < exitOption && menuChoice > 0) {
+                int coinsWon = play(menuChoice); // Determines what to do after a played game
+                if (coinsWon >= 0) {
+                    Coins.set(coinsWon, true);
+                    Casino.totalCoinsWon += coinsWon;
+                    if (!gameType.equals(GameType.LOTTO))
+                        Casino.gamesPlayed++; // Only increases stat for playable games
 
-                        switch (gameType){ // Determines which stat to increase
-                            case DICE:
-                                Stats.diceGamesPlayed++;
-                                break;
-                            case SLOTS:
-                                Stats.slotGamesPlayed++;
-                                break;
-                            case BLACKJACK:
-                                Stats.blackjackGamesPlayed++;
-                            case LOTTO:
-                                Stats.lotteryTicketsBought++;
-                        }
-
-                        Ui.pause();
+                    switch (gameType) { // Determines which stat to increase
+                        case DICE:
+                            Stats.diceGamesPlayed++;
+                            break;
+                        case SLOTS:
+                            Stats.slotGamesPlayed++;
+                            break;
+                        case BLACKJACK:
+                            Stats.blackjackGamesPlayed++;
+                        case LOTTO:
+                            Stats.lotteryTicketsBought++;
                     }
-                    break;
-                case 2:
-                    return;
-                default:
-                    break;
+
+                    Ui.pause();
+                }
+            } else if (menuChoice == exitOption) {
+                return;
             }
         }
     }
+
+    /**
+     *  Used to determine the exit entry of the game menu. All options numerically below this one are
+     *  given to the play function.
+     * @return int The option the user has to pick in order to exit to the casino menu
+     */
+    protected abstract int getExitEntry();
 
     public String getDescription() {
         return description;
