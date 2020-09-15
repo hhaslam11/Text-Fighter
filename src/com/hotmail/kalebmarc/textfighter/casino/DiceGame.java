@@ -101,4 +101,9 @@ public class DiceGame extends BasicCasinoGame{
         Ui.println("Coins Won: " + coinsWon);
         return coinsWon;
     }
+
+    @Override
+    protected int getExitEntry() {
+        return 2;
+    }
 }

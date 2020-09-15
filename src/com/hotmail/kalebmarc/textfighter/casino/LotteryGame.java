@@ -20,4 +20,9 @@ public class LotteryGame extends BasicCasinoGame{
     public int play(int selection) {
         return 0;
     }
+
+    @Override
+    protected int getExitEntry() {
+        return 3;
+    }
 }
