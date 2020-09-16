@@ -53,12 +53,16 @@ public class Saves {
 		set("Bank.Balance", Bank.get());
 		set("Casino.Winnings", Casino.totalCoinsWon);
 		set("Casino.Plays", Casino.gamesPlayed);
+		set("Casino.Lottery.Bought_Tickets", Casino.LOTTERY.getTicketsBought());
 		set("Achievements.Bought_Item", Achievements.boughtItem);
 		set("Stats.Money_Spent.Coins", Stats.totalCoinsSpent);
 		set("Stats.Money_Spent.Interest", Stats.coinsSpentOnBankInterest);
 		set("Stats.Money_Spent.Weapons", Stats.coinsSpentOnWeapons);
 		set("Stats.Money_Spent.Health", Stats.coinsSpentOnHealth);
 		set("Stats.Money_Spent.XP", Stats.xpBought);
+		set("Stats.Blackjack_Games_Played", Stats.blackjackGamesPlayed);
+		set("Stats.Lottery_Tickets_Bought", Stats.lotteryTicketsBought);
+		set("Stats.Lottery_Won", Stats.lotteryWon);
 		set("Bank.Current_Loan.Balance", Loan.getCurrentLoan());
 		set("Bank.Current_Loan.Due", Loan.getNetDue());
 
@@ -139,6 +143,7 @@ public class Saves {
 		set("Achievements.Nobodys_Perfect", Achievements.nobodysPerfect);
 		set("Achievements.Making_Money", Achievements.makingMoney);
 		set("Achievements.Gambling_Addiction", Achievements.gamblingAddiction);
+		set("Achievements.Unnatural_Luck", Achievements.unnaturalLuck);
 		set("Achievements.Level_2_Fighter", Achievements.level2Fighter);
 		set("Achievements.Level_3_Fighter", Achievements.level3Fighter);
 		set("Achievements.Level_4_Fighter", Achievements.level4Fighter);
@@ -204,12 +209,16 @@ public class Saves {
 		Bank.set(getInteger("Bank.Balance"), false);
 		Casino.totalCoinsWon = getInteger("Casino.Winnings");
 		Casino.gamesPlayed = getInteger("Casino.Plays");
+		Casino.LOTTERY.setTicketsBought(getInteger("Casino.Lottery.Bought_Tickets"));
 		Achievements.boughtItem = getBoolean("Achievements.Bought_Item");
 		Stats.totalCoinsSpent = getInteger("Stats.Money_Spent.Coins");
 		Stats.coinsSpentOnBankInterest = getInteger("Stats.Money_Spent.Interest");
 		Stats.coinsSpentOnWeapons = getInteger("Stats.Money_Spent.Weapons");
 		Stats.coinsSpentOnHealth = getInteger("Stats.Money_Spent.Health");
 		Stats.xpBought = getInteger("Stats.Money_Spent.XP");
+		Stats.blackjackGamesPlayed = getInteger("Stats.Blackjack_Games_Played");
+		Stats.lotteryTicketsBought = getInteger("Stats.Lottery_Tickets_Bought");
+		Stats.lotteryWon = getInteger("Stats.Lottery_Won");
 		Loan.setCurrentLoan(getInteger("Bank.Current_Loan.Balance"));
 		Loan.setNetDue(getInteger("Bank.Current_Loan.Due"));
 
@@ -285,6 +294,7 @@ public class Saves {
 		Achievements.slayer             = getBoolean("Achievements.Slayer");
 		Achievements.nobodysPerfect     = getBoolean("Achievements.Nobodys_Perfect");
 		Achievements.makingMoney        = getBoolean("Achievements.Making_Money");
+		Achievements.unnaturalLuck 		= getBoolean("Achievements.Unnatural_Luck");
 		Achievements.gamblingAddiction  = getBoolean("Achievements.Gabling_Addiction");
 		Achievements.level2Fighter      = getBoolean("Achievements.Level_2_Fighter");
 		Achievements.level3Fighter      = getBoolean("Achievements.Level_3_Fighter");
