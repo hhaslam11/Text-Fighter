@@ -65,6 +65,10 @@ public abstract class BasicCasinoGame {
                             break;
                         case BLACKJACK:
                             Stats.blackjackGamesPlayed++;
+                            break;
+                        case LOTTO:
+                            if(coinsWon >= 1000)
+                                Stats.lotteryWon++; // Lotteries only count as won, when the amount of won coins exceeds 100
                     }
 
                     Ui.pause();
