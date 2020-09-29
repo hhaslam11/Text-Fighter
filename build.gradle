@@ -7,10 +7,11 @@
  */
 
 // Apply the java plugin to add support for Java
-apply plugin: 'java'
-
 // Apply the application plugin to add support for building an application
-apply plugin: 'application'
+plugins {
+    id 'java'
+    id 'application'
+}
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -48,3 +49,7 @@ jar{
     }
 }
 
+// Resolves the input problem during Gradle run
+run{
+    standardInput = System.in
+}

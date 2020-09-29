@@ -1,7 +1,9 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
-import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.main.*;
+import com.hotmail.kalebmarc.textfighter.main.Casino;
+import com.hotmail.kalebmarc.textfighter.main.Cheats;
+import com.hotmail.kalebmarc.textfighter.main.Enemy;
+import com.hotmail.kalebmarc.textfighter.main.Ui;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ public class Achievements {
     public static final ArrayList<Boolean> arrayKilled = new ArrayList<>();
     private static final ArrayList<Enemy> arrayEnemy = new ArrayList<>();
     /* Achievements
-     * 31 Total
+     * 22 Total
      *
      * Booleans to check if the
      * achievement has been unlocked
@@ -27,6 +29,7 @@ public class Achievements {
     public static boolean nobodysPerfect = false;
     public static boolean makingMoney = false;
     public static boolean gamblingAddiction = false;
+    public static boolean unnaturalLuck = false;
     public static boolean level2Fighter = false;
     public static boolean level3Fighter = false;
     public static boolean level4Fighter = false;
@@ -58,8 +61,8 @@ public class Achievements {
         //Displays which achievements the user has gotten
         Ui.cls();
 
-        boolean ach[] = new boolean[21];
-        String strAch[] = new String[21];
+        boolean[] ach = new boolean[22];
+        String[] strAch = new String[22];
         ach[0] = moneyMaker;
         strAch[0] = "Money Maker";
 
@@ -123,6 +126,9 @@ public class Achievements {
         ach[20] = honestPlayer;
         strAch[20] = "Honest Player";
 
+        ach[21] = unnaturalLuck;
+        strAch[21] = "Unnatural Luck";
+
         Ui.println("---------------------------------------");
         Ui.println("Achievements");
         Ui.println();
@@ -175,6 +181,7 @@ public class Achievements {
             if (!nobodysPerfect) checkNobodysPerfect();
             if (!makingMoney) checkMakingMoney();
             if (!gamblingAddiction) checkGamblingAddiction();
+            if (!unnaturalLuck) checkUnnaturalLuck();
             if (!level2Fighter) checkLevel2Fighter();
             if (!level3Fighter) checkLevel3Fighter();
             if (!level4Fighter) checkLevel4Fighter();
@@ -200,6 +207,13 @@ public class Achievements {
         //Displays that you've gotten an achievement
         Ui.popup("You've got an achievement! \n\n" + ach, "Achievement", JOptionPane.INFORMATION_MESSAGE);
         Xp.set(100, true);
+    }
+
+    private static void checkUnnaturalLuck() {
+        if(Casino.LOTTERY.getJackpotWon()){
+            unnaturalLuck = true;
+            get("Unnatural Luck");
+        }
     }
 
     private static void checkMoneyMaker() {

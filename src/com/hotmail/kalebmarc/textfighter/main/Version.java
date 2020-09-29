@@ -1,7 +1,7 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
 class Version {
-    private static final String VERSION = "4.8DEV";
+    private static final String VERSION = "4.9DEV";
     private static final String STAGE = "Alpha";
     private static final String DESC = "" //Award for "worse game description" goes to:
             //But seriously; add information that the user actually cares about
@@ -15,8 +15,8 @@ class Version {
             + "(Not compatible with previous saves)\n\n"
 
             + "New Stuff:\n"
-            + "-\n"
-            + "-\n"
+            + "- Added new casino game: Lottery\n"
+            + "- Added new casino game: Blackjack\n"
             + "-\n"
             + "-\n"
             + "-\n\n"
