@@ -5,22 +5,22 @@ import com.hotmail.kalebmarc.textfighter.main.Random;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 
-public class SlotsGame extends BasicCasinoGame{
+public class SlotsGame extends BasicCasinoGame {
 
     public SlotsGame() {
         super("------------------------------------------------------------------\n" +
-                "                                Slots                             \n" +
-                "------------------------------------------------------------------",
+                        "                                Slots                             \n" +
+                        "------------------------------------------------------------------",
                 "You will pick an amount of coins to bet. Then, 4 slots will spin, \n" +
-                "each containing 5 possibilities. You'll win coins depending on how\n" +
-                "much of the same item you spin.                                   \n" +
+                        "each containing 5 possibilities. You'll win coins depending on how\n" +
+                        "much of the same item you spin.                                   \n" +
                         "\n" +
-                "0 the same : Lose amount you bet                                  \n" +
-                "2 the same : Lose amount you bet                                  \n" +
-                "3 the same : Win 4 times the amount you bet                       \n" +
-                "4 the same : Win 8 times the amount you bet                       ",
+                        "0 the same : Lose amount you bet                                  \n" +
+                        "2 the same : Lose amount you bet                                  \n" +
+                        "3 the same : Win 4 times the amount you bet                       \n" +
+                        "4 the same : Win 8 times the amount you bet                       ",
                 "1) Let's play!                                                    \n" +
-                "2) Back to casino menu                                            ",
+                        "2) Back to casino menu                                            ",
                 GameType.SLOTS);
     }
 

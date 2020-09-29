@@ -6,10 +6,10 @@ import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 
 public abstract class BasicCasinoGame {
+    protected final GameType gameType;
     private final String header;
     private final String description;
     private final String options; //Options are the menu options presented to the player
-    protected final GameType gameType;
 
     protected BasicCasinoGame(String header, String description, String options, GameType gameType) {
         this.header = header;
@@ -29,11 +29,11 @@ public abstract class BasicCasinoGame {
     /**
      * Starts the game loop. Ui pauses automatically after each playthrough. The exit option is determined by the getExitEntry() method
      */
-    public void start(){
+    public void start() {
         this.start(getExitEntry());
     }
 
-    private void start(int exitOption){
+    private void start(int exitOption) {
         while (true) {
             Ui.cls();
             Ui.println(header);
@@ -67,7 +67,7 @@ public abstract class BasicCasinoGame {
                             Stats.blackjackGamesPlayed++;
                             break;
                         case LOTTO:
-                            if(coinsWon >= 1000)
+                            if (coinsWon >= 1000)
                                 Stats.lotteryWon++; // Lotteries only count as won, when the amount of won coins exceeds 100
                     }
 
@@ -80,8 +80,9 @@ public abstract class BasicCasinoGame {
     }
 
     /**
-     *  Used to determine the exit entry of the game menu. All options numerically below this one are
-     *  given to the play function.
+     * Used to determine the exit entry of the game menu. All options numerically below this one are
+     * given to the play function.
+     *
      * @return int The option the user has to pick in order to exit to the casino menu
      */
     protected abstract int getExitEntry();

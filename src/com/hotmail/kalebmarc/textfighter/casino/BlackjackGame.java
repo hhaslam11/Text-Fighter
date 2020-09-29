@@ -73,77 +73,79 @@ public class BlackjackGame extends BasicCasinoGame {
 
     /**
      * Lets the player play his round of blackjack
+     *
      * @return int Score achieved by player. Scores above 21 will result in 0
      */
     private int playerTurn() {
-         List<Card> drawnCards = new LinkedList<>();
-         boolean exit = false;
+        List<Card> drawnCards = new LinkedList<>();
+        boolean exit = false;
 
-         // Ask the player to draw more cards
-         do{
-             // Draw cards
-             Card drawn = drawCard();
-             drawnCards.add(drawn);
-             Ui.cls();
-             Ui.println("You drew a " + drawn.getName());
-             Ui.pause();
+        // Ask the player to draw more cards
+        do {
+            // Draw cards
+            Card drawn = drawCard();
+            drawnCards.add(drawn);
+            Ui.cls();
+            Ui.println("You drew a " + drawn.getName());
+            Ui.pause();
 
-             // Shows current cards and drawn cards
-             Ui.cls();
-             Ui.println(getHeader());
-             Ui.println();
-             Ui.print("Cards:");
-             // Draw every card
-             for(int i = 0; i < drawnCards.size(); i++){
-                 Ui.print(" " + drawnCards.get(i));
-                 if(i+1 < drawnCards.size()){
-                     Ui.print(",");
-                 }
-             }
-             // Value of cards
-             Ui.println("Value: " + highestPossibleValue(drawnCards));
-             Ui.println();
+            // Shows current cards and drawn cards
+            Ui.cls();
+            Ui.println(getHeader());
+            Ui.println();
+            Ui.print("Cards:");
+            // Draw every card
+            for (int i = 0; i < drawnCards.size(); i++) {
+                Ui.print(" " + drawnCards.get(i));
+                if (i + 1 < drawnCards.size()) {
+                    Ui.print(",");
+                }
+            }
+            // Value of cards
+            Ui.println("Value: " + highestPossibleValue(drawnCards));
+            Ui.println();
 
-             // Check for too much points
-             if(highestPossibleValue(drawnCards) > 21){
-                 Ui.println("Unfortunately you got more than 21 points, resulting in a total of 0 points!");
-                 Ui.pause();
-                 break;
-             }else {
-                 Ui.println("Would you like to draw another card?");
-                 Ui.println("1) Take another card");
-                 Ui.println("2) Stop taking cards");
-             }
+            // Check for too much points
+            if (highestPossibleValue(drawnCards) > 21) {
+                Ui.println("Unfortunately you got more than 21 points, resulting in a total of 0 points!");
+                Ui.pause();
+                break;
+            } else {
+                Ui.println("Would you like to draw another card?");
+                Ui.println("1) Take another card");
+                Ui.println("2) Stop taking cards");
+            }
 
-             // Input
-             boolean quitInput = false;
-             while(!quitInput) {
-                 int menuChoice = Ui.getValidInt();
+            // Input
+            boolean quitInput = false;
+            while (!quitInput) {
+                int menuChoice = Ui.getValidInt();
 
-                 switch (menuChoice) {
-                     case 1:
-                         quitInput = true;
-                         break;
-                     case 2:
-                         exit = true;
-                         quitInput = true;
-                         break;
-                     default:
-                         break;
-                 }
-             }
+                switch (menuChoice) {
+                    case 1:
+                        quitInput = true;
+                        break;
+                    case 2:
+                        exit = true;
+                        quitInput = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-         }while(!exit);
+        } while (!exit);
 
-         if(highestPossibleValue(drawnCards) > 21){
-             return 0;
-         }else{
-             return highestPossibleValue(drawnCards);
-         }
+        if (highestPossibleValue(drawnCards) > 21) {
+            return 0;
+        } else {
+            return highestPossibleValue(drawnCards);
+        }
     }
 
     /**
      * The computer plays his round, progress is shown to the player
+     *
      * @return int Score achieved by the casino. Scores above 21 will result in 0
      */
     private int CasinoTurn() {
@@ -151,7 +153,7 @@ public class BlackjackGame extends BasicCasinoGame {
         boolean exit = false;
 
         // Determine to draw more cards
-        do{
+        do {
             // Draw cards
             Card drawn = drawCard();
             drawnCards.add(drawn);
@@ -165,9 +167,9 @@ public class BlackjackGame extends BasicCasinoGame {
             Ui.println();
             Ui.print("Casino's cards:");
             // Draw every card
-            for(int i = 0; i < drawnCards.size(); i++){
+            for (int i = 0; i < drawnCards.size(); i++) {
                 Ui.print(" " + drawnCards.get(i));
-                if(i+1 < drawnCards.size()){
+                if (i + 1 < drawnCards.size()) {
                     Ui.print(",");
                 }
             }
@@ -176,29 +178,29 @@ public class BlackjackGame extends BasicCasinoGame {
             Ui.println();
 
             // Check for too much points
-            if(highestPossibleValue(drawnCards) > 21){
+            if (highestPossibleValue(drawnCards) > 21) {
                 Ui.println("The casino drew more than a total of 21, resulting in its loss!");
                 Ui.pause();
                 break;
             }
 
             // Simple "AI" to determine the exit condition
-            if(highestPossibleValue(drawnCards) > 17){
+            if (highestPossibleValue(drawnCards) > 17) {
                 exit = true;
                 Ui.println("The casino stopped playing!");
 
-            }else if(highestPossibleValue(drawnCards) > 15) {
+            } else if (highestPossibleValue(drawnCards) > 15) {
                 if (Math.random() < 0.5D) {
                     exit = true;
                     Ui.println("The casino stopped playing!");
                 }
             }
 
-        }while(!exit);
+        } while (!exit);
 
-        if(highestPossibleValue(drawnCards) > 21){
+        if (highestPossibleValue(drawnCards) > 21) {
             return 0;
-        }else{
+        } else {
             return highestPossibleValue(drawnCards);
         }
     }
@@ -209,19 +211,19 @@ public class BlackjackGame extends BasicCasinoGame {
      * @param cards the Card List the value should be determined from
      * @return int The whole value including * cards
      */
-    private int highestPossibleValue(List<Card> cards){
+    private int highestPossibleValue(List<Card> cards) {
         int value = 0;
         int assCounter = 0;
 
         // Calculate the value without taking * into account
-        for(Card card : cards){
+        for (Card card : cards) {
             value += card.getValue();
-            if(card.getName().equals("*")) assCounter++;
+            if (card.getName().equals("*")) assCounter++;
         }
 
         // Subtracts value of *
-        for(int i = 0; i < assCounter; i++){
-            if(value <= 21)
+        for (int i = 0; i < assCounter; i++) {
+            if (value <= 21)
                 break;
             value -= 10;
         }
@@ -231,9 +233,10 @@ public class BlackjackGame extends BasicCasinoGame {
 
     /**
      * Helper method to draw cards.
+     *
      * @return Card random card drawn
      */
-    private Card drawCard(){
+    private Card drawCard() {
         return cardStack.pop();
     }
 
@@ -262,7 +265,7 @@ public class BlackjackGame extends BasicCasinoGame {
         return 2;
     }
 
-    private static class Card{
+    private static class Card {
         private final int value;
         private final String name;
 

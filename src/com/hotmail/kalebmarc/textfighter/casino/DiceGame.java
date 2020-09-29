@@ -5,20 +5,20 @@ import com.hotmail.kalebmarc.textfighter.main.Random;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 
-public class DiceGame extends BasicCasinoGame{
+public class DiceGame extends BasicCasinoGame {
 
     public DiceGame() {
         super("------------------------------------------------------------------\n" +
-                "                                Dice Game                            \n" +
-                "------------------------------------------------------------------",
+                        "                                Dice Game                            \n" +
+                        "------------------------------------------------------------------",
                 "You will pick two numbers between 1, and 6.\n" +
-                "Two dice will be rolled. If one of the dice matches one of your   \n" +
-                "numbers, you will win double the coins you bet. If both dice      \n" +
-                "matches both of your numbers, you will win 5 times the amount     \n" +
-                "of coins you bet. If none of the dice matches either of your      \n" +
-                "numbers, then you lose all your coins that you have bet.          ",
+                        "Two dice will be rolled. If one of the dice matches one of your   \n" +
+                        "numbers, you will win double the coins you bet. If both dice      \n" +
+                        "matches both of your numbers, you will win 5 times the amount     \n" +
+                        "of coins you bet. If none of the dice matches either of your      \n" +
+                        "numbers, then you lose all your coins that you have bet.          ",
                 "1) Let's play!                                                    \n" +
-                "2) Back to casino menu                                            ",
+                        "2) Back to casino menu                                            ",
                 GameType.DICE);
     }
 
