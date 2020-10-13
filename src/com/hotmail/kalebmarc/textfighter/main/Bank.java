@@ -3,11 +3,13 @@ package com.hotmail.kalebmarc.textfighter.main;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
+import com.hotmail.kalebmarc.textfighter.domain.*;
 
 public class Bank {
 
-    private static double interest;
-    private static int balance;
+//    private static double interest;
+//    private static int balance;
+      public static GameEntity gameEntity;
 
     public static void menu() {
 
@@ -28,7 +30,7 @@ public class Bank {
             Ui.println("You can deposit your coins into");
             Ui.println("the bank, so they will be safe if");
             Ui.println("you die. However, you will need to");
-            Ui.println("pay " + (interest * 100) + "% of what you're depositing");
+            Ui.println("pay " + (gameEntity.getBankInterest() * 100) + "% of what you're depositing");
             Ui.println("every time (Rounded to the nearest ");
             Ui.println("whole number).");
             Ui.println();
@@ -48,7 +50,7 @@ public class Bank {
                         Ui.msg("You can not deposit coins until you pay off your loan!");
                         break;
                     }
-                    Ui.println("How much money would you like to deposit? (You will have to pay " + (interest * 100) + "% of this)");
+                    Ui.println("How much money would you like to deposit? (You will have to pay " + (gameEntity.getBankInterest() * 100) + "% of this)");
                     Ui.println("You currently have " + Coins.get() + " coins.");
                     do {
                         amount = Ui.getValidInt();
@@ -60,7 +62,7 @@ public class Bank {
                     if (amount == 0) return;
 
                     //Deposit
-                    deposit(amount, interest);
+                    deposit(amount, gameEntity.getBankInterest());
                     //-----------------------------------------------------------------------------------
                     break;
                 case 2:
@@ -69,11 +71,11 @@ public class Bank {
 
                     //Input
                     Ui.println("How much money would you like to withdraw?");
-                    Ui.println("You currently have " + get() + " coins in your bank.");
+                    Ui.println("You currently have " + getBalance() + " coins in your bank.");
                     do {
                         amount = Ui.getValidInt();
                         if (amount > get()) {
-                            Ui.println("You don't have enough coins in your bank. You only have " + get() + " coins.");
+                            Ui.println("You don't have enough coins in your bank. You only have " + getBalance() + " coins.");
                             amount = -1;
                         }
                     } while (amount < 0);
@@ -91,32 +93,34 @@ public class Bank {
         }
     }
 
-    public static int get() {
-        return balance;
+    public static int getBalance() {
+        return gameEntity.getBankBalance();
     }
 
-    public static void set(int amount, boolean add) {
+    public static void setBalance(int amount, boolean add) {
         if (!add) {
-            balance = amount;
+            gameEntity.setBankBalance()= amount;
         } else {
+            int balance = gameEntity.getBankBalance();
             balance += amount;
             if (balance < 0) balance = 0;
+            gameEntity.setBankBalance();
         }
     }
 
     public static void setInterest(double price) {
-        interest = price;
+       gameEntity.setBankInterest(price);
     }
 
     private static void withdraw(int amount) {
         //Calculation
-        Coins.set(amount, true);
+        Coins.setBalance(amount, true);
         set(-amount, true);
 
         //Result
         Ui.cls();
         Ui.println("Amount withdrawn: " + amount);
-        Ui.println("Current Balance: " + get());
+        Ui.println("Current Balance: " + getBalance());
         Ui.pause();
     }
 
@@ -135,13 +139,13 @@ public class Bank {
         Stats.coinsSpentOnBankInterest += Math.round(interest);
 
         //Add remaining coins to bank account
-        set(amount, true);
+        setBalance(amount, true);
 
         //Display
         Ui.cls();
         Ui.println("Amount Deposited: " + amount + " coins");
         Ui.println("Interest Paid: " + Math.round(interest) + " coins");
-        Ui.println("Current Balance: " + get() + " coins");
+        Ui.println("Current Balance: " + getBalance() + " coins");
         Ui.pause();
     }
 }

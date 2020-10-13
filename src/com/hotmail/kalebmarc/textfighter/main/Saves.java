@@ -50,7 +50,7 @@ public class Saves {
 
 		//Coins
 		set("User.Balance", Coins.get());
-		set("Bank.Balance", Bank.get());
+		set("Bank.Balance", Bank.getBalance());
 		set("Casino.Winnings", Casino.totalCoinsWon);
 		set("Casino.Plays", Casino.gamesPlayed);
 		set("Casino.Lottery.Bought_Tickets", Casino.LOTTERY.getTicketsBought());
@@ -206,7 +206,7 @@ public class Saves {
 
 		//Coins
 		Coins.set(getInteger("User.Balance"), false);
-		Bank.set(getInteger("Bank.Balance"), false);
+		Bank.setBalance(getInteger("Bank.Balance"), false);
 		Casino.totalCoinsWon = getInteger("Casino.Winnings");
 		Casino.gamesPlayed = getInteger("Casino.Plays");
 		Casino.LOTTERY.setTicketsBought(getInteger("Casino.Lottery.Bought_Tickets"));
@@ -415,7 +415,7 @@ public class Saves {
 
 			//Coins
 			Coins.set(readInt(), false);
-			Bank.set(readInt(), false);
+			Bank.setBalance(readInt(), false);
 			Casino.totalCoinsWon = readInt();
 			Casino.gamesPlayed = readInt();
 			Achievements.boughtItem = readBoolean();

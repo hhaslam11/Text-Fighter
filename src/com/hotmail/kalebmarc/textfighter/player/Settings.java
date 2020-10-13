@@ -9,7 +9,8 @@ public class Settings {
 
     public static boolean difLocked = false;
     private static String difficulty;
-    private static boolean godMode = false;
+    private static boolean godMode = false;interest
+
 
     private Settings() {
     }
