@@ -17,7 +17,7 @@ class Version {
             + "New Stuff:\n"
             + "- Added new casino game: Lottery\n"
             + "- Added new casino game: Blackjack\n"
-            + "-\n"
+            + "- Updated information: Health\n"
             + "-\n"
             + "-\n\n"
 
