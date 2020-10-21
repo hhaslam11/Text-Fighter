@@ -181,7 +181,8 @@ public class Saves {
 		setup();
 
 		FileReader reader = read(saveLocation);
-
+		System.out.println(path);
+		System.out.println(saveLocation);
 		if (reader == null) {
 			Ui.cls();
 			Ui.println("------------------------------");
