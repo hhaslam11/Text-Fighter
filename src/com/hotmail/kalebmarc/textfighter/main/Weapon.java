@@ -198,6 +198,7 @@ public class Weapon {
 
                 for (int i = 1; i <= this.ammoUsed; i++) {
                     if (Random.RInt(100) > this.chanceOfMissing) {
+                        //Add critical hit chance here
                         damageDealt += BULLET_DAMAGE;
                         Stats.bulletsThatHit++;
                     }
@@ -220,6 +221,7 @@ public class Weapon {
 	        Ui.cls();
 	        Ui.println("----------------------------------------------------");
 	        Ui.println("You have attacked a " + Enemy.get().getName() + "!");
+	        // will need to add a conditional to check wether critical hit or not to display correct message
 	        Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
 	        Ui.println("----------------------------------------------------");
 	        Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
