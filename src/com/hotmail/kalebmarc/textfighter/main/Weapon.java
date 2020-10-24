@@ -253,6 +253,17 @@ public class Weapon {
 
     }
 
+    // Standard setter for criticalChance
+    // Can be used for future enhancements like weapon upgrades
+    public void setCriticalChance(double chance){
+        this.criticalChance = chance;
+    }
+
+    // Standard getter for criticalChance
+    public double getCriticalChance(){
+        return this.criticalChance;
+    }
+
     // Displays the damage dealt to console
     public void displayDamageDealt(int damageDealt, boolean didCritical){
         //Display stuff
