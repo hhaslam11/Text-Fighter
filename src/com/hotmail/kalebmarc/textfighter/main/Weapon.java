@@ -211,6 +211,7 @@ public class Weapon {
     public void dealDam() {
         int damageDealt = 0;
         boolean didCritical = false;
+
         if (this.melee) {
             /*
              * Melee Attack
@@ -225,7 +226,7 @@ public class Weapon {
 
                 for (int i = 1; i <= this.ammoUsed; i++) {
                     if (Random.RInt(100) > this.chanceOfMissing) {
-                        //Add critical hit chance here
+                        // Check if its a critical hit
                         didCritical = didCriticalHit();
                         if (didCritical) {
                             damageDealt += BULLET_DAMAGE * 10;
@@ -248,14 +249,21 @@ public class Weapon {
             }
         }
 
+        displayDamageDealt(damageDealt, didCritical);
+
+    }
+
+    // Displays the damage dealt to console
+    public void displayDamageDealt(int damageDealt, boolean didCritical){
         //Display stuff
         com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += damageDealt;
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(damageDealt, true);
         if(!Enemy.get().takeDamage(damageDealt)) { // !dead
-	        Ui.cls();
-	        Ui.println("----------------------------------------------------");
-	        Ui.println("You have attacked a " + Enemy.get().getName() + "!");
-	        // Conditional to check whether critical hit or not to display correct message
+            Ui.cls();
+            Ui.println("----------------------------------------------------");
+            Ui.println("You have attacked a " + Enemy.get().getName() + "!");
+
+            // Conditional to check whether critical hit or not to display correct message
             if(didCritical)
             {
                 Ui.print("Critical hit!");
@@ -263,17 +271,18 @@ public class Weapon {
             }else{
                 Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
             }
-	        Ui.println("----------------------------------------------------");
-	        Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
-	        Ui.println("Enemy health: " + Enemy.get().getHeathStr());
-	        Ui.println("----------------------------------------------------");
-	        Ui.pause();
-	
-	        if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
-	            Enemy.get().useFirstAidKit();
-	        }
-        } 
+            Ui.println("----------------------------------------------------");
+            Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
+            Ui.println("Enemy health: " + Enemy.get().getHeathStr());
+            Ui.println("----------------------------------------------------");
+            Ui.pause();
+
+            if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
+                Enemy.get().useFirstAidKit();
+            }
+        }
     }
+
 
     // Checks whether to perform critical hit or not
     public boolean didCriticalHit()
