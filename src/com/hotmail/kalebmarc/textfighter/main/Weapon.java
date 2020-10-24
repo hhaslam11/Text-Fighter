@@ -23,6 +23,7 @@ public class Weapon {
     public boolean owns;
     private int damageMin;
     private int damageMax;
+    private double criticalChance = .01;  // % chance of critical hit
     private double chanceOfMissing;
     private String name;
     private boolean buyable;
@@ -44,6 +45,31 @@ public class Weapon {
         this.level = level;
         this.chanceOfMissing = chanceOfMissing;
         this.melee = false;
+
+        if (!changeDif) {
+            arrayWeapon.add(this);
+        }
+
+        if (firstInit) {
+            this.owns = false;
+
+        }
+
+    }
+
+    public Weapon(String name, int ammoUsed, int ammoIncludedWithPurchase, boolean buyable, int price, //For guns
+                  int ammoPrice, int level, double chanceOfMissing, boolean firstInit, boolean changeDif, double criticalChance) {
+
+        this.name = name;
+        this.ammoUsed = ammoUsed;
+        this.ammoIncludedWithPurchase = ammoIncludedWithPurchase;
+        this.buyable = buyable;
+        this.price = price;
+        this.ammoPrice = ammoPrice;
+        this.level = level;
+        this.chanceOfMissing = chanceOfMissing;
+        this.melee = false;
+        this.criticalChance = criticalChance;
 
         if (!changeDif) {
             arrayWeapon.add(this);
