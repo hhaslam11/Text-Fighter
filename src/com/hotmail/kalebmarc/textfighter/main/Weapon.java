@@ -256,7 +256,13 @@ public class Weapon {
     // Standard setter for criticalChance
     // Can be used for future enhancements like weapon upgrades
     public void setCriticalChance(double chance){
-        this.criticalChance = chance;
+        // Set a default to not go under 0
+        if(chance < 0)
+        {
+            this.criticalChance = .01;
+        }else{
+            this.criticalChance = chance;
+        }
     }
 
     // Standard getter for criticalChance
