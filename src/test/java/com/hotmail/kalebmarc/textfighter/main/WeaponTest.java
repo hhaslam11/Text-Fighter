@@ -1,8 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
 import com.hotmail.kalebmarc.textfighter.player.Stats;
-import com.hotmail.kalebmarc.textfighter.main.Enemy;
-
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 import org.junit.Before;
 import org.junit.Test;
