@@ -3,10 +3,13 @@ package com.hotmail.kalebmarc.textfighter.main;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WeaponTest {
     Weapon rifle;
     Weapon pistol;
@@ -19,19 +22,19 @@ public class WeaponTest {
         pistol = new Weapon("Pistol", 1, 18, true, 250, 1, 4, 0, true, true);
         pistol.setAmmo(10,true);
         enemy = new Enemy("Dark Elf", 45, 10, 15, 10, 15, 15, true, false);
-        Enemy.encounterNew();
         Weapon.BULLET_DAMAGE = 10;
 
     }
 
     @Test
     public void dealDam() {
+        Enemy.encounterNew();
         /*
         * Make sure to click ok pop ups
         * */
         // Non critical
         int enemyStartHealth = enemy.getHealth();
-        assertEquals(enemy.getHealth(), 45);
+        assertEquals(enemy.getHealth(), enemyStartHealth);
         // Make sure there is 0 chance of critical damage
         pistol.setCriticalChance(0);
         pistol.dealDam();
@@ -79,6 +82,7 @@ public class WeaponTest {
 
     @Test
     public void displayDamageDealt() {
+        //Enemy.encounterNew();
         int nDealt = Stats.totalDamageDealt;
         int xp = Xp.getBattleXp();
 
@@ -110,4 +114,6 @@ public class WeaponTest {
         assertTrue(rifle.didCriticalHit());
 
     }
+
+
 }
