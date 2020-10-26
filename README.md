@@ -50,9 +50,9 @@ Bug Fixes
 
 Updates
 - Updated health information
-- Refreactored weapons and enemies
+- Refractored weapons and enemies
 - Added critical hits to weapons
 - Added testing directory
-- Weapon upgreades
-- Organize classes/packages
+- Weapon upgrades
+- Organized classes/packages
 - Seperate battle and main menue
