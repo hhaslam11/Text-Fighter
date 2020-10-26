@@ -41,3 +41,18 @@ In the beta stage, I want to add a better UI while still keeping the game mostly
 License
 --------------
 Published under the [MIT license](https://github.com/hhaslam11/Text-Fighter/blob/master/LICENSE)
+
+## Milestone 1
+--------------
+Bug Fixes
+- JUnit no longer crashes when running tests
+- Confirm overwritign save
+
+Updates
+- Updated health information
+- Refreactored weapons and enemies
+- Added critical hits to weapons
+- Added testing directory
+- Weapon upgreades
+- Organize classes/packages
+- Seperate battle and main menue
