@@ -16,6 +16,7 @@ public class Game {
 	private Game() {
 	}
 
+
 	//Enemies
 	public static Enemy darkElf;
 	public static Enemy ninja;
@@ -74,7 +75,18 @@ public class Game {
 		
 		switch(choice){
 			case 1:
-				if(Saves.savesPrompt()) break;
+				if(Saves.savesPrompt())
+				{
+					break;
+				}
+				else
+				{
+					setDif(getDifficulty(), true, false);
+					Health.set(100, 100);
+					Enemy.encounterNew();
+					Saves.save();
+					break;
+				}
 			default:
 				setDif(getDifficulty(), true, false);
 				Health.set(100, 100);
@@ -359,4 +371,6 @@ public class Game {
 			}
 		}
 	}
+
+
 }

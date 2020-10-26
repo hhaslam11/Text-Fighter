@@ -6,6 +6,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 public class User {
 
     private static String playerName = "Player";
+    private static boolean userExists = false;
 
     public static String name() {
         return playerName;
@@ -13,6 +14,16 @@ public class User {
 
     public static void setName(String name) {
         playerName = name;
+    }
+
+    public static void userIsFound()
+    {
+        userExists = true;
+    }
+
+    public static boolean getUserExists()
+    {
+        return userExists;
     }
 
     public static void promptNameSelection() {
@@ -31,4 +42,5 @@ public class User {
         playerName = name;
 
     }
+
 }

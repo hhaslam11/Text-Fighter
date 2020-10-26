@@ -12,6 +12,12 @@ import org.yaml.snakeyaml.representer.Representer;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
 
 /**
  * Created by Brendon Butler on 7/27/2016.
@@ -27,8 +33,8 @@ public class Saves {
 	private static Yaml yaml;
 
 	public static void save() {
-		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
-		path = path.replace(".jar", "_" + User.name());
+		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + User.name() + ".TFsave";
+		path = path.replace(".jar", "_" + User.name()); //Does not run
 		path = path.replaceAll("%20", " ");
 
 		setup();
@@ -179,19 +185,33 @@ public class Saves {
 
 	public static boolean load() {
 		setup();
-
+		long fileSize = 0;
 		FileReader reader = read(saveLocation);
+		//String fileName = User.name() + ".TFsave";
+		//Path filePath = Paths.get(fileName);
+		//fileSize = fileName.length();
+		File f = new File(String.valueOf(saveLocation));
+		boolean fileExists = f.exists();
 
-		if (reader == null) {
+		if(fileExists)
+		{
+			fileSize = f.length();
+		}
+
+		if (fileSize == 0) {
 			Ui.cls();
 			Ui.println("------------------------------");
 			Ui.println("Cannot find save file.  ");
 			Ui.println("Starting a new game...  ");
 			Ui.println("------------------------------");
-			Ui.pause();
-
-			data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
-			return true;
+			//Ui.pause();
+			//data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
+			//return true; //In this case, the user does not exist and the save file is empty, therefore let us treat this user as if they are starting a new game
+			return false;
+		}
+		else
+		{
+			User.userIsFound();
 		}
 
 		data = Collections.synchronizedMap((Map<String, Object>) yaml.load(reader));
@@ -346,7 +366,7 @@ public class Saves {
 
 	public static boolean savesPrompt() {
 		User.promptNameSelection();
-		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
+		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + User.name() + ".TFsave";
 		path = path.replace(".jar", "_" + User.name());
 		path = path.replaceAll("%20", " ");
 
@@ -361,6 +381,10 @@ public class Saves {
 		switch (Ui.getValidInt()) {
 			case 1:
 				load();
+				if(!User.getUserExists())
+				{
+					return false;
+				}
 				break;
 			case 2:
 				convert();
