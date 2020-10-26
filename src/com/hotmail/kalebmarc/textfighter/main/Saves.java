@@ -36,7 +36,7 @@ public class Saves {
 	{
 		User.promptNameSelection();
 		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + User.name() + ".TFsave";
-		path = path.replace(".jar", "_" + User.name()); //Does not run
+		path = path.replace(".jar", "_" + User.name());
 		path = path.replaceAll("%20", " ");
 	}
 	public static boolean checkExistingSaves()
@@ -316,7 +316,7 @@ public class Saves {
 		Stats.kills = getInteger("Stats.Kills");
 		Stats.highScore = getInteger("Stats.High_Score");
 		Stats.totalKills = getInteger("Stats.Total_Kills");
-		Weapon.set(getInteger("User.Weapons.Current")); //Fix index out of bounds error
+		Weapon.set(getInteger("User.Weapons.Current"));
 
 		for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
 			if (getBoolean("User.Weapons." + i)){
