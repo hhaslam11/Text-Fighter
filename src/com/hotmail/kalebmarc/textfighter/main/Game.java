@@ -16,6 +16,8 @@ public class Game {
 	private Game() {
 	}
 
+	/* Get rid of these to decouple
+
 	//Enemies
 	public static Enemy darkElf;
 	public static Enemy ninja;
@@ -27,6 +29,8 @@ public class Game {
 	public static Enemy giantAnt;
 	public static Enemy evilUnicorn;
 	public static Enemy ogre;
+
+	 */
 
 	//Weapons
 	public static Weapon fists;
