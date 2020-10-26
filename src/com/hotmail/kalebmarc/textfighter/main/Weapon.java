@@ -292,7 +292,8 @@ public class Weapon {
             Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
             Ui.println("Enemy health: " + Enemy.get().getHeathStr());
             Ui.println("----------------------------------------------------");
-            Ui.pause();
+            // Remove pause as Game now asks if you want to continue fighting before returning to menu
+            //Ui.pause();
 
             if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
                 Enemy.get().useFirstAidKit();

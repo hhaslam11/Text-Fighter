@@ -145,15 +145,7 @@ public class Game {
 
 			switch (Ui.getValidInt()) {
 				case 1:
-					int fightPath = Random.RInt(100);
-
-					if (Weapon.get().getName().equals("Sniper")) {
-						if (fightPath <= 30) Enemy.get().dealDamage();
-						if (fightPath > 30) sniper.dealDam();
-					} else {
-						if (fightPath <= 50) Enemy.get().dealDamage();
-						if (fightPath > 50) Weapon.get().dealDam();
-					}
+					battle();
 					break;
 				case 2:
 					home();
@@ -210,6 +202,33 @@ public class Game {
 			}//Switch
 		}//While loop
 	}//Method
+
+	private static void battle() {
+		int fightPath = Random.RInt(100);
+
+		if (Weapon.get().getName().equals("Sniper")) {
+			if (fightPath <= 30) Enemy.get().dealDamage();
+			if (fightPath > 30) sniper.dealDam();
+		} else {
+			if (fightPath <= 50) Enemy.get().dealDamage();
+			if (fightPath > 50) Weapon.get().dealDam();
+		}
+
+		Ui.println("What would you like to do?");
+		Ui.println("1) Continue Fighting");
+		Ui.println("2) Return Home");
+		Ui.println("----------------------------------------------------");
+
+		switch (Ui.getValidInt()) {
+			case 1:
+				battle();
+				break;
+			case 2:
+				return;
+			default:
+				break;
+		}
+	}
 
 	private static void town() {
 
