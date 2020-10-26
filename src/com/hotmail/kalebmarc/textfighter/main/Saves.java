@@ -32,13 +32,79 @@ public class Saves {
 	private static String path;
 	private static Yaml yaml;
 
-	public static void save() {
+	public static void createSavePath()
+	{
+		User.promptNameSelection();
 		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + User.name() + ".TFsave";
 		path = path.replace(".jar", "_" + User.name()); //Does not run
 		path = path.replaceAll("%20", " ");
-
+	}
+	public static boolean checkExistingSaves()
+	{
 		setup();
+		boolean addedSuccessfully = false;
 
+		if(checkUserExists())
+		{
+			addedSuccessfully = overwritePrompt();
+		}
+		else
+		{
+			Saves.save();
+			addedSuccessfully = true;
+		}
+
+		return addedSuccessfully;
+	}
+	public static boolean checkUserExists()
+	{
+		boolean userExists = false;
+		long fileSize = 0;
+		FileReader reader = read(saveLocation);
+		File potentialSaveFile = new File(String.valueOf(saveLocation));
+		boolean fileExists = potentialSaveFile.exists();
+
+		//Check if the file created is empty
+		if(fileExists)
+		{
+			fileSize = potentialSaveFile.length();
+		}
+
+		if(fileSize != 0)
+		{
+			userExists = true;
+		}
+
+		return userExists;
+	}
+
+	public static boolean overwritePrompt()
+	{
+		boolean overwriteStatus = false;
+
+			//Confirmation of overwrite
+			Ui.println("------------------------------");
+			Ui.println("Are you sure you want to ");
+			Ui.println("overwrite " + User.name() + "'s");
+			Ui.println("save file?");
+			Ui.println("------------------------------");
+			Ui.println("1) Yes");
+			Ui.println("2) Go Back");
+
+			switch(Ui.getValidInt()){
+				case 1:
+					save();
+					overwriteStatus = true;
+					break;
+				case 2:
+					break;
+			}
+
+			return overwriteStatus;
+	}
+
+	public static void save() {
+		setup();
 		/*
 		 * TODO: make a version checker that checks each part of a version ex: 1.4.1DEV
 		 * then determine whether or not it's older, current or newer.
@@ -185,20 +251,8 @@ public class Saves {
 
 	public static boolean load() {
 		setup();
-		long fileSize = 0;
 		FileReader reader = read(saveLocation);
-		//String fileName = User.name() + ".TFsave";
-		//Path filePath = Paths.get(fileName);
-		//fileSize = fileName.length();
-		File f = new File(String.valueOf(saveLocation));
-		boolean fileExists = f.exists();
-
-		if(fileExists)
-		{
-			fileSize = f.length();
-		}
-
-		if (fileSize == 0) {
+		if (!checkUserExists()) {
 			Ui.cls();
 			Ui.println("------------------------------");
 			Ui.println("Cannot find save file.  ");
@@ -206,12 +260,8 @@ public class Saves {
 			Ui.println("------------------------------");
 			//Ui.pause();
 			//data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
-			//return true; //In this case, the user does not exist and the save file is empty, therefore let us treat this user as if they are starting a new game
-			return false;
-		}
-		else
-		{
-			User.userIsFound();
+
+			return false; //return false because save file was not found for loading
 		}
 
 		data = Collections.synchronizedMap((Map<String, Object>) yaml.load(reader));
@@ -266,7 +316,7 @@ public class Saves {
 		Stats.kills = getInteger("Stats.Kills");
 		Stats.highScore = getInteger("Stats.High_Score");
 		Stats.totalKills = getInteger("Stats.Total_Kills");
-		Weapon.set(getInteger("User.Weapons.Current"));
+		Weapon.set(getInteger("User.Weapons.Current")); //Fix index out of bounds error
 
 		for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
 			if (getBoolean("User.Weapons." + i)){
@@ -365,11 +415,7 @@ public class Saves {
 	}
 
 	public static boolean savesPrompt() {
-		User.promptNameSelection();
-		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + User.name() + ".TFsave";
-		path = path.replace(".jar", "_" + User.name());
-		path = path.replaceAll("%20", " ");
-
+		createSavePath();
 		Ui.cls();
 		Ui.println("------------------------------");
 		Ui.println("What would you like to do?");
@@ -380,8 +426,7 @@ public class Saves {
 
 		switch (Ui.getValidInt()) {
 			case 1:
-				load();
-				if(!User.getUserExists())
+				if(!load())
 				{
 					return false;
 				}
