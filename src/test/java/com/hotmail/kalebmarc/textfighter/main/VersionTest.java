@@ -18,5 +18,18 @@ public class VersionTest {
 
     @Test
     public void getChange() {
+        String changes = Version.getChange();
+
+        assertTrue(changes.contains("Updated information: Health"));
+        assertTrue(changes.contains("Refractor weapons"));
+        assertTrue(changes.contains("Refractor enemies"));
+        assertTrue(changes.contains("Added critical hits"));
+        assertTrue(changes.contains("Testing Directory"));
+        assertTrue(changes.contains("Weapon Upgrade System"));
+        assertTrue(changes.contains("Organize Classes/packages"));
+        assertTrue(changes.contains("Fixed JUnit. Tests are now operable"));
+        assertTrue(changes.contains("Confirm overwriting save"));
+        assertTrue(changes.contains("Separate battle and main menu"));
     }
 }
+

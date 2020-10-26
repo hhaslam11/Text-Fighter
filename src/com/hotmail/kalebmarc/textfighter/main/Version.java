@@ -19,15 +19,16 @@ class Version {
             + "- Added new casino game: Blackjack\n"
             + "- Updated information: Health\n"
             + "- Refractor weapons\n"
+            + "- Refractor enemies\n"
             + "- Added critical hits\n"
             + "- Testing Directory\n"
             + "- Weapon Upgrade System\n"
             + "- Organize Classes/packages\n"
+            + "- Separate battle and main menu \n"
             + "-\n\n"
 
             + "Bug Fixes:\n"
             + "- Fixed JUnit. Tests are now operable \n"
-            + "- Confirm overwriting save\n"
             + "- Confirm overwriting save\n"
             + " ";
 
