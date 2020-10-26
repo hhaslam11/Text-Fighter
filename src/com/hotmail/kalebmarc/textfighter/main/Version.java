@@ -17,6 +17,7 @@ class Version {
             + "New Stuff:\n"
             + "- Added new casino game: Lottery\n"
             + "- Added new casino game: Blackjack\n"
+            + "- Updated information: Health\n"
             + "- Refractor weapons\n"
             + "- Added critical hits\n"
             + "- Testing Directory\n"
