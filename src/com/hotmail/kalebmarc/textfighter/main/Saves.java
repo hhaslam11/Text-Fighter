@@ -251,17 +251,19 @@ public class Saves {
 
 	public static boolean load() {
 		setup();
+
 		FileReader reader = read(saveLocation);
-		if (!checkUserExists()) {
+
+		if (reader == null) {
 			Ui.cls();
 			Ui.println("------------------------------");
 			Ui.println("Cannot find save file.  ");
 			Ui.println("Starting a new game...  ");
 			Ui.println("------------------------------");
-			//Ui.pause();
-			//data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
+			Ui.pause();
 
-			return false; //return false because save file was not found for loading
+			data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
+			return true;
 		}
 
 		data = Collections.synchronizedMap((Map<String, Object>) yaml.load(reader));
