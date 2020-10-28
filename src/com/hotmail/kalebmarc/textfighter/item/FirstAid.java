@@ -6,7 +6,7 @@ import com.hotmail.kalebmarc.textfighter.player.Health;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 
-public class FirstAid {
+public class    FirstAid {
     public static int used = 0;
     public static int price;
     public static int level;

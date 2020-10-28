@@ -23,6 +23,7 @@ public class Weapon {
     public boolean owns;
     private int damageMin;
     private int damageMax;
+    private double criticalChance = .01;  // % chance of critical hit
     private double chanceOfMissing;
     private String name;
     private boolean buyable;
@@ -44,6 +45,32 @@ public class Weapon {
         this.level = level;
         this.chanceOfMissing = chanceOfMissing;
         this.melee = false;
+
+        if (!changeDif) {
+            arrayWeapon.add(this);
+        }
+
+        if (firstInit) {
+            this.owns = false;
+
+        }
+
+    }
+
+    // used to set the criticalChance to non default value of .01
+    public Weapon(String name, int ammoUsed, int ammoIncludedWithPurchase, boolean buyable, int price, //For guns
+                  int ammoPrice, int level, double chanceOfMissing, boolean firstInit, boolean changeDif, double criticalChance) {
+
+        this.name = name;
+        this.ammoUsed = ammoUsed;
+        this.ammoIncludedWithPurchase = ammoIncludedWithPurchase;
+        this.buyable = buyable;
+        this.price = price;
+        this.ammoPrice = ammoPrice;
+        this.level = level;
+        this.chanceOfMissing = chanceOfMissing;
+        this.melee = false;
+        this.criticalChance = criticalChance;
 
         if (!changeDif) {
             arrayWeapon.add(this);
@@ -183,6 +210,7 @@ public class Weapon {
 
     public void dealDam() {
         int damageDealt = 0;
+        boolean didCritical = false;
 
         if (this.melee) {
             /*
@@ -198,9 +226,17 @@ public class Weapon {
 
                 for (int i = 1; i <= this.ammoUsed; i++) {
                     if (Random.RInt(100) > this.chanceOfMissing) {
-                        damageDealt += BULLET_DAMAGE;
+                        // Check if its a critical hit
+                        didCritical = didCriticalHit();
+                        if (didCritical) {
+                            damageDealt += BULLET_DAMAGE * 10;
+                        } else {
+                            damageDealt += BULLET_DAMAGE;
+                        }
+
                         Stats.bulletsThatHit++;
                     }
+
 
                     //Results
                     setAmmo(-1, true);
@@ -213,25 +249,67 @@ public class Weapon {
             }
         }
 
+        displayDamageDealt(damageDealt, didCritical);
+
+    }
+
+    // Standard setter for criticalChance
+    // Can be used for future enhancements like weapon upgrades
+    public void setCriticalChance(double chance){
+        // Set a default to not go under 0
+        if(chance < 0)
+        {
+            this.criticalChance = .01;
+        }else{
+            this.criticalChance = chance;
+        }
+    }
+
+    // Standard getter for criticalChance
+    public double getCriticalChance(){
+        return this.criticalChance;
+    }
+
+    // Displays the damage dealt to console
+    public void displayDamageDealt(int damageDealt, boolean didCritical){
         //Display stuff
         com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += damageDealt;
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(damageDealt, true);
         if(!Enemy.get().takeDamage(damageDealt)) { // !dead
-	        Ui.cls();
-	        Ui.println("----------------------------------------------------");
-	        Ui.println("You have attacked a " + Enemy.get().getName() + "!");
-	        Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
-	        Ui.println("----------------------------------------------------");
-	        Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
-	        Ui.println("Enemy health: " + Enemy.get().getHeathStr());
-	        Ui.println("----------------------------------------------------");
-	        Ui.pause();
-	
-	        if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
-	            Enemy.get().useFirstAidKit();
-	        }
-        } 
+            Ui.cls();
+            Ui.println("----------------------------------------------------");
+            Ui.println("You have attacked a " + Enemy.get().getName() + "!");
+
+            // Conditional to check whether critical hit or not to display correct message
+            if(didCritical)
+            {
+                Ui.print("Critical hit!");
+                Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
+            }else{
+                Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
+            }
+            Ui.println("----------------------------------------------------");
+            Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
+            Ui.println("Enemy health: " + Enemy.get().getHeathStr());
+            Ui.println("----------------------------------------------------");
+            // Remove pause as Game now asks if you want to continue fighting before returning to menu
+            //Ui.pause();
+
+            if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
+                Enemy.get().useFirstAidKit();
+            }
+        }
     }
+
+
+    // Checks whether to perform critical hit or not
+    public boolean didCriticalHit()
+    {
+        // For other different critical chance hits, must be >= 1.
+        // Assuming min critical chance hits is .01
+        return Random.RInt(100) * this.criticalChance >= 1;
+    }
+
 
     public void viewAbout() {
 

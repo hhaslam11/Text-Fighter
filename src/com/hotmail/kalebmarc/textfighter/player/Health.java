@@ -85,7 +85,8 @@ public class Health {
         Ui.println("Your health: " + (health - damage));
         Ui.println("Enemy health: " + Enemy.get().getHeathStr());
         Ui.println("----------------------------------------------------");
-        Ui.pause();
+        // Remove pause as Game now asks if you want to continue fighting before returning to menu
+        //Ui.pause();
         Health.lose(damage);
 
     }

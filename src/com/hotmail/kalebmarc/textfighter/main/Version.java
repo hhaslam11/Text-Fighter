@@ -17,12 +17,11 @@ class Version {
             + "New Stuff:\n"
             + "- Added new casino game: Lottery\n"
             + "- Added new casino game: Blackjack\n"
-            + "-\n"
-            + "-\n"
             + "-\n\n"
 
             + "Bug Fixes:\n"
-            + "-\n"
+            + "- Fixed JUnit. Tests are now operable \n"
+            + "- Confirm overwriting save\n"
             + " ";
 
     private Version() {
