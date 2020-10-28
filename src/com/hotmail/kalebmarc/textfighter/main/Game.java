@@ -16,8 +16,6 @@ public class Game {
 	private Game() {
 	}
 
-	/* Get rid of these to decouple
-
 	//Enemies
 	public static Enemy darkElf;
 	public static Enemy ninja;
@@ -60,35 +58,56 @@ public class Game {
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void start() {
-		
-		/*
-		 * Asks if the user wants to load from the save file
-		 */
-		Ui.cls();
-		Ui.println("____________________________________________");
-		Ui.println("|                                           |");
-		Ui.println("|       Do you want to load your game       |");
-		Ui.println("|            from save file?                |");
-		Ui.println("|                                           |");
-		Ui.println("| 1) Yes                                    |");
-		Ui.println("| 2) No, Start a new game                   |");
-		Ui.println("|___________________________________________|");
+		boolean loadedSuccessfully = false;
 
-		int choice = Ui.getValidInt();
-		
-		switch(choice){
-			case 1:
-				if(Saves.savesPrompt()) break;
-			default:
-				setDif(getDifficulty(), true, false);
-				Health.set(100, 100);
-				Enemy.encounterNew();
-				if(choice != 1) {
-					User.promptNameSelection();
-					Saves.save();
-				}
-				break;
-		}
+		do {
+			/*
+			 * Asks if the user wants to load from the save file
+			 */
+			Ui.cls();
+			Ui.println("____________________________________________");
+			Ui.println("|                                           |");
+			Ui.println("|       Do you want to load your game       |");
+			Ui.println("|            from save file?                |");
+			Ui.println("|                                           |");
+			Ui.println("| 1) Yes                                    |");
+			Ui.println("| 2) No, Start a new game                   |");
+			Ui.println("|___________________________________________|");
+
+			int choice = Ui.getValidInt();
+
+			switch (choice) {
+				case 1:
+					if (Saves.savesPrompt())
+					{
+						loadedSuccessfully = true;
+						break;
+					}
+					else
+					{
+						setDif(getDifficulty(), true, false);
+						Health.set(100, 100);
+						Enemy.encounterNew();
+						Saves.save();
+						loadedSuccessfully = true;
+						break;
+					}
+				default:
+					setDif(getDifficulty(), true, false);
+					Health.set(100, 100);
+					Enemy.encounterNew();
+					Saves.createSavePath();
+					if(Saves.checkExistingSaves())
+					{
+						loadedSuccessfully = true;
+					}
+					//if (choice != 1) {
+						//User.promptNameSelection();
+						//Saves.save();
+					//}
+					break;
+			}
+		}while(!loadedSuccessfully);
 
 		while (true) {
 
@@ -382,4 +401,6 @@ public class Game {
 			}
 		}
 	}
+
+
 }
