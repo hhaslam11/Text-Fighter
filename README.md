@@ -46,7 +46,7 @@ Published under the [MIT license](https://github.com/hhaslam11/Text-Fighter/blob
 --------------
 Bug Fixes
 - JUnit no longer crashes when running tests
-- Confirm overwritign save
+- Confirm overwriting save
 
 Updates
 - Updated health information
@@ -55,4 +55,5 @@ Updates
 - Added testing directory
 - Weapon upgrades
 - Organized classes/packages
-- Seperate battle and main menue
+- Seperate battle menu
+- Added potion stats
