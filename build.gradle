@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.yaml:snakeyaml:1.19'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
 }
 
 // Define the main class for the application

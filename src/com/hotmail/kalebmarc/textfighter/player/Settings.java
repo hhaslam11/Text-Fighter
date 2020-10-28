@@ -141,6 +141,8 @@ public class Settings {
     private static void setConstants(String dif, boolean firstInit, boolean changeDif) {
         if (dif.equals("Easy")) {//Sets variables for EASY mode
 
+            /* Got rid of this and created EnemyBuilder to decouple enemies from player
+
             //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, firstinit)
             Game.darkElf = new Enemy("Dark Elf", 45, 10, 15, 10, 15, 15, firstInit, changeDif);
             Game.ninja = new Enemy("Ninja", 75, 5, 15, 5, 15, 15, firstInit, changeDif);
@@ -152,6 +154,8 @@ public class Settings {
             Game.giantAnt = new Enemy("Giant Ant", 30, 5, 10, 5, 10, 10, firstInit, changeDif);
             Game.evilUnicorn = new Enemy("Evil Unicorn", 35, 30, 40, 5, 15, 20, firstInit, changeDif);
             Game.ogre = new Enemy("Ogre", 90, 20, 50, 10, 30, 50, firstInit, changeDif);
+
+             */
 
             //Weapons
             //Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, firstInit, changeDif)
@@ -185,6 +189,8 @@ public class Settings {
 
         } else {//Sets variables for HARD mode
 
+            /* Got rid of this and created EnemyBuilder to decouple enemies from player
+
             //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, firstinit, changeDif)
             Game.darkElf = new Enemy("Dark Elf", 55, 15, 20, 15, 20, 15, firstInit, changeDif);
             Game.ninja = new Enemy("Ninja", 85, 10, 20, 10, 20, 15, firstInit, changeDif);
@@ -196,6 +202,8 @@ public class Settings {
             Game.giantAnt = new Enemy("Giant Ant", 30, 5, 10, 5, 10, 10, firstInit, changeDif);
             Game.evilUnicorn = new Enemy("Evil Unicorn", 35, 20, 40, 5, 15, 20, firstInit, changeDif);
             Game.ogre = new Enemy("Ogre", 100, 20, 50, 10, 30, 50, firstInit, changeDif);
+
+             */
 
             //Weapons
             //Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, firstInit, changeDif)
