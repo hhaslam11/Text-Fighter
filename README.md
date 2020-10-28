@@ -55,5 +55,5 @@ Updates
 - Added testing directory
 - Weapon upgrades
 - Organized classes/packages
-- Seperate battle menu
-- Added potion stats
+- Battle screen Quality of Life update
+- Potion stats broken down into specific stats for different potions
