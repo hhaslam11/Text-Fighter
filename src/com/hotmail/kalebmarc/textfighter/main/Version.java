@@ -24,7 +24,11 @@ class Version {
             + "- Testing Directory\n"
             + "- Weapon Upgrade System\n"
             + "- Organize Classes/packages\n"
-            + "- Separate battle and main menu \n"
+            + "- Separate battle menu "
+            + "- Updated potion stats"
+            + "- Multiple save files"
+            +
+            "\n"
             + "-\n\n"
 
             + "Bug Fixes:\n"

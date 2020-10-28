@@ -29,7 +29,8 @@ public class VersionTest {
         assertTrue(changes.contains("Organize Classes/packages"));
         assertTrue(changes.contains("Fixed JUnit. Tests are now operable"));
         assertTrue(changes.contains("Confirm overwriting save"));
-        assertTrue(changes.contains("Separate battle and main menu"));
+        assertTrue(changes.contains("Separate battle menu"));
+        assertTrue(changes.contains("Updated potion stats"));
+        assertTrue(changes.contains("Multiple save files"));
     }
 }
-
