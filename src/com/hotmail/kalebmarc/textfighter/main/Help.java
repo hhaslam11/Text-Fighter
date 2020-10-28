@@ -141,7 +141,13 @@ class Help {
         Ui.println("health up to 200. Each upgrade will cost 100 coins on easy, ");
         Ui.println("and 150 coins on hard; and it will upgrade your health by 10.");
         Ui.println("You will be able to upgrade once per level.");
-        //TODO Add more health info
+        Ui.println("Potions and First-Aid kits are used to regenerate lost health.");
+        Ui.println("You can retrieve Potions or First-Aid kits either by purchasing them");
+        Ui.println("through the shop or by defeating enemies.");
+        Ui.println("First-Aid kits restore 20 points of players health.");
+        Ui.println("There are two health restoring potions: Survival & Recovery.");
+        Ui.println("Survival potions regenerate 25% of the players max health.");
+        Ui.println("Recovery potions regenerate 75% of the players max health.");
         Ui.println("------------------------------------------------------------");
         Ui.pause();
     }

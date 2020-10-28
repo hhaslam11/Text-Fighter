@@ -12,6 +12,12 @@ import org.yaml.snakeyaml.representer.Representer;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
 
 /**
  * Created by Brendon Butler on 7/27/2016.
@@ -26,13 +32,79 @@ public class Saves {
 	private static String path;
 	private static Yaml yaml;
 
-	public static void save() {
-		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
+	public static void createSavePath()
+	{
+		User.promptNameSelection();
+		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + User.name() + ".TFsave";
 		path = path.replace(".jar", "_" + User.name());
 		path = path.replaceAll("%20", " ");
-
+	}
+	public static boolean checkExistingSaves()
+	{
 		setup();
+		boolean addedSuccessfully = false;
 
+		if(checkUserExists())
+		{
+			addedSuccessfully = overwritePrompt();
+		}
+		else
+		{
+			Saves.save();
+			addedSuccessfully = true;
+		}
+
+		return addedSuccessfully;
+	}
+	public static boolean checkUserExists()
+	{
+		boolean userExists = false;
+		long fileSize = 0;
+		FileReader reader = read(saveLocation);
+		File potentialSaveFile = new File(String.valueOf(saveLocation));
+		boolean fileExists = potentialSaveFile.exists();
+
+		//Check if the file created is empty
+		if(fileExists)
+		{
+			fileSize = potentialSaveFile.length();
+		}
+
+		if(fileSize != 0)
+		{
+			userExists = true;
+		}
+
+		return userExists;
+	}
+
+	public static boolean overwritePrompt()
+	{
+		boolean overwriteStatus = false;
+
+			//Confirmation of overwrite
+			Ui.println("------------------------------");
+			Ui.println("Are you sure you want to ");
+			Ui.println("overwrite " + User.name() + "'s");
+			Ui.println("save file?");
+			Ui.println("------------------------------");
+			Ui.println("1) Yes");
+			Ui.println("2) Go Back");
+
+			switch(Ui.getValidInt()){
+				case 1:
+					save();
+					overwriteStatus = true;
+					break;
+				case 2:
+					break;
+			}
+
+			return overwriteStatus;
+	}
+
+	public static void save() {
+		setup();
 		/*
 		 * TODO: make a version checker that checks each part of a version ex: 1.4.1DEV
 		 * then determine whether or not it's older, current or newer.
@@ -345,11 +417,7 @@ public class Saves {
 	}
 
 	public static boolean savesPrompt() {
-		User.promptNameSelection();
-		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
-		path = path.replace(".jar", "_" + User.name());
-		path = path.replaceAll("%20", " ");
-
+		createSavePath();
 		Ui.cls();
 		Ui.println("------------------------------");
 		Ui.println("What would you like to do?");
@@ -360,7 +428,10 @@ public class Saves {
 
 		switch (Ui.getValidInt()) {
 			case 1:
-				load();
+				if(!load())
+				{
+					return false;
+				}
 				break;
 			case 2:
 				convert();

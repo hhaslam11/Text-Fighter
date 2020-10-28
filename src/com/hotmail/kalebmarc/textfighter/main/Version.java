@@ -17,18 +17,6 @@ class Version {
             + "New Stuff:\n"
             + "- Added new casino game: Lottery\n"
             + "- Added new casino game: Blackjack\n"
-            + "- Updated information: Health\n"
-            + "- Refractor weapons\n"
-            + "- Refractor enemies\n"
-            + "- Added critical hits\n"
-            + "- Testing Directory\n"
-            + "- Weapon Upgrade System\n"
-            + "- Organize Classes/packages\n"
-            + "- Separate battle menu "
-            + "- Updated potion stats"
-            + "- Multiple save files"
-            +
-            "\n"
             + "-\n\n"
 
             + "Bug Fixes:\n"
