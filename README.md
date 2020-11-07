@@ -1,5 +1,6 @@
 Text-Fighter
 ==========
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fhhaslam11%2FText-Fighter&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=PAGE+VIEWS&edge_flat=false)](https://hits.seeyoufarm.com)
 
 Text Fighter is a text-based RPG game. It's still in early development (Alpha stage), so there may be a lot of bugs/missing features. There isn't really any set goal or missions yet, but there's still a lot of things you can do. Fight a variety of enemies to get coins, gain XP, and unlock achievements. You can spend money on more weapons/supplies, and unlock items by leveling up. There's even a casino where you can gamble your hard-earned coins. If you aren't one who likes playing by the rules, you can use the built-in cheats to your advantage (or disadvantage). More in-depth documentation/information is available via the in-game help menus.
 
