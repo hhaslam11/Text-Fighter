@@ -18,7 +18,6 @@ class Version {
             + "- Added new casino game: Lottery\n"
             + "- Added new casino game: Blackjack\n"
             + "-\n"
-            + "-\n"
             + "-\n\n"
 
             + "Bug Fixes:\n"

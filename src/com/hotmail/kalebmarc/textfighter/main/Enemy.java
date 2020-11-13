@@ -11,11 +11,13 @@ public class Enemy {
     private static final int FIRST_AID_KIT_MIN = 0;
     private static final int FIRST_AID_KIT_MAX = 2;
 
-    //Enemy List
-    public static final ArrayList<Enemy> arrayEnemy = new ArrayList<>();
-
     //Static Variables
     private static Enemy current;
+    private static EnemyBuilder enemyBuilder = new EnemyBuilder();
+
+    //Enemy List
+    // This is only here incase it was referenced somewhere else until all instances fixed
+    public static final ArrayList<Enemy> arrayEnemy = enemyBuilder.getEnemyList();
 
     //Properties (Constant)
     private String name;
@@ -56,34 +58,150 @@ public class Enemy {
          * ===Don't forget to do this with the weapon class, as well===
          */
         if (!changeDif) {
-            arrayEnemy.add(this);
+            //arrayEnemy.add(this);
             Achievements.setUpEnemyAch(name, this);
         }
         if (firstInit) {//Only call if its the first time initializing the enemy. (Not if changing difficulties)
             this.health = healthMax;
         }
+
     }
 
+    // Old set before EnemyBuilder
+    //public static void set(int i) { current = arrayEnemy.get(i); }
+    // This is only here incase the old method was referenced somewhere else until all instances fixed
     public static void set(int i) {
-        current = arrayEnemy.get(i);
+        switch (i) {
+            case 0:
+                current = enemyBuilder.buildDarkElf();
+                break;
+            case 1:
+                current = enemyBuilder.buildNinja();
+                break;
+            case 2:
+                current = enemyBuilder.buildGiantSpider();
+                break;
+            case 3:
+                current = enemyBuilder.buildZombie();
+                break;
+            case 4:
+                current = enemyBuilder.buildGoblin();
+                break;
+            case 5:
+                current = enemyBuilder.buildGhost();
+                break;
+            case 6:
+                current = enemyBuilder.buildBarbarian();
+                break;
+            case 7:
+                current = enemyBuilder.buildGiantAnt();
+                break;
+            case 8:
+                current = enemyBuilder.buildEvilUnicorn();
+                break;
+            case 9:
+                current = enemyBuilder.buildOgre();
+                break;
+        }
     }
 
     public static Enemy get() {
         return current;
     }
 
+    // Old getIndex before EnemyBuilder
+    //public static int getIndex(Enemy i) { return arrayEnemy.indexOf(i); }
+    // This is only here incase the old method was referenced somewhere else until all instances fixed
     public static int getIndex(Enemy i) {
-        return arrayEnemy.indexOf(i);
+        switch (i.name) {
+            case "Dark Elf":
+                return 0;
+            case "Ninja":
+                return 1;
+            case "Giant Spider":
+                return 2;
+            case "Zombie":
+                return 3;
+            case "Goblin":
+                return 4;
+            case "Ghost":
+                return 5;
+            case "Barbarian":
+                return 6;
+            case "Giant Ant":
+                return 7;
+            case "Evil Unicorn":
+                return 8;
+            case "Ogre":
+                return 9;
+            default:
+                return -1;
+        }
     }
 
     public static void encounterNew() {
 
-        current = arrayEnemy.get(Random.RInt(0, arrayEnemy.size() - 1));
+        //current = arrayEnemy.get(Random.RInt(0, arrayEnemy.size() - 1));
+        current = createEnemy(generateNewEnemy());
         current.health = current.healthMax;
         current.firstAidKit = Random.RInt(FIRST_AID_KIT_MIN, FIRST_AID_KIT_MAX);
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(0, false);
         Ui.popup("You have encountered a " + current.getName(), "Encounter", JOptionPane.INFORMATION_MESSAGE);
 
+    }
+
+    public static String generateNewEnemy() {
+        switch (Random.RInt(0, 9)) {
+            case 0:
+                return "Dark Elf";
+            case 1:
+                return "Ninja";
+            case 2:
+                return "Giant Spider";
+            case 3:
+                return "Zombie";
+            case 4:
+                return "Goblin";
+            case 5:
+                return "Ghost";
+            case 6:
+                return "Barbarian";
+            case 7:
+                return "Giant Ant";
+            case 8:
+                return "Evil Unicorn";
+            case 9:
+                return "Ogre";
+            default:
+                return null;
+        }
+    }
+
+    public static Enemy createEnemy(String name) {
+        switch (name) {
+            case "Dark Elf":
+                return enemyBuilder.buildDarkElf();
+            case "Ninja":
+                return enemyBuilder.buildNinja();
+            case "Giant Spider":
+                return enemyBuilder.buildGiantSpider();
+            case "Zombie":
+                return enemyBuilder.buildZombie();
+            case "Goblin":
+                return enemyBuilder.buildGoblin();
+            case "Ghost":
+                return enemyBuilder.buildGhost();
+            case "Barbarian":
+                return enemyBuilder.buildBarbarian();
+            case "Giant Ant":
+                return enemyBuilder.buildGiantAnt();
+            case "Evil Unicorn":
+                return enemyBuilder.buildEvilUnicorn();
+            case "Ogre":
+                return enemyBuilder.buildOgre();
+            default:
+                return null;
+        }
     }
 
     private static void testFoundPipe() {

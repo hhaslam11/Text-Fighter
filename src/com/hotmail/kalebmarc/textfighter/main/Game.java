@@ -28,6 +28,8 @@ public class Game {
 	public static Enemy evilUnicorn;
 	public static Enemy ogre;
 
+	 */
+
 	//Weapons
 	public static Weapon fists;
 	public static Weapon baseballBat;
@@ -56,35 +58,56 @@ public class Game {
 	private static Scanner scan = new Scanner(System.in);
 
 	public static void start() {
-		
-		/*
-		 * Asks if the user wants to load from the save file
-		 */
-		Ui.cls();
-		Ui.println("____________________________________________");
-		Ui.println("|                                           |");
-		Ui.println("|       Do you want to load your game       |");
-		Ui.println("|            from save file?                |");
-		Ui.println("|                                           |");
-		Ui.println("| 1) Yes                                    |");
-		Ui.println("| 2) No, Start a new game                   |");
-		Ui.println("|___________________________________________|");
+		boolean loadedSuccessfully = false;
 
-		int choice = Ui.getValidInt();
-		
-		switch(choice){
-			case 1:
-				if(Saves.savesPrompt()) break;
-			default:
-				setDif(getDifficulty(), true, false);
-				Health.set(100, 100);
-				Enemy.encounterNew();
-				if(choice != 1) {
-					User.promptNameSelection();
-					Saves.save();
-				}
-				break;
-		}
+		do {
+			/*
+			 * Asks if the user wants to load from the save file
+			 */
+			Ui.cls();
+			Ui.println("____________________________________________");
+			Ui.println("|                                           |");
+			Ui.println("|       Do you want to load your game       |");
+			Ui.println("|            from save file?                |");
+			Ui.println("|                                           |");
+			Ui.println("| 1) Yes                                    |");
+			Ui.println("| 2) No, Start a new game                   |");
+			Ui.println("|___________________________________________|");
+
+			int choice = Ui.getValidInt();
+
+			switch (choice) {
+				case 1:
+					if (Saves.savesPrompt())
+					{
+						loadedSuccessfully = true;
+						break;
+					}
+					else
+					{
+						setDif(getDifficulty(), true, false);
+						Health.set(100, 100);
+						Enemy.encounterNew();
+						Saves.save();
+						loadedSuccessfully = true;
+						break;
+					}
+				default:
+					setDif(getDifficulty(), true, false);
+					Health.set(100, 100);
+					Enemy.encounterNew();
+					Saves.createSavePath();
+					if(Saves.checkExistingSaves())
+					{
+						loadedSuccessfully = true;
+					}
+					//if (choice != 1) {
+						//User.promptNameSelection();
+						//Saves.save();
+					//}
+					break;
+			}
+		}while(!loadedSuccessfully);
 
 		while (true) {
 
@@ -141,15 +164,7 @@ public class Game {
 
 			switch (Ui.getValidInt()) {
 				case 1:
-					int fightPath = Random.RInt(100);
-
-					if (Weapon.get().getName().equals("Sniper")) {
-						if (fightPath <= 30) Enemy.get().dealDamage();
-						if (fightPath > 30) sniper.dealDam();
-					} else {
-						if (fightPath <= 50) Enemy.get().dealDamage();
-						if (fightPath > 50) Weapon.get().dealDam();
-					}
+					battle();
 					break;
 				case 2:
 					home();
@@ -206,6 +221,33 @@ public class Game {
 			}//Switch
 		}//While loop
 	}//Method
+
+	private static void battle() {
+		int fightPath = Random.RInt(100);
+
+		if (Weapon.get().getName().equals("Sniper")) {
+			if (fightPath <= 30) Enemy.get().dealDamage();
+			if (fightPath > 30) sniper.dealDam();
+		} else {
+			if (fightPath <= 50) Enemy.get().dealDamage();
+			if (fightPath > 50) Weapon.get().dealDam();
+		}
+
+		Ui.println("What would you like to do?");
+		Ui.println("1) Continue Fighting");
+		Ui.println("2) Return Home");
+		Ui.println("----------------------------------------------------");
+
+		switch (Ui.getValidInt()) {
+			case 1:
+				battle();
+				break;
+			case 2:
+				return;
+			default:
+				break;
+		}
+	}
 
 	private static void town() {
 
@@ -359,4 +401,6 @@ public class Game {
 			}
 		}
 	}
+
+
 }
