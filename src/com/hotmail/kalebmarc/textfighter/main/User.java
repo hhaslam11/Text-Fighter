@@ -6,13 +6,20 @@ package com.hotmail.kalebmarc.textfighter.main;
 public class User {
 
     private static String playerName = "Player";
+    //field to indicate if player is the program default player (-1) or a user selected player
+    private static int playerDefault = -1;
 
     public static String name() {
         return playerName;
     }
 
+    public static int getPlayerDefault() {
+        return playerDefault;
+    }
+
     public static void setName(String name) {
         playerName = name;
+        playerDefault = 1;
     }
 
     public static void promptNameSelection() {
@@ -29,6 +36,7 @@ public class User {
         }
 
         playerName = name;
+        playerDefault = 1;
 
     }
 }
