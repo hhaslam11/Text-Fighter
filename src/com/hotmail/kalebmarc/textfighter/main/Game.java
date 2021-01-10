@@ -3,9 +3,8 @@ package com.hotmail.kalebmarc.textfighter.main;
 import com.hotmail.kalebmarc.textfighter.item.*;
 import com.hotmail.kalebmarc.textfighter.player.*;
 
+import javax.swing.*;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
 import static com.hotmail.kalebmarc.textfighter.player.Health.upgrade;
@@ -13,7 +12,14 @@ import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
 
 public class Game {
+	// docschorsch added boolean to indicate if a game had been started
+	private static boolean gameStarted = false;
+
 	private Game() {
+	}
+	// getter to indicate if game had been started for menu.load()
+	public static boolean hadGameStarted() {
+		return gameStarted;
 	}
 
 	//Enemies
@@ -60,30 +66,48 @@ public class Game {
 		/*
 		 * Asks if the user wants to load from the save file
 		 */
+		// docschorsch inserted new exit option back to Menu.load()
+
 		Ui.cls();
 		Ui.println("____________________________________________");
 		Ui.println("|                                           |");
 		Ui.println("|       Do you want to load your game       |");
 		Ui.println("|            from save file?                |");
-		Ui.println("|                                           |");
+		Ui.println("|            				                |");
+		Ui.println("| 0) Exit to Main                           |");
 		Ui.println("| 1) Yes                                    |");
 		Ui.println("| 2) No, Start a new game                   |");
 		Ui.println("|___________________________________________|");
 
 		int choice = Ui.getValidInt();
-		
+
 		switch(choice){
+			case 0: return;
 			case 1:
-				if(Saves.savesPrompt()) break;
-			default:
-				setDif(getDifficulty(), true, false);
-				Health.set(100, 100);
-				Enemy.encounterNew();
-				if(choice != 1) {
-					User.promptNameSelection();
-					Saves.save();
+				if(Saves.savesPrompt()) {
+					// docschorsch savesPrompt() true only if not exited --> game started with loaded player
+					gameStarted = true;
+					break;
+			// docschorsch added another return to Menu.load() if game selected but exited before start
+				} else {
+					return;
 				}
-				break;
+			default:
+				// docschorsch return String of getDifficulty() needed for breaking if "Exit" chosen in getDifficulty()
+				String difficultyLevel = getDifficulty();
+				if(difficultyLevel.equals("Exit")) {
+					return;
+				} else {
+					setDif(difficultyLevel, true, false);
+					Health.set(100, 100);
+					//docschorsch swapped order of promptNameSelection() and encounterNew()
+					User.promptNameSelection();
+					Enemy.encounterNew();
+					Saves.save();
+					// --> game started with new player
+					gameStarted = true;
+					break;
+				}
 		}
 
 		while (true) {
@@ -341,21 +365,26 @@ public class Game {
 		Ui.println("|       What difficulty would you           |");
 		Ui.println("|            like to play on?               |");
 		Ui.println("|                                           |");
+		Ui.println("| 0) Exit                                   |");
 		Ui.println("| 1) Easy                                   |");
 		Ui.println("| 2) Hard                                   |");
 		Ui.println("|___________________________________________|");
 
+		//docschorsch added empty default as new 0) option Exit
 		if (!scan.hasNextInt()) {
 			Ui.cls();
-			return "Easy";
+			return "Exit";
 		} else {
 			int difficultyChoice = scan.nextInt();
-			if (difficultyChoice == 2) {
+			if (difficultyChoice == 1) {
+				Ui.cls();
+				return "Easy";
+			} else if (difficultyChoice == 2) {
 				Ui.cls();
 				return "Hard";
 			} else {
 				Ui.cls();
-				return "Easy";
+				return "Exit";
 			}
 		}
 	}
