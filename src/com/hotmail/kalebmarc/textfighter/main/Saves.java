@@ -27,6 +27,7 @@ public class Saves {
 	private static Yaml yaml;
 
 	public static void save() {
+
 		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
 		path = path.replace(".jar", "_" + User.name());
 		path = path.replaceAll("%20", " ");
@@ -320,7 +321,6 @@ public class Saves {
 
 	private static void setup() {
 		saveLocation = new File(path);
-
 		if (!saveLocation.exists())
 			try {
 				saveLocation.createNewFile();
@@ -363,8 +363,12 @@ public class Saves {
 				load();
 				break;
 			case 2:
-				convert();
-				break;
+				//docschorsch 'if' needed for exit during convert()
+				if(!convert()) {
+					return false;
+				} else {
+					break;
+				}
 			default:
 				return false;
 		}
