@@ -7,7 +7,7 @@ class Credits {
 
             Ui.cls();
             Ui.println("------------------------------------------------------------------");
-            Ui.println("hhaslam11 - Head Developer");
+            Ui.println("hhaslam11 - Head Developer/Director");
             Ui.println("BrendonButler");
             Ui.println("TimerErTim");
             Ui.println("docschorsch");
