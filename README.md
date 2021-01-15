@@ -39,19 +39,6 @@ In the beta stage, I want to add a better UI while still keeping the game mostly
 
 *If you want to request any feature, open an [issue](https://github.com/hhaslam11/Text-Fighter/issues), and there's a good chance I'll add it.*
 
-Contributors
---------------
-| [<img src="https://avatars2.githubusercontent.com/u/9996803?s=460&u=f89dcd233a8ae10c8f3c7e4311978edd9550f3ad&v=4" width="100px;"/><br /><sub><b>hhaslam11</b></sub>](https://github.com/hhaslam11) 
-| [<img src="https://avatars0.githubusercontent.com/u/8996868?s=460&u=2bb6a6529973a8144afac1aca48db00600c0ac90&v=4" width="100px;"/><br /><sub><b>BrendonButler</b></sub>](https://github.com/BrendonButler) 
-| [<img src="https://avatars2.githubusercontent.com/u/27965164?s=460&u=b882bb06005d4c686d06a424b13f34e1a574e969&v=4" width="100px;"/><br /><sub><b>TimerErTim</b></sub>](https://github.com/TimerErTim) 
-| [<img src="https://avatars3.githubusercontent.com/u/77120592?s=460&v=4" width="100px;"/><br /><sub><b>docschorsch</b></sub>](https://github.com/docschorsch) 
-| [<img src="https://avatars2.githubusercontent.com/u/10839401?s=460&v=4" width="100px;"/><br /><sub><b>htn17</b></sub>](https://github.com/htn17) 
-| [<img src="https://avatars0.githubusercontent.com/u/16292483?s=460&u=670384a3eb83e096050fcd3a4e7c2519a7596147&v=4" width="100px;"/><br /><sub><b>Will-Etes</b></sub>](https://github.com/Will-Estes) 
-| [<img src="https://avatars2.githubusercontent.com/u/17124690?s=460&v=4" width="100px;"/><br /><sub><b>CLEMENTJOHNSHAJI</b></sub>](https://github.com/CLEMENTJOHNSHAJI) 
-| [<img src="https://avatars3.githubusercontent.com/u/14827868?s=460&u=518345a61191d4ac0ac7a21a4a843e2c067fbd79&v=4" width="100px;"/><br /><sub><b>alfr3dosv</b></sub>](https://github.com/alfr3dosv) 
-| [<img src="https://avatars0.githubusercontent.com/u/47092464?s=460&u=7535871844f07b609c8e7d32c38bb6dc14144490&v=4" width="100px;"/><br /><sub><b>xdvrx1</b></sub>](https://github.com/xdvrx1) |
-| [<img src="https://avatars2.githubusercontent.com/u/77441662?s=460&v=4" width="100px;"/><br /><sub><b>R1ndT</b></sub>](https://github.com/R1ndT) 
-
 License
 --------------
 Published under the [MIT license](https://github.com/hhaslam11/Text-Fighter/blob/master/LICENSE)
