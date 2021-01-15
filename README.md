@@ -43,16 +43,16 @@ Contributors
 --------------
 Thanks for all your work!
 
-[hhaslam11](https://github.com/hhaslam11)
-[BrendonButler](https://github.com/BrendonButler)
-[TimerErTim](https://github.com/TimerErTim)
-[docschorsch](https://github.com/docschorsch)
-[htn17](https://github.com/htn17)
-[Will-Estes](https://github.com/Will-Estes)
-[CLEMENTJOHNSHAJI](https://github.com/CLEMENTJOHNSHAJI)
-[alfr3dosv](https://github.com/alfr3dosv)
-[xdvrx1](https://github.com/xdvrx1)
-[R1ndT](https://github.com/R1ndT)
+[hhaslam11](https://github.com/hhaslam11)  
+[BrendonButler](https://github.com/BrendonButler)  
+[TimerErTim](https://github.com/TimerErTim)  
+[docschorsch](https://github.com/docschorsch)  
+[htn17](https://github.com/htn17)  
+[Will-Estes](https://github.com/Will-Estes)  
+[CLEMENTJOHNSHAJI](https://github.com/CLEMENTJOHNSHAJI)  
+[alfr3dosv](https://github.com/alfr3dosv)  
+[xdvrx1](https://github.com/xdvrx1)  
+[R1ndT](https://github.com/R1ndT)  
 
 License
 --------------
