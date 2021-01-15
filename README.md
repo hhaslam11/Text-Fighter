@@ -39,6 +39,21 @@ In the beta stage, I want to add a better UI while still keeping the game mostly
 
 *If you want to request any feature, open an [issue](https://github.com/hhaslam11/Text-Fighter/issues), and there's a good chance I'll add it.*
 
+Contributors
+--------------
+Thanks for all your work!
+
+[hhaslam11](https://github.com/hhaslam11)  
+[BrendonButler](https://github.com/BrendonButler)  
+[TimerErTim](https://github.com/TimerErTim)  
+[docschorsch](https://github.com/docschorsch)  
+[htn17](https://github.com/htn17)  
+[Will-Estes](https://github.com/Will-Estes)  
+[CLEMENTJOHNSHAJI](https://github.com/CLEMENTJOHNSHAJI)  
+[alfr3dosv](https://github.com/alfr3dosv)  
+[xdvrx1](https://github.com/xdvrx1)  
+[R1ndT](https://github.com/R1ndT)  
+
 License
 --------------
 Published under the [MIT license](https://github.com/hhaslam11/Text-Fighter/blob/master/LICENSE)

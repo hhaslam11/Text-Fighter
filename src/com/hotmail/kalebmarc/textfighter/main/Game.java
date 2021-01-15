@@ -313,7 +313,8 @@ public class Game {
 			Ui.println("6) About");
 			Ui.println("7) Settings");
 			Ui.println("8) Help");
-			Ui.println("9) Back");
+			Ui.println("9) Credits");
+			Ui.println("10) Back");
 			Ui.println("------------------------------------------------------------------");
 
 			menuChoice = Ui.getValidInt();
@@ -344,6 +345,9 @@ public class Game {
 				case 8:
 					Help.view();
 				case 9:
+					Credits.view();
+					break;
+				case 10:
 					return;
 				default:
 					break;
