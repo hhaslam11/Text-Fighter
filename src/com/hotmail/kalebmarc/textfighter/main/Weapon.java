@@ -200,17 +200,8 @@ public class Weapon {
                     if (Random.RInt(100) > this.chanceOfMissing) {
                         damageDealt += BULLET_DAMAGE;
                         Stats.bulletsThatHit++;
+                        criticalHit();
 
-                        if (true) {
-                            Ui.cls();
-                            Ui.println("----------------------------------------------------");
-                            Ui.println("Critical Hit!");
-                            Ui.println("You dealt 10x normal damage.");
-                            Ui.println("----------------------------------------------------");
-                            Ui.pause();
-                            damageDealt *= 10;
-
-                        }
                     }
 
                     //Results
@@ -243,7 +234,22 @@ public class Weapon {
 	        if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
 	            Enemy.get().useFirstAidKit();
 	        }
-        } 
+        }
+        damageDealt = 0;
+    }
+
+    public void criticalHit() {
+        if (true) {
+            damageDealt *= 10;
+
+            Ui.cls();
+            Ui.println("----------------------------------------------------");
+            Ui.println("Critical Hit!");
+            Ui.println("You dealt 10x normal damage.");
+            Ui.println("----------------------------------------------------");
+            Ui.pause();
+
+        }
     }
 
     public void viewAbout() {
