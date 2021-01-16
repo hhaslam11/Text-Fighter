@@ -344,6 +344,7 @@ public class Game {
 					break;
 				case 8:
 					Help.view();
+		 	 	 	break;
 				case 9:
 					Credits.view();
 					break;
