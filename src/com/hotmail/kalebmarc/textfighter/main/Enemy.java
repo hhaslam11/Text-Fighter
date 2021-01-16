@@ -24,6 +24,7 @@ public class Enemy {
     private int coinDropMax;
     private int damageMin;
     private int damageMax;
+    int damageDealt;
     private int xp;
 
     //Variables
@@ -109,6 +110,11 @@ public class Enemy {
         Health.takeDamage(damage);
     }
 
+    void returnDamage(int damage) {
+        damageDealt = damage;
+        
+    }
+
     private void die() {
 
         //Get rewards & store in temp vars
@@ -118,7 +124,7 @@ public class Enemy {
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(0, false);
 
         //Prompt enemy death
-        Ui.popup("You have defeated an enemy! You've found " + tempCoin + " coins, and " + xp + "Xp!", "You've defeated an enemy!", JOptionPane.PLAIN_MESSAGE);
+        Ui.popup("You have defeated an enemy, dealing " + damageDealt + " damage! You've found " + tempCoin + " coins, and " + xp + "Xp!", "You've defeated an enemy!", JOptionPane.PLAIN_MESSAGE);
 
         //Rewards
         testFoundPipe();

@@ -23,6 +23,7 @@ public class Weapon {
     public boolean owns;
     private int damageMin;
     private int damageMax;
+    private int damageDealt;
     private double chanceOfMissing;
     private String name;
     private boolean buyable;
@@ -182,7 +183,6 @@ public class Weapon {
     }
 
     public void dealDam() {
-        int damageDealt = 0;
 
         if (this.melee) {
             /*
@@ -223,6 +223,8 @@ public class Weapon {
                 damageDealt = 0;
             }
         }
+        //Make damageDealt available in Enemy.java
+        Enemy.get().returnDamage(damageDealt);
 
         //Display stuff
         com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += damageDealt;
