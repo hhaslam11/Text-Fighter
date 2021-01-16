@@ -200,7 +200,6 @@ public class Weapon {
                     if (Random.RInt(100) > this.chanceOfMissing) {
                         damageDealt += BULLET_DAMAGE;
                         Stats.bulletsThatHit++;
-                        criticalHit();
 
                     }
 
@@ -208,6 +207,7 @@ public class Weapon {
                     setAmmo(-1, true);
                     Stats.bulletsFired += 1;
                 }
+                criticalHit();
 
             } else {
                 noAmmo();
@@ -239,13 +239,15 @@ public class Weapon {
     }
 
     public void criticalHit() {
-        if (true) {
-            damageDealt *= 10;
+        if (Random.RInt(100) == 1) {
+            int critMultiplier = Random.RInt(5, 10);
+
+            damageDealt *= critMultiplier;
 
             Ui.cls();
             Ui.println("----------------------------------------------------");
             Ui.println("Critical Hit!");
-            Ui.println("You dealt 10x normal damage.");
+            Ui.println("You dealt " + critMultiplier + "x normal damage.");
             Ui.println("----------------------------------------------------");
             Ui.pause();
 
