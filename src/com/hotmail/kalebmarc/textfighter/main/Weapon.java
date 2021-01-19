@@ -184,6 +184,10 @@ public class Weapon {
         return this.ammo;
     }
 
+    public int getDamageDealt() {
+        return this.damageDealt;
+    }
+
     public void dealDam() {
 
         if (this.melee) {
@@ -217,8 +221,6 @@ public class Weapon {
                 damageDealt = 0;
             }
         }
-        //Make damageDealt available in Enemy.java
-        Enemy.get().returnDamage(damageDealt);
 
         //Display stuff
         com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += damageDealt;
