@@ -243,9 +243,9 @@ public class Weapon {
         damageDealt = 0;
     }
 
-    public void criticalHit() {
+    private void criticalHit() {
 
-        if (Random.RInt((int) (100 / this.critChanceMultiplier)) == 1) {
+        if (wasCriticalHit()) {
             int critMultiplier = Random.RInt(5, 10);
 
             damageDealt *= critMultiplier;
@@ -258,6 +258,10 @@ public class Weapon {
             Ui.pause();
 
         }
+    }
+
+    private boolean wasCriticalHit() {
+        return Random.RInt((int) (100 / this.critChanceMultiplier)) == 1;
     }
 
     public void viewAbout() {
