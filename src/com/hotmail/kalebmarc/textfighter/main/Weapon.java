@@ -26,6 +26,8 @@ public class Weapon {
     private int damageDealt;
     private double chanceOfMissing;
     private double critChanceMultiplier;
+    private int critDamMultiplierMin;
+    private int critDamMultiplierMax;
     private String name;
     private boolean buyable;
     //Ammo
@@ -35,7 +37,7 @@ public class Weapon {
     private int ammoIncludedWithPurchase;
 
     public Weapon(String name, int ammoUsed, int ammoIncludedWithPurchase, boolean buyable, int price, //For guns
-                  int ammoPrice, int level, double chanceOfMissing, double critChanceMultiplier, boolean firstInit, boolean changeDif) {
+                  int ammoPrice, int level, double chanceOfMissing, double critChanceMultiplier, int critDamMultiplierMin, int critDamMultiplierMax, boolean firstInit, boolean changeDif) {
 
         this.name = name;
         this.ammoUsed = ammoUsed;
@@ -46,6 +48,8 @@ public class Weapon {
         this.level = level;
         this.chanceOfMissing = chanceOfMissing;
         this.critChanceMultiplier = critChanceMultiplier;
+        this.critDamMultiplierMin = critDamMultiplierMin;
+        this.critDamMultiplierMax = critDamMultiplierMax;
         this.melee = false;
 
         if (!changeDif) {
@@ -246,7 +250,7 @@ public class Weapon {
     private void criticalHit() {
 
         if (wasCriticalHit()) {
-            int critMultiplier = Random.RInt(5, 10);
+            int critMultiplier = Random.RInt(this.critDamMultiplierMin, this.critDamMultiplierMax);
 
             damageDealt *= critMultiplier;
 
@@ -280,6 +284,7 @@ public class Weapon {
         Ui.println("Ammo Used: " + this.ammoUsed);
         Ui.println("Damage: " + this.getDamage());
         Ui.println("Chance of critical hit: " + this.critChanceMultiplier + "%");
+        Ui.println("Critical hit damage multiplier: " + this.critDamMultiplierMin + "-" + this.critDamMultiplierMax + "x");
         for (int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.pause();
         Ui.cls();
