@@ -118,7 +118,7 @@ public class Enemy {
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(0, false);
 
         //Prompt enemy death
-        Ui.popup("You have defeated an enemy! You've found " + tempCoin + " coins, and " + xp + "Xp!", "You've defeated an enemy!", JOptionPane.PLAIN_MESSAGE);
+        Ui.popup("You have defeated an enemy, dealing " + Weapon.get().getDamageDealt() + " damage! You've found " + tempCoin + " coins, and " + xp + "Xp!", "You've defeated an enemy!", JOptionPane.PLAIN_MESSAGE);
 
         //Rewards
         testFoundPipe();
