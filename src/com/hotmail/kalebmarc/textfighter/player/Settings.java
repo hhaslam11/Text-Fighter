@@ -141,7 +141,7 @@ public class Settings {
     private static void setConstants(String dif, boolean firstInit, boolean changeDif) {
         if (dif.equals("Easy")) {//Sets variables for EASY mode
 
-            //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, firstinit)
+            //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, levelMin, levelMax, firstinit, changeDif)
             Game.darkElf = new Enemy("Dark Elf", 45, 10, 15, 10, 15, 15, 1, 1, firstInit, changeDif);
             Game.ninja = new Enemy("Ninja", 75, 5, 15, 5, 15, 15, 1, 1, firstInit, changeDif);
             Game.giantSpider = new Enemy("Giant Spider", 35, 5, 10, 5, 10, 10, 1, 1, firstInit, changeDif);
@@ -190,7 +190,7 @@ public class Settings {
 
         } else {//Sets variables for HARD mode
 
-            //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, firstinit, changeDif)
+            //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, levelMin, levelMax, firstinit, changeDif)
             Game.darkElf = new Enemy("Dark Elf", 55, 15, 20, 15, 20, 15, 1, 1, firstInit, changeDif);
             Game.ninja = new Enemy("Ninja", 85, 10, 20, 10, 20, 15, 1, 1, firstInit, changeDif);
             Game.giantSpider = new Enemy("Giant Spider", 45, 10, 15, 10, 15, 10, 1, 1, firstInit, changeDif);

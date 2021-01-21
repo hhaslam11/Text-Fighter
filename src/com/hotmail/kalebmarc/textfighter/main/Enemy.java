@@ -80,16 +80,21 @@ public class Enemy {
         return arrayEnemy.indexOf(i);
     }
 
-    public static void encounterNew() {
+    public static void findEnemy() {
         int playerLevel = Xp.getLevel();
+        ArrayList<Enemy> suitableEnemies = new ArrayList<>();
 
-        //current = arrayEnemy.get(Random.RInt(0, arrayEnemy.size() - 1));
-        for(int i = 0; i < arrayEnemy.size(); i++) {
-            if(arrayEnemy.get(i).levelMin <= playerLevel && playerLevel <= arrayEnemy.get(i).levelMax) {
-                current = arrayEnemy.get(i);
+        for (int i = 0; i < arrayEnemy.size(); i++) {
+            if (arrayEnemy.get(i).levelMin <= playerLevel && playerLevel <= arrayEnemy.get(i).levelMax) {
+                suitableEnemies.add(arrayEnemy.get(i));
             }
         }
+        current = suitableEnemies.get(Random.RInt(0, suitableEnemies.size() -1));
+    }
 
+    public static void encounterNew() {
+
+        findEnemy();
         current.health = current.healthMax;
         current.firstAidKit = Random.RInt(FIRST_AID_KIT_MIN, FIRST_AID_KIT_MAX);
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(0, false);
