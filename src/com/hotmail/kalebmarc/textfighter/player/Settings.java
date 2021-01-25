@@ -142,16 +142,16 @@ public class Settings {
         if (dif.equals("Easy")) {//Sets variables for EASY mode
 
             //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, levelMin, levelMax, firstinit, changeDif)
-            Game.darkElf = new Enemy("Dark Elf", 45, 10, 15, 10, 15, 15, 1, 1, firstInit, changeDif);
-            Game.ninja = new Enemy("Ninja", 75, 5, 15, 5, 15, 15, 1, 1, firstInit, changeDif);
-            Game.giantSpider = new Enemy("Giant Spider", 35, 5, 10, 5, 10, 10, 1, 1, firstInit, changeDif);
-            Game.zombie = new Enemy("Zombie", 20, 5, 15, 5, 15, 15, 1, 1, firstInit, changeDif);
-            Game.goblin = new Enemy("Goblin", 60, 10, 20, 10, 20, 20, 1, 1, firstInit, changeDif);
-            Game.ghost = new Enemy("Ghost", 85, 15, 25, 15, 25, 25, 1, 1, firstInit, changeDif);
-            Game.barbarian = new Enemy("Barbarian", 50, 5, 15, 5, 15, 15, 1, 1, firstInit, changeDif);
-            Game.giantAnt = new Enemy("Giant Ant", 30, 5, 10, 5, 10, 10, 1, 1, firstInit, changeDif);
-            Game.evilUnicorn = new Enemy("Evil Unicorn", 35, 30, 40, 5, 15, 20, 1, 1, firstInit, changeDif);
-            Game.ogre = new Enemy("Ogre", 90, 20, 50, 10, 30, 50, 1, 1, firstInit, changeDif);
+            Game.darkElf = new Enemy("Dark Elf", 45, 10, 15, 10, 15, 15, 1, 100, firstInit, changeDif);
+            Game.ninja = new Enemy("Ninja", 75, 5, 15, 5, 15, 15, 1, 100, firstInit, changeDif);
+            Game.giantSpider = new Enemy("Giant Spider", 35, 5, 10, 5, 10, 10, 1, 100, firstInit, changeDif);
+            Game.zombie = new Enemy("Zombie", 20, 5, 15, 5, 15, 15, 1, 100, firstInit, changeDif);
+            Game.goblin = new Enemy("Goblin", 60, 10, 20, 10, 20, 20, 1, 100, firstInit, changeDif);
+            Game.ghost = new Enemy("Ghost", 85, 15, 25, 15, 25, 25, 1, 100, firstInit, changeDif);
+            Game.barbarian = new Enemy("Barbarian", 50, 5, 15, 5, 15, 15, 1, 100, firstInit, changeDif);
+            Game.giantAnt = new Enemy("Giant Ant", 30, 5, 10, 5, 10, 10, 1, 100, firstInit, changeDif);
+            Game.evilUnicorn = new Enemy("Evil Unicorn", 35, 30, 40, 5, 15, 20, 1, 100, firstInit, changeDif);
+            Game.ogre = new Enemy("Ogre", 90, 20, 50, 10, 30, 50, 1, 100, firstInit, changeDif);
 
             /*Weapons
             * Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, critChanceMultiplier,
@@ -191,16 +191,16 @@ public class Settings {
         } else {//Sets variables for HARD mode
 
             //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, levelMin, levelMax, firstinit, changeDif)
-            Game.darkElf = new Enemy("Dark Elf", 55, 15, 20, 15, 20, 15, 1, 1, firstInit, changeDif);
-            Game.ninja = new Enemy("Ninja", 85, 10, 20, 10, 20, 15, 1, 1, firstInit, changeDif);
-            Game.giantSpider = new Enemy("Giant Spider", 45, 10, 15, 10, 15, 10, 1, 1, firstInit, changeDif);
-            Game.zombie = new Enemy("Zombie", 30, 10, 20, 10, 20, 15, 1, 1, firstInit, changeDif);
-            Game.goblin = new Enemy("Goblin", 70, 15, 25, 15, 25, 20, 1, 1, firstInit, changeDif);
-            Game.ghost = new Enemy("Ghost", 95, 20, 30, 20, 30, 25, 1, 1, firstInit, changeDif);
-            Game.barbarian = new Enemy("Barbarian", 50, 5, 15, 5, 15, 15, 1, 1, firstInit, changeDif);
-            Game.giantAnt = new Enemy("Giant Ant", 30, 5, 10, 5, 10, 10, 1, 1, firstInit, changeDif);
-            Game.evilUnicorn = new Enemy("Evil Unicorn", 35, 20, 40, 5, 15, 20, 1, 1, firstInit, changeDif);
-            Game.ogre = new Enemy("Ogre", 100, 20, 50, 10, 30, 50, 1, 1, firstInit, changeDif);
+            Game.darkElf = new Enemy("Dark Elf", 55, 15, 20, 15, 20, 15, 1, 100, firstInit, changeDif);
+            Game.ninja = new Enemy("Ninja", 85, 10, 20, 10, 20, 15, 1, 100, firstInit, changeDif);
+            Game.giantSpider = new Enemy("Giant Spider", 45, 10, 15, 10, 15, 10, 1, 100, firstInit, changeDif);
+            Game.zombie = new Enemy("Zombie", 30, 10, 20, 10, 20, 15, 1, 100, firstInit, changeDif);
+            Game.goblin = new Enemy("Goblin", 70, 15, 25, 15, 25, 20, 1, 100, firstInit, changeDif);
+            Game.ghost = new Enemy("Ghost", 95, 20, 30, 20, 30, 25, 1, 100, firstInit, changeDif);
+            Game.barbarian = new Enemy("Barbarian", 50, 5, 15, 5, 15, 15, 1, 100, firstInit, changeDif);
+            Game.giantAnt = new Enemy("Giant Ant", 30, 5, 10, 5, 10, 10, 1, 100, firstInit, changeDif);
+            Game.evilUnicorn = new Enemy("Evil Unicorn", 35, 20, 40, 5, 15, 20, 1, 100, firstInit, changeDif);
+            Game.ogre = new Enemy("Ogre", 100, 20, 50, 10, 30, 50, 1, 100, firstInit, changeDif);
 
             /*Weapons
             * Gun:   (name, ammoUsed, ammoIncludedWithPurchase, buyable, price, ammoPrice, level, chanceOfMissing, critChanceMultiplier,
