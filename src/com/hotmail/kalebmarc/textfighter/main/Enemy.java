@@ -25,13 +25,15 @@ public class Enemy {
     private int damageMin;
     private int damageMax;
     private int xp;
+    private int levelMin;
+    private int levelMax;
 
     //Variables
     private int health;
     private int firstAidKit;
 
     public Enemy(String name, int healthMax, int coinDropMin, int coinDropMax,
-                 int damageMin, int damageMax, int xp, boolean firstInit, boolean changeDif) {
+                 int damageMin, int damageMax, int xp, int levelMin, int levelMax, boolean firstInit, boolean changeDif) {
 
         this.name = name;
         this.healthMax = healthMax;
@@ -40,6 +42,8 @@ public class Enemy {
         this.damageMin = damageMin;
         this.damageMax = damageMax;
         this.xp = xp;
+        this.levelMin = levelMin;
+        this.levelMax = levelMax;
 
         /*
          * Finding a way to only have one boolean here (either firstInit, changeDif, or something else) would be nicer.
@@ -76,9 +80,21 @@ public class Enemy {
         return arrayEnemy.indexOf(i);
     }
 
+    public static void findEnemy() {
+        int playerLevel = Xp.getLevel();
+        ArrayList<Enemy> suitableEnemies = new ArrayList<>();
+
+        for (int i = 0; i < arrayEnemy.size(); i++) {
+            if (arrayEnemy.get(i).levelMin <= playerLevel && playerLevel <= arrayEnemy.get(i).levelMax) {
+                suitableEnemies.add(arrayEnemy.get(i));
+            }
+        }
+        current = suitableEnemies.get(Random.RInt(0, suitableEnemies.size() -1));
+    }
+
     public static void encounterNew() {
 
-        current = arrayEnemy.get(Random.RInt(0, arrayEnemy.size() - 1));
+        findEnemy();
         current.health = current.healthMax;
         current.firstAidKit = Random.RInt(FIRST_AID_KIT_MIN, FIRST_AID_KIT_MAX);
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(0, false);
