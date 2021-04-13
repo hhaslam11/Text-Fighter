@@ -18,8 +18,12 @@ Installation
 ----------------
 First, make sure you have the latest version of [Java](https://www.java.com) installed on your computer. Download the jar file from the latest [release](https://github.com/hhaslam11/Text-Fighter/releases). 
 Simply clicking on the .jar file won't work (..yet). You need to run it in the command line.
-Open your command line/terminal, navigate to the downloaded .jar and run `java -jar Text.Fighter.jar`. If you want to run Text Fighter without the splash screen and popups (No GUI; true text-based), simply run it with the `nogui` option: `java -jar Text.Fighter.jar nogui`.
-*Text-Fighter should work on Windows, Mac, and Linux.* 
+Open your command line/terminal, navigate to the downloaded .jar and run `java -jar Text-Fighter.jar`. If you want to run Text Fighter without the splash screen and popups (No GUI; true text-based), simply run it with the `nogui` option: `java -jar Text-Fighter.jar nogui`.
+*Text-Fighter should work on Windows, Mac, and Linux.*
+
+Running
+----------------
+To run this project in IntelliJ use the [these configurations](https://imgur.com/a/IpXX3Jy)
 
 Modifications
 -------------------
