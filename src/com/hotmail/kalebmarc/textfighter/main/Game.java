@@ -10,13 +10,12 @@ import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
 import static com.hotmail.kalebmarc.textfighter.player.Health.upgrade;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
+import static java.util.Arrays.asList;
 
 public class Game {
 	// docschorsch added boolean to indicate if a game had been started
 	private static boolean gameStarted = false;
 
-	private Game() {
-	}
 	// getter to indicate if game had been started for menu.load()
 	public static boolean hadGameStarted() {
 		return gameStarted;
@@ -61,29 +60,24 @@ public class Game {
 
 	private static Scanner scan = new Scanner(System.in);
 
-	public static void start() {
+	public void start() {
 		
 		/*
 		 * Asks if the user wants to load from the save file
 		 */
 		// docschorsch inserted new exit option back to Menu.load()
 
-		Ui.cls();
-		Ui.println("____________________________________________");
-		Ui.println("|                                           |");
-		Ui.println("|       Do you want to load your game       |");
-		Ui.println("|            from save file?                |");
-		Ui.println("|            				                |");
-		Ui.println("| 0) Exit to Main                           |");
-		Ui.println("| 1) Yes                                    |");
-		Ui.println("| 2) No, Start a new game                   |");
-		Ui.println("|___________________________________________|");
+		GameUtils.showPopup(Constants.HEADER,
+				Constants.SUB_HEADER,
+				asList("Do you want to load your game", "from save file?"),
+				asList("Exit to Main", "Yes", "No")
+				);
 
 		int choice = Ui.getValidInt();
 
 		switch(choice){
-			case 0: return;
-			case 1:
+			case 1: return;
+			case 2:
 				if(Saves.savesPrompt()) {
 					// docschorsch savesPrompt() true only if not exited --> game started with loaded player
 					gameStarted = true;
@@ -364,16 +358,11 @@ public class Game {
 		 * they want to play on. Sets variables
 		 * according.
 		 */
-		Ui.cls();
-		Ui.println("_____________________________________________");
-		Ui.println("|                                           |");
-		Ui.println("|       What difficulty would you           |");
-		Ui.println("|            like to play on?               |");
-		Ui.println("|                                           |");
-		Ui.println("| 0) Exit                                   |");
-		Ui.println("| 1) Easy                                   |");
-		Ui.println("| 2) Hard                                   |");
-		Ui.println("|___________________________________________|");
+		GameUtils.showPopup(Constants.HEADER,
+				Constants.SUB_HEADER,
+				asList("What difficulty would you","like to play on?"),
+				asList("Exit","Easy","Hard")
+		);
 
 		//docschorsch added empty default as new 0) option Exit
 		if (!scan.hasNextInt()) {
@@ -381,10 +370,10 @@ public class Game {
 			return "Exit";
 		} else {
 			int difficultyChoice = scan.nextInt();
-			if (difficultyChoice == 1) {
+			if (difficultyChoice == 2) {
 				Ui.cls();
 				return "Easy";
-			} else if (difficultyChoice == 2) {
+			} else if (difficultyChoice == 3) {
 				Ui.cls();
 				return "Hard";
 			} else {

@@ -2,7 +2,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 
 import java.util.List;
 
-public class StringUtils {
+public class GameUtils {
 
   /*
   * This is a Utility Class for modifying String
@@ -15,28 +15,17 @@ public class StringUtils {
     print(input + "\n");
   }
 
-  public static void println(int input) {
-    print(input + "\n");
-  }
-
-  public static void println(boolean input) {
-    print(input + "\n");
-  }
-
-  public static void println(double input) {
-    print(input + "\n");
-  }
-
-  public static void println() {
-    print("\n");
-  }
-
   public static void showPopup(String header, String subheader, List<String> message, List<String> inputs) {
     Ui.cls();
     println(center(Constants.DASH_DIVIDER));
-    println(center(header));
-    println(center(subheader));
-    println(center(Constants.STAR_DIVIDER));
+    if(!header.isEmpty()) {
+      println(center(header));
+    }
+
+    if(!subheader.isEmpty()) {
+      println(center(subheader));
+      println(center(Constants.STAR_DIVIDER));
+    }
     println(center(Constants.EMPTY_SPACE_BOX));
 
     for (int i = 0; i < message.size(); i++) {
@@ -46,17 +35,13 @@ public class StringUtils {
     println(center(Constants.EMPTY_SPACE_BOX));
 
     for (int i = 0; i < inputs.size(); i++) {
-      int input_num = i+1;
+      int input_num = i+1; // This addition is because our switch case starts from Case 1 and not Case 0
       String input = input_num + "- " + inputs.get(i);
       println(leftAlign(input));
     }
     println(center(Constants.DASH_DIVIDER));
     println(center(Constants.BRAND_NAME));
     println(center(Constants.DASH_DIVIDER));
-  }
-
-  public static String center(String s, int size) {
-    return center(s, size, ' ');
   }
 
   public static String center(String s) {
