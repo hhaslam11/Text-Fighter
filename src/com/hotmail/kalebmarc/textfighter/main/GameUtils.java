@@ -35,12 +35,11 @@ public class GameUtils {
     println(center(Constants.EMPTY_SPACE_BOX));
 
     for (int i = 0; i < inputs.size(); i++) {
-      int input_num = i+1; // This addition is because our switch case starts from Case 1 and not Case 0
+      int input_num = i + 1; // This addition is because our switch case starts from Case 1 and not Case 0
       String input = input_num + "- " + inputs.get(i);
       println(leftAlign(input));
     }
-    println(center(Constants.DASH_DIVIDER));
-    println(center(Constants.BRAND_NAME));
+
     println(center(Constants.DASH_DIVIDER));
   }
 
@@ -51,34 +50,35 @@ public class GameUtils {
     return leftAlign(s, 45, ' ');
   }
 
-  public static String center(String s, int size, char pad) {
-    if (s == null || size <= s.length()) {
-      return s;
-    }
+  public static String center(String input, int size, char pad) {
+    if (input == null || size <= input.length())
+      return input;
 
-    StringBuilder sb = new StringBuilder(size);
-    sb.append("|");
-    sb.append(String.valueOf(pad).repeat((size - s.length()) / 2));
-    sb.append(s);
-    while (sb.length() < size) {
-      sb.append(pad);
+    StringBuilder output = new StringBuilder(size);
+    output.append("|");
+    output.append(String.valueOf(pad).repeat((size - input.length()) / 2));
+    output.append(input);
+
+    while (output.length() < size) {
+      output.append(pad);
     }
-    sb.append("|");
-    return sb.toString();
+    output.append("|");
+    return output.toString();
   }
 
-  public static String leftAlign(String s, int size, char pad) {
-    if (s == null || size <= s.length()) {
-      return s;
+  public static String leftAlign(String input, int size, char pad) {
+    if (input == null || size <= input.length())
+      return input;
+
+    StringBuilder output = new StringBuilder(size);
+    output.append("|");
+    output.append(String.valueOf(pad).repeat(10));
+    output.append(input);
+
+    while (output.length() < size) {
+      output.append(pad);
     }
-    StringBuilder sb = new StringBuilder(size);
-    sb.append("|");
-    sb.append(String.valueOf(pad).repeat(10));
-    sb.append(s);
-    while (sb.length() < size) {
-      sb.append(pad);
-    }
-    sb.append("|");
-    return sb.toString();
+    output.append("|");
+    return output.toString();
   }
 }
