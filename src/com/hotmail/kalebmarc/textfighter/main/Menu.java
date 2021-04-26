@@ -1,47 +1,38 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import static java.util.Arrays.asList;
+
 class Menu {
-	
-	private Menu(){}
-	public static void load(){
-		while(true){
-			
-			Ui.cls();
-			//Menu Screen
-			Ui.println("_____________________________________________");
-			Ui.println("|          WELCOME TO TEXT FIGHTER          |");
-			Ui.println("|        A Text-Based Fighting Game         |");
-			Ui.println("|*******************************************|");
-			Ui.println("|                                           |");
-			Ui.println("|   To get started, Type in a number below  |");
-			Ui.println("|             and press enter.              |");
-			Ui.println("|                                           |");
-			Ui.println("| 1) Start Game                             |");
-			Ui.println("| 2) About Game                             |");
-			Ui.println("| 3) Exit                                   |");
-			Ui.println("|             www.TextFighter.tk            |");
-			Ui.println("|___________________________________________|");
 
-            switch (Ui.getValidInt()) {
-                case 1:
-                    Ui.cls();
-                    Ui.guiEnabled = false;
-                    Game.start();
+  public void load() {
+    while (true) {
 
-                    //Saves the game before exiting
-                    // docschorsch: save() only if player is not program default player amd game had started
-                    if(User.getPlayerDefault()>0 && Game.hadGameStarted()) {
-                        Saves.save();
-                    }
-                    break;
-                case 2:
-                    About.view(false);
-                    break;
-                case 3:
-                    return;
-                default:
-                    break;
-            }
-        }//Loop
-    }//Method
+      //Menu Screen
+      GameUtils.showPopup(Constants.WELCOME_HEADER,
+          Constants.SUB_HEADER,
+          asList("To get started, Type in a number below", "and press enter."),
+          asList("Start Game", "About Game")
+      );
+
+      switch (Ui.getValidInt()) {
+        case 1:
+          Ui.guiEnabled = false;
+          new Game().start();
+
+          //Saves the game before exiting
+          // docschorsch: save() only if player is not program default player amd game had started
+          if (User.getPlayerDefault() > 0 && Game.hadGameStarted()) {
+            Saves.save();
+          }
+          break;
+        case 2:
+          About.view(false);
+          break;
+        case 3:
+          return;
+        default:
+          break;
+      }
+    }//Loop
+  }//Method
 }//Class

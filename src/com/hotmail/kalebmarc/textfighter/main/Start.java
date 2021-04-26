@@ -2,7 +2,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 
 class Start {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         if (args.length != 0 && args[0].equalsIgnoreCase("nogui")) Ui.guiEnabled = false;
         Ui.println("Loading..");
@@ -13,7 +13,8 @@ class Start {
         }
 
         //Runs the game
-        Menu.load();
+        Menu menu = new Menu();
+        menu.load();
 
         //Clears Console
         Ui.cls();
