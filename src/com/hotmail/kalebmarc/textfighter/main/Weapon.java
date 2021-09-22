@@ -7,9 +7,8 @@ import com.hotmail.kalebmarc.textfighter.player.Xp;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collections;
 
-public class Weapon implements Comparable<Weapon> {
+public class Weapon {
 
     //Weapon List
     public static final ArrayList<Weapon> arrayWeapon = new ArrayList<>();
@@ -61,8 +60,6 @@ public class Weapon implements Comparable<Weapon> {
             this.owns = false;
 
         }
-
-        Collections.sort(arrayWeapon);
 
     }
 
@@ -200,13 +197,13 @@ public class Weapon implements Comparable<Weapon> {
         if (this.melee) {
             /*
              * Melee Attack
-             */
+			 */
             damageDealt = Random.RInt(this.damageMin, this.damageMax);
         } else {
 
-            /*
-             * Gun Attack
-             */
+			/*
+			 * Gun Attack
+			 */
             if (getAmmo() >= this.ammoUsed) {
 
                 for (int i = 1; i <= this.ammoUsed; i++) {
@@ -233,19 +230,19 @@ public class Weapon implements Comparable<Weapon> {
         com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += damageDealt;
         com.hotmail.kalebmarc.textfighter.player.Xp.setBattleXp(damageDealt, true);
         if(!Enemy.get().takeDamage(damageDealt)) { // !dead
-            Ui.cls();
-            Ui.println("----------------------------------------------------");
-            Ui.println("You have attacked a " + Enemy.get().getName() + "!");
-            Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
-            Ui.println("----------------------------------------------------");
-            Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
-            Ui.println("Enemy health: " + Enemy.get().getHeathStr());
-            Ui.println("----------------------------------------------------");
-            Ui.pause();
-
-            if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
-                Enemy.get().useFirstAidKit();
-            }
+	        Ui.cls();
+	        Ui.println("----------------------------------------------------");
+	        Ui.println("You have attacked a " + Enemy.get().getName() + "!");
+	        Ui.println("You dealt " + damageDealt + " damage with a " + this.name);
+	        Ui.println("----------------------------------------------------");
+	        Ui.println("Your health: " + com.hotmail.kalebmarc.textfighter.player.Health.getStr());
+	        Ui.println("Enemy health: " + Enemy.get().getHeathStr());
+	        Ui.println("----------------------------------------------------");
+	        Ui.pause();
+	
+	        if (Enemy.get().getHealth() <= Enemy.get().getHealthMax() / 3){
+	            Enemy.get().useFirstAidKit();
+	        }
         }
         damageDealt = 0;
     }
@@ -378,10 +375,5 @@ public class Weapon implements Comparable<Weapon> {
 
     public int getAmmoPrice() {
         return this.ammoPrice;
-    }
-
-    @Override
-    public int compareTo(Weapon w) {
-        return Integer.compare(this.level, w.level);
     }
 }
