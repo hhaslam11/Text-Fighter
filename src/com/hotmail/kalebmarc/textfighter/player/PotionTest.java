@@ -38,10 +38,6 @@ public class PotionTest {
         sysInBackup = System.in; // backup System.in to restore it later
         in = new ByteArrayInputStream("\n\n\n\n\n\n\n\n\n\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n".getBytes());
         System.setIn(in);
-        
-        Potion.spUsed = 0;
-        
-        Potion.rpUsed = 0;
 	}
 
 	@After
