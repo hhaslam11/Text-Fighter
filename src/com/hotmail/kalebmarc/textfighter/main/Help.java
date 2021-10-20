@@ -141,7 +141,30 @@ class Help {
         Ui.println("health up to 200. Each upgrade will cost 100 coins on easy, ");
         Ui.println("and 150 coins on hard; and it will upgrade your health by 10.");
         Ui.println("You will be able to upgrade once per level.");
-        //TODO Add more health info
+        Ui.println("Health deteriorates by fighting enemies.");
+        Ui.println("If your health reaches 0, you'll die and you will lose coins.");
+        Ui.println("The goal is to eliminate an enemy by reducing his health to 0.");
+        Ui.println("If an enemies health is 0 they will die.");
+        Ui.println("You'll receive XP points and gain coins if you kill an enemy.");
+        Ui.println("Potions are used to increase your health.");
+        Ui.println("You start the game with 2 Recovery and 2 Survival Potions.");
+        Ui.println("A Recovery Potion increases your health by 25%.");
+        Ui.println("A Survival Potion increases your health by 75%.");
+        Ui.println("You can purchase more potions at the shop once you've ");
+        Ui.println("completed level 2.");
+        Ui.println("First Aid Kits are used to increase your health.");
+        Ui.println("You start the game with 3 First Aid Kits.");
+        Ui.println("A First Aid Kit increases your health by 20 health points.");
+        Ui.println("You can purchase more First Aid Kits at the shop.");
+        Ui.println("Food is given to you at the beginning of the game.");
+        Ui.println("You can eat food to increase your health.");
+        Ui.println("If you eat all the food you cannot purchase more at the shop.");
+        Ui.println("InstaHealth can also restore your health.");
+        Ui.println("If you use an InstaHealth your health will fully recover.");
+        Ui.println("InstaHealth can be purchased at the shops after you have ");
+        Ui.println("reached level 3.");
+        Ui.println("The prices of the items you can purchase at the shop are ");
+        Ui.println("determined by which difficulty you are playing on. If you ");
         Ui.println("------------------------------------------------------------");
         Ui.pause();
     }
