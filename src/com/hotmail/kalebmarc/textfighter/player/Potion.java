@@ -19,6 +19,7 @@ public class Potion {
     public static int ppLevel;
     public static int ppPrice;
     
+    
     public Potion() {
     }
 

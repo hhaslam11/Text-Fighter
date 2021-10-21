@@ -11,7 +11,7 @@ public class Settings {
     private static String difficulty;
     private static boolean godMode = false;
 
-    private Settings() {
+    public Settings() {
     }
 
     public static void menu() {
@@ -138,7 +138,7 @@ public class Settings {
         return difficulty;
     }
 
-    private static void setConstants(String dif, boolean firstInit, boolean changeDif) {
+    public static void setConstants(String dif, boolean firstInit, boolean changeDif) {
         if (dif.equals("Easy")) {//Sets variables for EASY mode
 
             //Enemies (Name, health, coindropmin, coindropmax, damagemin, damagemax, xp, levelMin, levelMax, firstinit, changeDif)
@@ -187,6 +187,8 @@ public class Settings {
             Potion.rpLevel = 2;
             InstaHealth.level = 3;
             Power.level = 4;
+            Potion.ppLevel = 5;
+            Potion.ppPrice =50;
 
         } else {//Sets variables for HARD mode
 
@@ -236,6 +238,8 @@ public class Settings {
             Potion.rpLevel = 2;
             InstaHealth.level = 3;
             Power.level = 4;
+            Potion.ppLevel = 5;
+            Potion.ppPrice =60;
 
         }
         if (firstInit) newGameSetup();
