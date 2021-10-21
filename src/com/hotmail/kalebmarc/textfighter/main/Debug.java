@@ -56,12 +56,12 @@ class Debug {
                     Xp.set(Ui.getValidInt(), false);
                     break;
                 case 3:
-                    for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-                        Weapon.arrayWeapon.get(i).owns = true;
+                    for (int i = 0; i < Weapon.getWeapons().size(); i++) {
+                        Weapon.getWeapons().get(i).owns = true;
                     }
                     Power.set(100, true);
-                    for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-                        Weapon.arrayWeapon.get(i).setAmmo(10000, false);
+                    for (int i = 0; i < Weapon.getWeapons().size(); i++) {
+                        Weapon.getWeapons().get(i).setAmmo(10000, false);
                     }
                     Ui.println("You now have all weapons");
                     Ui.pause();
@@ -84,10 +84,10 @@ class Debug {
                     break;
                 case 8:
                     Ui.cls();
-                    for (int i = 0; i < Food.arrayFood.size(); i++) {
-                        Ui.println(i + ") " + Food.arrayFood.get(i).getName());
+                    for (int i = 0; i < Food.getFoods().size(); i++) {
+                        Ui.println(i + ") " + Food.getFoods().get(i).getName());
                     }
-                    Food.arrayFood.get(Ui.getValidInt()).setQuantity(10);
+                    Food.getFoods().get(Ui.getValidInt()).setQuantity(10);
                     break;
                 case 9:
                     return;
