@@ -11,7 +11,7 @@ public class Settings {
     private static String difficulty;
     private static boolean godMode = false;
 
-    public Settings() {
+   private Settings() {
     }
 
     public static void menu() {

@@ -20,7 +20,8 @@ public class Potion {
     public static int ppPrice;
     
     
-    public Potion() {
+    private Potion() {
+    	throw new UnsupportedOperationException();
     }
 
     public static int get(String kind) {
