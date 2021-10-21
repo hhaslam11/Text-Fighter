@@ -75,6 +75,15 @@ public class WeaponTest {
 
 	@Test
 	public void testGetWeapons() {
-		fail("Not yet implemented");
+		assertEquals(Weapon.arrayWeapon, Weapon.getWeapons());
+		assertEquals(Weapon.arrayWeapon.get(0), Weapon.getWeapons().get(0));
+		assertEquals(Weapon.arrayWeapon.get(1), Weapon.getWeapons().get(1));
+		assertEquals(Weapon.arrayWeapon.get(2), Weapon.getWeapons().get(2));
+		assertEquals(Weapon.arrayWeapon.get(3), Weapon.getWeapons().get(3));
+		assertEquals(Weapon.arrayWeapon.get(4), Weapon.getWeapons().get(4));
+		assertEquals(Weapon.arrayWeapon.get(5), Weapon.getWeapons().get(5));
+		assertEquals(Weapon.arrayWeapon.get(6), Weapon.getWeapons().get(6));
+		assertEquals(Weapon.arrayWeapon.get(7), Weapon.getWeapons().get(7));
+		assertEquals(Weapon.arrayWeapon.get(8), Weapon.getWeapons().get(8));
 	}
 }

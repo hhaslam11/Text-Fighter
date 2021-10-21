@@ -143,6 +143,16 @@ public class EnemyTest {
 
 	@Test
 	public void testGetEnemies() {
-		fail("Not yet implemented");
+		assertEquals(Enemy.arrayEnemy, Enemy.getEnemies());
+		assertEquals(Enemy.arrayEnemy.get(0), Enemy.getEnemies().get(0));
+		assertEquals(Enemy.arrayEnemy.get(1), Enemy.getEnemies().get(1));
+		assertEquals(Enemy.arrayEnemy.get(2), Enemy.getEnemies().get(2));
+		assertEquals(Enemy.arrayEnemy.get(3), Enemy.getEnemies().get(3));
+		assertEquals(Enemy.arrayEnemy.get(4), Enemy.getEnemies().get(4));
+		assertEquals(Enemy.arrayEnemy.get(5), Enemy.getEnemies().get(5));
+		assertEquals(Enemy.arrayEnemy.get(6), Enemy.getEnemies().get(6));
+		assertEquals(Enemy.arrayEnemy.get(7), Enemy.getEnemies().get(7));
+		assertEquals(Enemy.arrayEnemy.get(8), Enemy.getEnemies().get(8));
+		assertEquals(Enemy.arrayEnemy.get(9), Enemy.getEnemies().get(9));
 	}
 }

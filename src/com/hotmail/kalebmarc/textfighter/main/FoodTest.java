@@ -79,6 +79,12 @@ public class FoodTest {
 
 	@Test
 	public void testGetFoods() {
-		fail("Not yet implemented");
+		assertEquals(Food.arrayFood, Food.getFoods());
+		assertEquals(Food.arrayFood.get(0), Food.getFoods().get(0));
+		assertEquals(Food.arrayFood.get(1), Food.getFoods().get(1));
+		assertEquals(Food.arrayFood.get(2), Food.getFoods().get(2));
+		assertEquals(Food.arrayFood.get(3), Food.getFoods().get(3));
+		assertEquals(Food.arrayFood.get(4), Food.getFoods().get(4));
+		assertEquals(Food.arrayFood.get(5), Food.getFoods().get(5));
 	}
 }
