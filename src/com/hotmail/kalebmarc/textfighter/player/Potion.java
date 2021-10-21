@@ -14,8 +14,12 @@ public class Potion {
     public static int rpPrice;
     private static int survivalPotion; //potion that heals 25% of health
     private static int recoveryPotion; //potion that heals 75% of health
-
-    private Potion() {
+    public static int poisonPotion;
+    public static int ppUsed = 0;
+    public static int ppLevel;
+    public static int ppPrice;
+    
+    public Potion() {
     }
 
     public static int get(String kind) {
