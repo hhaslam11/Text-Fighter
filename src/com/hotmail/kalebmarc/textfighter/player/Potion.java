@@ -1,13 +1,10 @@
 package com.hotmail.kalebmarc.textfighter.player;
 import com.hotmail.kalebmarc.textfighter.main.Food;
-import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.item.FirstAid;
-import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
-import com.hotmail.kalebmarc.textfighter.item.Power;
+
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
-import com.hotmail.kalebmarc.textfighter.main.Weapon;
+
 /*
  * Potion class is used to heal player or inflict damage to an enemy.
  */
@@ -102,7 +99,7 @@ public class Potion {
             Ui.println("----------------------------------------------------");
             Ui.pause();
            //If poison type is used enemy will lose 30 health points.  
-        } else if(k == "poison"){
+        } else if(k.equals("poison") ){
             int enemiesHealth = Enemy.get().getHealth()-30;
             //If enemies health is below 0, enemies health reverts to 0;
             if(enemiesHealth < 0 ) enemiesHealth = 0;
@@ -125,7 +122,7 @@ public class Potion {
 
 
         }
-        //If health is 100 player cant use potion to heal themselves.
+        //If health is 100 player can't use potion to heal themselves.
         else if (Health.get() == 100) {
 
             Ui.println("----------------------------------------------------");
@@ -193,7 +190,7 @@ public class Potion {
             Ui.pause();
         } else if (price <= Coins.get()) {
             Coins.set(-price, true);
-            if(kind != "poison") Stats.coinsSpentOnHealth += price;
+            if(kind.equals("poison") ) Stats.coinsSpentOnHealth += price;
             else{Stats.coinsSpentOnPoison += price;}
             set(kind, 1, true);
             Ui.println("Thank you for your purchase. Come again soon! ");
@@ -247,20 +244,20 @@ public class Potion {
      */
     public static void brewPotion(String kind) {
       
-        	if(kind == "survival") {
+        	if(kind.equals( "survival")) {
         		 if (fruitAvailable("Apple","survival") && fruitAvailable("Mushroom" , "survival")){
         			 useFruitInPotion("Apple");
         			 useFruitInPotion("Mushroom");
         			 set("survival", 1, true);
-        			 printPotionisBrewed(kind.toLowerCase());
+        			 printPotionIsBrewed(kind.toLowerCase());
         		 }}
         		 
-        	else if(kind == "recovery") {
+        	else if(kind.equals("recovery")) {
           		 if (fruitAvailable("Orange","recovery") && fruitAvailable("Dragon Fruit","recovery")){
           			 useFruitInPotion("Orange");
         			 useFruitInPotion("Dragon Fruit");
         			 set("recovery", 1, true); 
-        			 printPotionisBrewed(kind.toLowerCase());
+        			 printPotionIsBrewed(kind.toLowerCase());
         		 }}
         		
         	else {
@@ -268,14 +265,14 @@ public class Potion {
           			 useFruitInPotion("Chunk of meat");
         			 useFruitInPotion("Fish");
         			 set("poison", 1, true); 
-        			 printPotionisBrewed(kind.toLowerCase());
+        			 printPotionIsBrewed(kind.toLowerCase());
         		 }}
     }
     /**
      * Prints to console that potion brewing was successful.
      * @param kind type of potion that is brewed.
      */
-    private static void printPotionisBrewed(String kind) {
+    private static void printPotionIsBrewed(String kind) {
     	Ui.println("----------------------------------------------------");
         Ui.println("You successfully brewed a "+ kind +" potion!");
         Ui.println("You have "+ get(kind) +" "+ kind +" potions.");
@@ -287,13 +284,14 @@ public class Potion {
      * Checks if player has fruit needed to brew a potion.
      * @param fruit type of fruit needed to brew a potion.
      * @param kind type of potion that is being brewed.
-     * @return
+     * @return true if fruit is available for brewing potion
+     *         false if fruit is not available for brewing potion
      */
     public static boolean fruitAvailable(String fruit, String kind) {
     	
     	   for (int i = 0; i < Food.arrayFood.size(); i++) {
                if (Food.arrayFood.get(i).getQuantity() > 0) {
-                   if(Food.arrayFood.get(i).getName() == fruit) {
+                   if(Food.arrayFood.get(i).getName().equals(fruit)) {
                 	   return true;
                    }
                }         
@@ -307,13 +305,13 @@ public class Potion {
     }
     
     /**
-     * Removes fruit from players chest if its used in the potion.
+     * Removes fruit from players chest if it's used in the potion.
      * @param fruit type of fruit that is being used.
      */
     public static void useFruitInPotion(String fruit) {
     	
  	   for (int i = 0; i < Food.arrayFood.size(); i++) {
-                if(Food.arrayFood.get(i).getName() == fruit) {
+                if(Food.arrayFood.get(i).getName().equals(fruit)) {
                 	Food.arrayFood.get(i).useInPotion();
                 }         
  	   }
@@ -323,7 +321,7 @@ public class Potion {
      */
     public static void choose() {
 
-        while (true) {
+        //while (true) {
             Ui.cls();
             Ui.println("---------------------------------------------");
             Ui.println("Brew a Potion");
@@ -351,5 +349,6 @@ public class Potion {
             }
         }
         
-    }}
+    //}
+    }
 }
