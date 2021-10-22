@@ -308,13 +308,14 @@ public class Game {
 			Ui.println("1) Equip weapon");
 			Ui.println("2) Equip Armour");
 			Ui.println("3) View Item Chest");
-			Ui.println("4) Achievements");
-			Ui.println("5) Stats");
-			Ui.println("6) About");
-			Ui.println("7) Settings");
-			Ui.println("8) Help");
-			Ui.println("9) Credits");
-			Ui.println("10) Back");
+			Ui.println("4) Brew Potions");
+			Ui.println("5) Achievements");
+			Ui.println("6) Stats");
+			Ui.println("7) About");
+			Ui.println("8) Settings");
+			Ui.println("9) Help");
+			Ui.println("10) Credits");
+			Ui.println("11) Back");
 			Ui.println("------------------------------------------------------------------");
 
 			menuChoice = Ui.getValidInt();
@@ -330,25 +331,28 @@ public class Game {
 					Chest.view();
 					break;
 				case 4:
-					Achievements.view();
+					Potion.choose();
 					break;
 				case 5:
-					Stats.view();
+					Achievements.view();
 					break;
 				case 6:
+					Stats.view();
+					break;
+				case 7:
 					About.view(true);
 					Achievements.viewedAbout = true;
 					break;
-				case 7:
+				case 8:
 					menu();
 					break;
-				case 8:
+				case 9:
 					Help.view();
 		 	 	 	break;
-				case 9:
+				case 10:
 					Credits.view();
 					break;
-				case 10:
+				case 11:
 					return;
 				default:
 					break;

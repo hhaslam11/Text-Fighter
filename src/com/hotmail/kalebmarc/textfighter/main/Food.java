@@ -119,6 +119,12 @@ public class Food {
         }
 
     }
+    public void useInPotion() {
+        Ui.cls();
+
+        Ui.println("You have used a " + getName() + " to brew a potion!");
+        this.quantity--;
+    }
 
     public void viewAbout() {
 

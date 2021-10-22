@@ -1,8 +1,13 @@
 package com.hotmail.kalebmarc.textfighter.player;
-
+import com.hotmail.kalebmarc.textfighter.main.Food;
+import com.hotmail.kalebmarc.textfighter.item.Armour;
+import com.hotmail.kalebmarc.textfighter.item.FirstAid;
+import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
+import com.hotmail.kalebmarc.textfighter.item.Power;
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
+import com.hotmail.kalebmarc.textfighter.main.Weapon;
 /*
  * Potion class is used to heal player or inflict damage to an enemy.
  */
@@ -233,7 +238,118 @@ public class Potion {
         }
     }
     
+    /**
+     * Brews potion. If potion can be brewed, uses fruit from players chest.
+     * @param kind type of potion that is brewed.
+     * survival potion is brewed with apple and mushroom.
+     * recovery potion is brewed with orange and dragon fruit.
+     * poison potion is brewed with chunk of meat and fish.
+     */
     public static void brewPotion(String kind) {
-    	
+      
+        	if(kind == "survival") {
+        		 if (fruitAvailable("Apple","survival") && fruitAvailable("Mushroom" , "survival")){
+        			 useFruitInPotion("Apple");
+        			 useFruitInPotion("Mushroom");
+        			 set("survival", 1, true);
+        			 printPotionisBrewed(kind.toLowerCase());
+        		 }}
+        		 
+        	else if(kind == "recovery") {
+          		 if (fruitAvailable("Orange","recovery") && fruitAvailable("Dragon Fruit","recovery")){
+          			 useFruitInPotion("Orange");
+        			 useFruitInPotion("Dragon Fruit");
+        			 set("recovery", 1, true); 
+        			 printPotionisBrewed(kind.toLowerCase());
+        		 }}
+        		
+        	else {
+          		 if (fruitAvailable("Chunk of meat","poison") && fruitAvailable("Fish","poison")){
+          			 useFruitInPotion("Chunk of meat");
+        			 useFruitInPotion("Fish");
+        			 set("poison", 1, true); 
+        			 printPotionisBrewed(kind.toLowerCase());
+        		 }}
     }
+    /**
+     * Prints to console that potion brewing was successful.
+     * @param kind type of potion that is brewed.
+     */
+    private static void printPotionisBrewed(String kind) {
+    	Ui.println("----------------------------------------------------");
+        Ui.println("You successfully brewed a "+ kind +" potion!");
+        Ui.println("You have "+ get(kind) +" "+ kind +" potions.");
+        Ui.println("----------------------------------------------------");
+        Ui.pause();
+    }
+    
+    /**
+     * Checks if player has fruit needed to brew a potion.
+     * @param fruit type of fruit needed to brew a potion.
+     * @param kind type of potion that is being brewed.
+     * @return
+     */
+    private static boolean fruitAvailable(String fruit, String kind) {
+    	
+    	   for (int i = 0; i < Food.arrayFood.size(); i++) {
+               if (Food.arrayFood.get(i).getQuantity() > 0) {
+                   if(Food.arrayFood.get(i).getName() == fruit) {
+                	   return true;
+                   }
+               }         
+    	   }
+           Ui.println("----------------------------------------------------");
+           Ui.println("You don't have any " + fruit + "'s!");
+           Ui.println("You need " + fruit + "'s to brew a " + kind + " potion.");
+           Ui.println("----------------------------------------------------");
+           Ui.pause();
+		return false;
+    }
+    
+    /**
+     * Removes fruit from players chest if its used in the potion.
+     * @param fruit type of fruit that is being used.
+     */
+    private static void useFruitInPotion(String fruit) {
+    	
+ 	   for (int i = 0; i < Food.arrayFood.size(); i++) {
+                if(Food.arrayFood.get(i).getName() == fruit) {
+                	Food.arrayFood.get(i).useInPotion();
+                }         
+ 	   }
+ }
+    /**
+     * Player chooses which potion they will brew.
+     */
+    public static void choose() {
+
+        while (true) {
+            Ui.cls();
+            Ui.println("---------------------------------------------");
+            Ui.println("Brew a Potion");
+            Ui.println();
+            Ui.println("1) Survival Potion: Apple and Mushroom");
+            Ui.println("2) Recovery Potion: Orange and Dragon Fruit");
+            Ui.println("3) Poison Potion: Chunk of Meat and Fish");
+            Ui.println("---------------------------------------------");
+
+            //Get valid index
+            while (true) {
+
+                int menuItem = Ui.getValidInt();
+                try {
+                	
+                	if(menuItem == 1) {brewPotion("survival"); return;}
+                	if(menuItem ==2 ) {brewPotion("recovery"); return;}
+                	if(menuItem == 3) { brewPotion("poison");return;}
+                	
+                    
+                
+            }catch (Exception e) {
+                Ui.println();
+                Ui.println(menuItem + " is not an option.");
+            }
+        }
+        
+    }}
 }
