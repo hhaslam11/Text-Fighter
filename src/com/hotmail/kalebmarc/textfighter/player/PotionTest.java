@@ -14,47 +14,55 @@ public class PotionTest  {
 	@Test
 	public void testGet() {
 		// Test if correct integer is returned from the Poison type of potion.
-		assertEquals(-50, Potion.get("Poison"));
+		Potion.set("poison", 0, false);
+		assertEquals(0, Potion.get("poison"));
 	}
 
 	@Test
 	public void testSet() {
-		Potion.set("Poison", 1, true);
+		Potion.set("poison", 1, false);
 		assertEquals(1, Potion.poisonPotion);
+		Potion.set("poison", 3, true);
+		assertEquals(4, Potion.get("poison"));
+		Potion.set("poison", -4, true);
+		assertEquals(0, Potion.get("poison"));
 	}
-
+	
 	@Test
 	//Poison reduces enemies health by 30 health points.
+	//Must hit "Enter" when testing because of UI pause.
 	public void testUse() {
-        Enemy darkElf = new Enemy("Dark Elf", 30, 10, 15, 10, 15, 15, 1, 100, true, false);
+		//Testing when user doesnt have poison available.
+        Enemy darkElf = new Enemy("Dark Elf", 40, 10, 15, 10, 15, 15, 1, 100, true, false);
         darkElf.arrayEnemy.add(darkElf);
         darkElf.set(0);
-        Potion.use("poisonPotion");
-		assertEquals(0, darkElf.getHealth());
+		Potion.set("poison", 1, true);
+        Potion.use("poison");
+		assertEquals(10, darkElf.getHealth());
 	}
-
+	
 	@Test
 	public void testUsed() {
-		Potion.used("poisonPotion");
-		
-		assertEquals(1, Potion.ppUsed);
+		Potion.used("poison");
+		assertEquals(2,Potion.ppUsed) ;
 	}
-
+	
 	@Test
 	public void testBuy() {
-		Potion.buy("poisonPotion");
-		assertEquals(1, Potion.poisonPotion);
+		Potion.buy("poison");
+		assertEquals(1, Potion.get("poison"));
 	}
-
+	
 	@Test
 	public void testGetLevel() {
-		
-		assertEquals(5,Potion.getLevel("poisonPotion"));
+		Potion.ppLevel = 0; 
+		assertEquals(0,Potion.getLevel("poison"));
 	}
 
 	@Test
 	public void testGetPrice() {
-		assertEquals(50, Potion.getPrice("poisonPotion"));
+		Potion.ppPrice = 0;
+		assertEquals(0, Potion.getPrice("poison"));
 	}
 
 }
