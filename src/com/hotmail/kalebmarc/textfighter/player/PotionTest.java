@@ -64,5 +64,15 @@ public class PotionTest  {
 		Potion.ppPrice = 0;
 		assertEquals(0, Potion.getPrice("poison"));
 	}
+	
+	@Test
+	public void testBrewPotion() {
+		Potion.brewPotion("recovery");
+		assertEquals(1, Potion.get("recovery"));
+		Potion.brewPotion("survival");
+		assertEquals(1, Potion.get("survival"));
+		Potion.brewPotion("poison");
+		assertEquals(1, Potion.get("poison"));
+	}
 
 }

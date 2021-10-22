@@ -232,4 +232,8 @@ public class Potion {
                 return 0; //need to modify
         }
     }
+    
+    public static void brewPotion(String kind) {
+    	
+    }
 }
