@@ -18,6 +18,8 @@ public class PotionTest  {
 		// Test if correct integer is returned from the Poison type of potion.
 		Potion.set("poison", 0, false);
 		assertEquals(0, Potion.get("poison"));
+		Potion.set("poison", 1, false);
+		assertEquals(1, Potion.get("poison"));
 	}
 
 	@Test
