@@ -16,7 +16,7 @@ public class Weapon implements Comparable<Weapon> {
     //Properties
     public static int BULLET_DAMAGE;
     public static int BULLET_CRITICAL_MULTIPLIER;
-    public static int BULLET_CRITICAL_CHANCE;
+    public static double BULLET_CRITICAL_CHANCE;
     //Variables
     public static Weapon starting;
     private static Weapon current = null;

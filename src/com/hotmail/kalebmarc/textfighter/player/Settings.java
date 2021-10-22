@@ -174,7 +174,7 @@ public class Settings {
             //Price
             Power.price = 25;
             Weapon.BULLET_DAMAGE = 10;
-            Weapon.BULLET_CRITICAL_CHANCE = 1;
+            Weapon.BULLET_CRITICAL_CHANCE = 0.01;
             Weapon.BULLET_CRITICAL_MULTIPLIER = 10;
             FirstAid.price = 5;
             Potion.spPrice = 10;
@@ -225,7 +225,7 @@ public class Settings {
             //PRICE
             Power.price = 75;
             Weapon.BULLET_DAMAGE = 5;
-            Weapon.BULLET_CRITICAL_CHANCE = 1;
+            Weapon.BULLET_CRITICAL_CHANCE = 0.01;
             Weapon.BULLET_CRITICAL_MULTIPLIER = 10;
             FirstAid.price = 15;
             Potion.spPrice = 25;

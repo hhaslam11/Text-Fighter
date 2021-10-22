@@ -71,7 +71,7 @@ public class EnemyTest {
         Weapon.BULLET_DAMAGE = 10;
         
         Weapon.BULLET_CRITICAL_MULTIPLIER = 10;
-		Weapon.BULLET_CRITICAL_CHANCE = 1;
+		Weapon.BULLET_CRITICAL_CHANCE = 0.001;
 	}
 
 	@AfterClass
