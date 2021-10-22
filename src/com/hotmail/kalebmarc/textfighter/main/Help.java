@@ -164,9 +164,7 @@ class Help {
         Ui.println("InstaHealth can be purchased at the shops after you have ");
         Ui.println("reached level 3.");
         Ui.println("The prices of the items you can purchase at the shop are ");
-        Ui.println("determined by which difficulty you are playing on. If you ");
-        Ui.println("are playing on a harder difficulty the prices will be higher.");
-        //TODO Add more health info
+        Ui.println("determined by which difficulty you are playing on.");
         Ui.println("------------------------------------------------------------");
         Ui.pause();
     }
