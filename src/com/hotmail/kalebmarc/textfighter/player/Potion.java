@@ -289,7 +289,7 @@ public class Potion {
      * @param kind type of potion that is being brewed.
      * @return
      */
-    private static boolean fruitAvailable(String fruit, String kind) {
+    public static boolean fruitAvailable(String fruit, String kind) {
     	
     	   for (int i = 0; i < Food.arrayFood.size(); i++) {
                if (Food.arrayFood.get(i).getQuantity() > 0) {
@@ -310,7 +310,7 @@ public class Potion {
      * Removes fruit from players chest if its used in the potion.
      * @param fruit type of fruit that is being used.
      */
-    private static void useFruitInPotion(String fruit) {
+    public static void useFruitInPotion(String fruit) {
     	
  	   for (int i = 0; i < Food.arrayFood.size(); i++) {
                 if(Food.arrayFood.get(i).getName() == fruit) {

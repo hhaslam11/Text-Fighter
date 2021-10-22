@@ -1,5 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.player;
-
+import com.hotmail.kalebmarc.textfighter.main.Game;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Constructor;
@@ -7,7 +7,9 @@ import java.lang.reflect.Constructor;
 import org.junit.Test;
 
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
+import com.hotmail.kalebmarc.textfighter.main.Food;
 import com.hotmail.kalebmarc.textfighter.main.Game;
+import com.hotmail.kalebmarc.textfighter.main.StatusEffect;
 
 public class PotionTest  {
 
@@ -43,12 +45,14 @@ public class PotionTest  {
 	
 	@Test
 	public void testUsed() {
+		Potion.ppUsed = 0;
 		Potion.used("poison");
-		assertEquals(2,Potion.ppUsed) ;
+		assertEquals(1,Potion.ppUsed) ;
 	}
 	
 	@Test
 	public void testBuy() {
+		Potion.set("poison", 0, false);
 		Potion.buy("poison");
 		assertEquals(1, Potion.get("poison"));
 	}
@@ -67,12 +71,33 @@ public class PotionTest  {
 	
 	@Test
 	public void testBrewPotion() {
+		Game test = new Game();
+		Potion.set("recovery", 0, false);
 		Potion.brewPotion("recovery");
 		assertEquals(1, Potion.get("recovery"));
+		Potion.set("survival", 0, false);
 		Potion.brewPotion("survival");
 		assertEquals(1, Potion.get("survival"));
-		Potion.brewPotion("poison");
-		assertEquals(1, Potion.get("poison"));
+		Potion.set("poison", 0, false);
+	}
+	
+	@Test
+	public void testFruitAvailable() {
+		assertFalse(Potion.fruitAvailable("Raspberry", "recovery"));
+		assertFalse(Potion.fruitAvailable("Apple", "recovery"));
+		assertTrue(Potion.fruitAvailable("Chunk of meat", "poison"));
+	}
+	@Test
+	public void testUseFruitInPotion() {
+		// Fish is available to use in potion.
+		assertTrue(Potion.fruitAvailable("Fish", "poison"));
+		// Use fish in potion
+		Potion.useFruitInPotion("Fish");
+		// Fish is now unavailable.
+		assertFalse(Potion.fruitAvailable("Fish", "poison"));
+		
 	}
 
 }
+
+
