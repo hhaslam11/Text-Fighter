@@ -91,6 +91,7 @@ public class Potion {
             Ui.println(kind + " Potions: " + get(kind));
             Ui.println("----------------------------------------------------");
             Enemy.get().takeDamage(30);
+            com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += 30;
             set(kind, -1, true);
             used(kind);
             Ui.pause();
