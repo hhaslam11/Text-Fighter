@@ -23,7 +23,7 @@ class Shop {
             Ui.println();
             Ui.println("Coins: " + Coins.get());
             Ui.println("First-Aid kits: " + FirstAid.get());
-            Ui.println("Potions: " + (Potion.get("survival") + Potion.get("recovery")));
+            Ui.println("Potions: " + (Potion.get("survival") + Potion.get("recovery")+ Potion.get("poison")));
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
             Ui.println("1) Health");
@@ -84,11 +84,15 @@ class Shop {
             Ui.println("   Price - " + Potion.rpPrice + " coins");
             Ui.println("   Level - " + Potion.rpLevel);
             Ui.println();
-            Ui.println("4) INSTA-HEALTH");
+            Ui.println("4) POISON POTION");
+            Ui.println("   Price - " + Potion.ppPrice + " coins");
+            Ui.println("   Level - " + Potion.ppLevel);
+            Ui.println();
+            Ui.println("5) INSTA-HEALTH");
             Ui.println("   Price - " + InstaHealth.price + " coins");
             Ui.println("   Level - " + InstaHealth.level);
             Ui.println();
-            Ui.println("5) Back");
+            Ui.println("6) Back");
             Ui.println("-------------------------------------------------------------------");
             switch (Ui.getValidInt()) {
                 case 1:
@@ -108,10 +112,15 @@ class Shop {
                     break;
                 case 4:
                     Ui.cls();
-                    InstaHealth.buy();
+                    Potion.buy("poison");
                     NPC.gratitude("Health", "purchase");
                     break;
                 case 5:
+                    Ui.cls();
+                    InstaHealth.buy();
+                    NPC.gratitude("Health", "purchase");
+                    break;
+                case 6:
                     return;
                 default:
                     break;

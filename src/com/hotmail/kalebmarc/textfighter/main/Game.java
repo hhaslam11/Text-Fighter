@@ -135,6 +135,7 @@ public class Game {
             Ui.println("     Potions: ");
             Ui.println("          Survival: " + Potion.get("survival"));
             Ui.println("          Recovery: " + Potion.get("recovery"));
+			Ui.println("          Poison: " + Potion.get("poison"));
 			Ui.println("     Equipped armour: " + Armour.getEquipped().toString());
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			//Displays ammo only if a weapon is equipped
@@ -183,7 +184,8 @@ public class Game {
 					Ui.println("Which potion would you like to use?");
 					Ui.println("1) Survival Potion");
 					Ui.println("2) Recovery Potion");
-					Ui.println("3) Back");
+					Ui.println("3) Poison Potion");
+					Ui.println("4) Back");
 					switch (Ui.getValidInt()) {
 						case 1:
 							Potion.use("survival");
@@ -192,6 +194,9 @@ public class Game {
 							Potion.use("recovery");
 							break;
 						case 3:
+							Potion.use("poison");
+							break;
+						case 4:
 							break;
 						default:
 							break;
@@ -244,6 +249,7 @@ public class Game {
             Ui.println("     Potions: ");
             Ui.println("          Survival: " + Potion.get("survival"));
             Ui.println("          Recovery: " + Potion.get("recovery"));
+			Ui.println("          Poison: " + Potion.get("poison"));
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("1) Casino");
@@ -296,7 +302,7 @@ public class Game {
 			Ui.println("     Health: " + getStr());
 			Ui.println("     Coins: " + Coins.get());
 			Ui.println("     First-Aid kits: " + FirstAid.get());
-            Ui.println("     Potions: " + (Potion.get("survival") + Potion.get("recovery")));
+            Ui.println("     Potions: " + (Potion.get("survival") + Potion.get("recovery") + Potion.get("poison") ));
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("1) Equip weapon");

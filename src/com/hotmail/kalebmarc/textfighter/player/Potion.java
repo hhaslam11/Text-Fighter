@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
+import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 
@@ -14,14 +15,13 @@ public class Potion {
     public static int rpPrice;
     private static int survivalPotion; //potion that heals 25% of health
     private static int recoveryPotion; //potion that heals 75% of health
-    public static int poisonPotion;
+    public static int poisonPotion;    //potion that reduces enemies health by 30 health points.
     public static int ppUsed = 0;
     public static int ppLevel;
     public static int ppPrice;
     
-    
     private Potion() {
-    	throw new UnsupportedOperationException();
+
     }
 
     public static int get(String kind) {
@@ -30,6 +30,8 @@ public class Potion {
                 return survivalPotion;
             case "recovery":
                 return recoveryPotion;
+            case "poison":
+                return poisonPotion;
             default:
                 return 0; //need to modify
         }
@@ -52,6 +54,13 @@ public class Potion {
                     recoveryPotion += amount;
                     if (recoveryPotion < 0) recoveryPotion = 0;
                 }
+            case "poison":
+                if (!add) {
+                    poisonPotion = amount;
+                } else {
+                    poisonPotion += amount;
+                    if (poisonPotion < 0) poisonPotion= 0;
+                }
                 break;
             default:
                 Handle.error("Unknown potion type: " + kind);
@@ -71,7 +80,24 @@ public class Potion {
             Ui.println("----------------------------------------------------");
             Ui.pause();
 
-        } else if (Health.get() == 100) {
+        } else if(k == "poison"){
+            int enemiesHealth = Enemy.get().getHealth()-30;
+            if(enemiesHealth < 0 ) enemiesHealth = 0;
+            Ui.println("----------------------------------------------------");
+            Ui.println("You are poisoning the " + Enemy.get().getName() +"!");
+            Ui.println(Enemy.get().getName()+"'s health is now " + enemiesHealth );
+            Ui.println("----------------------------------------------------");
+            Ui.println("Your health: " + Health.getStr());
+            Ui.println(kind + " Potions: " + get(kind));
+            Ui.println("----------------------------------------------------");
+            Enemy.get().takeDamage(30);
+            set(kind, -1, true);
+            used(kind);
+            Ui.pause();
+
+
+        }
+        else if (Health.get() == 100) {
 
             Ui.println("----------------------------------------------------");
             Ui.println("You already have full health!");
@@ -119,6 +145,8 @@ public class Potion {
                 spUsed++;
             case "recovery":
                 rpUsed++;
+            case "poison":
+                ppUsed++;
         }
     }
 
@@ -132,7 +160,8 @@ public class Potion {
             Ui.pause();
         } else if (price <= Coins.get()) {
             Coins.set(-price, true);
-            Stats.coinsSpentOnHealth += price;
+            if(kind != "poison") Stats.coinsSpentOnHealth += price;
+            else{Stats.coinsSpentOnPoison += price;}
             set(kind, 1, true);
             Ui.println("Thank you for your purchase. Come again soon! ");
             Ui.pause();
@@ -148,6 +177,8 @@ public class Potion {
                 return spLevel;
             case "recovery":
                 return rpLevel;
+            case "poison":
+                return ppLevel;
             default:
                 return 0; //need to modify
         }
@@ -159,6 +190,8 @@ public class Potion {
                 return spPrice;
             case "recovery":
                 return rpPrice;
+            case "poison":
+                return ppPrice;
             default:
                 return 0; //need to modify
         }

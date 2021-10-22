@@ -251,6 +251,7 @@ public class Settings {
         FirstAid.set(3, false);
         Potion.set("survival", 2, false);
         Potion.set("recovery", 2, false);
+        Potion.set("poison", 1, false);
         Xp.setAll(0, 500, 1);
         Game.none.setOwns(true);
         Game.none.equipSilent();

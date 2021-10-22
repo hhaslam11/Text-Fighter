@@ -17,6 +17,7 @@ public class Stats {
     public static int totalCoinsSpent;
     public static int coinsSpentOnWeapons;
     public static int coinsSpentOnHealth;
+    public static int coinsSpentOnPoison;
     public static int coinsSpentOnBankInterest;
     public static int xpBought;
     //Other
@@ -62,13 +63,14 @@ public class Stats {
         Ui.println("   Coins spent on bank interest - " + coinsSpentOnBankInterest);
         Ui.println("   Coins spent on weapons - " + coinsSpentOnWeapons);
         Ui.println("   Coins spent on health - " + coinsSpentOnHealth);
+        Ui.println("   Coins spent on poison - " + coinsSpentOnPoison);
         Ui.println("   XP bought - " + xpBought);
         Ui.println();
         Ui.println("Health:");
         Ui.println("   Health - " + Health.getStr());
         Ui.println("   Insta-Healths used - " + InstaHealth.used);
         Ui.println("   First-Aid kits used - " + FirstAid.used);
-        Ui.println("   Potions used - " + (Potion.spUsed + Potion.rpUsed));
+        Ui.println("   Potions used - " + (Potion.spUsed + Potion.rpUsed + Potion.ppUsed));
         Ui.println("   Times Died - " + Health.timesDied);
         Ui.println("   Food items eaten - " + Food.totalEaten);
         Ui.println();

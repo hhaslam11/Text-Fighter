@@ -60,6 +60,7 @@ public class Saves {
 		set("Stats.Money_Spent.Interest", Stats.coinsSpentOnBankInterest);
 		set("Stats.Money_Spent.Weapons", Stats.coinsSpentOnWeapons);
 		set("Stats.Money_Spent.Health", Stats.coinsSpentOnHealth);
+		set("Stats.Money_Spent.Poison", Stats.coinsSpentOnPoison);
 		set("Stats.Money_Spent.XP", Stats.xpBought);
 		set("Stats.Blackjack_Games_Played", Stats.blackjackGamesPlayed);
 		set("Stats.Lottery_Tickets_Bought", Stats.lotteryTicketsBought);
@@ -77,9 +78,10 @@ public class Saves {
 		//Potions
 		set("Stats.Potions.Survival.Used", Potion.spUsed);
 		set("Stats.Potions.Recovery.Used", Potion.rpUsed);
+		set("Stats.Potions.Poison.Used", Potion.ppUsed);
 		set("User.Potions.Survival", Potion.get("survival"));
 		set("User.Potions.Recovery", Potion.get("recovery"));
-
+		set("User.Potions.Poison", Potion.get("poison"));
 		//Settings
 		set("Settings.Difficulty.Level", Settings.getDif());
 		set("Settings.Difficulty.Locked", Settings.difLocked);
@@ -216,6 +218,7 @@ public class Saves {
 		Stats.coinsSpentOnBankInterest = getInteger("Stats.Money_Spent.Interest");
 		Stats.coinsSpentOnWeapons = getInteger("Stats.Money_Spent.Weapons");
 		Stats.coinsSpentOnHealth = getInteger("Stats.Money_Spent.Health");
+		Stats.coinsSpentOnPoison = getInteger("Stats.Money_Spent.Poison");
 		Stats.xpBought = getInteger("Stats.Money_Spent.XP");
 		Stats.blackjackGamesPlayed = getInteger("Stats.Blackjack_Games_Played");
 		Stats.lotteryTicketsBought = getInteger("Stats.Lottery_Tickets_Bought");
@@ -233,9 +236,10 @@ public class Saves {
 		//Potions
 		Potion.spUsed = getInteger("Stats.Potions.Survival.Used");
 		Potion.rpUsed = getInteger("Stats.Potions.Recovery.Used");
+		Potion.ppUsed = getInteger("Stats.Potions.Poison.Used");
 		Potion.set("survival", getInteger("User.Potions.Survival"), false);
 		Potion.set("recovery", getInteger("User.Potions.Recovery"), false);
-
+		Potion.set("poison", getInteger("User.Potions.Poison"), false);
 		//Settings
 		Settings.setDif(getString("Settings.Difficulty.Level"), false, false);
 		Settings.difLocked = getBoolean("Settings.Difficulty.Locked");
@@ -427,6 +431,7 @@ public class Saves {
 			Stats.coinsSpentOnBankInterest = readInt();
 			Stats.coinsSpentOnWeapons = readInt();
 			Stats.coinsSpentOnHealth = readInt();
+			Stats.coinsSpentOnPoison = readInt();
 			Stats.xpBought = readInt();
 			Loan.setCurrentLoan(readInt());
 			Loan.setNetDue(readInt());
@@ -441,8 +446,10 @@ public class Saves {
 			//Potions
 			Potion.spUsed = readInt();
 			Potion.rpUsed = readInt();
+			Potion.ppUsed = readInt();
 			Potion.set("survival", readInt(), false);
 			Potion.set("recovery", readInt(), false);
+			Potion.set("poison", readInt(), false);
 
 
 			//Settings
