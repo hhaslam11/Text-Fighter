@@ -141,6 +141,9 @@ class Help {
         Ui.println("health up to 200. Each upgrade will cost 100 coins on easy, ");
         Ui.println("and 150 coins on hard; and it will upgrade your health by 10.");
         Ui.println("You will be able to upgrade once per level.");
+        Ui.println("Use potions to increase your health or decrease your enemies.");
+        Ui.println("Recovery and Survival potions will increase your health.");
+        Ui.println("Poison will deduct health points from your enemy.");
         //TODO Add more health info
         Ui.println("------------------------------------------------------------");
         Ui.pause();

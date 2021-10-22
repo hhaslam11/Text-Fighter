@@ -3,7 +3,9 @@ package com.hotmail.kalebmarc.textfighter.player;
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
-
+/*
+ * Potion class is used to heal player or inflict damage to an enemy.
+ */
 public class Potion {
     public static int spUsed = 0;
     public static int spLevel;
@@ -23,7 +25,12 @@ public class Potion {
     private Potion() {
 
     }
-
+    
+    /**
+     * Getter for potion.
+     * @param kind type of potion.
+     * @return number of potions player possess.
+     */
     public static int get(String kind) {
         switch (kind.toLowerCase()) {
             case "survival":
@@ -36,7 +43,13 @@ public class Potion {
                 return 0; //need to modify
         }
     }
-
+    /**
+     * Setter for potion.
+     * @param kind type of potion.
+     * @param amount number of potions player will have.
+     * @param add true if player is accumulating a total of potions. 
+     * 		      false if player is setting potion.
+     */
     public static void set(String kind, int amount, boolean add) {
         switch (kind.toLowerCase()) {
             case "survival":
@@ -67,11 +80,15 @@ public class Potion {
         }
     }
 
+    /**
+     * Called to use potions during game.
+     * @param k type of potion being used.
+     */
     public static void use(String k) {
         String kind = k.trim().substring(0, 1).toUpperCase()
                 + k.substring(1).toLowerCase();
         Ui.cls();
-
+        // If player doesn't have any potions available, they cannot use any.
         if (get(kind) <= 0) {
 
             Ui.println("----------------------------------------------------");
@@ -79,9 +96,10 @@ public class Potion {
             Ui.println("Go to the shop to buy some more.");
             Ui.println("----------------------------------------------------");
             Ui.pause();
-
+           //If poison type is used enemy will lose 30 health points.  
         } else if(k == "poison"){
             int enemiesHealth = Enemy.get().getHealth()-30;
+            //If enemies health is below 0, enemies health reverts to 0;
             if(enemiesHealth < 0 ) enemiesHealth = 0;
             Ui.println("----------------------------------------------------");
             Ui.println("You are poisoning the " + Enemy.get().getName() +"!");
@@ -90,14 +108,19 @@ public class Potion {
             Ui.println("Your health: " + Health.getStr());
             Ui.println(kind + " Potions: " + get(kind));
             Ui.println("----------------------------------------------------");
+            //Enemy is dealt 30 damage
             Enemy.get().takeDamage(30);
+            //Player totalDamageDealt stat is updated.
             com.hotmail.kalebmarc.textfighter.player.Stats.totalDamageDealt += 30;
+            //Poison count is reduced by 1.
             set(kind, -1, true);
+            //Potions used stat is updated.
             used(kind);
             Ui.pause();
 
 
         }
+        //If health is 100 player cant use potion to heal themselves.
         else if (Health.get() == 100) {
 
             Ui.println("----------------------------------------------------");
@@ -139,7 +162,7 @@ public class Potion {
                 return 0;
         }
     }
-
+    //Updates potions used stats.
     public static void used(String kind) {
         switch (kind.toLowerCase()) {
             case "survival":
@@ -150,12 +173,16 @@ public class Potion {
                 ppUsed++;
         }
     }
-
+    
+    /**
+     * Used in the shop to purchase potions
+     * @param kind type of potion that is being purchased
+     */
     public static void buy(String kind) {
 
         int level = getLevel(kind);
         int price = getPrice(kind);
-
+        //If user isn't at a high enough level or enough coins they cannot purchase potions.
         if (Xp.getLevel() < level) {
             Ui.println("You have to be at least level " + level + " to buy this!");
             Ui.pause();
@@ -171,7 +198,11 @@ public class Potion {
             Ui.pause();
         }
     }
-
+    /**
+     * Getter for the level that must be met to purchase potions
+     * @param kind potion type
+     * @return level that is necessary to purchase a potion.
+     */
     public static int getLevel(String kind) {
         switch (kind.toLowerCase()) {
             case "survival":
@@ -184,7 +215,11 @@ public class Potion {
                 return 0; //need to modify
         }
     }
-
+    /**
+     * Getter for price of potion.
+     * @param kind potion type.
+     * @return price for specified potion.
+     */
     public static int getPrice(String kind) {
         switch (kind.toLowerCase()) {
             case "survival":
