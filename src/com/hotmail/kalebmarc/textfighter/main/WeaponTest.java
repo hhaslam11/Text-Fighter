@@ -74,6 +74,9 @@ public class WeaponTest {
         Xp.setLevel(1);
         
         Weapon.BULLET_DAMAGE = 10;
+        
+        Weapon.BULLET_CRITICAL_MULTIPLIER = 10;
+		Weapon.BULLET_CRITICAL_CHANCE = 100;
 	}
 
 	@AfterClass
@@ -96,6 +99,8 @@ public class WeaponTest {
 
 	@Test
 	public void testDealDam() {
+		
+		Weapon.set(0);
 		
 		ByteArrayInputStream chooseIn = new ByteArrayInputStream("\n".getBytes());
         
@@ -144,10 +149,9 @@ public class WeaponTest {
 
 	@Test
 	public void testGeneralBulletCriticalHit() {
-		fail("Not yet implemented");
 		
-		//Weapon.BULLET_CRITICAL_MULTIPLIER = 10
-		//Weapon.BULLET_CRITICAL_CHANCE = 100
+		Weapon.BULLET_CRITICAL_MULTIPLIER = 10;
+		Weapon.BULLET_CRITICAL_CHANCE = 100;
 		
 		int startHealth;
 		int endHealth;
@@ -177,7 +181,7 @@ public class WeaponTest {
 		
 		String nextEnemy = Enemy.get().getName();
 		
-		assertTrue((lost <= Random.RInt(3, 4) * 10 * 10 && lost >= 100) || (nextEnemy != previousEnemy));
+		assertTrue((lost <= Random.RInt(3, 4) * 10 * 10 && lost >= 100) || (nextEnemy != previousEnemy) || (Enemy.get().getHealth() == 20));
 		
 		startHealth = Enemy.get().getHealth();
 
@@ -193,6 +197,6 @@ public class WeaponTest {
 		
 		String lastEnemy = Enemy.get().getName();
 		
-		assertTrue((lost <= Random.RInt(3, 4) * 10 * 10 && lost >= 100) || (lastEnemy != nextEnemy));
+		assertTrue((lost <= Random.RInt(3, 4) * 10 * 10 && lost >= 100) || (lastEnemy != nextEnemy) || (Enemy.get().getHealth() == 20));
 	}
 }

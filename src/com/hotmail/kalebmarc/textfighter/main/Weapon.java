@@ -15,6 +15,8 @@ public class Weapon implements Comparable<Weapon> {
     public static final ArrayList<Weapon> arrayWeapon = new ArrayList<>();
     //Properties
     public static int BULLET_DAMAGE;
+    public static int BULLET_CRITICAL_MULTIPLIER;
+    public static int BULLET_CRITICAL_CHANCE;
     //Variables
     public static Weapon starting;
     private static Weapon current = null;
@@ -222,6 +224,7 @@ public class Weapon implements Comparable<Weapon> {
                 }
                 //Run the logic for critical hit
                 criticalHit();
+                bulletCriticalHit();
 
             } else {
                 noAmmo();
@@ -266,9 +269,29 @@ public class Weapon implements Comparable<Weapon> {
 
         }
     }
+    
+    private void bulletCriticalHit() {
+    	
+    	if (bulletWasCriticalHit()) {
+
+            damageDealt *= Weapon.BULLET_CRITICAL_MULTIPLIER;
+
+            Ui.cls();
+            Ui.println("----------------------------------------------------");
+            Ui.println("Critical Bullet Hit!");
+            Ui.println("Your bullets dealt " + Weapon.BULLET_CRITICAL_MULTIPLIER + "x normal damage.");
+            Ui.println("----------------------------------------------------");
+            Ui.pause();
+
+        }
+    }
 
     private boolean wasCriticalHit() {
         return Random.RInt((int) (100 / this.critChanceMultiplier)) == 1;
+    }
+    
+    private boolean bulletWasCriticalHit() {
+    	return Random.RInt((int) (100 / Weapon.BULLET_CRITICAL_CHANCE)) == 1;
     }
 
     public void viewAbout() {

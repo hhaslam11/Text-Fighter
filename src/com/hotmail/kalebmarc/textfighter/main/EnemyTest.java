@@ -69,6 +69,9 @@ public class EnemyTest {
         Xp.setLevel(1);
         
         Weapon.BULLET_DAMAGE = 10;
+        
+        Weapon.BULLET_CRITICAL_MULTIPLIER = 10;
+		Weapon.BULLET_CRITICAL_CHANCE = 1;
 	}
 
 	@AfterClass
@@ -120,7 +123,7 @@ public class EnemyTest {
 		
 		String nextEnemy = Enemy.get().getName();
 		
-		assertTrue((lost <= Random.RInt(3, 4) * 10 * 10 && lost >= 0) || (nextEnemy != previousEnemy));
+		assertTrue((lost <= Random.RInt(3, 4) * 10 * 10 && lost >= 0) || (nextEnemy != previousEnemy) || (Enemy.get().getHealth() == 20));
 		
 		startHealth = Enemy.get().getHealth();
 
@@ -136,6 +139,6 @@ public class EnemyTest {
 		
 		String lastEnemy = Enemy.get().getName();
 		
-		assertTrue((lost <= Random.RInt(3, 4) * 10 * 10 && lost >= 0) || (lastEnemy != nextEnemy));
+		assertTrue((lost <= Random.RInt(3, 4) * 10 * 10 && lost >= 0) || (lastEnemy != nextEnemy) || (Enemy.get().getHealth() == 20));
 	}
 }
