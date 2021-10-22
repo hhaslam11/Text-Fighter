@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.player.Health;
 
 import java.util.ArrayList;
@@ -32,10 +33,10 @@ public class Food {
         while (true) {
             Ui.cls();
             int j = 0;
-            int[] offset = new int[arrayFood.size()];
-            for (int i = 0; i < arrayFood.size(); i++) {
-                if (arrayFood.get(i).quantity > 0) {
-                    Ui.println((j + 1) + ") " + arrayFood.get(i).getName() + "(" + arrayFood.get(i).quantity + ")");
+            int[] offset = new int[getFoods().size()];
+            for (int i = 0; i < getFoods().size(); i++) {
+                if (getFoods().get(i).quantity > 0) {
+                    Ui.println((j + 1) + ") " + getFoods().get(i).getName() + "(" + getFoods().get(i).quantity + ")");
                     offset[j] = i - j;
                     j++;
                 }
@@ -57,14 +58,14 @@ public class Food {
 
                     //TODO once more status effects are implemented, use a switch here if appropriate.
                     //Testing to make sure the option is valid goes here:
-                    if (arrayFood.get(menuItem).getStatusEffect() == StatusEffect.type.HEALTH && Health.get() == Health.getOutOf()) {
+                    if (getFoods().get(menuItem).getStatusEffect() == StatusEffect.type.HEALTH && Health.get() == Health.getOutOf()) {
                         Ui.msg("Your health is already full. No need to eat this!");
                         return;
                     }
 
                     //Results go here:
-                    if (arrayFood.get(menuItem).quantity > 0) {
-                        Food.arrayFood.get(menuItem).eat();
+                    if (getFoods().get(menuItem).quantity > 0) {
+                        Food.getFoods().get(menuItem).eat();
                     }
                     return;
 
@@ -74,6 +75,10 @@ public class Food {
                 }
             }
         }
+    }
+
+    public static ArrayList<Food> getFoods() {
+        return arrayFood;
     }
 
     public String getName() {
