@@ -71,18 +71,18 @@ public class GameTime {
 	// This method will print the current session time played to the console.
 	public static String printSessionTime() {
 		endTime();
-		sessionTime = "Current session time: Days: " + String.format("%.2f", dayTime) + ", "
-                     	+ "Hours: " + String.format("%.2f", hourTime) + ", "
-                     	+ "Minutes: " + String.format("%.2f", minuteTime) + ", "
-                     	+ "Seconds: " + String.format("%.2f", secondTime);
+		sessionTime = "	Days: " + String.format("%.2f", dayTime) + "\n"
+                     	+ "	Hours: " + String.format("%.2f", hourTime) + "\n"
+                     	+ "	Minutes: " + String.format("%.2f", minuteTime) + "\n"
+                     	+ "	Seconds: " + String.format("%.2f", secondTime);
 		return sessionTime;
 	}
 	
 	// This method will update the total amount of time played.
 	public static void updateTotalTime() {
-		totalTime = "Current session time: Days: " + String.format("%.2f", totalDayTime) + ", "
-             	+ "Hours: " + String.format("%.2f", totalHourTime) + ", "
-             	+ "Minutes: " + String.format("%.2f", totalMinuteTime) + ", "
+		totalTime =  String.format("%.2f", totalDayTime) + "\n"
+             	+ "Hours: " + String.format("%.2f", totalHourTime) + "\n"
+             	+ "Minutes: " + String.format("%.2f", totalMinuteTime) + "\n"
              	+ "Seconds: " + String.format("%.2f", totalSecondTime);
 	}
 	

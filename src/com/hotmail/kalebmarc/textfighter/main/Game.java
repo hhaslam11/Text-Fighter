@@ -81,6 +81,7 @@ public class Game {
 				if(Saves.savesPrompt()) {
 					// docschorsch savesPrompt() true only if not exited --> game started with loaded player
 					gameStarted = true;
+					GameTime.startSessionTime();
 					break;
 			// docschorsch added another return to Menu.load() if game selected but exited before start
 				} else {
@@ -100,6 +101,7 @@ public class Game {
 					Saves.save();
 					// --> game started with new player
 					gameStarted = true;
+					GameTime.startSessionTime();
 					break;
 				}
 		}
@@ -137,6 +139,8 @@ public class Game {
             Ui.println("          Recovery: " + Potion.get("recovery"));
 			Ui.println("     Equipped armour: " + Armour.getEquipped().toString());
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
+			Ui.println("--Session Time--");
+			Ui.println("     " + GameTime.printSessionTime());
 			//Displays ammo only if a weapon is equipped
 			Weapon.displayAmmo();
 			//--------------------
