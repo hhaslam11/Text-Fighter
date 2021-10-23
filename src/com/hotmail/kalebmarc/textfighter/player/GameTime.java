@@ -30,31 +30,60 @@ public class GameTime {
 	// Set the total time to 0 for new players.
 	public static void initializeNewTime() {
 		
+		setTotalSecondTime(0.0);
+	    setTotalMinuteTime(0.0);
+	    setTotalHourTime(0.0);
+	    setTotalDayTime(0.0);
+	    secondTime = 0.0;
+	    minuteTime = 0.0;
+	    hourTime = 0.0;
+	    dayTime = 0.0;
 	}
 	
 	public static void initializeSavedTime() {
+		dumTotalSecond = totalSecondTime;
+		dumTotalMinute = totalMinuteTime;
+		dumTotalHour = totalHourTime;
+		dumTotalDay = totalDayTime;
 		
 	}
 	
 	// This method is to start counting the time when the game has started.
 	public static void startSessionTime() {
-		
+		startTime = System.currentTimeMillis();
 	}
 	
 	// This method is for the end time place holder.
 	public static void endTime() {
-		
+	    endTime = System.currentTimeMillis();
+	    calculateTime();
 	}
 	
 	// This method will calculate how much time has been played.
 	// It will set the seconds, minutes, hours, and days.
 	public static void calculateTime() {
-		
+		secondTime = (double) (endTime - startTime) / 1000;
+		minuteTime = secondTime / 60;
+		hourTime = minuteTime / 60;
+		dayTime = hourTime / 24;
 	}
 	
 	// This method will print the current session time played to the console.
 	public static String printSessionTime() {
+		endTime();
+		sessionTime = "Current session time: Days: " + String.format("%.2f", dayTime) + ", "
+                     	+ "Hours: " + String.format("%.2f", hourTime) + ", "
+                     	+ "Minutes: " + String.format("%.2f", minuteTime) + ", "
+                     	+ "Seconds: " + String.format("%.2f", secondTime);
 		return sessionTime;
+	}
+	
+	// This method will update the total amount of time played.
+	public static void updateTotalTime() {
+		totalTime = "Current session time: Days: " + String.format("%.2f", totalDayTime) + ", "
+             	+ "Hours: " + String.format("%.2f", totalHourTime) + ", "
+             	+ "Minutes: " + String.format("%.2f", totalMinuteTime) + ", "
+             	+ "Seconds: " + String.format("%.2f", totalSecondTime);
 	}
 	
 	// The following methods will up update the total time for seconds, minutes, hours, and days.
@@ -94,6 +123,10 @@ public class GameTime {
    // Set time totals from save file
    public static void setTotalDayTime(double oldDays) {
       totalDayTime = oldDays;
+   }
+   
+   public static String getTotalTime() {
+	   return GameTime.totalTime;
    }
    
    // These getters and setter will mainly be used for testing purposes.

@@ -16,8 +16,8 @@ public class TestTimeTrack {
 		newTime.calculateTime();
 		assertEquals(600.0, newTime.getSeconds(), 0.0);
 		assertEquals(10.0, newTime.getMinutes(), 0.0);
-		assertEquals(0.167, newTime.getHours(), 0.0);
-		assertEquals(0.007, newTime.getDays(), 0.0);
+		assertEquals(0.167, newTime.getHours(), 0.05);
+		assertEquals(0.007, newTime.getDays(), 0.05);
 	}
 	
 	@Test
@@ -28,8 +28,8 @@ public class TestTimeTrack {
 		newTime.calculateTime();
 		assertEquals(600.0, newTime.getTotalSecondTime(), 0.0);
 		assertEquals(10.0, newTime.getTotalMinuteTime(), 0.0);
-		assertEquals(0.167, newTime.getTotalHourTime(), 0.0);
-		assertEquals(0.007, newTime.getTotalDayTime(), 0.0);
+		assertEquals(0.167, newTime.getTotalHourTime(), 0.05);
+		assertEquals(0.007, newTime.getTotalDayTime(), 0.05);
 	}
 	
 	@Test
