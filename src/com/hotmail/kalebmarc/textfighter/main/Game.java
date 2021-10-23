@@ -141,7 +141,10 @@ public class Game {
             Ui.println("          Recovery: " + Potion.get("recovery"));
 			Ui.println("     Equipped armour: " + Armour.getEquipped().toString());
 			Ui.println("     Equipped Weapon: " + Weapon.get().getName());
-			Ui.println("	 Clock: " + GameClock.updateGameTime());
+			GameClock.updateGameTime();
+			Ui.println("--Time--");
+			Ui.println("	Date: " + GameClock.getGameDate());
+			Ui.println("	Clock: " + GameClock.getGameTime());
 			//Displays ammo only if a weapon is equipped
 			Weapon.displayAmmo();
 			//--------------------

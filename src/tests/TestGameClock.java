@@ -33,14 +33,14 @@ public class TestGameClock {
 	@Test
 	void testUpdateGameTime() {
 		LocalDateTime testTimeBase = LocalDateTime.of(LocalDate.of(2021, Month.DECEMBER, 2), LocalTime.of(5, 0, 0)); 
-		LocalDateTime testTimeFast = LocalDateTime.of(LocalDate.of(2021, Month.DECEMBER, 2), LocalTime.of(5, 0, 0));
+		String testTimeFast;
 		GameClock newClock = new GameClock();
 		newClock.setBaseTime(testTimeBase);
-		newClock.setFastTime(testTimeBase);
 		newClock.setStartTime(0);
 		newClock.setEndTime(6000000);
 		newClock.updateGameTime();
-		assertNotEquals(testTimeBase.format(newClock.getDateTimeFormat()), testTimeFast.format(newClock.getDateTimeFormat()));
+		testTimeFast = newClock.getFastTime().format(newClock.getDateTimeFormat());
+		assertFalse(testTimeFast.equals(newClock.getBaseTime().format(newClock.getDateTimeFormat())));
 		
 	}
 	
@@ -54,15 +54,16 @@ public class TestGameClock {
 	
 	@Test
 	void testDayRollOver() {
-		LocalDateTime testTimeBase = LocalDateTime.of(LocalDate.of(2021, Month.DECEMBER, 2), LocalTime.of(23, 59, 59)); 
-		String testTimeFast;
+		LocalDateTime testTimeBase = LocalDateTime.of(LocalDate.of(2021, Month.OCTOBER, 23), LocalTime.of(23, 59, 59)); 
 		GameClock newClock = new GameClock();
 		newClock.setBaseTime(testTimeBase);
+		newClock.splitDateTime(newClock.getBaseTime());
+		String baseDate = newClock.getGameDate();
 		newClock.setStartTime(0);
 		newClock.setEndTime(6000000);
-		testTimeFast = newClock.updateGameTime();
-		assertFalse(testTimeFast.contentEquals(testTimeBase.toString()));
-		
+		newClock.updateGameTime();
+		String fastDate = newClock.getGameDate();
+		assertFalse(fastDate.equalsIgnoreCase(baseDate));
 	}
 	
 	

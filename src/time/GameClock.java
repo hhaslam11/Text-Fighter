@@ -19,7 +19,9 @@ public class GameClock {
 	private static long increasedTime;
 	// Maybe where we set increasePercent could be moved to Settings?
 	private static double increasePercent = 0.5;  // Time increase can be changed to desired increase.
-	private static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("E, MMM dd yyyy HH:mm:ss");
+	private static DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("E, MMM dd yyyy-HH:mm:ss");
+	private static String gameDate;
+	private static String gameTime;
 	
 	
 	// Default constructor
@@ -45,12 +47,23 @@ public class GameClock {
         return (long) (increasedTime + (increasedTime * increasePercent));
 	}
 	
-	// After you get the increase in time, you can add it to the base time.
-	public static String updateGameTime() {
+	// This method adds the increased time to the base time.
+	// The base time gets formatted into a string.
+	// The date and time string gets split into two separate date and time strings.
+	public static void updateGameTime() {
 		endTimeCounter();
 		fastTime = baseTime.plus(Duration.ofMillis(timeConversion()));
-		return fastTime.format(myFormatObj);
+		splitDateTime(fastTime);
 	}
+	
+	// This method is for simply splitting up the LocalDateTime into separate strings of date and time.
+	public static void splitDateTime(LocalDateTime dateTime) {
+		String[] dateTimeArray = dateTime.format(myFormatObj).split("-");
+		gameDate = dateTimeArray[0];
+		gameTime = dateTimeArray[1];
+	}
+	
+	
 
 	
 	// All these methods below are getters and setters for the variables.
@@ -98,6 +111,24 @@ public class GameClock {
 	
 	public DateTimeFormatter getDateTimeFormat() {
 		return GameClock.myFormatObj;
+	}
+	
+	// The getter and setter methods below here are static so that they can be used from the Game class to grab
+	// the date and time as separate strings.
+	public static void setGameDate(String date) {
+		GameClock.gameDate = date;
+	}
+	
+	public static String getGameDate() {
+		return GameClock.gameDate;
+	}
+	
+	public static void setGameTime(String time) {
+		GameClock.gameTime = time;
+	}
+	
+	public static String getGameTime() {
+		return GameClock.gameTime;
 	}
 	
 	
