@@ -29,25 +29,27 @@ public class GameClock {
 	
 	// Declares the base time of the players current time.
 	public static void startTimeClock() {
-		
+		startTime = System.currentTimeMillis();
+		baseTime = LocalDateTime.now();
 	}
 	
 	// This method is used as a end time place holder so that we can get a time duration.
 	public static void endTimeCounter() {
-
+		endTime = System.currentTimeMillis();
 	}
 	
 	// The time increase is based off of getting the milliseconds and increasing it by a percentage.
 	// This method returns the amount of time in milliseconds that the game clock needs to be increased.
 	public static long timeConversion() {
-        
-        return increasedTime;
+        increasedTime = endTime - startTime;
+        return (long) (increasedTime + (increasedTime * increasePercent));
 	}
 	
 	// After you get the increase in time, you can add it to the base time.
 	public static String updateGameTime() {
-		
-		return fastTime.toString();
+		endTimeCounter();
+		fastTime = baseTime.plus(Duration.ofMillis(timeConversion()));
+		return fastTime.format(myFormatObj);
 	}
 
 	
