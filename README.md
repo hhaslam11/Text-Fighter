@@ -23,7 +23,15 @@ Open your command line/terminal, navigate to the downloaded .jar and run `java -
 
 Running
 ----------------
-To run this project in IntelliJ use the [these configurations](https://imgur.com/a/IpXX3Jy)
+- **IntelliJ:** IntelliJ is the recommended IDE for this project. Follow these directions to setup the project in IntelliJ. 
+   - To run this project in IntelliJ, add a Run/Debug configuration like [this configuration](https://imgur.com/a/IpXX3Jy).
+- **Gradle:** To run this project just in your terminal/command prompt with gradle, just execute these command when in the Text-Fighter directory:
+   - gradle build
+   - gradle run
+
+Game Play
+------------------
+To see a clip that shows a little about how the game is played, go [here](https://www.youtube.com/watch?v=Xrw0zHYXGFI).
 
 Modifications
 -------------------
@@ -58,6 +66,8 @@ Thanks for all your work!
 [xdvrx1](https://github.com/xdvrx1)  
 [R1ndT](https://github.com/R1ndT)
 [SaurabhKukreja](https://github.com/SaurabhKukreja)
+[emmamickas](https://github.com/emmamickas)
+[rberlin-2019](https://github.com/rberlin-2019)
 
 License
 --------------
