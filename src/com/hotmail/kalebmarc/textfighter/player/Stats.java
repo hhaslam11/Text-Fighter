@@ -36,6 +36,7 @@ public class Stats {
     public static void view() {
 
         updateKillDeathRatio();
+        GameTime.updateTotalTime();
 
         Ui.cls();
         Ui.println("-------------------------------------------------");
@@ -88,6 +89,8 @@ public class Stats {
         Ui.println("   Lottery Tickets Bought - " + lotteryTicketsBought);
         Ui.println("   Lotteries Won - " + lotteryWon);
         Ui.println();
+        Ui.println("Total Time Played: ");
+        Ui.println("	" + GameTime.getTotalTime());
         Ui.println("-------------------------------------------------");
         Ui.pause();
     }

@@ -33,6 +33,7 @@ public class Saves {
 		path = path.replaceAll("%20", " ");
 
 		setup();
+		GameTime.updateTotalTime();
 
 		/*
 		 * TODO: make a version checker that checks each part of a version ex: 1.4.1DEV
@@ -163,6 +164,10 @@ public class Saves {
 		set("Stats.Items_Crafted", Stats.timesCheated);
 		set("Stats.Games_Played.Dice", Stats.diceGamesPlayed);
 		set("Stats.Games_Played.Slots", Stats.slotGamesPlayed);
+		set("Stats.Days_Played", GameTime.getTotalDayTime());
+		set("Stats.Hours_Played", GameTime.getTotalHourTime());
+		set("Stats.Minutes_Played", GameTime.getTotalMinuteTime());
+		set("Stats.Seconds_Played", GameTime.getTotalSecondTime());
 
 		try {
 			if (!saveLocation.exists())
@@ -315,6 +320,12 @@ public class Saves {
 		Stats.itemsCrafted = getInteger("Stats.Items_Crafted");
 		Stats.diceGamesPlayed = getInteger("Stats.Games_Played.Dice");
 		Stats.slotGamesPlayed = getInteger("Stats.Games_Played.Slots");
+		
+		//Time Played
+		GameTime.setTotalDayTime(getDouble("Stats.Days_Played"));
+		GameTime.setTotalHourTime(getDouble("Stats.Hours_Played"));
+		GameTime.setTotalMinuteTime(getDouble("Stats.Minutes_Played"));
+		GameTime.setTotalSecondTime(getDouble("Stats.Seconds_Player"));
 
 		return true;
 	}
