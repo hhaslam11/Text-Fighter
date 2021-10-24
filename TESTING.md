@@ -1,4 +1,4 @@
-# Testing cheat functionality:
+# Testing array access modifier functionality:
 ## The following tests were performed to ensure that behavior was preserved after refactoring/changes:
  ### [Armour Tests](https://github.com/emmamickas/Text-Fighter/blob/AddConstantArraylistAccessModifiers/src/com/hotmail/kalebmarc/textfighter/item/ArmourTest.java) including testing of the methods:
  * choose()
