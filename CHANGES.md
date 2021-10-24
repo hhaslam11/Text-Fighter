@@ -1,7 +1,7 @@
 # Changes in this branch
 
 ## This branch addresses the following issue:
-### Show Specific Potion Stats, (issue #58 in the source hhaslam11/Text-Fighter repository, issue #7 in the forked emmamickas/Text-Fighter repository)
+### Show Specific Potion Stats, ([issue #58](https://github.com/hhaslam11/Text-Fighter/issues/58) in the source hhaslam11/Text-Fighter repository, [issue #7](https://github.com/emmamickas/Text-Fighter/issues/7) in the forked emmamickas/Text-Fighter repository)
 
 ## Desired modifications:
 ### In the current functionality, when a player views their stats, they are only able to view a total number of potions used, but not individual totals for different types of potions that they have used. The changes include separating the totals for individual potion types to display each total, while also keeping a total of all potions used by the player.
