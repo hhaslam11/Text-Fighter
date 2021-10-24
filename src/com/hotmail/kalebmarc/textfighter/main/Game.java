@@ -112,6 +112,7 @@ public class Game {
 			if (Stats.kills > Stats.highScore) Stats.highScore = Stats.kills;
 			Achievements.check();
 			Saves.save();
+			
 			Ui.cls();
 
 			/*

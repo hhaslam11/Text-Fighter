@@ -80,10 +80,11 @@ public class GameTime {
 	
 	// This method will update the total amount of time played.
 	public static void updateTotalTime() {
-		totalTime =  String.format("%.2f", totalDayTime) + "\n"
-             	+ "Hours: " + String.format("%.2f", totalHourTime) + "\n"
-             	+ "Minutes: " + String.format("%.2f", totalMinuteTime) + "\n"
-             	+ "Seconds: " + String.format("%.2f", totalSecondTime);
+		endTime();
+		totalTime =  " Days: " + String.format("%.2f", getTotalDayTime()) + "\n"
+             	+ "	Hours: " + String.format("%.2f", getTotalHourTime()) + "\n"
+             	+ "	Minutes: " + String.format("%.2f", getTotalMinuteTime()) + "\n"
+             	+ "	Seconds: " + String.format("%.2f", getTotalSecondTime());
 	}
 	
 	// The following methods will up update the total time for seconds, minutes, hours, and days.
