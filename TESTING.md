@@ -17,8 +17,6 @@
  ### [Settings Tests](https://github.com/emmamickas/Text-Fighter/blob/AddingPotions/src/com/hotmail/kalebmarc/textfighter/player/SettingsTest.java) including testing of the methods:
  * GetDif()
 
-** This method is tested for weapon and food debugging
 
 ## Additional Notes on Testing:Testing Brewing and Adding Potion
-### The Chest.java, Shop.java were altered to display information 
-### These classes only displayed information given by Potion methods, which were thoroughly tested. 
+### Of the changed classes Chest.java, Game.java, Help.java, Stats.java were menu's and UI elements that utilized Potion methods.
