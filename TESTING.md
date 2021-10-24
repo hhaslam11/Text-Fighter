@@ -1,9 +1,9 @@
 # Testing critical hit functionality:
 ## The following tests were performed to ensure that behavior was preserved and correct after refactoring/changes:
- ### [Weapon](https://github.com/emmamickas/Text-Fighter/tree/CriticalHits/src/com/hotmail/kalebmarc/textfighter/main) Tests including testing of the methods:
+ ### [Weapon](https://github.com/emmamickas/Text-Fighter/blob/CriticalHits/src/com/hotmail/kalebmarc/textfighter/main/WeaponTest.java) Tests including testing of the methods:
  * dealDam()
  * bulletCriticalHit()
- ### [Enemy](https://github.com/emmamickas/Text-Fighter/tree/CriticalHits/src/com/hotmail/kalebmarc/textfighter/main) Tests including testing of the methods:
+ ### [Enemy](https://github.com/emmamickas/Text-Fighter/blob/CriticalHits/src/com/hotmail/kalebmarc/textfighter/main/EnemyTest.java) Tests including testing of the methods:
  * die()
 
 ## Additional Notes on Testing:
