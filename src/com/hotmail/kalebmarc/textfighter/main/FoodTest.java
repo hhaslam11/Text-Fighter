@@ -18,6 +18,13 @@ public class FoodTest {
 		Potion.brewPotion("survival");
 		assertEquals(0, apple.getQuantity() );
 		assertEquals(0, mushroom.getQuantity());
+		
+		Food orange      = new Food("Orange",        "Sort of like an apple, but orange.", StatusEffect.type.HEALTH, Food.type.FRUIT,      5);
+		assertEquals(1, orange.getQuantity());
+		orange.useInPotion();
+		assertEquals(0, orange.getQuantity());
+		orange.useInPotion();
+		assertEquals(0, orange.getQuantity());
 	}
 
 }

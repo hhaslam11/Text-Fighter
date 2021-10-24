@@ -1,7 +1,8 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
 import com.hotmail.kalebmarc.textfighter.player.Health;
-
+import java.io.*;  
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.ArrayList;
 
 public class Food {
@@ -123,7 +124,10 @@ public class Food {
         Ui.cls();
 
         Ui.println("You have used a " + getName() + " to brew a potion!");
-        this.quantity--;
+        if(this.quantity > 0) this.quantity--;
+        else {
+        	Ui.println("You dont have enough " + getName() + "'s!");
+        }
     }
 
     public void viewAbout() {
