@@ -12,10 +12,10 @@ public class GameTime {
 	private static double totalMinuteTime;
 	private static double totalHourTime;
 	private static double totalDayTime;
-	private static double dumTotalSecond;
-	private static double dumTotalMinute;
-	private static double dumTotalHour;
-	private static double dumTotalDay;
+	private static double oldTotalSecond;
+	private static double oldTotalMinute;
+	private static double oldTotalHour;
+	private static double oldTotalDay;
 
 	//Variables
 	private static double secondTime;
@@ -41,10 +41,10 @@ public class GameTime {
 	}
 	
 	public static void initializeSavedTime() {
-		dumTotalSecond = totalSecondTime;
-		dumTotalMinute = totalMinuteTime;
-		dumTotalHour = totalHourTime;
-		dumTotalDay = totalDayTime;
+		oldTotalSecond = totalSecondTime;
+		oldTotalMinute = totalMinuteTime;
+		oldTotalHour = totalHourTime;
+		oldTotalDay = totalDayTime;
 		
 	}
 	
@@ -89,41 +89,41 @@ public class GameTime {
 	
 	// The following methods will up update the total time for seconds, minutes, hours, and days.
 	public static double getTotalSecondTime() {
-		return totalSecondTime += secondTime;
+		return totalSecondTime = oldTotalSecond + secondTime;
 	}
 	
    public static double getTotalMinuteTime() {
-	   return totalMinuteTime += minuteTime;
+	   return totalMinuteTime = oldTotalMinute + minuteTime;
    }
 
    public static double getTotalHourTime() {
-      return totalHourTime += hourTime;
+      return totalHourTime = oldTotalHour + hourTime;
    }
 
    public static double getTotalDayTime() {
-      return totalDayTime += dayTime;
+      return totalDayTime = oldTotalDay + dayTime;
    }
 
    
    // The following methods sets the time totals for the saved file.
    // Set time totals from save file
    public static void setTotalSecondTime(double oldSeconds) {
-      totalSecondTime = oldSeconds;
+      oldTotalSecond = oldSeconds;
    }
 
    // Set time totals from save file
    public static void setTotalMinuteTime(double oldMinutes) {
-      totalMinuteTime = oldMinutes;
+      oldTotalMinute = oldMinutes;
    }
 
    // Set time totals from save file
    public static void setTotalHourTime(double oldHours) {
-      totalHourTime = oldHours;
+      oldTotalHour = oldHours;
    }
 
    // Set time totals from save file
    public static void setTotalDayTime(double oldDays) {
-      totalDayTime = oldDays;
+      oldTotalDay = oldDays;
    }
    
    public static String getTotalTime() {

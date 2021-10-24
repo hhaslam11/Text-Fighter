@@ -89,10 +89,6 @@ public class Stats {
         Ui.println();
         Ui.println("Total Time Played: ");
         Ui.println("	" + GameTime.getTotalTime());
-//        Ui.println("	Days Played: " + GameTime.getTotalDayTime());
-//        Ui.println("	Hours Played: " + GameTime.getTotalHourTime());
-//        Ui.println("	Minutes Played: " + GameTime.getTotalMinuteTime());
-//        Ui.println("	Seconds Played" + GameTime.getTotalSecondTime());
         Ui.println("-------------------------------------------------");
         Ui.pause();
     }
