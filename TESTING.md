@@ -16,7 +16,8 @@
  * TakeDamageDie()
  ### [Settings Tests](https://github.com/emmamickas/Text-Fighter/blob/AddingPotions/src/com/hotmail/kalebmarc/textfighter/player/SettingsTest.java) including testing of the methods:
  * GetDif()
-
+ ### [Food Tests](https://github.com/emmamickas/Text-Fighter/blob/AddingPotions/src/com/hotmail/kalebmarc/textfighter/main/FoodTest.java) including testing of the methods:
+ * UseInPotion()
 
 ## Additional Notes on Testing:Testing Brewing and Adding Potion
 ### Of the changed classes Chest.java, Game.java, Help.java, Stats.java were menu's and UI elements that utilized Potion methods.
