@@ -20,3 +20,4 @@
 
 ## Additional Notes on Testing:Testing Brewing and Adding Potion
 ### Of the changed classes Chest.java, Game.java, Help.java, Stats.java were menu's and UI elements that utilized Potion methods.
+### No additional testing was necessary for these classes.
