@@ -311,6 +311,10 @@ public class Weapon implements Comparable<Weapon> {
         Ui.println("Damage: " + this.getDamage());
         Ui.println("Chance of critical hit: " + this.critChanceMultiplier + "%");
         Ui.println("Critical hit damage multiplier: " + this.critDamMultiplierMin + "-" + this.critDamMultiplierMax + "x");
+        if (!this.melee) {
+            Ui.println("Chance of critical hit, bullet: " + Weapon.BULLET_CRITICAL_CHANCE + "%");
+            Ui.println("Bullet Critical of critical hit, bullet: " + Weapon.BULLET_CRITICAL_MULTIPLIER + "x");
+        }
         for (int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.pause();
         Ui.cls();
