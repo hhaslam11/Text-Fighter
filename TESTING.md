@@ -1,4 +1,4 @@
-# Testing cheat functionality:
+# Testing potion functionality:
 ## The following tests were performed to ensure that behavior was preserved after refactoring/changes:
  ### [Potion Tests](https://github.com/emmamickas/Text-Fighter/blob/AddingPotions/src/com/hotmail/kalebmarc/textfighter/player/PotionTest.java) including testing of the methods:
  * get(string type)
