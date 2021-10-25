@@ -24,8 +24,8 @@
  #### See [here](https://github.com/emmamickas/Text-Fighter/blob/AddConstantArraylistAccessModifiers/TESTING.md) for more information on testing.
  
  ## Resolution:
- ### The branch was merged with master:
- [Pull request #127](https://github.com/hhaslam11/Text-Fighter/commit/555f73191bb4e5476f82c6f481dd3b8190866159)
+ ### The branch was [merged](https://github.com/hhaslam11/Text-Fighter/commit/555f73191bb4e5476f82c6f481dd3b8190866159) with master:
+ [Pull request #127](https://github.com/hhaslam11/Text-Fighter/pull/127)
  
  ## Additional resources:
  ### Please view the following to find additional documentation of the changes and the code involved in the changes.
