@@ -8,11 +8,11 @@
 ### In the updated implementation, the Health section describes all aspect of the game pertaining to player and enemy health.
 
 ## Modified files:
-### As viewable in the [Dependency References folder](https://github.com/emmamickas/Text-Fighter/tree/AddConstantArraylistAccessModifiers/Dependency%20References), the following files were modified in the change:
+### The following files were modified in the change:
  * [Help.java](https://github.com/emmamickas/Text-Fighter/blob/HelpSectionUpdate/src/com/hotmail/kalebmarc/textfighter/main/Help.java)
 
  
  ## Additional resources:
  ### Please view the following to find additional documentation of the changes and the code involved in the changes.
-  * [Class Diagrams](https://github.com/emmamickas/Text-Fighter/tree/AddingPotions/Class%20Diagram) of modified classes.
-  * [Dependencies](https://github.com/emmamickas/Text-Fighter/tree/AddingPotions/Dependency%20Matrix) of modified or dependent classes.
+  * [Class Diagrams](https://github.com/emmamickas/Text-Fighter/tree/HealthHelpSection/Class%20Diagrams) of modified classes.
+  * [Dependencies](https://github.com/emmamickas/Text-Fighter/tree/HealthHelpSection/Dependency%20Matrix) of modified or dependent classes.
