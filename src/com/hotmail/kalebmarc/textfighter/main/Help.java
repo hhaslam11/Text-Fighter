@@ -63,18 +63,18 @@ class Help {
             Ui.println("                         ENEMY INFO                         ");
             Ui.println("Which enemy would you like to know about?");
             Ui.println();
-            for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
-                Ui.println((i + 1) + ") " + Enemy.arrayEnemy.get(i).getName());
+            for (int i = 0; i < Enemy.getEnemies().size(); i++) {
+                Ui.println((i + 1) + ") " + Enemy.getEnemies().get(i).getName());
             }
-            Ui.println((Enemy.arrayEnemy.size() + 1) + ") Back");
+            Ui.println((Enemy.getEnemies().size() + 1) + ") Back");
             Ui.println("------------------------------------------------------------");
 
             int menuItem = Ui.getValidInt();
 
             try {
-                Enemy.arrayEnemy.get(menuItem - 1).viewAbout();
+                Enemy.getEnemies().get(menuItem - 1).viewAbout();
             } catch (Exception e) {
-                if (menuItem == (Enemy.arrayEnemy.size() + 1)) return;
+                if (menuItem == (Enemy.getEnemies().size() + 1)) return;
                 Ui.println(menuItem + " is not an option.");
                 Ui.pause();
             }
@@ -115,18 +115,18 @@ class Help {
             Ui.println("                         WEAPON INFO                        ");
             Ui.println("Which weapon would you like to know about?");
             Ui.println();
-            for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-                Ui.println((i + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
+            for (int i = 0; i < Weapon.getWeapons().size(); i++) {
+                Ui.println((i + 1) + ") " + Weapon.getWeapons().get(i).getName());
             }
-            Ui.println((Weapon.arrayWeapon.size() + 1) + ") Back");
+            Ui.println((Weapon.getWeapons().size() + 1) + ") Back");
             Ui.println("------------------------------------------------------------");
 
             int menuItem = Ui.getValidInt();
 
             try {
-                Weapon.arrayWeapon.get(menuItem - 1).viewAbout();
+                Weapon.getWeapons().get(menuItem - 1).viewAbout();
             } catch (Exception e) {
-                if (menuItem == (Weapon.arrayWeapon.size() + 1)) return;
+                if (menuItem == (Weapon.getWeapons().size() + 1)) return;
                 Ui.println(menuItem + " is not an option.");
                 Ui.pause();
             }
@@ -141,7 +141,30 @@ class Help {
         Ui.println("health up to 200. Each upgrade will cost 100 coins on easy, ");
         Ui.println("and 150 coins on hard; and it will upgrade your health by 10.");
         Ui.println("You will be able to upgrade once per level.");
-        //TODO Add more health info
+        Ui.println("Health deteriorates by fighting enemies.");
+        Ui.println("If your health reaches 0, you'll die and you will lose coins.");
+        Ui.println("The goal is to eliminate an enemy by reducing his health to 0.");
+        Ui.println("If an enemies health is 0 they will die.");
+        Ui.println("You'll receive XP points and gain coins if you kill an enemy.");
+        Ui.println("Potions are used to increase your health.");
+        Ui.println("You start the game with 2 Recovery and 2 Survival Potions.");
+        Ui.println("A Recovery Potion increases your health by 25%.");
+        Ui.println("A Survival Potion increases your health by 75%.");
+        Ui.println("You can purchase more potions at the shop once you've ");
+        Ui.println("completed level 2.");
+        Ui.println("First Aid Kits are used to increase your health.");
+        Ui.println("You start the game with 3 First Aid Kits.");
+        Ui.println("A First Aid Kit increases your health by 20 health points.");
+        Ui.println("You can purchase more First Aid Kits at the shop.");
+        Ui.println("Food is given to you at the beginning of the game.");
+        Ui.println("You can eat food to increase your health.");
+        Ui.println("If you eat all the food you cannot purchase more at the shop.");
+        Ui.println("InstaHealth can also restore your health.");
+        Ui.println("If you use an InstaHealth your health will fully recover.");
+        Ui.println("InstaHealth can be purchased at the shops after you have ");
+        Ui.println("reached level 3.");
+        Ui.println("The prices of the items you can purchase at the shop are ");
+        Ui.println("determined by which difficulty you are playing on.");
         Ui.println("------------------------------------------------------------");
         Ui.pause();
     }
@@ -153,18 +176,18 @@ class Help {
             Ui.println("                          FOOD INFO                         ");
             Ui.println("Which food would you like to know about?");
             Ui.println();
-            for (int i = 0; i < Food.arrayFood.size(); i++) {
-                Ui.println((i + 1) + ") " + Food.arrayFood.get(i).getName());
+            for (int i = 0; i < Food.getFoods().size(); i++) {
+                Ui.println((i + 1) + ") " + Food.getFoods().get(i).getName());
             }
-            Ui.println((Food.arrayFood.size() + 1) + ") Back");
+            Ui.println((Food.getFoods().size() + 1) + ") Back");
             Ui.println("------------------------------------------------------------");
 
             int menuItem = Ui.getValidInt();
 
             try {
-                Food.arrayFood.get(menuItem - 1).viewAbout();
+                Food.getFoods().get(menuItem - 1).viewAbout();
             } catch (Exception e) {
-                if (menuItem == (Food.arrayFood.size() + 1)) return;
+                if (menuItem == (Food.getFoods().size() + 1)) return;
                 Ui.println(menuItem + " is not an option.");
                 Ui.pause();
             }
@@ -243,10 +266,10 @@ class Help {
         Ui.println("   Enemy Slayer           | Kill a total of 100 enemies");
         Ui.println("   First Kill             | Kill one enemy");
         Ui.println("   Time For An Upgrade    | Buy any weapon from the shop");
-        for (int i = 0; i < Enemy.arrayEnemy.size(); i++) {
-            Ui.print("   Goodbye, " + Enemy.arrayEnemy.get(i).getName());
-            for (int x = 0; x < (14 - Enemy.arrayEnemy.get(i).getName().length()); x++) Ui.print(" ");
-            Ui.println("| Kill a " + Enemy.arrayEnemy.get(i).getName());
+        for (int i = 0; i < Enemy.getEnemies().size(); i++) {
+            Ui.print("   Goodbye, " + Enemy.getEnemies().get(i).getName());
+            for (int x = 0; x < (14 - Enemy.getEnemies().get(i).getName().length()); x++) Ui.print(" ");
+            Ui.println("| Kill a " + Enemy.getEnemies().get(i).getName());
 
         }
         Ui.println("   Text-Fighter Master    | Get all other achievements");
