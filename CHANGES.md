@@ -17,8 +17,8 @@
  #### See [here](https://github.com/emmamickas/Text-Fighter/blob/ShowSpecificPotionStats/TESTING.md) for more information on testing.
  
  ## Resolution:
- ### The branch was merged with master, closing issue #58:
- [Pull request #125](https://github.com/hhaslam11/Text-Fighter/commit/659955becfa0eb803f4b214821f18dbef9419da8)
+ ### The branch was [merged](https://github.com/hhaslam11/Text-Fighter/commit/659955becfa0eb803f4b214821f18dbef9419da8) with master, closing issue #58:
+ [Pull request #125](https://github.com/hhaslam11/Text-Fighter/pull/125)
  
  ## Additional resources:
  ### Please view the following to find additional documentation of the changes and the code involved in the changes.
