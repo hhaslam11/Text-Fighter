@@ -15,4 +15,4 @@
  ## Additional resources:
  ### Please view the following to find additional documentation of the changes and the code involved in the changes.
   * [Class Diagrams](https://github.com/emmamickas/Text-Fighter/tree/HealthHelpSection/Class%20Diagrams) of modified classes.
-  * [Dependencies](https://github.com/emmamickas/Text-Fighter/tree/HealthHelpSection/Dependency%20Matrix) of modified or dependent classes.
+  * [Dependency Reference](https://github.com/emmamickas/Text-Fighter/tree/HealthHelpSection/Dependency%20Reference) of Health class.
