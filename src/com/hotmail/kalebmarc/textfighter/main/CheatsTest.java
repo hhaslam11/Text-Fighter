@@ -100,13 +100,6 @@ public class CheatsTest {
         assertEquals(5000, Food.arrayFood.get(4).getQuantity());
         assertEquals(5000, Food.arrayFood.get(5).getQuantity());
         
-        assertEquals(5000, Food.getFoods().get(0).getQuantity());
-        assertEquals(5000, Food.getFoods().get(1).getQuantity());
-        assertEquals(5000, Food.getFoods().get(2).getQuantity());
-        assertEquals(5000, Food.getFoods().get(3).getQuantity());
-        assertEquals(5000, Food.getFoods().get(4).getQuantity());
-        assertEquals(5000, Food.getFoods().get(5).getQuantity());
-        
         // Ensure that cheat updated weapon counts
         assertTrue(Weapon.arrayWeapon.get(0).owns);
         assertTrue(Weapon.arrayWeapon.get(1).owns);
@@ -117,16 +110,6 @@ public class CheatsTest {
         assertTrue(Weapon.arrayWeapon.get(6).owns);
         assertTrue(Weapon.arrayWeapon.get(7).owns);
         assertTrue(Weapon.arrayWeapon.get(8).owns);
-
-        assertTrue(Weapon.getWeapons().get(0).owns);
-        assertTrue(Weapon.getWeapons().get(1).owns);
-        assertTrue(Weapon.getWeapons().get(2).owns);
-        assertTrue(Weapon.getWeapons().get(3).owns);
-        assertTrue(Weapon.getWeapons().get(4).owns);
-        assertTrue(Weapon.getWeapons().get(5).owns);
-        assertTrue(Weapon.getWeapons().get(6).owns);
-        assertTrue(Weapon.getWeapons().get(7).owns);
-        assertTrue(Weapon.getWeapons().get(8).owns);
 	}
 
 	@Test
@@ -148,12 +131,6 @@ public class CheatsTest {
         assertEquals(5000, Weapon.arrayWeapon.get(6).getAmmo());
         assertEquals(5000, Weapon.arrayWeapon.get(7).getAmmo());
         assertEquals(5000, Weapon.arrayWeapon.get(8).getAmmo());
-
-        assertEquals(5000, Weapon.getWeapons().get(4).getAmmo());
-        assertEquals(5000, Weapon.getWeapons().get(5).getAmmo());
-        assertEquals(5000, Weapon.getWeapons().get(6).getAmmo());
-        assertEquals(5000, Weapon.getWeapons().get(7).getAmmo());
-        assertEquals(5000, Weapon.getWeapons().get(8).getAmmo());
 	}
 
 	@Test
@@ -176,12 +153,4 @@ public class CheatsTest {
         assertEquals(10, Food.arrayFood.get(3).getQuantity());
         assertEquals(10, Food.arrayFood.get(4).getQuantity());
         assertEquals(10, Food.arrayFood.get(5).getQuantity());
-        
-        assertEquals(10, Food.getFoods().get(0).getQuantity());
-        assertEquals(10, Food.getFoods().get(1).getQuantity());
-        assertEquals(10, Food.getFoods().get(2).getQuantity());
-        assertEquals(10, Food.getFoods().get(3).getQuantity());
-        assertEquals(10, Food.getFoods().get(4).getQuantity());
-        assertEquals(10, Food.getFoods().get(5).getQuantity());
 	}
-}
