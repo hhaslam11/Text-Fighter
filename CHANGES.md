@@ -1,4 +1,4 @@
-# Modifications in this fork
+# Modifications in this fork (to be used in maintainability measurement work).
 
 
 ## Changes in the ShowSpecificPotionStats branch
