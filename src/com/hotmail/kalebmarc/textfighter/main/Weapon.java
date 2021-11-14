@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.player.Achievements;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
@@ -93,6 +94,10 @@ public class Weapon implements Comparable<Weapon> {
         }
     }
 
+    public static ArrayList<Weapon> getWeapons() {
+        return arrayWeapon;
+    }
+
     public static Weapon get() {
         return current;
     }
@@ -119,10 +124,10 @@ public class Weapon implements Comparable<Weapon> {
             Ui.println("Equipped weapon: " + current.getName());
             Ui.println("----------------------------");
             int j = 0;
-            int[] offset = new int[arrayWeapon.size()];
-            for (int i = 0; i < arrayWeapon.size(); i++) {
-                if (arrayWeapon.get(i).owns()) {
-                    Ui.println((j + 1) + ") " + arrayWeapon.get(i).getName());
+            int[] offset = new int[getWeapons().size()];
+            for (int i = 0; i < getWeapons().size(); i++) {
+                if (getWeapons().get(i).owns()) {
+                    Ui.println((j + 1) + ") " + getWeapons().get(i).getName());
                     offset[j] = i - j;
                     j++;
                 }
@@ -144,13 +149,13 @@ public class Weapon implements Comparable<Weapon> {
                     menuItem = menuItem + offset[menuItem];
 
                     //Testing to make sure the option is valid goes here:
-                    if (!arrayWeapon.get(menuItem).owns) {
+                    if (!getWeapons().get(menuItem).owns) {
                         Ui.msg("You do not own this weapon!");
                         return;
                     }
 
-                    current = arrayWeapon.get(menuItem);
-                    Ui.msg("You have equipped a " + arrayWeapon.get(menuItem).getName());
+                    current = getWeapons().get(menuItem);
+                    Ui.msg("You have equipped a " + getWeapons().get(menuItem).getName());
                     return;
 
                 } catch (Exception e) {

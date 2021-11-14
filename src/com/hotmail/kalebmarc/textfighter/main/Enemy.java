@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.player.*;
 
 import javax.swing.*;
@@ -72,6 +73,10 @@ public class Enemy {
         current = arrayEnemy.get(i);
     }
 
+    public static ArrayList<Enemy> getEnemies() {
+        return arrayEnemy;
+    }
+
     public static Enemy get() {
         return current;
     }
@@ -84,9 +89,9 @@ public class Enemy {
         int playerLevel = Xp.getLevel();
         ArrayList<Enemy> suitableEnemies = new ArrayList<>();
 
-        for (int i = 0; i < arrayEnemy.size(); i++) {
-            if (arrayEnemy.get(i).levelMin <= playerLevel && playerLevel <= arrayEnemy.get(i).levelMax) {
-                suitableEnemies.add(arrayEnemy.get(i));
+        for (int i = 0; i < getEnemies().size(); i++) {
+            if (getEnemies().get(i).levelMin <= playerLevel && playerLevel <= getEnemies().get(i).levelMax) {
+                suitableEnemies.add(getEnemies().get(i));
             }
         }
         current = suitableEnemies.get(Random.RInt(0, suitableEnemies.size() -1));
