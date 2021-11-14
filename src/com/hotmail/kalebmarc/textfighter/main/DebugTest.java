@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CheatsTest {
+public class DebugTest {
 	
 	static InputStream sysInBackup;
 	
@@ -35,7 +35,8 @@ public class CheatsTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		Cheats.enable();
+		
+		Debug.enable();
 		
 		sysInBackup = System.in; // backup System.in to restore it later
 		
@@ -80,27 +81,19 @@ public class CheatsTest {
 	}
 
 	@Test
-	public void testCheatGatewaygivemeitall() {
+	public void testMenuWeapon() {
 		
-		Ui.print("Type 'givemeitall' to test");
+		Ui.print("Enter '3' followed by '9' to test");
 		
-		ByteArrayInputStream chooseIn = new ByteArrayInputStream("givemeitall".getBytes()); // Set input stream to pick cheat automatically
+		ByteArrayInputStream chooseIn = new ByteArrayInputStream("3".getBytes()); // Set input stream to pick cheat automatically
         
         System.setIn(chooseIn);
 	    
-	    Cheats.cheatGateway();
+	    Debug.menu();
 
         System.setIn(sysInBackup);
         
-        // Ensure that cheat updated food counts
-        assertEquals(5000, Food.arrayFood.get(0).getQuantity());
-        assertEquals(5000, Food.arrayFood.get(1).getQuantity());
-        assertEquals(5000, Food.arrayFood.get(2).getQuantity());
-        assertEquals(5000, Food.arrayFood.get(3).getQuantity());
-        assertEquals(5000, Food.arrayFood.get(4).getQuantity());
-        assertEquals(5000, Food.arrayFood.get(5).getQuantity());
-        
-        // Ensure that cheat updated weapon counts
+        // Ensure that debug updated weapon counts
         assertTrue(Weapon.arrayWeapon.get(0).owns);
         assertTrue(Weapon.arrayWeapon.get(1).owns);
         assertTrue(Weapon.arrayWeapon.get(2).owns);
@@ -110,39 +103,41 @@ public class CheatsTest {
         assertTrue(Weapon.arrayWeapon.get(6).owns);
         assertTrue(Weapon.arrayWeapon.get(7).owns);
         assertTrue(Weapon.arrayWeapon.get(8).owns);
+
+        assertTrue(Weapon.getWeapons().get(0).owns);
+        assertTrue(Weapon.getWeapons().get(1).owns);
+        assertTrue(Weapon.getWeapons().get(2).owns);
+        assertTrue(Weapon.getWeapons().get(3).owns);
+        assertTrue(Weapon.getWeapons().get(4).owns);
+        assertTrue(Weapon.getWeapons().get(5).owns);
+        assertTrue(Weapon.getWeapons().get(6).owns);
+        assertTrue(Weapon.getWeapons().get(7).owns);
+        assertTrue(Weapon.getWeapons().get(8).owns);
+        
+        // Ensure that debug updated weapon ammo counts
+        assertEquals(10000, Weapon.arrayWeapon.get(4).getAmmo());
+        assertEquals(10000, Weapon.arrayWeapon.get(5).getAmmo());
+        assertEquals(10000, Weapon.arrayWeapon.get(6).getAmmo());
+        assertEquals(10000, Weapon.arrayWeapon.get(7).getAmmo());
+        assertEquals(10000, Weapon.arrayWeapon.get(8).getAmmo());
+
+        assertEquals(10000, Weapon.getWeapons().get(4).getAmmo());
+        assertEquals(10000, Weapon.getWeapons().get(5).getAmmo());
+        assertEquals(10000, Weapon.getWeapons().get(6).getAmmo());
+        assertEquals(10000, Weapon.getWeapons().get(7).getAmmo());
+        assertEquals(10000, Weapon.getWeapons().get(8).getAmmo());
 	}
 
 	@Test
-	public void testCheatGatewayweaponstash() {
+	public void testMenuFood() {
 		
-		Ui.print("Type 'weaponstash' to test");
+		Ui.print("Enter '8' followed by the numbers '0' through '5' five times, then finally '9' to test");
 		
-		ByteArrayInputStream chooseIn = new ByteArrayInputStream("weaponstash".getBytes()); // Set input stream to pick cheat automatically
+		ByteArrayInputStream chooseIn = new ByteArrayInputStream("8".getBytes()); // Set input stream to pick cheat automatically
         
         System.setIn(chooseIn);
 	    
-	    Cheats.cheatGateway();
-
-        System.setIn(sysInBackup);
-        
-        // Ensure that cheat updated weapon ammo counts
-        assertEquals(5000, Weapon.arrayWeapon.get(4).getAmmo());
-        assertEquals(5000, Weapon.arrayWeapon.get(5).getAmmo());
-        assertEquals(5000, Weapon.arrayWeapon.get(6).getAmmo());
-        assertEquals(5000, Weapon.arrayWeapon.get(7).getAmmo());
-        assertEquals(5000, Weapon.arrayWeapon.get(8).getAmmo());
-	}
-
-	@Test
-	public void testCheatGatewaythirstforfood() {
-		
-		Ui.print("Type 'thirstforfood' to test");
-		
-		ByteArrayInputStream chooseIn = new ByteArrayInputStream("thirstforfood".getBytes()); // Set input stream to pick cheat automatically
-        
-        System.setIn(chooseIn);
-	    
-	    Cheats.cheatGateway();
+	    Debug.menu();
 
         System.setIn(sysInBackup);
         
@@ -153,4 +148,13 @@ public class CheatsTest {
         assertEquals(10, Food.arrayFood.get(3).getQuantity());
         assertEquals(10, Food.arrayFood.get(4).getQuantity());
         assertEquals(10, Food.arrayFood.get(5).getQuantity());
+        
+        assertEquals(10, Food.getFoods().get(0).getQuantity());
+        assertEquals(10, Food.getFoods().get(1).getQuantity());
+        assertEquals(10, Food.getFoods().get(2).getQuantity());
+        assertEquals(10, Food.getFoods().get(3).getQuantity());
+        assertEquals(10, Food.getFoods().get(4).getQuantity());
+        assertEquals(10, Food.getFoods().get(5).getQuantity());
 	}
+
+}
