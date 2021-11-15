@@ -1,3 +1,11 @@
+# Testing Game Clock Functionality:
+## The following tests were performed to ensure that behavior was preserved after refactoring/changes:
+ ### [TestGameClock](https://github.com/emmamickas/Text-Fighter/blob/AddTimeFeatures/src/tests/TestGameClock.java) including testing of the methods:
+ * timeCoversion()
+ * updateGameTime()
+ * startTime()
+ * endTime()
+ 
 # Testing critical hit functionality:
 ## The following tests were performed to ensure that behavior was preserved and correct after refactoring/changes:
  ### [Weapon](https://github.com/emmamickas/Text-Fighter/blob/CriticalHits/src/com/hotmail/kalebmarc/textfighter/main/WeaponTest.java) Tests including testing of the methods:
