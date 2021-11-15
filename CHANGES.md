@@ -1,6 +1,17 @@
 # Changes in this branch
 
 ## This branch addresses the following issue:
+
+### Add more health info in Help section, ([issue #37](https://github.com/hhaslam11/Text-Fighter/issues/37) in the source hhaslam11/Text-Fighter repository, [issue #3](https://github.com/emmamickas/Text-Fighter/issues/3) in the forked emmamickas/Text-Fighter repository)
+
+## Desired modifications:
+### In the current implementation, the Health section of the Help Menus doesn't go into detail of the features available that affect player and enemies health.
+### In the updated implementation, the Health section describes all aspect of the game pertaining to player and enemy health.
+
+## Modified files:
+### As viewable in the [Dependency References folder](https://github.com/emmamickas/Text-Fighter/tree/AddConstantArraylistAccessModifiers/Dependency%20References), the following files were modified in the change:
+ * [Help.java](https://github.com/emmamickas/Text-Fighter/blob/HelpSectionUpdate/src/com/hotmail/kalebmarc/textfighter/main/Help.java)
+
 ### Time, ([issue #72](https://github.com/hhaslam11/Text-Fighter/issues/72) in the source hhaslam11/Text-Fighter repository, [issue #5](https://github.com/emmamickas/Text-Fighter/issues/5) in the forked emmamickas/Text-Fighter repository)
 
 ## Desired modifications:
@@ -17,9 +28,13 @@
 ###  The following tests were performed to ensure that behavior was preserved after refactoring/changes:
  * [TestGameClock](https://github.com/emmamickas/Text-Fighter/blob/AddTimeFeatures/src/tests/TestGameClock.java)
 
+
  
  ## Additional resources:
- ### Please view the following to find additional documentation of the changes and the code involved in the changes.
+ ### Please view the following to find additional documentation of the changes and the code involved in the changes
+  * [Class Diagrams](https://github.com/emmamickas/Text-Fighter/tree/AddingPotions/Class%20Diagram) of modified classes.
+  * [Dependencies](https://github.com/emmamickas/Text-Fighter/tree/AddingPotions/Dependency%20Matrix) of modified or dependent classes.
+
 # Changes in this branch (to be used in maintainability measurement work).
 
 
