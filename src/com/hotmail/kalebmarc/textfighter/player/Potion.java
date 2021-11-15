@@ -111,8 +111,10 @@ public class Potion {
         switch (kind.toLowerCase()) {
             case "survival":
                 spUsed++;
+                break;
             case "recovery":
                 rpUsed++;
+                break;
         }
     }
 
