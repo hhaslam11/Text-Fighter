@@ -1,5 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.player.Achievements;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
@@ -15,6 +16,8 @@ public class Weapon implements Comparable<Weapon> {
     public static final ArrayList<Weapon> arrayWeapon = new ArrayList<>();
     //Properties
     public static int BULLET_DAMAGE;
+    public static int BULLET_CRITICAL_MULTIPLIER;
+    public static double BULLET_CRITICAL_CHANCE;
     //Variables
     public static Weapon starting;
     private static Weapon current = null;
@@ -91,6 +94,10 @@ public class Weapon implements Comparable<Weapon> {
         }
     }
 
+    public static ArrayList<Weapon> getWeapons() {
+        return arrayWeapon;
+    }
+
     public static Weapon get() {
         return current;
     }
@@ -117,10 +124,10 @@ public class Weapon implements Comparable<Weapon> {
             Ui.println("Equipped weapon: " + current.getName());
             Ui.println("----------------------------");
             int j = 0;
-            int[] offset = new int[arrayWeapon.size()];
-            for (int i = 0; i < arrayWeapon.size(); i++) {
-                if (arrayWeapon.get(i).owns()) {
-                    Ui.println((j + 1) + ") " + arrayWeapon.get(i).getName());
+            int[] offset = new int[getWeapons().size()];
+            for (int i = 0; i < getWeapons().size(); i++) {
+                if (getWeapons().get(i).owns()) {
+                    Ui.println((j + 1) + ") " + getWeapons().get(i).getName());
                     offset[j] = i - j;
                     j++;
                 }
@@ -142,13 +149,13 @@ public class Weapon implements Comparable<Weapon> {
                     menuItem = menuItem + offset[menuItem];
 
                     //Testing to make sure the option is valid goes here:
-                    if (!arrayWeapon.get(menuItem).owns) {
+                    if (!getWeapons().get(menuItem).owns) {
                         Ui.msg("You do not own this weapon!");
                         return;
                     }
 
-                    current = arrayWeapon.get(menuItem);
-                    Ui.msg("You have equipped a " + arrayWeapon.get(menuItem).getName());
+                    current = getWeapons().get(menuItem);
+                    Ui.msg("You have equipped a " + getWeapons().get(menuItem).getName());
                     return;
 
                 } catch (Exception e) {
@@ -222,6 +229,7 @@ public class Weapon implements Comparable<Weapon> {
                 }
                 //Run the logic for critical hit
                 criticalHit();
+                bulletCriticalHit();
 
             } else {
                 noAmmo();
@@ -266,9 +274,29 @@ public class Weapon implements Comparable<Weapon> {
 
         }
     }
+    
+    private void bulletCriticalHit() {
+    	
+    	if (bulletWasCriticalHit()) {
+
+            damageDealt *= Weapon.BULLET_CRITICAL_MULTIPLIER;
+
+            Ui.cls();
+            Ui.println("----------------------------------------------------");
+            Ui.println("Critical Bullet Hit!");
+            Ui.println("Your bullets dealt " + Weapon.BULLET_CRITICAL_MULTIPLIER + "x normal damage.");
+            Ui.println("----------------------------------------------------");
+            Ui.pause();
+
+        }
+    }
 
     private boolean wasCriticalHit() {
         return Random.RInt((int) (100 / this.critChanceMultiplier)) == 1;
+    }
+    
+    private boolean bulletWasCriticalHit() {
+    	return Random.RInt((int) (100 / Weapon.BULLET_CRITICAL_CHANCE)) == 1;
     }
 
     public void viewAbout() {
@@ -288,6 +316,10 @@ public class Weapon implements Comparable<Weapon> {
         Ui.println("Damage: " + this.getDamage());
         Ui.println("Chance of critical hit: " + this.critChanceMultiplier + "%");
         Ui.println("Critical hit damage multiplier: " + this.critDamMultiplierMin + "-" + this.critDamMultiplierMax + "x");
+        if (!this.melee) {
+            Ui.println("Chance of critical hit, bullet: " + Weapon.BULLET_CRITICAL_CHANCE + "%");
+            Ui.println("Bullet Critical of critical hit, bullet: " + Weapon.BULLET_CRITICAL_MULTIPLIER + "x");
+        }
         for (int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.pause();
         Ui.cls();

@@ -132,12 +132,12 @@ class Shop {
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
             int j = 0;
-            int[] offset = new int[Weapon.arrayWeapon.size()];
-            for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-                if (Weapon.arrayWeapon.get(i).isBuyable()) {
-                    Ui.println((j + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
-                    Ui.println("   Price: " + Weapon.arrayWeapon.get(i).price);
-                    Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
+            int[] offset = new int[Weapon.getWeapons().size()];
+            for (int i = 0; i < Weapon.getWeapons().size(); i++) {
+                if (Weapon.getWeapons().get(i).isBuyable()) {
+                    Ui.println((j + 1) + ") " + Weapon.getWeapons().get(i).getName());
+                    Ui.println("   Price: " + Weapon.getWeapons().get(i).price);
+                    Ui.println("   Level: " + Weapon.getWeapons().get(i).level);
                     offset[j] = i - j;
                     j++;
                     Ui.println();
@@ -170,7 +170,7 @@ class Shop {
                     menuItem = menuItem + offset[menuItem];
 
                     //Results go here:
-                    Weapon.arrayWeapon.get(menuItem).buy();
+                    Weapon.getWeapons().get(menuItem).buy();
                     return;
 
                 } catch (Exception e) {
@@ -255,12 +255,12 @@ class Shop {
             Ui.println();
             Ui.println("-------------------------------------------------------------------");
             ArrayList<Weapon> validWeapons = new ArrayList<Weapon>();
-            for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-                if (Weapon.arrayWeapon.get(i).isBuyable() && !Weapon.arrayWeapon.get(i).melee && Weapon.arrayWeapon.get(i).owns()) {
-                    Ui.println((validWeapons.size() + 1) + ") " + Weapon.arrayWeapon.get(i).getName());
-                    Ui.println("   Price: " + Weapon.arrayWeapon.get(i).getAmmoPrice());
-                    Ui.println("   Level: " + Weapon.arrayWeapon.get(i).level);
-                    validWeapons.add(Weapon.arrayWeapon.get(i));
+            for (int i = 0; i < Weapon.getWeapons().size(); i++) {
+                if (Weapon.getWeapons().get(i).isBuyable() && !Weapon.getWeapons().get(i).melee && Weapon.getWeapons().get(i).owns()) {
+                    Ui.println((validWeapons.size() + 1) + ") " + Weapon.getWeapons().get(i).getName());
+                    Ui.println("   Price: " + Weapon.getWeapons().get(i).getAmmoPrice());
+                    Ui.println("   Level: " + Weapon.getWeapons().get(i).level);
+                    validWeapons.add(Weapon.getWeapons().get(i));
                 }
             }
             Ui.println((validWeapons.size() + 1) + ") Back");

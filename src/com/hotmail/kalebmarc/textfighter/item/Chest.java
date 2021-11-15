@@ -23,11 +23,11 @@ public class Chest {
         Ui.println("          Recovery: " + Potion.get("recovery"));
         Ui.println("Coins: " + Coins.get());
         Ui.println("POWERS: " + Power.get());
-        for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-            if (Weapon.arrayWeapon.get(i).owns()) {
-                Ui.println(Weapon.arrayWeapon.get(i).getName());
-                if (!Weapon.arrayWeapon.get(i).melee)
-                    Ui.println(" (Ammo: " + Weapon.arrayWeapon.get(i).getAmmo() + ")");
+        for (int i = 0; i < Weapon.getWeapons().size(); i++) {
+            if (Weapon.getWeapons().get(i).owns()) {
+                Ui.println(Weapon.getWeapons().get(i).getName());
+                if (!Weapon.getWeapons().get(i).melee)
+                    Ui.println(" (Ammo: " + Weapon.getWeapons().get(i).getAmmo() + ")");
             }
         }
         for (int i = 1; i < Armour.getArmours().size(); i++) {
@@ -35,9 +35,9 @@ public class Chest {
                 Ui.println(Armour.getArmours().get(i).toString());
             }
         }
-        for (int i = 0; i < Food.arrayFood.size(); i++) {
-            if (Food.arrayFood.get(i).getQuantity() > 0)
-                Ui.println(Food.arrayFood.get(i).getName() + "(x" + Food.arrayFood.get(i).getQuantity() + ")");
+        for (int i = 0; i < Food.getFoods().size(); i++) {
+            if (Food.getFoods().get(i).getQuantity() > 0)
+                Ui.println(Food.getFoods().get(i).getName() + "(x" + Food.getFoods().get(i).getQuantity() + ")");
         }
         Ui.println();
         Ui.println("------------------------------");
