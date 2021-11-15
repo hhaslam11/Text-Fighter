@@ -16,6 +16,8 @@ public class Weapon implements Comparable<Weapon> {
     public static final ArrayList<Weapon> arrayWeapon = new ArrayList<>();
     //Properties
     public static int BULLET_DAMAGE;
+    public static int BULLET_CRITICAL_MULTIPLIER;
+    public static double BULLET_CRITICAL_CHANCE;
     //Variables
     public static Weapon starting;
     private static Weapon current = null;
@@ -227,6 +229,7 @@ public class Weapon implements Comparable<Weapon> {
                 }
                 //Run the logic for critical hit
                 criticalHit();
+                bulletCriticalHit();
 
             } else {
                 noAmmo();
@@ -271,9 +274,29 @@ public class Weapon implements Comparable<Weapon> {
 
         }
     }
+    
+    private void bulletCriticalHit() {
+    	
+    	if (bulletWasCriticalHit()) {
+
+            damageDealt *= Weapon.BULLET_CRITICAL_MULTIPLIER;
+
+            Ui.cls();
+            Ui.println("----------------------------------------------------");
+            Ui.println("Critical Bullet Hit!");
+            Ui.println("Your bullets dealt " + Weapon.BULLET_CRITICAL_MULTIPLIER + "x normal damage.");
+            Ui.println("----------------------------------------------------");
+            Ui.pause();
+
+        }
+    }
 
     private boolean wasCriticalHit() {
         return Random.RInt((int) (100 / this.critChanceMultiplier)) == 1;
+    }
+    
+    private boolean bulletWasCriticalHit() {
+    	return Random.RInt((int) (100 / Weapon.BULLET_CRITICAL_CHANCE)) == 1;
     }
 
     public void viewAbout() {
@@ -293,6 +316,10 @@ public class Weapon implements Comparable<Weapon> {
         Ui.println("Damage: " + this.getDamage());
         Ui.println("Chance of critical hit: " + this.critChanceMultiplier + "%");
         Ui.println("Critical hit damage multiplier: " + this.critDamMultiplierMin + "-" + this.critDamMultiplierMax + "x");
+        if (!this.melee) {
+            Ui.println("Chance of critical hit, bullet: " + Weapon.BULLET_CRITICAL_CHANCE + "%");
+            Ui.println("Bullet Critical of critical hit, bullet: " + Weapon.BULLET_CRITICAL_MULTIPLIER + "x");
+        }
         for (int i = 0; i < BORDER_LENGTH; i++) Ui.print("-");//Make line
         Ui.pause();
         Ui.cls();
