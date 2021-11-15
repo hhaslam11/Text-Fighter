@@ -58,8 +58,8 @@ public class Cheats {
                 Potion.set("Recovery", 5000, false);
                 break;
             case "weaponstash":
-                for (int i = 0; i <= Weapon.getWeapons().size(); i++) {
-                    Weapon.getWeapons().get(i).setAmmo(5000, false);
+                for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
+                    Weapon.arrayWeapon.get(i).setAmmo(5000, false);
                 }
 
                 Power.set(5000, false);
