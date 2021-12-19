@@ -56,8 +56,11 @@ Thanks for all your work!
 [CLEMENTJOHNSHAJI](https://github.com/CLEMENTJOHNSHAJI)  
 [alfr3dosv](https://github.com/alfr3dosv)  
 [xdvrx1](https://github.com/xdvrx1)  
-[R1ndT](https://github.com/R1ndT)
-[SaurabhKukreja](https://github.com/SaurabhKukreja)
+[R1ndT](https://github.com/R1ndT)   
+[SaurabhKukreja](https://github.com/SaurabhKukreja)    
+[emmamickas](https://github.com/emmamickas)   
+[colinwillis2](https://github.com/colinwillis2)   
+[mmccoy3](https://github.com/mmccoy3)
 
 License
 --------------
