@@ -91,16 +91,16 @@ public class Saves {
 		set("Stats.Kills", Stats.kills);
 		set("Stats.Total_Kills", Stats.totalKills);
 		set("Stats.High_Score", Stats.highScore);
-		set("User.Weapons.Current", Weapon.arrayWeapon.indexOf(Weapon.get()));
+		set("User.Weapons.Current", Weapon.getWeapons().indexOf(Weapon.get()));
 
 
-		for (int i = 0; i < Weapon.arrayWeapon.size(); i++) {
-			if (Weapon.arrayWeapon.get(i).owns()) {
+		for (int i = 0; i < Weapon.getWeapons().size(); i++) {
+			if (Weapon.getWeapons().get(i).owns()) {
 				set(("User.Weapons." + i), true);
 			} else {
 				set(("User.Weapons." + i), false);
 			}
-			set(("User.Weapons.Ammo." + i), Weapon.arrayWeapon.get(i).getAmmo());
+			set(("User.Weapons.Ammo." + i), Weapon.getWeapons().get(i).getAmmo());
 		}
 
 
@@ -120,7 +120,7 @@ public class Saves {
 		set("User.Armour.Current", Armour.get());
 
 		//Enemy
-		set("Battle.Current.Enemy", Enemy.arrayEnemy.indexOf(Enemy.get()));
+		set("Battle.Current.Enemy", Enemy.getEnemies().indexOf(Enemy.get()));
 		set("Battle.Current.Enemy_Health", Enemy.get().getHealth());
 		set("Battle.Current.Enemy_Max_Health", Enemy.get().getHealthMax());
 		set("Battle.Current.Enemy_First_Aid_Kit", Enemy.get().getFirstAidKit());
@@ -133,9 +133,9 @@ public class Saves {
 
 		List<String> enemiesKilled = new ArrayList<>();
 
-		for (int i = 0; i < Enemy.arrayEnemy.size(); i++)
+		for (int i = 0; i < Enemy.getEnemies().size(); i++)
 			if (Achievements.arrayKilled.get(i))
-				enemiesKilled.add(Enemy.arrayEnemy.get(i).getName());
+				enemiesKilled.add(Enemy.getEnemies().get(i).getName());
 		set("Achievements.Enemies_Killed", enemiesKilled);
 		set("Achievements.Text_Fighter_Master", Achievements.textFighterMaster);
 		set("Achievements.YAY_POWER", Achievements.YAYPOWER);
@@ -249,11 +249,11 @@ public class Saves {
 		Stats.totalKills = getInteger("Stats.Total_Kills");
 		Weapon.set(getInteger("User.Weapons.Current"));
 
-		for(int i = 0; i < Weapon.arrayWeapon.size(); i++){
+		for(int i = 0; i < Weapon.getWeapons().size(); i++){
 			if (getBoolean("User.Weapons." + i)){
-				Weapon.arrayWeapon.get(i).owns = true;
+				Weapon.getWeapons().get(i).owns = true;
 			}
-			Weapon.arrayWeapon.get(i).setAmmo(getInteger("User.Weapons.Ammo." + i), false);
+			Weapon.getWeapons().get(i).setAmmo(getInteger("User.Weapons.Ammo." + i), false);
 		}
 
 		Power.set(getInteger("User.Power"), false);
@@ -283,8 +283,8 @@ public class Saves {
 		List<String> achSet = (List<String>) getList("Achievements.Enemies_Killed");
 
 		for (int i = 0; i < achSet.size(); i++){
-			for (int x = 0; x < Enemy.arrayEnemy.size(); x++){
-				if(Enemy.arrayEnemy.get(x).getName().equals(achSet.get(i))){
+			for (int x = 0; x < Enemy.getEnemies().size(); x++){
+				if(Enemy.getEnemies().get(x).getName().equals(achSet.get(i))){
 					Achievements.arrayKilled.set(x, true);
 				}
 			}
@@ -457,10 +457,10 @@ public class Saves {
 			Stats.highScore = readInt();
 			Stats.totalKills = readInt();
 			Weapon.set(readInt());
-			for (int i = 0; i < Weapon.arrayWeapon.size(); i++)
-				Weapon.arrayWeapon.get(i).owns = readBoolean();
-			for (int i = 0; i < Weapon.arrayWeapon.size(); i++)
-				Weapon.arrayWeapon.get(i).setAmmo(readInt(), false);
+			for (int i = 0; i < Weapon.getWeapons().size(); i++)
+				Weapon.getWeapons().get(i).owns = readBoolean();
+			for (int i = 0; i < Weapon.getWeapons().size(); i++)
+				Weapon.getWeapons().get(i).setAmmo(readInt(), false);
 			Power.set(readInt(), false);
 			Power.used = readInt();
 			Stats.totalDamageDealt = readInt();
@@ -479,7 +479,7 @@ public class Saves {
 			Achievements.enemySlayer = readBoolean();
 			Achievements.firstKill = readBoolean();
 			Achievements.timeForAnUpgrade = readBoolean();
-			for (int i = 0; i < Enemy.arrayEnemy.size(); i++)
+			for (int i = 0; i < Enemy.getEnemies().size(); i++)
 				Achievements.arrayKilled.set(i, readBoolean());
 			Achievements.textFighterMaster = readBoolean();
 			Achievements.YAYPOWER = readBoolean();
