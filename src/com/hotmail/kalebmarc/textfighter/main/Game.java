@@ -14,7 +14,7 @@ import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
 import static java.util.Arrays.asList;
 
-public class Game {
+public class  Game {
 	// docschorsch added boolean to indicate if a game had been started
 	private static boolean gameStarted = false;
 

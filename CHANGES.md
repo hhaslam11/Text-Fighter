@@ -9,6 +9,15 @@
 ### In the updated implementation, the Health section describes all aspect of the game pertaining to player and enemy health.
 
 ## Modified files:
+### The following files were modified in the change:
+ * [Help.java](https://github.com/emmamickas/Text-Fighter/blob/HelpSectionUpdate/src/com/hotmail/kalebmarc/textfighter/main/Help.java)
+
+ 
+ ## Additional resources:
+ ### Please view the following to find additional documentation of the changes and the code involved in the changes.
+  * [Class Diagrams](https://github.com/emmamickas/Text-Fighter/tree/HealthHelpSection/Class%20Diagrams) of modified classes.
+  * [Dependency Reference](https://github.com/emmamickas/Text-Fighter/tree/HealthHelpSection/Dependency%20Reference) of Health class.
+
 ### As viewable in the [Dependency References folder](https://github.com/emmamickas/Text-Fighter/tree/AddConstantArraylistAccessModifiers/Dependency%20References), the following files were modified in the change:
  * [Help.java](https://github.com/emmamickas/Text-Fighter/blob/HelpSectionUpdate/src/com/hotmail/kalebmarc/textfighter/main/Help.java)
 
