@@ -1,8 +1,9 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class Ui {
     public static boolean guiEnabled = true;

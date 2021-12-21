@@ -1,12 +1,12 @@
 package com.hotmail.kalebmarc.textfighter.item;
 
+import java.util.ArrayList;
+
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.NPC;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
-
-import java.util.ArrayList;
 
 public class Armour {
 

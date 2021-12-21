@@ -1,11 +1,16 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import java.util.Scanner;
+
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
-import com.hotmail.kalebmarc.textfighter.player.*;
-
-import java.util.Scanner;
+import com.hotmail.kalebmarc.textfighter.player.Coins;
+import com.hotmail.kalebmarc.textfighter.player.Health;
+import com.hotmail.kalebmarc.textfighter.player.Potion;
+import com.hotmail.kalebmarc.textfighter.player.Settings;
+import com.hotmail.kalebmarc.textfighter.player.Stats;
+import com.hotmail.kalebmarc.textfighter.player.Xp;
 
 public class Cheats {
 

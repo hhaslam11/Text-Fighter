@@ -3,7 +3,12 @@ package com.hotmail.kalebmarc.textfighter.player;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
-import com.hotmail.kalebmarc.textfighter.main.*;
+import com.hotmail.kalebmarc.textfighter.main.Bank;
+import com.hotmail.kalebmarc.textfighter.main.Casino;
+import com.hotmail.kalebmarc.textfighter.main.Cheats;
+import com.hotmail.kalebmarc.textfighter.main.Food;
+import com.hotmail.kalebmarc.textfighter.main.Ui;
+import com.hotmail.kalebmarc.textfighter.main.Weapon;
 
 public class Stats {
     //Battle Stats

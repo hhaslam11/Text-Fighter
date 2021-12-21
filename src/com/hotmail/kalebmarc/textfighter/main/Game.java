@@ -1,18 +1,29 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import com.hotmail.kalebmarc.textfighter.item.*;
-import com.hotmail.kalebmarc.textfighter.player.*;
-
-import time.GameClock;
-
-import javax.swing.*;
-import java.util.Scanner;
-
 import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
 import static com.hotmail.kalebmarc.textfighter.player.Health.upgrade;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
 import static java.util.Arrays.asList;
+
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import com.hotmail.kalebmarc.textfighter.item.Armour;
+import com.hotmail.kalebmarc.textfighter.item.Chest;
+import com.hotmail.kalebmarc.textfighter.item.FirstAid;
+import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
+import com.hotmail.kalebmarc.textfighter.item.Power;
+import com.hotmail.kalebmarc.textfighter.player.Achievements;
+import com.hotmail.kalebmarc.textfighter.player.Coins;
+import com.hotmail.kalebmarc.textfighter.player.Health;
+import com.hotmail.kalebmarc.textfighter.player.Potion;
+import com.hotmail.kalebmarc.textfighter.player.Settings;
+import com.hotmail.kalebmarc.textfighter.player.Stats;
+import com.hotmail.kalebmarc.textfighter.player.Xp;
+
+import time.GameClock;
 
 public class  Game {
 	// docschorsch added boolean to indicate if a game had been started

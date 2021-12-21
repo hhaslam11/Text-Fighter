@@ -1,9 +1,8 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.player.Health;
-
 import java.util.ArrayList;
+
+import com.hotmail.kalebmarc.textfighter.player.Health;
 
 public class Food {
 

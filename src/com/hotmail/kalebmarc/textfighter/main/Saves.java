@@ -1,17 +1,35 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.item.FirstAid;
-import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
-import com.hotmail.kalebmarc.textfighter.item.Power;
-import com.hotmail.kalebmarc.textfighter.player.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.*;
+import com.hotmail.kalebmarc.textfighter.item.Armour;
+import com.hotmail.kalebmarc.textfighter.item.FirstAid;
+import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
+import com.hotmail.kalebmarc.textfighter.item.Power;
+import com.hotmail.kalebmarc.textfighter.player.Achievements;
+import com.hotmail.kalebmarc.textfighter.player.Coins;
+import com.hotmail.kalebmarc.textfighter.player.Health;
+import com.hotmail.kalebmarc.textfighter.player.Potion;
+import com.hotmail.kalebmarc.textfighter.player.Settings;
+import com.hotmail.kalebmarc.textfighter.player.Stats;
+import com.hotmail.kalebmarc.textfighter.player.Xp;
 
 /**
  * Created by Brendon Butler on 7/27/2016.

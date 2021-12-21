@@ -1,10 +1,10 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
+import javax.swing.JOptionPane;
+
 import com.hotmail.kalebmarc.textfighter.main.Cheats;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
-
-import javax.swing.*;
 
 public class Xp {
 

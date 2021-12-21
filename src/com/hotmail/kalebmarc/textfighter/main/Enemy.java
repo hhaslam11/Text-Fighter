@@ -1,10 +1,15 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.player.*;
-
-import javax.swing.*;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import com.hotmail.kalebmarc.textfighter.player.Achievements;
+import com.hotmail.kalebmarc.textfighter.player.Coins;
+import com.hotmail.kalebmarc.textfighter.player.Health;
+import com.hotmail.kalebmarc.textfighter.player.Potion;
+import com.hotmail.kalebmarc.textfighter.player.Stats;
+import com.hotmail.kalebmarc.textfighter.player.Xp;
 
 public class Enemy {
 

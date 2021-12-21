@@ -1,12 +1,13 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import com.hotmail.kalebmarc.textfighter.main.Casino;
 import com.hotmail.kalebmarc.textfighter.main.Cheats;
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
-
-import javax.swing.*;
-import java.util.ArrayList;
 
 public class Achievements {
     //Arrays for achievements
