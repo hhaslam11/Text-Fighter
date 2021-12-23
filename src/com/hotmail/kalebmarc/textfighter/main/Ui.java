@@ -112,9 +112,14 @@ public class Ui {
         print("\n");
     }
 
-    // 66 characters long
+    private static int hrLength = 66;
     public static void printhr() {
-        println("------------------------------------------------------------------");
+        println("-".repeat(hrLength));
+    }
+
+    // This function will reliably centre solely strings of an even length. I don't know of a way to fix this without varying hrLength. Do you? Couldn't varying hrLength solve the issue reliably as well?
+    public static String getCentred(String input) {
+        return " ".repeat((hrLength - input.length()) / 2) + input;
     }
 
     /**

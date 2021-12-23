@@ -45,8 +45,9 @@ public static final ArrayList<Property> arrayProperty = new ArrayList<Property>(
 
 	public void visit() {
 		Ui.cls();
-		Ui.println("------------------------------------------------------------------");
-		Ui.println(" ".repeat(27 - name.length()) + "Welcome to the " + name + "!" + " ".repeat(27 - name.length()));
+		Ui.printhr();
+		Ui.println(Ui.getCentred("Welcome to the " + name + "!"));
+		Ui.printhr();
 		Ui.pause();
 
 	}
