@@ -1,7 +1,5 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import java.util.ArrayList;
-
 import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
@@ -10,6 +8,8 @@ import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Potion;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
+
+import java.util.ArrayList;
 
 class Shop {
     private Shop() {
@@ -287,6 +287,8 @@ class Shop {
             }
         }
     }
+
+
     private static void property(){
         while (true){
 
@@ -298,13 +300,41 @@ class Shop {
             Ui.println("Coins: " + Coins.get());
             Ui.println("________________________________________________");
 
-            //TODO do stuff to buy property
-            Ui.pause();//temp
-
-
+            for (int i = 0; i < Property.getPropertyList().size(); i++) {
+            	Property p = Property.getPropertyList().get(i);
+                Ui.println((i + 1) + ") " + p.getName());
+                Ui.println("   Price: "  + p.getPrice());
+                Ui.println("   Level: "  + p.getLevel());
+            }
+            Ui.println();
+            Ui.println((Property.getPropertyList().size() + 1) + ") Back");
+            buyProperty();
             return;
         }
     }
+    private static void buyProperty() {
+        int size = Property.getPropertyList().size();
+
+        int menuItem = Ui.getValidInt();
+        if (menuItem == size + 1) {
+            Ui.cls();
+            return;
+        }
+
+        if (menuItem <= size) {
+            Property.getPropertyList().get(menuItem - 1).buy();
+            // NPC.gratitude("Property", "purchase"); // TODO Add property shop
+            property();
+        } else {
+            Ui.println();
+            Ui.println(menuItem + " is not an option.");
+            Ui.cls();
+            Ui.pause();
+            property();
+        }
+    }
+
+
     private static void armour() {
         while (true) {
             Ui.cls();

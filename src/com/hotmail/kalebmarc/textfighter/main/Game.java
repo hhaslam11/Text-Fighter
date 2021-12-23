@@ -1,29 +1,18 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.*;
+import com.hotmail.kalebmarc.textfighter.player.*;
+import time.GameClock;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import static com.hotmail.kalebmarc.textfighter.player.Health.getStr;
 import static com.hotmail.kalebmarc.textfighter.player.Health.upgrade;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.menu;
 import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
 import static java.util.Arrays.asList;
-
-import java.util.Scanner;
-
-import javax.swing.JOptionPane;
-
-import com.hotmail.kalebmarc.textfighter.item.Armour;
-import com.hotmail.kalebmarc.textfighter.item.Chest;
-import com.hotmail.kalebmarc.textfighter.item.FirstAid;
-import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
-import com.hotmail.kalebmarc.textfighter.item.Power;
-import com.hotmail.kalebmarc.textfighter.player.Achievements;
-import com.hotmail.kalebmarc.textfighter.player.Coins;
-import com.hotmail.kalebmarc.textfighter.player.Health;
-import com.hotmail.kalebmarc.textfighter.player.Potion;
-import com.hotmail.kalebmarc.textfighter.player.Settings;
-import com.hotmail.kalebmarc.textfighter.player.Stats;
-import com.hotmail.kalebmarc.textfighter.player.Xp;
-
-import time.GameClock;
 
 public class  Game {
 	// docschorsch added boolean to indicate if a game had been started
@@ -61,6 +50,9 @@ public class  Game {
 	public static Armour none = new Armour("None", 0, 0, 1);//DO NOT REMOVE
 	public static Armour basic = new Armour("Basic", 400, 15, 5);
 	public static Armour advanced = new Armour("Advanced", 750, 30, 7);
+
+	//Properties
+	public static Property farm;
 
 	//Food
 	//TODO when the StatusEffect system is implemented, change effect types
@@ -166,14 +158,15 @@ public class  Game {
 			Ui.println("------------------------------------------------------------------");
 			Ui.println("1) Go to battle");
 			Ui.println("2) Go Home");
-			Ui.println("3) Go to the town");
-			Ui.println("4) Use First-Aid kit");
-			Ui.println("5) Use Potion");
-			Ui.println("6) Eat Food");
-			Ui.println("7) Use Insta-Health");
-			Ui.println("8) Use POWER");
-			Ui.println("9) Run From Battle (You will lose any XP earned)");
-			Ui.println("10) Quit Game (Game will automatically be saved)");
+			Ui.println("3) Go to a property");
+			Ui.println("4) Go to the town");
+			Ui.println("5) Use First-Aid kit");
+			Ui.println("6) Use Potion");
+			Ui.println("7) Eat Food");
+			Ui.println("8) Use Insta-Health");
+			Ui.println("9) Use POWER");
+			Ui.println("10) Run From Battle (You will lose any XP earned)");
+			Ui.println("11) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
 
 			switch (Ui.getValidInt()) {
@@ -192,12 +185,14 @@ public class  Game {
 					home();
 					break;
 				case 3:
+					property();
+				case 4:
 					town();
 					break;
-				case 4:
+				case 5:
 					FirstAid.use();
 					break;
-				case 5:
+				case 6:
 					Ui.cls();
 					Ui.println("Which potion would you like to use?");
 					Ui.println("1) Survival Potion");
@@ -216,21 +211,21 @@ public class  Game {
 							break;
 					}
 					break;
-				case 6:
+				case 7:
 					Food.list();
 					break;
-				case 7:
+				case 8:
 					InstaHealth.use();
 					break;
-				case 8:
+				case 9:
 					Power.use();
 					break;
-				case 9:
+				case 10:
 					Ui.cls();
 					Ui.popup("You ran away from the battle.", "Ran Away", JOptionPane.INFORMATION_MESSAGE);
 					Enemy.encounterNew();
 					break;
-				case 10:
+				case 11:
 					Stats.timesQuit++;
 					return;
 				case 0:
@@ -368,6 +363,32 @@ public class  Game {
 			}//Switch
 		}//While loop
 	}//Method
+
+	private static void property() {
+		Ui.println("Which property would you like to visit?");
+		Ui.println();
+		ArrayList<Property> suitableProperties = new ArrayList<Property>();
+		for (int i = 0; i < Property.getPropertyList().size(); i++) {
+			Property p = Property.getPropertyList().get(i);
+			if (p.owns()) {
+				Ui.print((i + 1) + ") " + p.getName());
+				suitableProperties.add(p);
+			}
+		}
+		Ui.println();
+		Ui.println((suitableProperties.size() + 1) + ") Back");
+
+		while(true) {
+			int menuItem = Ui.getValidInt();
+			if (menuItem == suitableProperties.size() + 1) {
+				return;
+			}
+
+			if (menuItem <= suitableProperties.size()) {
+				suitableProperties.get(menuItem -1).visit();
+			}
+		}
+	}
 
 	private static String getDifficulty() {
 		

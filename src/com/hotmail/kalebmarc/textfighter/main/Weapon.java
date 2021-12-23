@@ -1,14 +1,13 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
-import javax.swing.JOptionPane;
-
 import com.hotmail.kalebmarc.textfighter.player.Achievements;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
 import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Weapon implements Comparable<Weapon> {
 

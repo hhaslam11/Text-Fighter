@@ -1,7 +1,84 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.item.FirstAid;
+import com.hotmail.kalebmarc.textfighter.player.*;
+
+import java.util.ArrayList;
+
 public class Property {
 
+public static final ArrayList<Property> arrayProperty = new ArrayList<Property>();
+	
+	private String name;
+	private int price;
+	private int level;
+	private String description;
+	private boolean owns;
+	
+	public Property(String name, int price, int level, String description, boolean firstInit, boolean changeDif) {
+		this.name = name;
+		this.price = price;
+		this.level = level;
+		this.description = description;
+		
+		if (!changeDif) {
+            arrayProperty.add(this);
+        }
+
+        if (firstInit) {
+            this.owns = false;
+        }
+	}
+	
+	public static ArrayList<Property> getPropertyList() {
+		return arrayProperty;
+	}
+	public String getName() {
+		return name.toString();
+	}
+	public int getPrice() {
+		return price;
+	}
+	public int getLevel() {
+		return level;
+	}
+
+	public void visit() {
+		Ui.cls();
+		Ui.println("------------------------------------------------------------------");
+		Ui.println(" ".repeat(27 - name.length()) + "Welcome to the " + name + "!" + " ".repeat(27 - name.length()));
+		Ui.pause();
+
+	}
+
+	public boolean owns() {
+		return owns;
+	}
+	public void buy() {
+		if (this.owns()) {
+			Ui.msg("You already own this property.");
+			return;
+		}
+		if (level > Xp.getLevel()) {
+			Ui.msg("You are not a high enough level to buy this item.");
+			return;
+		}
+		if (price > Coins.get()) {
+			Ui.msg("You do not have enough coins to buy this item.");
+			return;
+		}
+
+		Achievements.boughtItem = true;
+		Coins.set(-price, true);
+		Stats.coinsSpentOnProperty += price;
+		this.owns = true;
+		Ui.println("You have bought a " + this.getName() + " for " + this.price + " coins.");
+		Ui.println("Coins: " + Coins.get());
+		Ui.pause();
+
+	}
+	
+    /*
     private String name;
     private String desc;
     private Type type;
@@ -74,6 +151,6 @@ public class Property {
                     return null;
             }
         }
-    }
+    } */
 }
 

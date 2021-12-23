@@ -1,6 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 class About {
     private static boolean viewed = false;

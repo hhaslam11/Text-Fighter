@@ -1,13 +1,12 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
-import java.util.concurrent.ThreadLocalRandom;
-
-import javax.swing.JOptionPane;
-
 import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.main.Enemy;
 import com.hotmail.kalebmarc.textfighter.main.Handle;
 import com.hotmail.kalebmarc.textfighter.main.Ui;
+
+import javax.swing.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Health {
 

@@ -1,13 +1,9 @@
 package com.hotmail.kalebmarc.textfighter.casino;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
-
 import com.hotmail.kalebmarc.textfighter.main.Ui;
 import com.hotmail.kalebmarc.textfighter.player.Coins;
+
+import java.util.*;
 
 public class BlackjackGame extends BasicCasinoGame {
     private Stack<Card> cardStack;

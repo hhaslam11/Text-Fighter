@@ -22,5 +22,4 @@ public class Coins {
             if (coins < 0) coins = 0;
         }
     }
-
 }

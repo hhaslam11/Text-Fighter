@@ -3,12 +3,7 @@ package com.hotmail.kalebmarc.textfighter.player;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
-import com.hotmail.kalebmarc.textfighter.main.Bank;
-import com.hotmail.kalebmarc.textfighter.main.Cheats;
-import com.hotmail.kalebmarc.textfighter.main.Enemy;
-import com.hotmail.kalebmarc.textfighter.main.Game;
-import com.hotmail.kalebmarc.textfighter.main.Ui;
-import com.hotmail.kalebmarc.textfighter.main.Weapon;
+import com.hotmail.kalebmarc.textfighter.main.*;
 
 public class Settings {
 
@@ -176,6 +171,9 @@ public class Settings {
             Game.rifle = new Weapon("Rifle", 1, 18, true, 275, 1, 5, 10, 1.25, 6, 7, firstInit, changeDif);
             Game.sniper = new Weapon("Sniper", 1, 10, true, 700, 2, 7, 0, 1, 7, 10, firstInit, changeDif);
 
+            //Properties
+            Game.farm = new Property("Farm", 200, 10, "A farm", firstInit, changeDif);
+
             //Price
             Power.price = 25;
             Weapon.BULLET_DAMAGE = 10;
@@ -227,6 +225,9 @@ public class Settings {
             Game.rifle = new Weapon("Rifle", 1, 18, true, 300, 1, 5, 10, 1, 5, 6, firstInit, changeDif);
             Game.sniper = new Weapon("Sniper", 1, 10, true, 750, 2, 7, 0, .75, 7, 9, firstInit, changeDif);
 
+            //Properties
+            Game.farm = new Property("Farm", 200, 10, "A farm", firstInit, changeDif);
+
             //PRICE
             Power.price = 75;
             Weapon.BULLET_DAMAGE = 5;
@@ -253,11 +254,11 @@ public class Settings {
 
     private static void newGameSetup() {
 
-        Coins.set(50, false);
+        Coins.set(50000, false);
         FirstAid.set(3, false);
         Potion.set("survival", 2, false);
         Potion.set("recovery", 2, false);
-        Xp.setAll(0, 500, 1);
+        Xp.setAll(0, 500, 100);
         Game.none.setOwns(true);
         Game.none.equipSilent();
 

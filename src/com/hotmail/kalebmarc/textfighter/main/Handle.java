@@ -1,6 +1,6 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class Handle {
     private Handle() {

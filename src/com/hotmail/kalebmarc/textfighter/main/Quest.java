@@ -1,9 +1,9 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
-import java.util.ArrayList;
-
 import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
+
+import java.util.ArrayList;
 
 public class Quest {
 
