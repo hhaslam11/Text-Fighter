@@ -1,5 +1,9 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.farm.Farm;
+import com.hotmail.kalebmarc.textfighter.farm.Field;
+import com.hotmail.kalebmarc.textfighter.farm.Seed;
+import com.hotmail.kalebmarc.textfighter.farm.Crop;
 import com.hotmail.kalebmarc.textfighter.item.*;
 import com.hotmail.kalebmarc.textfighter.player.*;
 import time.GameClock;
@@ -46,13 +50,18 @@ public class  Game {
 	public static Weapon rifle;
 	public static Weapon sniper;
 
-	//Amours
+	//Armours
 	public static Armour none = new Armour("None", 0, 0, 1);//DO NOT REMOVE
 	public static Armour basic = new Armour("Basic", 400, 15, 5);
 	public static Armour advanced = new Armour("Advanced", 750, 30, 7);
 
 	//Properties
-	public static Property farm;
+	public static Farm farm;
+
+	//Seeds
+	public static Seed wheat;
+
+	//Crops
 
 	//Food
 	//TODO when the StatusEffect system is implemented, change effect types
@@ -180,12 +189,19 @@ public class  Game {
 						if (fightPath <= 50) Enemy.get().dealDamage();
 						if (fightPath > 50) Weapon.get().dealDam();
 					}
+
+					for (Farm f : Farm.getFarms()) {
+						for (Field fi : f.getFields()) {
+							fi.updateCycle();
+						}
+					}
 					break;
 				case 2:
 					home();
 					break;
 				case 3:
 					property();
+					break;
 				case 4:
 					town();
 					break;
@@ -367,27 +383,27 @@ public class  Game {
 	private static void property() {
 		Ui.println("Which property would you like to visit?");
 		Ui.println();
-		ArrayList<Property> suitableProperties = new ArrayList<Property>();
-		for (int i = 0; i < Property.getPropertyList().size(); i++) {
-			Property p = Property.getPropertyList().get(i);
+		ArrayList<Farm> suitableFarms = new ArrayList<Farm>();
+		for (int i = 0; i < Farm.getFarms().size(); i++) {
+			Farm p = Farm.getFarms().get(i);
 			if (p.owns()) {
 				Ui.print((i + 1) + ") " + p.getName());
-				suitableProperties.add(p);
+				Ui.println();
+				suitableFarms.add(p);
 			}
 		}
 		Ui.println();
-		Ui.println((suitableProperties.size() + 1) + ") Back");
+		Ui.println((suitableFarms.size() + 1) + ") Back");
 
-		while(true) {
-			int menuItem = Ui.getValidInt();
-			if (menuItem == suitableProperties.size() + 1) {
-				return;
-			}
-
-			if (menuItem <= suitableProperties.size()) {
-				suitableProperties.get(menuItem -1).visit();
-			}
+		int menuItem = Ui.getValidInt();
+		if (menuItem == suitableFarms.size() + 1) {
+			return;
 		}
+
+		if (menuItem <= suitableFarms.size()) {
+			suitableFarms.get(menuItem - 1).menu();
+		}
+		return;
 	}
 
 	private static String getDifficulty() {

@@ -1,5 +1,8 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.farm.Crop;
+import com.hotmail.kalebmarc.textfighter.farm.Farm;
+import com.hotmail.kalebmarc.textfighter.farm.Seed;
 import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
@@ -30,8 +33,10 @@ class Shop {
             Ui.println("2) Weapons/Ammo");
             Ui.println("3) Body Armour");
             Ui.println("4) Property");
-            Ui.println("5) XP");
-            Ui.println("6) Back");
+            Ui.println("5) Seeds");
+            Ui.println("6) Crops");
+            Ui.println("7) XP");
+            Ui.println("8) Back");
             Ui.println("-------------------------------------------------------------------");
             switch (Ui.getValidInt()) {
                 case 1:
@@ -47,9 +52,15 @@ class Shop {
                     property();
                     break;
                 case 5:
-                    xp();
+                    seeds();
                     break;
                 case 6:
+                    crops();
+                    break;
+                case 7:
+                    xp();
+                    break;
+                case 8:
                     return;
                 default:
                     break;
@@ -291,7 +302,6 @@ class Shop {
 
     private static void property(){
         while (true){
-
             Ui.cls();
             Ui.println("________________________________________________");
             Ui.println("                    Property                    ");
@@ -300,37 +310,122 @@ class Shop {
             Ui.println("Coins: " + Coins.get());
             Ui.println("________________________________________________");
 
-            for (int i = 0; i < Property.getPropertyList().size(); i++) {
-            	Property p = Property.getPropertyList().get(i);
+            for (int i = 0; i < Farm.getFarms().size(); i++) {
+            	Farm p = Farm.getFarms().get(i);
                 Ui.println((i + 1) + ") " + p.getName());
                 Ui.println("   Price: "  + p.getPrice());
                 Ui.println("   Level: "  + p.getLevel());
+                Ui.println("   Field count: "  + p.getFieldCount());
+                Ui.println();
             }
             Ui.println();
-            Ui.println((Property.getPropertyList().size() + 1) + ") Back");
-            buyProperty();
-            return;
+            Ui.println((Farm.getFarms().size() + 1) + ") Back");
+
+            int size = Farm.getFarms().size();
+
+            int menuItem = Ui.getValidInt();
+            if (menuItem == size + 1) {
+                Ui.cls();
+                return;
+            }
+
+            if (menuItem <= size) {
+                Farm.getFarms().get(menuItem - 1).buy();
+                return;
+            } else {
+                Ui.println();
+                Ui.println(menuItem + " is not an option.");
+                Ui.cls();
+                Ui.pause();
+            }
         }
     }
-    private static void buyProperty() {
-        int size = Property.getPropertyList().size();
 
-        int menuItem = Ui.getValidInt();
-        if (menuItem == size + 1) {
+    public static void seeds() {
+        while (true){
             Ui.cls();
-            return;
-        }
+            Ui.printhr();
+            Ui.println(Ui.getCentred("Seeds"));
+            NPC.welcome("seeds");
+            Ui.println("Level: " + Xp.getLevel());
+            Ui.println("Coins: " + Coins.get());
+            Ui.printhr();
 
-        if (menuItem <= size) {
-            Property.getPropertyList().get(menuItem - 1).buy();
-            // NPC.gratitude("Property", "purchase"); // TODO Add property shop
-            property();
-        } else {
+            for (int i = 0; i < Seed.getSeeds().size(); i++) {
+                Seed s = Seed.getSeeds().get(i);
+                Ui.println((i + 1) + ") " + s.getName());
+                Ui.println("   Price per lot: "  + s.getPrice());
+                Ui.println("   Pieces per lot: " + s.getLot());
+                Ui.println("   Level: "  + s.getLevel());
+                Ui.println("   Growth time (in fights): " + s.getGrowthTime());
+                Ui.println("   Minimal crop yield: " + s.getMinCrops());
+                Ui.println("   Maximal crop yield: " + s.getMaxCrops());
+                Ui.println();
+            }
             Ui.println();
-            Ui.println(menuItem + " is not an option.");
+            Ui.println((Farm.getFarms().size() + 1) + ") Back");
+
+            int size = Seed.getSeeds().size();
+
+            int menuItem = Ui.getValidInt();
+            if (menuItem == size + 1) {
+                Ui.cls();
+                return;
+            }
+
+            if (menuItem <= size) {
+                Ui.cls();
+                Ui.println("How many lots would you like to buy?");
+                int multiplier = Ui.getValidInt();
+                Seed.getSeeds().get(menuItem - 1).buy(multiplier);
+                return;
+            } else {
+                Ui.println();
+                Ui.println(menuItem + " is not an option.");
+                Ui.cls();
+                Ui.pause();
+            }
+        }
+    }
+
+    private static void crops() {
+        while (true) {
             Ui.cls();
-            Ui.pause();
-            property();
+            Ui.printhr();
+            Ui.println(Ui.getCentred("Sell Crops"));
+            Ui.println();
+
+            for (int i = 0; i < Crop.getCrops().size(); i++) {
+                Crop c = Crop.getCrops().get(i);
+                Ui.println((i + 1) + ") " + c.getName());
+                Ui.println("   Sell price: "  + c.getSellPrice());
+                Ui.println();
+            }
+            Ui.println();
+            Ui.println((Crop.getCrops().size() + 1) + ") Back");
+
+            int size = Crop.getCrops().size();
+
+            int menuItem = Ui.getValidInt();
+            if (menuItem == size + 1) {
+                Ui.cls();
+                return;
+            }
+
+            if (menuItem <= size) {
+                Crop c = Crop.getCrops().get(menuItem - 1);
+
+                Ui.cls();
+                Ui.println("How many bundles would you like to sell?");
+                Ui.println("You currently have " + c.getOwned() + " bundles of " + c.getName() + ".");
+                int multiplier = Ui.getValidInt();
+                c.sell(multiplier);
+            } else {
+                Ui.println();
+                Ui.println(menuItem + " is not an option.");
+                Ui.cls();
+                Ui.pause();
+            }
         }
     }
 

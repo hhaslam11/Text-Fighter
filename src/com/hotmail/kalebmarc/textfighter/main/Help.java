@@ -6,6 +6,7 @@ class Help {
     private Help() {
     }
 
+    // TODO Add property
     public static void view() {
         while (true) {
             Ui.cls();

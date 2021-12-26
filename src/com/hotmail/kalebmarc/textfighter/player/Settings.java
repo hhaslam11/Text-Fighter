@@ -1,5 +1,7 @@
 package com.hotmail.kalebmarc.textfighter.player;
 
+import com.hotmail.kalebmarc.textfighter.farm.Farm;
+import com.hotmail.kalebmarc.textfighter.farm.Seed;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
 import com.hotmail.kalebmarc.textfighter.item.Power;
@@ -172,7 +174,18 @@ public class Settings {
             Game.sniper = new Weapon("Sniper", 1, 10, true, 700, 2, 7, 0, 1, 7, 10, firstInit, changeDif);
 
             //Properties
-            Game.farm = new Property("Farm", 200, 10, "A farm", firstInit, changeDif);
+            Game.farm = new Farm("Farm", "A farm", 500, 10, 2, firstInit, changeDif);
+
+            //Seeds
+            //  Generates crop with the same name
+            //      Seed(String name, int price, int count, int level, String description, int growthTime, int minCrops, int maxCrops, int cropSellPrice, boolean firstInit, boolean changeDif)
+            //  Requires a separately generated crop
+            //       Seed(String name, int price, int count, int level, String description, int growthTime, int minCrops, int maxCrops, Crop crop, boolean firstInit, boolean changeDif)
+
+            Game.wheat = new Seed("Wheat", 20, 3, 10, "Plain old wheat.", 10, 3, 6, 20, firstInit, changeDif);
+
+            //Crops
+            //  Crop(String name, int sellPrice, Seed seed, boolean firstInit, boolean changeDif)
 
             //Price
             Power.price = 25;
@@ -226,7 +239,19 @@ public class Settings {
             Game.sniper = new Weapon("Sniper", 1, 10, true, 750, 2, 7, 0, .75, 7, 9, firstInit, changeDif);
 
             //Properties
-            Game.farm = new Property("Farm", 200, 10, "A farm", firstInit, changeDif);
+            //  Farm(String name, String description, int price, int level, int fieldCount, boolean firstInit, boolean changeDif)
+            Game.farm = new Farm("Farm", "Simply a farm.", 200, 10, 2, firstInit, changeDif);
+
+            //Seeds
+            //  Generates crop with the same name
+            //      Seed(String name, int price, int count, int level, String description, int growthTime, int minCrops, int maxCrops, int cropSellPrice, boolean firstInit, boolean changeDif)
+            //  Requires a separately generated crop
+            //       Seed(String name, int price, int count, int level, String description, int growthTime, int minCrops, int maxCrops, Crop crop, boolean firstInit, boolean changeDif)
+
+            Game.wheat = new Seed("Wheat", 20, 3, 10, "Plain old wheat.", 10, 3, 6, 20, firstInit, changeDif);
+
+            //Crops
+            //  Crop(String name, int sellPrice, Seed seed, boolean firstInit, boolean changeDif)
 
             //PRICE
             Power.price = 75;
@@ -254,11 +279,11 @@ public class Settings {
 
     private static void newGameSetup() {
 
-        Coins.set(50000, false);
+        Coins.set(50, false);
         FirstAid.set(3, false);
         Potion.set("survival", 2, false);
         Potion.set("recovery", 2, false);
-        Xp.setAll(0, 500, 100);
+        Xp.setAll(0, 500, 1);
         Game.none.setOwns(true);
         Game.none.equipSilent();
 

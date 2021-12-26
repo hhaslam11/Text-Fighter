@@ -17,6 +17,8 @@ public class Stats {
     public static int totalCoinsSpent;
     public static int coinsSpentOnWeapons;
     public static int coinsSpentOnProperty;
+    public static int coinsSpentOnSeeds;
+    public static int coinsGainedOnCrops;
     public static int coinsSpentOnHealth;
     public static int coinsSpentOnBankInterest;
     public static int xpBought;
@@ -63,6 +65,8 @@ public class Stats {
         Ui.println("   Coins spent on bank interest - " + coinsSpentOnBankInterest);
         Ui.println("   Coins spent on weapons - " + coinsSpentOnWeapons);
         Ui.println("   Coins spent on buying property - " + coinsSpentOnProperty);
+        Ui.println("   Coins spent on buying seeds - " + coinsSpentOnSeeds);
+        Ui.println("   Coins gained on selling crops - " + coinsGainedOnCrops);
         Ui.println("   Coins spent on health - " + coinsSpentOnHealth);
         Ui.println("   XP bought - " + xpBought);
         Ui.println();
