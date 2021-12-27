@@ -191,9 +191,7 @@ public class  Game {
 					}
 
 					for (Farm f : Farm.getFarms()) {
-						for (Field fi : f.getFields()) {
-							fi.updateCycle();
-						}
+						f.updateFields();
 					}
 					break;
 				case 2:
