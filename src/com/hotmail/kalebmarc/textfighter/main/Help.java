@@ -1,5 +1,8 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import com.hotmail.kalebmarc.textfighter.farm.Crop;
+import com.hotmail.kalebmarc.textfighter.farm.Farm;
+import com.hotmail.kalebmarc.textfighter.farm.Seed;
 import com.hotmail.kalebmarc.textfighter.item.Armour;
 
 class Help {
@@ -20,10 +23,13 @@ class Help {
             Ui.println("3) Weapon");
             Ui.println("4) Health");
             Ui.println("5) Food");
-            Ui.println("6) XP");
-            Ui.println("7) Cheats");
-            Ui.println("8) Achievements");
-            Ui.println("9) Back");
+            Ui.println("6) Property");
+            Ui.println("7) Seeds");
+            Ui.println("8) Crops");
+            Ui.println("9) XP");
+            Ui.println("10) Cheats");
+            Ui.println("11) Achievements");
+            Ui.println("12) Back");
             Ui.println("------------------------------------------------------------");
             switch (Ui.getValidInt()) {
                 case 1:
@@ -42,16 +48,27 @@ class Help {
                     info_food();
                     break;
                 case 6:
-                    info_xp();
+                    info_property();
                     break;
                 case 7:
-                    info_cheats();
+                    info_seeds();
                     break;
                 case 8:
-                    info_achs();
+                    info_crops();
                     break;
                 case 9:
+                    info_xp();
+                    break;
+                case 10:
+                    info_cheats();
+                    break;
+                case 11:
+                    info_achs();
+                    break;
+                case 12:
                     return;
+                default:
+                    break;
             }
         }
     }
@@ -193,6 +210,107 @@ class Help {
             }
         }
     }
+
+    private static void info_property() {
+        while (true) {
+            int size = Farm.getFarms().size();
+
+            Ui.cls();
+            Ui.printhr();
+            Ui.println(Ui.getCentred("PROPERTY INFO"));
+            Ui.println("Which property would you like to know about?");
+            Ui.println();
+            Ui.println("Farms:");
+            for (int i = 0; i < size; i++) {
+                Ui.println(i + 1 + ") " + Farm.getFarms().get(i).getName());
+            }
+            Ui.println();
+            Ui.println((size + 1) + ") Back");
+
+            int menuItem = Ui.getValidInt();
+
+            if (menuItem == size + 1) {
+                return;
+            }
+
+            if (menuItem <= size) {
+                Farm.getFarms().get(menuItem - 1).viewAbout();
+            } else {
+                Ui.println();
+                Ui.println(menuItem + " is not an option.");
+                Ui.cls();
+                Ui.pause();
+            }
+        }
+    }
+
+    private static void info_seeds() {
+        while (true) {
+            int size = Seed.getSeeds().size();
+
+            Ui.cls();
+            Ui.printhr();
+            Ui.println(Ui.getCentred("SEED INFO"));
+            Ui.println("Which seed would you like to know about?");
+            Ui.println();
+            Ui.println("Seeds:");
+            for (int i = 0; i < size; i++) {
+                Ui.println(i + 1 + ") " + Seed.getSeeds().get(i).getName());
+            }
+            Ui.println();
+            Ui.println((size + 1) + ") Back");
+
+            int menuItem = Ui.getValidInt();
+
+            if (menuItem == size + 1) {
+                return;
+            }
+
+            if (menuItem <= size) {
+                Seed.getSeeds().get(menuItem - 1).viewAbout();
+            } else {
+                Ui.println();
+                Ui.println(menuItem + " is not an option.");
+                Ui.cls();
+                Ui.pause();
+            }
+        }
+    }
+
+    private static void info_crops() {
+        while (true) {
+            int size = Crop.getCrops().size();
+
+            Ui.cls();
+            Ui.printhr();
+            Ui.println(Ui.getCentred("CROP INFO"));
+            Ui.println("Which crop would you like to know about?");
+            Ui.println();
+            Ui.println("Crops:");
+            for (int i = 0; i < size; i++) {
+                Ui.println(i + 1 + ") " + Crop.getCrops().get(i).getName());
+            }
+            Ui.println();
+            Ui.println((size + 1) + ") Back");
+
+            int menuItem = Ui.getValidInt();
+
+            if (menuItem == size + 1) {
+                return;
+            }
+
+            if (menuItem <= size) {
+                Crop.getCrops().get(menuItem - 1).viewAbout();
+            } else {
+                Ui.println();
+                Ui.println(menuItem + " is not an option.");
+                Ui.cls();
+                Ui.pause();
+            }
+        }
+    }
+
+
 
     private static void info_xp() {
         Ui.cls();

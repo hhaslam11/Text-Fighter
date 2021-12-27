@@ -7,6 +7,7 @@ import com.hotmail.kalebmarc.textfighter.player.Stats;
 import com.hotmail.kalebmarc.textfighter.player.Xp;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Farm {
 
@@ -126,6 +127,20 @@ public class Farm {
 		for (Field f : fields) {
 			f.updateCycle();
 		}
+	}
+
+	public void viewAbout() {
+		Ui.cls();
+		Ui.printhr();
+		Ui.println(Ui.getCentred(this.name.toUpperCase()));
+		Ui.println(Ui.getCentred(this.description));
+		Ui.println();
+		Ui.println("Price: " + this.price + " coins");
+		Ui.println("Required level: " + this.level);
+		Ui.println("Number of fields: " + this.fieldCount);
+
+		Ui.printhr();
+		Ui.pause();
 	}
 }
 

@@ -121,4 +121,22 @@ public class Seed {
     public Crop getCrop() {
         return crop;
     }
+
+    public void viewAbout() {
+        Ui.cls();
+        Ui.printhr();
+        Ui.println(Ui.getCentred(this.name.toUpperCase()));
+        Ui.println(Ui.getCentred(this.description));
+        Ui.println();
+        Ui.println("Price: " + this.price + " coins");
+        Ui.println("Required level: " + this.level);
+        Ui.println("Bundles per lot: " + this.count);
+        Ui.println("Growth time: " + this.growthTime);
+        Ui.println("Crop: " + this.crop.getName());
+        Ui.println("Minimal yield: " + this.minCrops);
+        Ui.println("Maximal yield: " + this.maxCrops);
+
+        Ui.printhr();
+        Ui.pause();
+    }
 }

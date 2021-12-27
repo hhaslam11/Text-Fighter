@@ -62,4 +62,16 @@ public class Crop {
             this.owned = owned;
         }
     }
+
+    public void viewAbout() {
+        Ui.cls();
+        Ui.printhr();
+        Ui.println(Ui.getCentred(this.name.toUpperCase()));
+        Ui.println();
+        Ui.println("Sell price: " + this.sellPrice + " coins");
+        Ui.println("Seed: " + this.seed.getName());
+
+        Ui.printhr();
+        Ui.pause();
+    }
 }
