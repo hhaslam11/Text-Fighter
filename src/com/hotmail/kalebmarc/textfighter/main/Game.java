@@ -157,12 +157,7 @@ public class  Game {
 			Ui.println("2) Go Home");
 			Ui.println("3) Go to the town");
 			Ui.println("4) Use First-Aid kit");
-			Ui.println("5) Use Potion");
-			Ui.println("6) Eat Food");
-			Ui.println("7) Use Insta-Health");
-			Ui.println("8) Use POWER");
-			Ui.println("9) Run From Battle (You will lose any XP earned)");
-			Ui.println("10) Quit Game (Game will automatically be saved)");
+			Ui.println("5) Quit Game (Game will automatically be saved)");
 			Ui.println("------------------------------------------------------------------");
 
 			switch (Ui.getValidInt()) {
@@ -184,42 +179,8 @@ public class  Game {
 					town();
 					break;
 				case 4:
-					FirstAid.use();
-					break;
+					battleMenu();
 				case 5:
-					Ui.cls();
-					Ui.println("Which potion would you like to use?");
-					Ui.println("1) Survival Potion");
-					Ui.println("2) Recovery Potion");
-					Ui.println("3) Back");
-					switch (Ui.getValidInt()) {
-						case 1:
-							Potion.use("survival");
-							break;
-						case 2:
-							Potion.use("recovery");
-							break;
-						case 3:
-							break;
-						default:
-							break;
-					}
-					break;
-				case 6:
-					Food.list();
-					break;
-				case 7:
-					InstaHealth.use();
-					break;
-				case 8:
-					Power.use();
-					break;
-				case 9:
-					Ui.cls();
-					Ui.popup("You ran away from the battle.", "Ran Away", JOptionPane.INFORMATION_MESSAGE);
-					Enemy.encounterNew();
-					break;
-				case 10:
 					Stats.timesQuit++;
 					return;
 				case 0:
@@ -258,8 +219,9 @@ public class  Game {
 			Ui.println("2) Home");
 			Ui.println("3) Bank");
 			Ui.println("4) Shop");
-			Ui.println("5) Upgrade Health");
-			Ui.println("6) Back");
+			Ui.println("5) Battle");
+			Ui.println("6) Upgrade Health");
+			Ui.println("7) Back");
 			Ui.println("------------------------------------------------------------------");
 
 			menuChoice = Ui.getValidInt();
@@ -278,9 +240,12 @@ public class  Game {
 					Shop.menu();
 					break;
 				case 5:
-					upgrade();
+					Battle.menu();
 					break;
 				case 6:
+					upgrade();
+					break;
+				case 7:
 					return;
 				default:
 					break;
@@ -357,6 +322,63 @@ public class  Game {
 			}//Switch
 		}//While loop
 	}//Method
+
+	private static void battleMenu(){
+
+		while(true){
+			Ui.cls();
+			Ui.println("------------------------------------------------------------------");
+			Ui.println("                WELCOME TO THE BATTLE MENU                        ");
+			Ui.println("1) Use First-Aid kit");
+			Ui.println("2) Use Potion");
+			Ui.println("3) Eat Food");
+			Ui.println("4) Use Insta-Health");
+			Ui.println("5) Use POWER");
+			Ui.println("6) Run From Battle (You will lose any XP earned");
+			Ui.println("------------------------------------------------------------------");
+
+			battleMenuChoice=Ui.getValidInt();
+
+			case 1:
+				FirstAid.use();
+				break;
+			case 2:
+				Ui.cls();
+				Ui.println("Which potion would you like to use?");
+				Ui.println("1) Survival Potion");
+				Ui.println("2) Recovery Potion");
+				Ui.println("3) Back");
+				switch (Ui.getValidInt()) {
+					case 1:
+						Potion.use("survival");
+						break;
+					case 2:
+						Potion.use("recovery");
+						break;
+					case 3:
+						break;
+					default:
+						break;
+				}
+				break;
+			case 3:
+				Food.list();
+				break;
+			case 4:
+				InstaHealth.use();
+				break;
+			case 5:
+				Power.use();
+				break;
+			case 6:
+				Ui.cls();
+				Ui.popup("You ran away from the battle.", "Ran Away", JOptionPane.INFORMATION_MESSAGE);
+				Enemy.encounterNew();
+				break;
+
+		}
+	}
+
 
 	private static String getDifficulty() {
 		
