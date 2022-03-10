@@ -22,7 +22,7 @@ class Menu {
           //Saves the game before exiting
           // docschorsch: save() only if player is not program default player amd game had started
           if (User.getPlayerDefault() > 0 && Game.hadGameStarted()) {
-            Saves.save();
+            Saves.save(false);
           }
           break;
         case 2:

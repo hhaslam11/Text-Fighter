@@ -1,5 +1,7 @@
 package com.hotmail.kalebmarc.textfighter.main;
 
+import static com.hotmail.kalebmarc.textfighter.main.Ui.*;
+
 import com.hotmail.kalebmarc.textfighter.item.Armour;
 import com.hotmail.kalebmarc.textfighter.item.FirstAid;
 import com.hotmail.kalebmarc.textfighter.item.InstaHealth;
@@ -17,7 +19,7 @@ import java.util.*;
  * Created by Brendon Butler on 7/27/2016.
  */
 public class Saves {
-
+	// TODO: Either make Saves an extension of Map to support getting node values or create a separate class for this
 	private static DumperOptions options;
 	private static File saveLocation;
 	private static Map<String, Object> data;
@@ -26,19 +28,214 @@ public class Saves {
 	private static String path;
 	private static Yaml yaml;
 
-	public static void save() {
-
-		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
-		path = path.replace(".jar", "_" + User.name());
-		path = path.replaceAll("%20", " ");
+	/**
+	 * Save file
+	 */
+	public static void save(boolean newGame) {
+		if (newGame)
+			saveLocation = null;
 
 		setup();
 
+		updateMapValues();
+
+		try {
+			if (!saveLocation.exists())
+				saveLocation.createNewFile();
+
+			FileWriter writer = new FileWriter(saveLocation);
+
+			writer.write(yaml.dump(data));
+			writer.flush();
+			writer.close();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+	}
+
+	/**
+	 * Setup Saves, path, save location, yaml, and data map
+	 */
+	private static void setup() {
+		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		path = path.replaceAll("%20", " ").substring(0, path.lastIndexOf('/'));
+
+		if (saveLocation == null) {
+			saveLocation = new File(path + "/" + User.name() + ".TFsave");
+			// TODO: Append (##) to save file for duplicates
+			int i = 1;
+			while (saveLocation.exists()) {
+				saveLocation = new File(String.format("%s/%s (%d).TFsave", path, User.name(), i));
+				i++;
+			}
+		}
+
+		if (!saveLocation.exists())
+			try {
+				saveLocation.createNewFile();
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
+
+		setupDumper();
+
+		yaml = new Yaml(representer, options);
+		data = new LinkedHashMap<>();
+	}
+
+	/**
+	 * Set up dumper options for YAML
+	 */
+	private static void setupDumper() {
+		options = new DumperOptions();
+		representer = new Representer();
+
+		options.setIndent(2);
+		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+		options.setAllowUnicode(Charset.defaultCharset().name().contains("UTF"));
+		representer.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+	}
+
+	/**
+	 * Update variable values
+	 */
+	private static void updateVariableValues() {
+		// TODO: Fix how items are checked in data (containsValue("User.Name") should check the multi levels of keys)
+		if (getString("User.Name") != null && !getString("User.Name").trim().equals(""))
+			User.setName(getString("User.Name"));
+		else User.promptNameSelection();
+
+		//Health
+		Health.set(getInteger("User.Health"), getInteger("User.Max_Health"));
+		FirstAid.set(getInteger("User.FirstAid.Owns"), false);
+		FirstAid.used = getInteger("Stats.FirstAid.Used");
+		InstaHealth.set(getInteger("User.InstaHealth.Owns"), false);
+		InstaHealth.used = getInteger("Stats.InstaHealth.Used");
+		Health.timesDied = getInteger("Stats.TimesDied");
+
+		//Coins
+		Coins.set(getInteger("User.Balance"), false);
+		Bank.set(getInteger("Bank.Balance"), false);
+		Casino.totalCoinsWon = getInteger("Casino.Winnings");
+		Casino.gamesPlayed = getInteger("Casino.Plays");
+		Casino.LOTTERY.setTicketsBought(getInteger("Casino.Lottery.Bought_Tickets"));
+		Achievements.boughtItem = getBoolean("Achievements.Bought_Item");
+		Stats.totalCoinsSpent = getInteger("Stats.Money_Spent.Coins");
+		Stats.coinsSpentOnBankInterest = getInteger("Stats.Money_Spent.Interest");
+		Stats.coinsSpentOnWeapons = getInteger("Stats.Money_Spent.Weapons");
+		Stats.coinsSpentOnHealth = getInteger("Stats.Money_Spent.Health");
+		Stats.xpBought = getInteger("Stats.Money_Spent.XP");
+		Stats.blackjackGamesPlayed = getInteger("Stats.Blackjack_Games_Played");
+		Stats.lotteryTicketsBought = getInteger("Stats.Lottery_Tickets_Bought");
+		Stats.lotteryWon = getInteger("Stats.Lottery_Won");
+		Loan.setCurrentLoan(getInteger("Bank.Current_Loan.Balance"));
+		Loan.setNetDue(getInteger("Bank.Current_Loan.Due"));
+
+		//Xp
+		Xp.setLevel(getInteger("User.XP.Level"));
+		Xp.setOutOf(getInteger("User.XP.Needed"));
+		Xp.set(getInteger("User.XP.Amount"), false);
+		Xp.total = getInteger("User.XP.Total");
+		Xp.setBattleXp(getInteger("User.XP.battleXp"), false);
+
+		//Potions
+		Potion.spUsed = getInteger("Stats.Potions.Survival.Used");
+		Potion.rpUsed = getInteger("Stats.Potions.Recovery.Used");
+		Potion.set("survival", getInteger("User.Potions.Survival"), false);
+		Potion.set("recovery", getInteger("User.Potions.Recovery"), false);
+
+		//Settings
+		Settings.setDif(getString("Settings.Difficulty.Level"), false, false);
+		Settings.difLocked = getBoolean("Settings.Difficulty.Locked");
+		if(getBoolean("Settings.Cheats.Enabled")) Cheats.enable();
+		if(getBoolean("Settings.Cheats.Locked")) Cheats.lock();
+		guiEnabled = getBoolean("Settings.GUI.Enabled");
+
+		//Combat
+		Stats.kills = getInteger("Stats.Kills");
+		Stats.highScore = getInteger("Stats.High_Score");
+		Stats.totalKills = getInteger("Stats.Total_Kills");
+		Weapon.set(getInteger("User.Weapons.Current"));
+
+		for(int i = 0; i < Weapon.getWeapons().size(); i++){
+			if (getBoolean("User.Weapons." + i)){
+				Weapon.getWeapons().get(i).owns = true;
+			}
+			Weapon.getWeapons().get(i).setAmmo(getInteger("User.Weapons.Ammo." + i), false);
+		}
+
+		Power.set(getInteger("User.Power"), false);
+		Power.used = getInteger("Stats.Power.Used");
+		Stats.totalDamageDealt = getInteger("Stats.Damage_Dealt");
+		Stats.bulletsFired = getInteger("Stats.Bullets_Fired");
+		Stats.bulletsThatHit = getInteger("Stats.Bullets_Hit");
+
+		List<Integer> armours = (List<Integer>) getList("User.Armour.Owns");
+
+		for(int i = 0; i < armours.size(); i++)
+			Armour.getArmours().get(i).setOwns(true);
+
+		Armour.set(getInteger("User.Armour.Current"));
+
+		//Enemy
+		Enemy.set(getInteger("Battle.Current.Enemy"));
+		Enemy.get().setHealth(getInteger("Battle.Current.Enemy_Health"), getInteger("Battle.Current.Enemy_Max_Health"));
+		Enemy.get().setFirstAidKit(getInteger("Battle.Current.Enemy_First_Aid_Kit"));
+
+		//Achs
+		Achievements.moneyMaker         = getBoolean("Achievements.Money_Maker");
+		Achievements.enemySlayer        = getBoolean("Achievements.Enemy_Slayer");
+		Achievements.firstKill          = getBoolean("Achievements.First_Kill");
+		Achievements.timeForAnUpgrade   = getBoolean("Achievements.Time_For_An_Upgrade");
+
+		List<String> achSet = (List<String>) getList("Achievements.Enemies_Killed");
+
+		for (String s : achSet) {
+			for (int x = 0; x < Enemy.getEnemies().size(); x++) {
+				if (Enemy.getEnemies().get(x).getName().equals(s)) {
+					Achievements.arrayKilled.set(x, true);
+				}
+			}
+		}
+
+		Achievements.textFighterMaster  = getBoolean("Achievements.Text_Fighter_Master");
+		Achievements.YAYPOWER           = getBoolean("Achievements.YAY_POWER");
+		Achievements.awwYouCareAboutMe  = getBoolean("Achievements.Aww_You_Care_About_Me");
+		Achievements.slayer             = getBoolean("Achievements.Slayer");
+		Achievements.nobodysPerfect     = getBoolean("Achievements.Nobodys_Perfect");
+		Achievements.makingMoney        = getBoolean("Achievements.Making_Money");
+		Achievements.unnaturalLuck 		= getBoolean("Achievements.Unnatural_Luck");
+		Achievements.gamblingAddiction  = getBoolean("Achievements.Gabling_Addiction");
+		Achievements.level2Fighter      = getBoolean("Achievements.Level_2_Fighter");
+		Achievements.level3Fighter      = getBoolean("Achievements.Level_3_Fighter");
+		Achievements.level4Fighter      = getBoolean("Achievements.Level_4_Fighter");
+		Achievements.level5Fighter      = getBoolean("Achievements.Level_5_Fighter");
+		Achievements.level6Fighter      = getBoolean("Achievements.Level_6_Fighter");
+		Achievements.level7Fighter      = getBoolean("Achievements.Level_7_Fighter");
+		Achievements.level8Fighter      = getBoolean("Achievements.Level_8_Fighter");
+		Achievements.level9Fighter      = getBoolean("Achievements.Level_9_Fighter");
+		Achievements.level10Fighter     = getBoolean("Achievements.Level_10_Fighter");
+		Achievements.honestPlayer       = getBoolean("Achievements.Honest_Player");
+
+		//Other Stuff
+		About.setViewed(getBoolean("Settings.About_Viewed"));
+		Stats.timesCheated = getInteger("Stats.Times_Cheated");
+		Stats.timesQuit = getInteger("Stats.Times_Quit");
+		Stats.itemsCrafted = getInteger("Stats.Items_Crafted");
+		Stats.diceGamesPlayed = getInteger("Stats.Games_Played.Dice");
+		Stats.slotGamesPlayed = getInteger("Stats.Games_Played.Slots");
+	}
+
+	/**
+	 * Update map values
+	 */
+	private static void updateMapValues() {
 		/*
-		 * TODO: make a version checker that checks each part of a version ex: 1.4.1DEV
-		 * then determine whether or not it's older, current or newer.
-		 */
+	 	 * TODO: make a version checker that checks each part of a version ex: 1.4.1DEV
+	 	 * then determine whether or not it's older, current or newer.
+	 	 */
 		set("Version", Version.getFull());
+		set("User.Name", User.name());
 
 		//Health
 		set("User.Health", Health.get());
@@ -85,7 +282,7 @@ public class Saves {
 		set("Settings.Difficulty.Locked", Settings.difLocked);
 		set("Settings.Cheats.Enabled", Cheats.enabled());
 		set("Settings.Cheats.Locked", Cheats.locked());
-		set("Settings.GUI.Enabled", Ui.guiEnabled);
+		set("Settings.GUI.Enabled", guiEnabled);
 
 		//Combat
 		set("Stats.Kills", Stats.kills);
@@ -102,7 +299,6 @@ public class Saves {
 			}
 			set(("User.Weapons.Ammo." + i), Weapon.getWeapons().get(i).getAmmo());
 		}
-
 
 		set("User.Power", Power.get());
 		set("Stats.Power.Used", Power.used);
@@ -163,366 +359,71 @@ public class Saves {
 		set("Stats.Items_Crafted", Stats.timesCheated);
 		set("Stats.Games_Played.Dice", Stats.diceGamesPlayed);
 		set("Stats.Games_Played.Slots", Stats.slotGamesPlayed);
-
-		try {
-			if (!saveLocation.exists())
-				saveLocation.createNewFile();
-
-			FileWriter writer = new FileWriter(saveLocation);
-
-			writer.write(yaml.dump(data));
-			writer.flush();
-			writer.close();
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		}
 	}
 
+	// TODO: be more consistent with prompts across game
+	/**
+	 * Load a save game and set values to various variables
+	 *
+	 * @return true if successfully loaded
+	 */
 	public static boolean load() {
+		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		path = path.replaceAll("%20", " ").substring(0, path.lastIndexOf('/'));
+
+		File dir = new File(path + "/");
+		System.out.println(dir);
+
+		File[] saveList = dir.listFiles((dir1, name) -> name.endsWith(".TFsave"));
+
+		cls();
+		println("------------------------------");
+		println("Choose a save game...");
+		println("------------------------------");
+		for (int i = 0; i < saveList.length; i++)
+			System.out.printf("%d) %s%n", i + 1, saveList[i].getName().substring(0, saveList[i].getName().lastIndexOf(".TFsave")));
+
+		saveLocation = saveList[getValidInt(1, saveList.length) - 1];
+
 		setup();
 
 		FileReader reader = read(saveLocation);
 
 		if (reader == null) {
-			Ui.cls();
-			Ui.println("------------------------------");
-			Ui.println("Cannot find save file.  ");
-			Ui.println("Starting a new game...  ");
-			Ui.println("------------------------------");
-			Ui.pause();
+			cls();
+			println("------------------------------");
+			println("Cannot find save file.  ");
+			println("Starting a new game...  ");
+			println("------------------------------");
+			pause();
 
-			data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
+			data = new LinkedHashMap<>();
 			return true;
 		}
 
-		data = Collections.synchronizedMap((Map<String, Object>) yaml.load(reader));
+		data = yaml.load(reader);
 
-		//Health
-		Health.set(getInteger("User.Health"), getInteger("User.Max_Health"));
-		FirstAid.set(getInteger("User.FirstAid.Owns"), false);
-		FirstAid.used = getInteger("Stats.FirstAid.Used");
-		InstaHealth.set(getInteger("User.InstaHealth.Owns"), false);
-		InstaHealth.used = getInteger("Stats.InstaHealth.Used");
-		Health.timesDied = getInteger("Stats.TimesDied");
-
-		//Coins
-		Coins.set(getInteger("User.Balance"), false);
-		Bank.set(getInteger("Bank.Balance"), false);
-		Casino.totalCoinsWon = getInteger("Casino.Winnings");
-		Casino.gamesPlayed = getInteger("Casino.Plays");
-		Casino.LOTTERY.setTicketsBought(getInteger("Casino.Lottery.Bought_Tickets"));
-		Achievements.boughtItem = getBoolean("Achievements.Bought_Item");
-		Stats.totalCoinsSpent = getInteger("Stats.Money_Spent.Coins");
-		Stats.coinsSpentOnBankInterest = getInteger("Stats.Money_Spent.Interest");
-		Stats.coinsSpentOnWeapons = getInteger("Stats.Money_Spent.Weapons");
-		Stats.coinsSpentOnHealth = getInteger("Stats.Money_Spent.Health");
-		Stats.xpBought = getInteger("Stats.Money_Spent.XP");
-		Stats.blackjackGamesPlayed = getInteger("Stats.Blackjack_Games_Played");
-		Stats.lotteryTicketsBought = getInteger("Stats.Lottery_Tickets_Bought");
-		Stats.lotteryWon = getInteger("Stats.Lottery_Won");
-		Loan.setCurrentLoan(getInteger("Bank.Current_Loan.Balance"));
-		Loan.setNetDue(getInteger("Bank.Current_Loan.Due"));
-
-		//Xp
-		Xp.setLevel(getInteger("User.XP.Level"));
-		Xp.setOutOf(getInteger("User.XP.Needed"));
-		Xp.set(getInteger("User.XP.Amount"), false);
-		Xp.total = getInteger("User.XP.Total");
-		Xp.setBattleXp(getInteger("User.XP.battleXp"), false);
-
-		//Potions
-		Potion.spUsed = getInteger("Stats.Potions.Survival.Used");
-		Potion.rpUsed = getInteger("Stats.Potions.Recovery.Used");
-		Potion.set("survival", getInteger("User.Potions.Survival"), false);
-		Potion.set("recovery", getInteger("User.Potions.Recovery"), false);
-
-		//Settings
-		Settings.setDif(getString("Settings.Difficulty.Level"), false, false);
-		Settings.difLocked = getBoolean("Settings.Difficulty.Locked");
-		if(getBoolean("Settings.Cheats.Enabled")) Cheats.enable();
-		if(getBoolean("Settings.Cheats.Locked")) Cheats.lock();
-		Ui.guiEnabled = getBoolean("Settings.GUI.Enabled");
-
-		//Combat
-		Stats.kills = getInteger("Stats.Kills");
-		Stats.highScore = getInteger("Stats.High_Score");
-		Stats.totalKills = getInteger("Stats.Total_Kills");
-		Weapon.set(getInteger("User.Weapons.Current"));
-
-		for(int i = 0; i < Weapon.getWeapons().size(); i++){
-			if (getBoolean("User.Weapons." + i)){
-				Weapon.getWeapons().get(i).owns = true;
-			}
-			Weapon.getWeapons().get(i).setAmmo(getInteger("User.Weapons.Ammo." + i), false);
-		}
-
-		Power.set(getInteger("User.Power"), false);
-		Power.used = getInteger("Stats.Power.Used");
-		Stats.totalDamageDealt = getInteger("Stats.Damage_Dealt");
-		Stats.bulletsFired = getInteger("Stats.Bullets_Fired");
-		Stats.bulletsThatHit = getInteger("Stats.Bullets_Hit");
-
-		List<Integer> armours = (List<Integer>) getList("User.Armour.Owns");
-
-		for(int i = 0; i < armours.size(); i++)
-			Armour.getArmours().get(i).setOwns(true);
-
-		Armour.set(getInteger("User.Armour.Current"));
-
-		//Enemy
-		Enemy.set(getInteger("Battle.Current.Enemy"));
-		Enemy.get().setHealth(getInteger("Battle.Current.Enemy_Health"), getInteger("Battle.Current.Enemy_Max_Health"));
-		Enemy.get().setFirstAidKit(getInteger("Battle.Current.Enemy_First_Aid_Kit"));
-
-		//Achs
-		Achievements.moneyMaker         = getBoolean("Achievements.Money_Maker");
-		Achievements.enemySlayer        = getBoolean("Achievements.Enemy_Slayer");
-		Achievements.firstKill          = getBoolean("Achievements.First_Kill");
-		Achievements.timeForAnUpgrade   = getBoolean("Achievements.Time_For_An_Upgrade");
-
-		List<String> achSet = (List<String>) getList("Achievements.Enemies_Killed");
-
-		for (int i = 0; i < achSet.size(); i++){
-			for (int x = 0; x < Enemy.getEnemies().size(); x++){
-				if(Enemy.getEnemies().get(x).getName().equals(achSet.get(i))){
-					Achievements.arrayKilled.set(x, true);
-				}
-			}
-		}
-		Achievements.textFighterMaster  = getBoolean("Achievements.Text_Fighter_Master");
-		Achievements.YAYPOWER           = getBoolean("Achievements.YAY_POWER");
-		Achievements.awwYouCareAboutMe  = getBoolean("Achievements.Aww_You_Care_About_Me");
-		Achievements.slayer             = getBoolean("Achievements.Slayer");
-		Achievements.nobodysPerfect     = getBoolean("Achievements.Nobodys_Perfect");
-		Achievements.makingMoney        = getBoolean("Achievements.Making_Money");
-		Achievements.unnaturalLuck 		= getBoolean("Achievements.Unnatural_Luck");
-		Achievements.gamblingAddiction  = getBoolean("Achievements.Gabling_Addiction");
-		Achievements.level2Fighter      = getBoolean("Achievements.Level_2_Fighter");
-		Achievements.level3Fighter      = getBoolean("Achievements.Level_3_Fighter");
-		Achievements.level4Fighter      = getBoolean("Achievements.Level_4_Fighter");
-		Achievements.level5Fighter      = getBoolean("Achievements.Level_5_Fighter");
-		Achievements.level6Fighter      = getBoolean("Achievements.Level_6_Fighter");
-		Achievements.level7Fighter      = getBoolean("Achievements.Level_7_Fighter");
-		Achievements.level8Fighter      = getBoolean("Achievements.Level_8_Fighter");
-		Achievements.level9Fighter      = getBoolean("Achievements.Level_9_Fighter");
-		Achievements.level10Fighter     = getBoolean("Achievements.Level_10_Fighter");
-		Achievements.honestPlayer       = getBoolean("Achievements.Honest_Player");
-
-		//Other Stuff
-		About.setViewed(getBoolean("Settings.About_Viewed"));
-		Stats.timesCheated = getInteger("Stats.Times_Cheated");
-		Stats.timesQuit = getInteger("Stats.Times_Quit");
-		Stats.itemsCrafted = getInteger("Stats.Items_Crafted");
-		Stats.diceGamesPlayed = getInteger("Stats.Games_Played.Dice");
-		Stats.slotGamesPlayed = getInteger("Stats.Games_Played.Slots");
-
+		updateVariableValues();
 		return true;
 	}
 
-	private static void setup() {
-		saveLocation = new File(path);
-		if (!saveLocation.exists())
-			try {
-				saveLocation.createNewFile();
-			} catch (IOException exception) {
-				exception.printStackTrace();
-			}
-
-		setupDumper();
-
-		yaml = new Yaml(representer, options);
-		data = Collections.synchronizedMap(new LinkedHashMap<String, Object>());
-	}
-
-	private static void setupDumper() {
-		options = new DumperOptions();
-		representer = new Representer();
-
-		options.setIndent(2);
-		options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-		options.setAllowUnicode(Charset.defaultCharset().name().contains("UTF"));
-		representer.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-	}
-
-	public static boolean savesPrompt() {
-		User.promptNameSelection();
-		path = Saves.class.getProtectionDomain().getCodeSource().getLocation().getPath() + ".TFsave";
-		path = path.replace(".jar", "_" + User.name());
-		path = path.replaceAll("%20", " ");
-
-		Ui.cls();
-		Ui.println("------------------------------");
-		Ui.println("What would you like to do?");
-		Ui.println("------------------------------");
-		Ui.println("1) Load Save");
-		Ui.println("2) Convert Old Save");
-		Ui.println("3) Exit");
-
-		switch (Ui.getValidInt()) {
-			case 1:
-				load();
-				break;
-			case 2:
-				//docschorsch 'if' needed for exit during convert()
-				if(!convert()) {
-					return false;
-				} else {
-					break;
-				}
-			default:
-				return false;
-		}
-		return true;
-	}
-
-	public static boolean convert() {
-		Ui.cls();
-		Ui.println("------------------------------------");
-		Ui.println("WARNING- Converting a save file may");
-		Ui.println("result in a corrupt save.");
-		Ui.println("It's recommended that you make a");
-		Ui.println("backup of your current save file(s)");
-		Ui.println("before you continue.");
-		Ui.println("------------------------------------");
-		Ui.println("1) Exit");
-		Ui.println("2) Continue");
-
-		switch(Ui.getValidInt()){
-			case 1:
-				return false;
-			case 2:
-				break;
-			default:
-				return false;
-		}
-
-		try {
-			File file = new File(path);
-
-			if (!file.exists()) {
-				Ui.println("File not found. Please put an \"_\" before your username in the save file.");
-				System.exit(0); //TODO shouldn't just exit like this.... Go back to main menu
-			}
-
-			input = new Scanner(file);
-
-			setup();
-			readString();
-
-			//Health
-			Health.set(readInt(), readInt());
-			FirstAid.set(readInt(), false);
-			FirstAid.used = readInt();
-			InstaHealth.set(readInt(), false);
-			InstaHealth.used = readInt();
-			Health.timesDied = readInt();
-
-			//Coins
-			Coins.set(readInt(), false);
-			Bank.set(readInt(), false);
-			Casino.totalCoinsWon = readInt();
-			Casino.gamesPlayed = readInt();
-			Achievements.boughtItem = readBoolean();
-			Stats.totalCoinsSpent = readInt();
-			Stats.coinsSpentOnBankInterest = readInt();
-			Stats.coinsSpentOnWeapons = readInt();
-			Stats.coinsSpentOnHealth = readInt();
-			Stats.xpBought = readInt();
-			Loan.setCurrentLoan(readInt());
-			Loan.setNetDue(readInt());
-
-			//Xp
-			Xp.setLevel(readInt());
-			Xp.setOutOf(readInt());
-			Xp.set(readInt(), false);
-			Xp.total = readInt();
-			Xp.setBattleXp(readInt(), false);
-
-			//Potions
-			Potion.spUsed = readInt();
-			Potion.rpUsed = readInt();
-			Potion.set("survival", readInt(), false);
-			Potion.set("recovery", readInt(), false);
-
-
-			//Settings
-			Settings.setDif(input.nextLine(), false, false);
-			if (readBoolean()) Cheats.enable();
-			if (readBoolean()) Cheats.lock();
-			Settings.difLocked = readBoolean();
-			Ui.guiEnabled = readBoolean();
-
-			//Combat
-			Stats.kills = readInt();
-			Stats.highScore = readInt();
-			Stats.totalKills = readInt();
-			Weapon.set(readInt());
-			for (int i = 0; i < Weapon.getWeapons().size(); i++)
-				Weapon.getWeapons().get(i).owns = readBoolean();
-			for (int i = 0; i < Weapon.getWeapons().size(); i++)
-				Weapon.getWeapons().get(i).setAmmo(readInt(), false);
-			Power.set(readInt(), false);
-			Power.used = readInt();
-			Stats.totalDamageDealt = readInt();
-			Stats.bulletsFired = readInt();
-			Stats.bulletsThatHit = readInt();
-			for (int i = 0; i < Armour.getArmours().size(); i++)
-				Armour.getArmours().get(i).setOwns(readBoolean());
-			Armour.set(readInt());
-
-			//Enemy
-			Enemy.set(readInt());
-			Enemy.get().setHealth(readInt(), Enemy.get().getHealthMax());
-
-			//Achs
-			Achievements.moneyMaker = readBoolean();
-			Achievements.enemySlayer = readBoolean();
-			Achievements.firstKill = readBoolean();
-			Achievements.timeForAnUpgrade = readBoolean();
-			for (int i = 0; i < Enemy.getEnemies().size(); i++)
-				Achievements.arrayKilled.set(i, readBoolean());
-			Achievements.textFighterMaster = readBoolean();
-			Achievements.YAYPOWER = readBoolean();
-			Achievements.awwYouCareAboutMe = readBoolean();
-			Achievements.slayer = readBoolean();
-			Achievements.nobodysPerfect = readBoolean();
-			Achievements.makingMoney = readBoolean();
-			Achievements.gamblingAddiction = readBoolean();
-			Achievements.level2Fighter = readBoolean();
-			Achievements.level3Fighter = readBoolean();
-			Achievements.level4Fighter = readBoolean();
-			Achievements.level5Fighter = readBoolean();
-			Achievements.level6Fighter = readBoolean();
-			Achievements.level7Fighter = readBoolean();
-			Achievements.level8Fighter = readBoolean();
-			Achievements.level9Fighter = readBoolean();
-			Achievements.level10Fighter = readBoolean();
-			Achievements.honestPlayer = readBoolean();
-
-			//Other Stuff
-			About.setViewed(readBoolean());
-			Stats.timesCheated = readInt();
-			Stats.timesQuit = readInt();
-			Stats.itemsCrafted = readInt();
-			Stats.diceGamesPlayed = readInt();
-			Stats.slotGamesPlayed = readInt();
-
-			save();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		return true;
-	}
-
+	// TODO: make this work with nodes
+	/**
+	 * Check if the data map contains a specific key
+	 *
+	 * @param key node to check
+	 * @return if a key exists in the map
+	 */
 	public static boolean contains(String key) {
 		return data.containsKey(key);
 	}
 
-	public static boolean exists() {
-		return data != null;
-	}
-
+	/**
+	 * Get a boolean value from a key node
+	 *
+	 * @param key node to retrieve a value
+	 * @return a value from the input key node
+	 */
 	public static boolean getBoolean(String key) {
 		Object tempObject = get(key);
 
@@ -541,29 +442,50 @@ public class Saves {
 		return false;
 	}
 
+	/**
+	 * Check if the map contains a value from a key node
+	 *
+	 * @param key node to check if a value exists
+	 * @return a value from the input key node
+	 */
 	public static boolean hasValue(String key) {
-		Object tempObject = data.get(key);
+		Object tempObject = get(key);
 
 		return (tempObject != null);
 	}
 
+	/**
+	 * @return whether the data map is null or empty
+	 */
 	public static boolean isEmpty() {
-		return data.isEmpty() || data == null;
+		return data == null || data.isEmpty();
 	}
 
+	/**
+	 * Get a byte from an input key node
+	 *
+	 * @param key node to retrieve a value
+	 * @return a value from the input key node
+	 */
 	public static byte getByte(String key) {
 		Object tempObject = get(key);
 
 		if (tempObject instanceof Byte)
 			return (Byte) tempObject;
 		if (tempObject instanceof String)
-			if (Ui.isNumber(tempObject.toString()))
+			if (isNumber(tempObject.toString()))
 				return Byte.parseByte(tempObject.toString());
 		if (tempObject instanceof Number)
 			return Byte.parseByte(tempObject.toString());
 		return -1;
 	}
 
+	/**
+	 * Get a character from an input key node
+	 *
+	 * @param key node to retrieve a value
+	 * @return a value from the input key node
+	 */
 	public static char getChar(String key) {
 		Object tempObject = get(key);
 
@@ -576,73 +498,101 @@ public class Saves {
 		return '\u0000';
 	}
 
+	/**
+	 * Get an integer from an input key node
+	 *
+	 * @param key node to retrieve a value
+	 * @return a value from the input key node
+	 */
 	public static double getDouble(String key) {
 		Object tempObject = get(key);
 
 		if (tempObject instanceof Double)
 			return (Double) tempObject;
 		if (tempObject instanceof String)
-			if (Ui.isDecimalNumber(tempObject.toString()))
+			if (isDecimalNumber(tempObject.toString()))
 				return Double.parseDouble(tempObject.toString());
 		if (tempObject instanceof Number)
 			return Double.parseDouble(tempObject.toString());
 		return -1;
 	}
 
+	/**
+	 * Get an integer from an input key node
+	 *
+	 * @param key node to retrieve a value
+	 * @return a value from the input key node
+	 */
 	public static int getInteger(String key) {
 		Object tempObject = get(key);
 
 		if (tempObject instanceof Integer)
 			return (Integer) tempObject;
 		if (tempObject instanceof String)
-			if (Ui.isNumber(tempObject.toString()))
+			if (isNumber(tempObject.toString()))
 				return Integer.parseInt(tempObject.toString());
 		if (tempObject instanceof Number)
 			return Integer.parseInt(tempObject.toString());
 		return -1;
 	}
 
+	/**
+	 * Get a list from an input key node
+	 *
+	 * @param key node to retrieve a value
+	 * @return a value from the input key node
+	 */
 	public static List<?> getList(String key) {
 		Object tempObject = get(key);
 
-		if (tempObject instanceof List<?>)
-			return (List) tempObject;
+		if (tempObject instanceof List)
+			return (List<?>) tempObject;
 		return null;
 	}
 
+	/**
+	 * Get a long from an input key node
+	 *
+	 * @param key node to retrieve a value
+	 * @return a value from the input key node
+	 */
 	public static long getLong(String key) {
 		Object tempObject = get(key);
 
 		if (tempObject instanceof Long)
 			return (Long) tempObject;
 		if (tempObject instanceof String)
-			if (Ui.isNumber(tempObject.toString()))
+			if (isNumber(tempObject.toString()))
 				return Long.parseLong(tempObject.toString());
 		if (tempObject instanceof Number)
 			return Long.parseLong(tempObject.toString());
 		return -1;
 	}
 
-	public static Map<?, ?> getMap(String key) {
-		Object tempObject = get(key);
-
-		if (tempObject instanceof Map<?, ?>)
-			return (Map) tempObject;
-		return null;
-	}
-
-	public static Map<String, Object> getValues() {
+	// TODO: return nested values
+	/**
+	 * Get the values from the input key node
+	 *
+	 * @return all values from the data map
+	 */
+	public static Collection<Object> getValues() {
 		if (!isEmpty())
-			return data;
+			return data.values();
 		return null;
 	}
 
+	/**
+	 * Get the value from the input key node
+	 *
+	 * @param key node to retrieve a value
+	 * @return a value from the input key node
+	 */
 	public static Object get(String key) {
 		if (isEmpty())
 			return null;
 
 		final String[] nodes = key.split("\\.");
-		Map curMap = data;
+		Map<String, Object> curMap = data;
 
 		for (int i = 0; i <= nodes.length - 1; ++i) {
 			Object child = curMap.get(nodes[i]);
@@ -654,30 +604,48 @@ public class Saves {
 				else return null;
 			}
 
-			curMap = (Map) child;
+			curMap = (LinkedHashMap) child;
 		}
 		return null;
 	}
 
+	// TODO: return nested keys ex: "User.Name" as well as main keys ex: "User"
+	/**
+	 * Get the key set from the data map
+	 *
+	 * @return key set from the data map
+	 */
 	public static Set<String> getKeys() {
 		if (!isEmpty())
 			return data.keySet();
 		return new HashSet<>();
 	}
 
+	/**
+	 * Get a short from the data map using a key
+	 *
+	 * @param key input key nodes to get the string value
+	 * @return short value from input
+	 */
 	public static short getShort(String key) {
 		Object tempObject = get(key);
 
 		if (tempObject instanceof Short)
 			return (Short) tempObject;
 		if (tempObject instanceof String)
-			if (Ui.isNumber(tempObject.toString()))
+			if (isNumber(tempObject.toString()))
 				return Short.parseShort(tempObject.toString());
 		if (tempObject instanceof Number)
 			return Short.parseShort(tempObject.toString());
 		return -1;
 	}
 
+	/**
+	 * Get a string from the data map using a key
+	 *
+	 * @param key input key nodes to get the string value
+	 * @return String value from input
+	 */
 	public static String getString(String key) {
 		Object tempObject = get(key);
 
@@ -686,52 +654,72 @@ public class Saves {
 		return null;
 	}
 
+	/**
+	 * Read input file
+	 *
+	 * @param file to be read
+	 * @return new FileReader for save file
+	 */
 	public static FileReader read(File file) {
 		try {
 			if (!file.exists())
 				return null;
 			return new FileReader(file);
 		} catch (FileNotFoundException exception) {
-			exception.printStackTrace();
+			Handle.error("File not found! Path to expected file: %s", file.getPath());
+			pause();
 		}
 		return null;
 	}
 
 	/**
-	 *
 	 * @return the next line as an integer
 	 */
-	private static int readInt(){
+	private static int readInt() {
 		return Integer.parseInt(input.nextLine());
 	}
 
 	/**
-	 *
 	 * @return the next line as a boolean
 	 */
-	private static boolean readBoolean(){
+	private static boolean readBoolean() {
 		return Boolean.parseBoolean(input.nextLine());
 	}
 
 	/**
-	 *
 	 * @return the next line as a String
 	 */
-	private static String readString(){
+	private static String readString() {
 		return input.nextLine();
 	}
 
-    //Thanks http://stackoverflow.com/a/38951302/3291305 !
+	/**
+	 * Stores data in a map from a key to an object with sub-keys as needed.
+	 * ex: "User.Name" would be in the form map("User", map("Name", value))
+	 *
+	 * Thanks http://stackoverflow.com/a/38951302/3291305 !
+	 *
+	 * @param key	 node to store object value
+	 * @param object object to store in key
+	 */
     public static void set(String key, Object object) {
+		// if the data is null, something went wrong
+        if (data == null) {
+			Handle.error("There was a problem saving your game.");
+			return;
+		}
 
-        if (!exists())
-            return;
+        String[] nodes = key.split("\\.");
 
-        final String[] nodes = key.split("\\.");
-
+		// set the current map to modify to the main data map
 		Map<String, Object> cur = data;
 
-        for (int i = 0; i <= nodes.length - 2; ++i) {
+		/* for each node (split by "."):
+		 * if the current key node value doesn't exist, create it nested in the previous key
+		 * else, there is data there that should be, handle the error
+		 * continue until all key nodes are placed
+		 */
+        for (int i = 0; i < nodes.length - 1; ++i) {
             Object val = cur.get(nodes[i]);
             if (val == null) {
                 val = new LinkedHashMap();
@@ -739,8 +727,10 @@ public class Saves {
             } else if (!(val instanceof Map)) {
                 Handle.error("There was a problem saving your game.");
             }
-			cur = (Map<String, Object>) val;
+			// adjust the current map to the new nested map
+			cur = (LinkedHashMap) val;
 		}
+		// add the value to the final nested key
         cur.put(nodes[nodes.length - 1], object);
     }
 }
