@@ -51,7 +51,7 @@ public class Saves {
 			writer.flush();
 			writer.close();
 		} catch (IOException exception) {
-			exception.printStackTrace();
+			Handle.error("There was a problem saving your game.");
 		}
 	}
 
@@ -76,7 +76,7 @@ public class Saves {
 			try {
 				saveLocation.createNewFile();
 			} catch (IOException exception) {
-				exception.printStackTrace();
+				Handle.error("Could not create new file! Path to expected file: %s", saveLocation.getPath());
 			}
 
 		setupDumper();
