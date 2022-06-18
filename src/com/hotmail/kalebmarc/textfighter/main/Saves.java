@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * @author Brendon Butler
  * Created by Brendon Butler on 7/27/2016.
- * Revised: 03/10/2022
+ * Revised: 03/10/2022, 6/18/2022
  */
 public class Saves {
 	// TODO: Either make Saves an extension of Map to support getting node values or create a separate class for this
@@ -38,7 +38,6 @@ public class Saves {
 			saveLocation = null;
 
 		setup();
-
 		updateMapValues();
 
 		try {
@@ -64,10 +63,10 @@ public class Saves {
 
 		if (saveLocation == null) {
 			saveLocation = new File(path + "/" + User.name() + ".TFsave");
-			// TODO: Append (##) to save file for duplicates
+
 			int i = 1;
 			while (saveLocation.exists()) {
-				saveLocation = new File(String.format("%s/%s (%d).TFsave", path, User.name(), i));
+				saveLocation = new File(java.lang.String.format("%s/%s (%d).TFsave", path, User.name(), i));
 				i++;
 			}
 		}
@@ -409,7 +408,6 @@ public class Saves {
 		return true;
 	}
 
-	// TODO: make this work with nodes
 	/**
 	 * Check if the data map contains a specific key
 	 *
@@ -417,7 +415,26 @@ public class Saves {
 	 * @return if a key exists in the map
 	 */
 	public static boolean contains(String key) {
-		return data.containsKey(key);
+		boolean contains = false;
+
+		if (key.contains(".")) {
+			String[] node = key.split("\\.");
+			Map<String, Object> curNode = data;
+
+			if (curNode.containsKey(node[0])) {
+				int index = 0;
+
+				while (node.length - 1 > index) {
+					println(node[index]);
+					curNode = (LinkedHashMap) curNode.get(node[index]);
+					index++;
+				}
+
+				contains = curNode.containsKey(node[index]);
+			}
+		} else contains = data.containsKey(key);
+
+		return contains;
 	}
 
 	/**
@@ -606,9 +623,9 @@ public class Saves {
 				else return null;
 			}
 
-			curMap = (LinkedHashMap) child;
+			curMap = (Map) child;
 		}
-		return null;
+		return curMap;
 	}
 
 	// TODO: return nested keys ex: "User.Name" as well as main keys ex: "User"
