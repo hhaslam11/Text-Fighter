@@ -15,6 +15,9 @@ import static com.hotmail.kalebmarc.textfighter.player.Settings.setDif;
 import static java.util.Arrays.asList;
 
 public class  Game {
+
+	private final static Scanner SCAN = new Scanner(System.in);
+
 	// docschorsch added boolean to indicate if a game had been started
 	private static boolean gameStarted = false;
 
@@ -60,8 +63,6 @@ public class  Game {
 	public static Food mushroom    = new Food("Mushroom",      "The good kind!",                     StatusEffect.type.HEALTH, Food.type.OTHER,      5);
 	public static Food fish        = new Food("Fish",          "Found in rivers and lakes.",         StatusEffect.type.HEALTH, Food.type.MEAT_FISH,  15);
 
-	private static Scanner scan = new Scanner(System.in);
-
 	public void start() {
 		
 		/*
@@ -80,7 +81,7 @@ public class  Game {
 		switch(choice){
 			case 1: return;
 			case 2:
-				if(Saves.savesPrompt()) {
+				if(Saves.load()) {
 					// docschorsch savesPrompt() true only if not exited --> game started with loaded player
 					gameStarted = true;
 					GameClock.startTimeClock();
@@ -100,8 +101,8 @@ public class  Game {
 					//docschorsch swapped order of promptNameSelection() and encounterNew()
 					User.promptNameSelection();
 					Enemy.encounterNew();
-					Saves.save();
 					// --> game started with new player
+					Saves.save(true);
 					gameStarted = true;
 					GameClock.startTimeClock();
 					break;
@@ -113,7 +114,7 @@ public class  Game {
 			//Runs all the tests and clears the screen
 			if (Stats.kills > Stats.highScore) Stats.highScore = Stats.kills;
 			Achievements.check();
-			Saves.save();
+			// TODO: put back in? affects saving -- Saves.save();
 			Ui.cls();
 
 			/*
@@ -198,10 +199,6 @@ public class  Game {
 							break;
 						case 2:
 							Potion.use("recovery");
-							break;
-						case 3:
-							break;
-						default:
 							break;
 					}
 					break;
@@ -373,11 +370,11 @@ public class  Game {
 		);
 
 		//docschorsch added empty default as new 0) option Exit
-		if (!scan.hasNextInt()) {
+		if (!SCAN.hasNextInt()) {
 			Ui.cls();
 			return "Exit";
 		} else {
-			int difficultyChoice = scan.nextInt();
+			int difficultyChoice = SCAN.nextInt();
 			if (difficultyChoice == 2) {
 				Ui.cls();
 				return "Easy";

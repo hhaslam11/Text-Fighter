@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Ui {
     public static boolean guiEnabled = true;
-    private static Scanner in = new Scanner(System.in);
+    private final static Scanner IN = new Scanner(System.in);
     private Ui() {
     }
 
@@ -115,7 +115,7 @@ public class Ui {
     /**
      * Clears screen, prints msg, then calls pause();.
      *
-     * @param msg
+     * @param msg string to output
      */
     public static void msg(String msg) {//TODO use this instead throughout project
         if (msg == null || msg.equals("")) {
@@ -188,16 +188,25 @@ public class Ui {
     }
 
     public static int getValidInt() {
-        while (!in.hasNextInt()) {
-            in.nextLine();
+        while (!IN.hasNextInt()) {
+            IN.nextLine();
         }
-        return in.nextInt();
+        return IN.nextInt();
+    }
+
+    public static int getValidInt(int min, int max) {
+        int value = getValidInt();
+
+        while (min > value || value > max)
+            value = getValidInt();
+
+        return value;
     }
 
     public static String getValidString() {
 
-        in.reset();
-        return in.next();
+        IN.reset();
+        return IN.next();
 
     }
 

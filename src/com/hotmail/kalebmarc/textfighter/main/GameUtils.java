@@ -15,7 +15,7 @@ public class GameUtils {
     print(input + "\n");
   }
 
-  public static void showPopup(String header, String subheader, List<String> message, List<String> inputs) {
+  public static void showPopup(String header, String subheader, List<?> message, List<?> inputs) {
     Ui.cls();
     println(center(Constants.DASH_DIVIDER));
     if(!header.isEmpty()) {
@@ -28,8 +28,8 @@ public class GameUtils {
     }
     println(center(Constants.EMPTY_SPACE_BOX));
 
-    for (int i = 0; i < message.size(); i++) {
-      println(center(message.get(i)));
+    for (Object o : message) {
+      println(center(String.valueOf(o)));
     }
 
     println(center(Constants.EMPTY_SPACE_BOX));

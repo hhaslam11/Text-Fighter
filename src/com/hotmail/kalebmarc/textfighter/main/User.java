@@ -23,7 +23,6 @@ public class User {
     }
 
     public static void promptNameSelection() {
-
         Ui.cls();
         Ui.println("Please enter your username.");
         String name = Ui.getValidString();
@@ -31,8 +30,8 @@ public class User {
         //Validate
         name = name.trim();
         if (name.equals("")) {
-            Ui.println("Name cannot be blank. Using default name.");
-            name = "Player";
+            Ui.println("Name cannot be blank.");
+            promptNameSelection();
         }
 
         playerName = name;
