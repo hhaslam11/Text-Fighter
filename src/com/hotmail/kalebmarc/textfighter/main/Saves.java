@@ -383,8 +383,13 @@ public class Saves {
 		println("------------------------------");
 		for (int i = 0; i < saveList.length; i++)
 			System.out.printf("%d) %s%n", i + 1, saveList[i].getName().substring(0, saveList[i].getName().lastIndexOf(".TFsave")));
+		System.out.printf("0) EXIT%n");
 
-		saveLocation = saveList[getValidInt(1, saveList.length) - 1];
+		int response = getValidInt(0, saveList.length);
+
+		if (response == 0)
+			return false;
+		else saveLocation = saveList[response - 1];
 
 		setup();
 
@@ -426,7 +431,7 @@ public class Saves {
 
 				while (node.length - 1 > index) {
 					println(node[index]);
-					curNode = (LinkedHashMap) curNode.get(node[index]);
+					curNode = (LinkedHashMap<String, Object>) curNode.get(node[index]);
 					index++;
 				}
 
@@ -623,7 +628,7 @@ public class Saves {
 				else return null;
 			}
 
-			curMap = (Map) child;
+			curMap = (Map<String, Object>) child;
 		}
 		return curMap;
 	}
@@ -669,7 +674,7 @@ public class Saves {
 		Object tempObject = get(key);
 
 		if (tempObject instanceof String)
-			return (String) tempObject;
+			return String.valueOf(tempObject);
 		return null;
 	}
 
@@ -741,13 +746,13 @@ public class Saves {
         for (int i = 0; i < nodes.length - 1; ++i) {
             Object val = cur.get(nodes[i]);
             if (val == null) {
-                val = new LinkedHashMap();
+                val = new LinkedHashMap<String, Object>();
                 cur.put(nodes[i], val);
             } else if (!(val instanceof Map)) {
                 Handle.error("There was a problem saving your game.");
             }
 			// adjust the current map to the new nested map
-			cur = (LinkedHashMap) val;
+			cur = (LinkedHashMap<String, Object>) val;
 		}
 		// add the value to the final nested key
         cur.put(nodes[nodes.length - 1], object);

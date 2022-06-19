@@ -194,10 +194,12 @@ public class  Game {
 					Ui.println("2) Recovery Potion");
 					Ui.println("3) Back");
 					switch (Ui.getValidInt()) {
-						case 1 -> Potion.use("survival");
-						case 2 -> Potion.use("recovery");
-						default -> {
-						}
+						case 1:
+							Potion.use("survival");
+							break;
+						case 2:
+							Potion.use("recovery");
+							break;
 					}
 					break;
 				case 6:

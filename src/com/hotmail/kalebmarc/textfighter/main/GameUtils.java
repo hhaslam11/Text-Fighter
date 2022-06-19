@@ -29,7 +29,7 @@ public class GameUtils {
     println(center(Constants.EMPTY_SPACE_BOX));
 
     for (Object o : message) {
-      println(center((String) o));
+      println(center(String.valueOf(o)));
     }
 
     println(center(Constants.EMPTY_SPACE_BOX));
