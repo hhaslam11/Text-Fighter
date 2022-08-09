@@ -164,6 +164,7 @@ public class Settings {
             Game.baseballBat = new Weapon("Baseball Bat", false, true, 120, 1, 10, 15, firstInit, changeDif);
             Game.knife = new Weapon("Knife", false, true, 125, 2, 10, 20, firstInit, changeDif);
             Game.pipe = new Weapon("Pipe", false, false, 0, 0, 5, 20, firstInit, changeDif);
+            Game.chainsaw = new Weapon("Chainsaw", false, true, 200, 7, 15, 25, firstInit, changeDif);
             //Guns:
             Game.pistol = new Weapon("Pistol", 1, 18, true, 250, 1, 4, 15, 1.5, 3, 4, firstInit, changeDif);
             Game.smg = new Weapon("Smg", 10, 75, true, 700, 1, 10, 75, 2.5, 4, 6, firstInit, changeDif);
@@ -215,6 +216,7 @@ public class Settings {
             Game.baseballBat = new Weapon("Baseball Bat", false, true, 170, 1, 10, 15, firstInit, changeDif);
             Game.knife = new Weapon("Knife", false, true, 175, 2, 10, 20, firstInit, changeDif);
             Game.pipe = new Weapon("Pipe", false, false, 0, 0, 5, 20, firstInit, changeDif);
+            Game.chainsaw = new Weapon("Chainsaw", false, true, 350, 7, 15, 25, firstInit, changeDif);
             //Guns:
             Game.pistol = new Weapon("Pistol", 1, 18, true, 275, 1, 4, 15, 1.25, 2, 3, firstInit, changeDif);
             Game.smg = new Weapon("Smg", 10, 75, true, 800, 1, 10, 75, 1.75, 3, 5, firstInit, changeDif);
