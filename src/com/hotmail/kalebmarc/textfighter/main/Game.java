@@ -49,6 +49,8 @@ public class  Game {
 	public static Weapon rifle;
 	public static Weapon sniper;
 
+	public static Weapon chainsaw;
+
 	//Amours
 	public static Armour none = new Armour("None", 0, 0, 1);//DO NOT REMOVE
 	public static Armour basic = new Armour("Basic", 400, 15, 5);
