@@ -76,42 +76,23 @@ public class Ui {
      *
      * Also to control whether popup should actually be a popup or not, based on user preference
      */
-    public static void print(String input) {
-        System.out.print(input);
+
+    public static <T> void print(T input){
+        System.out.print(String.valueOf(input));
     }
 
-    public static void println(String input) {
-        print(input + "\n");
+    public static <T> void println(T input){
+        System.out.println(String.valueOf(input));
     }
 
-    public static void print(int input) {
-        print(input + "");
+    public static void print(){
+        System.out.print("");
     }
 
-    public static void println(int input) {
-        print(input + "\n");
+    public static void println(){
+        System.out.println("");
     }
-
-    public static void print(boolean input) {
-        print(input + "");
-    }
-
-    public static void println(boolean input) {
-        print(input + "\n");
-    }
-
-    public static void print(double input) {
-        print(input + "");
-    }
-
-    public static void println(double input) {
-        print(input + "\n");
-    }
-
-    public static void println() {
-        print("\n");
-    }
-
+    
     /**
      * Clears screen, prints msg, then calls pause();.
      *
