@@ -35,10 +35,10 @@ public class Cheats {
     private static void cheatSelect() {
         Ui.println("*");
 
+        boolean cheated = true;
         switch (cheat.nextLine()) {
             case "moneylover":
                 Coins.set(1000, false);
-                Stats.timesCheated++;
                 break;
             case "givemeitall":
                 Coins.set(5000, false);
@@ -51,7 +51,6 @@ public class Cheats {
                 for (int i = 0; i < Weapon.getWeapons().size(); i++) {
                     Weapon.getWeapons().get(i).owns = true;
                 }
-                Stats.timesCheated++;
                 for (int i = 0; i < Food.getFoods().size(); i++)
                     Food.getFoods().get(i).setQuantity(5000);
                 Potion.set("Survival", 5000, false);
@@ -66,7 +65,6 @@ public class Cheats {
                 for (int i = 0; i < Weapon.getWeapons().size(); i++) {
                     Weapon.getWeapons().get(i).owns = true;
                 }
-                Stats.timesCheated++;
                 break;
             case "nomorepain":
                 FirstAid.set(1000, false);
@@ -75,40 +73,34 @@ public class Cheats {
                 Potion.set("Recovery", 500, false);
                 for (int i = 0; i < Food.getFoods().size(); i++)
                     Food.getFoods().get(i).setQuantity(100);
-                Stats.timesCheated++;
                 break;
             case "healme":
                 Health.set(Health.getOutOf());
-                Stats.timesCheated++;
                 break;
             case "givemeachallenge":
                 Enemy.get().setHealth(1000, 1000);
-                Stats.timesCheated++;
                 break;
             case "lotsofkills":
                 Stats.kills = 5000;
-                Stats.timesCheated++;
                 break;
             case "suicide":
                 Health.die();
-                Stats.timesCheated++;
                 break;
             case "godmode":
                 Settings.toggleGodMode();
-                Stats.timesCheated++;
                 break;
             case "loanshark":
                 Loan.setCurrentLoan(0);
                 Loan.setNetDue(0);
-                Stats.timesCheated++;
                 break;
             case "thirstforfood":
                 for (int i = 0; i < Food.getFoods().size(); i++)
                     Food.getFoods().get(i).setQuantity(10);
-                Stats.timesCheated++;
                 break;
-
+            default:
+                cheated = false;
         }
+        if(cheated) Stats.timesCheated++;
     }
 
     public static boolean enabled() {
