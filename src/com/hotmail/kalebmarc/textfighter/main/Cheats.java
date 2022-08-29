@@ -100,7 +100,7 @@ public class Cheats {
             default:
                 cheated = false;
         }
-        if(cheated) Stats.timesCheated++;
+        if (cheated) Stats.timesCheated++;
     }
 
     public static boolean enabled() {
