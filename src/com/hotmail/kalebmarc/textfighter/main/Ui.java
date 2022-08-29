@@ -15,58 +15,16 @@ public class Ui {
             return false;
         }
 
-        int length = string.length();
-
-        if (length == 1) {
-            return false;
-        }
-
-        int i = 0;
-
-        if (string.charAt(0) == '-') {
-            if (length < 3) {
-                return false;
-            }
-            i = 1;
-        }
-
-        int numOfDot = 0;
-
-        for (; i < length; i++) {
-            char c = string.charAt(i);
-            if (c == '.')
-                numOfDot++;
-            else if (c == '/')
-                return false;
-            else if (c < '.' || c > '9') {
-                return false;
-            }
-        }
-
-        return (numOfDot == 1);
+        //Search for 1 or more digits followed by a `.` and 1 or more digits after the dot
+        return string.matches("\\d+\\.\\d+");
     }
 
     public static boolean isNumber(String string) {
         if (string == null) return false;
 
-        int length = string.length();
-
-        if (length == 0) return false;
-
-        int i = 0;
-
-        if (string.charAt(0) == '-') {
-            if (length == 1) return false;
-
-            i = 1;
-        }
-
-        for (; i < length; i++) {
-            char c = string.charAt(i);
-
-            if (c <= '/' || c >= ':') return false;
-        }
-        return true;
+        //Search for any character that is not a digit
+        //If you find a non-digit char, return false
+        return !string.matches("\\D");
     }
 
     /*
@@ -76,40 +34,21 @@ public class Ui {
      *
      * Also to control whether popup should actually be a popup or not, based on user preference
      */
-    public static void print(String input) {
-        System.out.print(input);
+
+    public static <T> void print(T input){
+        System.out.print(String.valueOf(input));
     }
 
-    public static void println(String input) {
-        print(input + "\n");
+    public static <T> void println(T input){
+        System.out.println(String.valueOf(input));
     }
 
-    public static void print(int input) {
-        print(input + "");
+    public static void print(){
+        System.out.print("");
     }
 
-    public static void println(int input) {
-        print(input + "\n");
-    }
-
-    public static void print(boolean input) {
-        print(input + "");
-    }
-
-    public static void println(boolean input) {
-        print(input + "\n");
-    }
-
-    public static void print(double input) {
-        print(input + "");
-    }
-
-    public static void println(double input) {
-        print(input + "\n");
-    }
-
-    public static void println() {
-        print("\n");
+    public static void println(){
+        System.out.println("");
     }
 
     /**
