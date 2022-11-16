@@ -154,3 +154,4 @@ public class CheatsTest {
         assertEquals(10, Food.arrayFood.get(4).getQuantity());
         assertEquals(10, Food.arrayFood.get(5).getQuantity());
 	}
+}
