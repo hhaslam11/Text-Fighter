@@ -3,7 +3,7 @@ package com.hotmail.kalebmarc.textfighter.main;
 import com.hotmail.kalebmarc.textfighter.item.*;
 import com.hotmail.kalebmarc.textfighter.player.*;
 
-import time.GameClock;
+import com.hotmail.kalebmarc.textfighter.time.GameClock;
 
 import javax.swing.*;
 import java.util.Scanner;
@@ -48,7 +48,6 @@ public class  Game {
 	public static Weapon shotgun;
 	public static Weapon rifle;
 	public static Weapon sniper;
-
 	public static Weapon chainsaw;
 
 	//Amours
@@ -171,14 +170,10 @@ public class  Game {
 			switch (Ui.getValidInt()) {
 				case 1:
 					int fightPath = Random.RInt(100);
-
-					if (Weapon.get().getName().equals("Sniper")) {
-						if (fightPath <= 30) Enemy.get().dealDamage();
-						if (fightPath > 30) sniper.dealDam();
-					} else {
-						if (fightPath <= 50) Enemy.get().dealDamage();
-						if (fightPath > 50) Weapon.get().dealDam();
-					}
+					Weapon weapon = Weapon.get();
+					int value = weapon.getName().equals("Sniper") ? 30 : 50;
+					if (fightPath <= value) Enemy.get().dealDamage();
+					if (fightPath > value) weapon.dealDam();
 					break;
 				case 2:
 					home();
